@@ -18,15 +18,22 @@ public class costByAreaImpl implements costByArea{
             return 0;
         }
         else {
-            double areaSquareMeters = 0.092903 * areaSquareFeet;
-            areaSquareMeters = (long) (areaSquareMeters * 1e4) / 1e4;
+            double areaSquareMeters = (long) (0.092903 * areaSquareFeet * 1e4) / 1e4;
             return areaSquareMeters;
         }
     }
 
     @Override
     public double calcCost(double areaSquareMeter) {
-        return 0;
+        if(areaSquareMeter < 0){
+            throw new IndexOutOfBoundsException("Cannot have negative area");
+        }else if(areaSquareMeter == 0) {
+            return 0;
+        }
+        else{
+            double cost = (long) (costPerSquareMeter * areaSquareMeter * 1e2) / 1e2;
+            return cost;
+        }
     }
 
     @Override
