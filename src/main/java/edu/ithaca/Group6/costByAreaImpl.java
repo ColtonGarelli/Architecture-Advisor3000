@@ -62,4 +62,9 @@ public class costByAreaImpl implements costByArea{
     public double getCostPerSquareMeter() {
         return this.costPerSquareMeter;
     }
+
+    @Override
+    public String toString(){
+        return "";
+    }
 }

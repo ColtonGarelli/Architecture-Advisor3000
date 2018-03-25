@@ -79,4 +79,10 @@ public class costByArea_Test {
         assertEquals(1.00,areaMaterial.getCostPerSquareMeter(),"Could not retrieve cost");
     }
 
+    @Test
+    public void toStringTest(){
+        areaMaterial = new costByAreaImpl("Wood",1.00);
+        String desiredString = "Wood : $1.00 per meter";
+        assertEquals(desiredString,areaMaterial.toString(),"Did not properly do toString");
+    }
 }

@@ -16,4 +16,6 @@ public interface costByArea {
 
     public double getCostPerSquareMeter();
 
+    public String toString();
+
 }
