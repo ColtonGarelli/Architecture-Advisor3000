@@ -38,12 +38,19 @@ public class costByAreaImpl implements costByArea{
 
     @Override
     public void setMaterialName(String material) {
+        if(material == ""){
+            throw new NullPointerException("Cannot set a material name to blank!");
+        }
         this.materialName = material;
     }
 
     @Override
     public void setCost(double cost) {
-        this.costPerSquareMeter = cost;
+        if(cost < 0){
+            throw new IndexOutOfBoundsException("Cannot set cost to be negative!");
+        }else {
+            this.costPerSquareMeter = cost;
+        }
     }
 
     @Override
