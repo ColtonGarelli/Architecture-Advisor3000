@@ -12,7 +12,16 @@ public class costByAreaImpl implements costByArea{
 
     @Override
     public double calcAreaMeter(double areaSquareFeet) {
-        return 0;
+        if(areaSquareFeet < 0){
+            throw new IndexOutOfBoundsException("Cannot have negative area");
+        }else if(areaSquareFeet == 0){
+            return 0;
+        }
+        else {
+            double areaSquareMeters = 0.092903 * areaSquareFeet;
+            areaSquareMeters = (long) (areaSquareMeters * 1e4) / 1e4;
+            return areaSquareMeters;
+        }
     }
 
     @Override
