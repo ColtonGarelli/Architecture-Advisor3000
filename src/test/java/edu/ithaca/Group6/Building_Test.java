@@ -9,7 +9,7 @@ public class Building_Test {
     @org.junit.jupiter.api.Test
     void constructorTest(){
         //test default constructor
-        Building building1 = new Building();
+        Building building1 = new functions.Building();
         //test length
         double length1 = building1.getLength();
         assertEquals(0.0, length1, "Innacurate length - Default Constructor");
@@ -23,7 +23,7 @@ public class Building_Test {
         String material1 = building1.getExtWallMaterial();
         assertEquals("drywall", material1, "Innacurate Material - Default Constructor");
 
-        Building building2 = new Building(80.0, 50.0, 10.0, "cement");
+        Building building2 = new functions.Building(80.0, 50.0, 10.0, "cement");
         //test length
         double length2 = building2.getLength();
         assertEquals(80.0, length2, "Innacurate length");
@@ -39,7 +39,7 @@ public class Building_Test {
     }
 
     void settersTest(){
-        Building building1 = new Building();
+        Building building1 = new functions.Building();
         //test length setter
         building1.setLength(50.0);
         assertEquals(50.0, building1.getLength(), "Length not set");
@@ -55,7 +55,7 @@ public class Building_Test {
     }
 
     void dimensionTest(){
-        Building building1 = new Building(60.0, 60.0, 12.0, "cement");
+        Building building1 = new functions.Building(60.0, 60.0, 12.0, "cement");
         //test square footage calculation
         double sqftg1 = building1.getSquareFootage();
         assertEquals(3600.0, sqftg1, "Innacurate calculation of square footage");
@@ -65,7 +65,7 @@ public class Building_Test {
     }
 
     void calcTotalCostTest(){
-        Building building1 = new Building(60.0, 60.0, 12.0, "cement");
+        Building building1 = new functions.Building(60.0, 60.0, 12.0, "cement");
         double totalCost1 = building1.calcTotalCost();
         assertEquals(15840.0, totalCost1, "Innacurate calculation of total cost");
     }
