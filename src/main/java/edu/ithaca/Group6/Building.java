@@ -4,10 +4,6 @@ public interface Building {
     //Creating a building in the shape of a rectangular prism
     //Assume that the main function will prevent the user from inputting a negative dimension (i.e. -60.0 for the width)
 
-    //Constructors
-    public void Building();
-    public void Building(double length, double width, double height, String extWallMaterial);
-
     public void setLength(double newVal);
     //set a new length of the building
 

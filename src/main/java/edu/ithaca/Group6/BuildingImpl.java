@@ -7,14 +7,14 @@ public class BuildingImpl implements Building{
     double height;
     String extWallMaterial;
 
-    public void Building(){
+    public BuildingImpl(){
         this.length = 0.0;
         this.width = 0.0;
         this.height = 0.0;
         this.extWallMaterial = "drywall";
     }
 
-    public void Building(double length, double width, double height, String extWallMaterial){
+    public BuildingImpl(double length, double width, double height, String extWallMaterial){
         this.length = length;
         this.width = width;
         this.height = height;
