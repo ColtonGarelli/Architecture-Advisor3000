@@ -1,9 +1,20 @@
 package edu.ithaca.Group6;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Building_Test {
+    private costByArea newMaterial1;
+    private costByArea newMaterial2;
+    private costByArea defaultMaterial;
+
+    @BeforeEach
+    void setup() {
+        defaultMaterial = new costByAreaImpl();
+        newMaterial1 = new costByAreaImpl("Concrete",70.00);
+        newMaterial2 = new costByAreaImpl("Wood",1.00);
+    }
 
     @Test
     void constructorTest(){
@@ -19,10 +30,10 @@ public class Building_Test {
         double height1 = building1.getHeight();
         assertEquals(0.0, height1, "Innacurate height - Default Constructor");
         //test external wall material
-        String material1 = building1.getExtWallMaterial();
-        assertEquals("drywall", material1, "Innacurate Material - Default Constructor");
+        String material1 = building1.extWallMaterial.getMaterialName();
+        assertEquals("", material1, "Innacurate Material - Default Constructor");
 
-        Building building2 = new BuildingImpl(80.0, 50.0, 10.0, "cement");
+        Building building2 = new BuildingImpl(80.0, 50.0, 10.0, newMaterial1);
         //test length
         double length2 = building2.getLength();
         assertEquals(80.0, length2, "Innacurate length");
@@ -34,7 +45,7 @@ public class Building_Test {
         assertEquals(10.0, height2, "Innacurate height");
         //test external wall material
         String material2 = building2.getExtWallMaterial();
-        assertEquals("cement", material2, "Innacurate Material");
+        assertEquals("Concrete", material2, "Innacurate Material");
     }
 
     @Test
@@ -50,13 +61,13 @@ public class Building_Test {
         building1.setHeight(50.0);
         assertEquals(50.0, building1.getHeight(), "Height not set");
         //test ext wall material set
-        building1.setExtWallMaterial("cement");
-        assertEquals("cement", building1.getExtWallMaterial(), "Material of Exterior Wall not set");
+        building1.setExtWallMaterial(newMaterial2);
+        assertEquals("Wood", building1.getExtWallMaterial(), "Material of Exterior Wall not set");
     }
 
     @Test
     void dimensionTest() {
-        Building building1 = new BuildingImpl(60.0, 60.0, 12.0, "cement");
+        Building building1 = new BuildingImpl(60.0, 60.0, 12.0, newMaterial1);
         //test square footage calculation
         double sqftg1 = building1.getSquareFootage();
         assertEquals(3600.0, sqftg1, "Innacurate calculation of square footage");
@@ -103,8 +114,8 @@ public class Building_Test {
     }
 
     void calcTotalCostTest(){
-        Building building1 = new BuildingImpl(60.0, 60.0, 12.0, "cement");
+        Building building1 = new BuildingImpl(60.0, 60.0, 12.0, newMaterial1);
         double totalCost1 = building1.calcTotalCost();
-        assertEquals(15840.0, totalCost1, "Innacurate calculation of total cost");
+        assertEquals(201600, totalCost1, "Innacurate calculation of total cost");
     }
 }

@@ -22,7 +22,7 @@ public interface Building {
     public double getHeight();
     //get the height of the building
 
-    public void setExtWallMaterial(String newMaterial);
+    public void setExtWallMaterial(costByArea newMaterial);
     //set a new material for the external walls
 
     public String getExtWallMaterial();
