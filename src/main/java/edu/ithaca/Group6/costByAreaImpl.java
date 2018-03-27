@@ -1,15 +1,17 @@
 package edu.ithaca.Group6;
 
-public class costByAreaImpl implements costByArea{
+public abstract class costByAreaImpl implements costByArea{
     private String materialName;
-    private double costPerSquareMeter;
-    private String costPerSquareMeterStr;
+    private double costPerSquareFoot;
+    private String costPerSquareFootStr;
 
+    public abstract String materialNameBuilder();
+    public abstract double costPerSquareFeetBuilder();
 
-    public costByAreaImpl(String material, double cost){
-        this.materialName = material;
-        this.costPerSquareMeter = cost;
-        this.costPerSquareMeterStr = convertDoubleToString(this.costPerSquareMeter);
+    public costByAreaImpl(){
+        this.materialName = materialNameBuilder();
+        this.costPerSquareFoot = costPerSquareFeetBuilder();
+        this.costPerSquareFootStr = convertDoubleToString(this.costPerSquareFoot);
     }
 
     private String convertDoubleToString(double toConvert){
@@ -31,14 +33,14 @@ public class costByAreaImpl implements costByArea{
     }
 
     @Override
-    public double calcCost(double areaSquareMeter) {
-        if(areaSquareMeter < 0){
+    public double calcCost(double areaSquareFeet) {
+        if(areaSquareFeet < 0){
             throw new IndexOutOfBoundsException("Cannot have negative area");
-        }else if(areaSquareMeter == 0) {
+        }else if(areaSquareFeet == 0) {
             return 0;
         }
         else{
-            double cost = (long) (costPerSquareMeter * areaSquareMeter * 1e2) / 1e2;
+            double cost = (long) (costPerSquareFoot * areaSquareFeet * 1e2) / 1e2;
             return cost;
         }
     }
@@ -56,7 +58,7 @@ public class costByAreaImpl implements costByArea{
         if(cost < 0){
             throw new IndexOutOfBoundsException("Cannot set cost to be negative!");
         }else {
-            this.costPerSquareMeter = cost;
+            this.costPerSquareFoot = cost;
         }
     }
 
@@ -66,12 +68,89 @@ public class costByAreaImpl implements costByArea{
     }
 
     @Override
-    public double getCostPerSquareMeter() {
-        return this.costPerSquareMeter;
+    public double getCostPerSquareFoot() {
+        return this.costPerSquareFoot;
     }
 
     @Override
     public String toString(){
-        return this.materialName + " : $" +this.costPerSquareMeterStr + " per square meter";
+        return this.materialName + " : $" +this.costPerSquareFootStr + " per square foot";
+    }
+}
+
+class Wood extends costByAreaImpl{
+    @Override
+    public String materialNameBuilder() {
+        return "Wood";
+    }
+
+    @Override
+    public double costPerSquareFeetBuilder() {
+        return 1.00;
+    }
+}
+
+class Brick extends costByAreaImpl{
+
+    @Override
+    public String materialNameBuilder() {
+        return "Brick";
+    }
+
+    @Override
+    public double costPerSquareFeetBuilder() {
+        return 142.34231564;
+    }
+}
+
+class ClayBrick extends costByAreaImpl{
+
+    @Override
+    public String materialNameBuilder() {
+        return "Clay Brick";
+    }
+
+    @Override
+    public double costPerSquareFeetBuilder() {
+        return 0.04;
+    }
+}
+
+class ConcreteBrick extends costByAreaImpl{
+
+    @Override
+    public String materialNameBuilder() {
+        return "Concrete Brick";
+    }
+
+    @Override
+    public double costPerSquareFeetBuilder() {
+        return 0.03;
+    }
+}
+
+class TwoByFour extends costByAreaImpl{
+
+    @Override
+    public String materialNameBuilder() {
+        return "Two by Four Wood";
+    }
+
+    @Override
+    public double costPerSquareFeetBuilder() {
+        return 1.66;
+    }
+}
+
+class TwoByThree extends costByAreaImpl{
+
+    @Override
+    public String materialNameBuilder() {
+        return "Two by Three Wood";
+    }
+
+    @Override
+    public double costPerSquareFeetBuilder() {
+        return 1.23;
     }
 }

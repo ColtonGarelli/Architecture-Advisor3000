@@ -2,11 +2,15 @@ package edu.ithaca.Group6;
 
 public interface costByArea {
     String materialName = "";
-    double costPerSquareMeter = -1;
-    String costPerSquareMeterStr = "";
+    double costPerSquareFoot = -1;
+    String costPerSquareFootStr = "";
+
+    public String materialNameBuilder();
+    public double costPerSquareFeetBuilder();
 
     /**
      * Converts an area in square feet to an area in square meters
+     * for use in physics calculations later on
      * @param areaSquareFeet the area in square feet
      * @return area in square meters
      */
@@ -14,10 +18,10 @@ public interface costByArea {
 
     /**
      * Calculates the cost of the material
-     * @param areaSquareMeter the area of the material in square meters
+     * @param areaSquareFoot the area of the material in square feet
      * @return total cost
      */
-    public double calcCost(double areaSquareMeter);
+    public double calcCost(double areaSquareFoot);
 
     /**
      * sets the name of the material
@@ -27,8 +31,8 @@ public interface costByArea {
     public void setMaterialName(String material);
 
     /**
-     * sets the cost of the material in cost/area in square meters
-     * @param cost cost per area in square meters
+     * sets the cost of the material in cost/area in square feet
+     * @param cost cost per area in square foot
      * @post costPerSquareMeter is changed to cost
      */
     public void setCost(double cost);
@@ -41,14 +45,14 @@ public interface costByArea {
 
     /**
      *
-     * @return costPerSquareMeter
+     * @return costPerSquareFoot
      */
-    public double getCostPerSquareMeter();
+    public double getCostPerSquareFoot();
 
     /**
      *
      * @return String following the form:
-     * "MaterialName : $Amount per square meter"
+     * "MaterialName : $Amount per square foot"
      * ***The amount always rounds down to the next nearest cent***
      */
     public String toString();
