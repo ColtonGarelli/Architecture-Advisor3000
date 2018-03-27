@@ -82,7 +82,10 @@ public class costByArea_Test {
     @Test
     public void toStringTest(){
         areaMaterial = new costByAreaImpl("Wood",1.00);
-        String desiredString = "Wood : $1.00 per meter";
+        String desiredString = "Wood : $1.00 per square meter";
         assertEquals(desiredString,areaMaterial.toString(),"Did not properly do toString");
+        areaMaterial = new costByAreaImpl("Brick",142.34231564);
+        String desiredString2 = "Brick : $142.34 per square meter";
+        assertEquals(desiredString2,areaMaterial.toString(),"Did not toString properly for long decimal");
     }
 }
