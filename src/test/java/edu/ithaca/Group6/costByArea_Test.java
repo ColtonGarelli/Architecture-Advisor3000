@@ -20,9 +20,10 @@ public class costByArea_Test {
         double areaFeetZero = 0;
         double areaFeetPos = 7;
         double areaFeetNeg = -7;
+        double deltaFactor = 0.002; //how far off the doubles can be
 
-        assertEquals(0, areaMaterial.calcAreaMeter(areaFeetZero), "Did not calculate area with zero square feet");
-        assertEquals(.6503,areaMaterial.calcAreaMeter(areaFeetPos),"Did not calculate area with positive square feet");
+        assertEquals(0, areaMaterial.calcAreaMeter(areaFeetZero), deltaFactor, "Did not calculate area with zero square feet");
+        assertEquals(.6503,areaMaterial.calcAreaMeter(areaFeetPos), deltaFactor, "Did not calculate area with positive square feet");
         assertThrows(IndexOutOfBoundsException.class,()->{areaMaterial.calcAreaMeter(areaFeetNeg);},"Did not throw exception with negative square feet");
     }
 
@@ -32,9 +33,10 @@ public class costByArea_Test {
         double areaMetersZero = 0;
         double areaMetersPos = 7;
         double areaMetersNeg = -7;
+        double deltaFactor = 0.005; //how far off the doubles can be
 
-        assertEquals(0,areaMaterial.calcCost(areaMetersZero),"Did not calculate cost for zero meters");
-        assertEquals(7.00,areaMaterial.calcCost(areaMetersPos),"Did not calculate cost of positive meters");
+        assertEquals(0,areaMaterial.calcCost(areaMetersZero),deltaFactor,"Did not calculate cost for zero meters");
+        assertEquals(7.00,areaMaterial.calcCost(areaMetersPos),deltaFactor,"Did not calculate cost of positive meters");
         assertThrows(IndexOutOfBoundsException.class,()->{areaMaterial.calcCost(areaMetersNeg);},"Did not throw exception with negative square meters");
     }
 

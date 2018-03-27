@@ -49,6 +49,7 @@ public interface costByArea {
      *
      * @return String following the form:
      * "MaterialName : $Amount per square meter"
+     * ***The amount always rounds down to the next nearest cent***
      */
     public String toString();
 
