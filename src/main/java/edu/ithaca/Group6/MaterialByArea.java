@@ -1,6 +1,6 @@
 package edu.ithaca.Group6;
 
-public interface costByArea {
+public interface MaterialByArea {
     String materialName = "";
     double costPerSquareFoot = -1;
     String costPerSquareFootStr = "";

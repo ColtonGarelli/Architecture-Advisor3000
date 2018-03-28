@@ -1,6 +1,6 @@
 package edu.ithaca.Group6;
 
-public abstract class costByAreaImpl implements costByArea{
+public abstract class MaterialByAreaImpl implements MaterialByArea {
     private String materialName;
     private double costPerSquareFoot;
     private String costPerSquareFootStr;
@@ -8,7 +8,7 @@ public abstract class costByAreaImpl implements costByArea{
     public abstract String materialNameBuilder();
     public abstract double costPerSquareFeetBuilder();
 
-    public costByAreaImpl(){
+    public MaterialByAreaImpl(){
         this.materialName = materialNameBuilder();
         this.costPerSquareFoot = costPerSquareFeetBuilder();
         this.costPerSquareFootStr = convertDoubleToString(this.costPerSquareFoot);
@@ -78,7 +78,7 @@ public abstract class costByAreaImpl implements costByArea{
     }
 }
 
-class Wood extends costByAreaImpl{
+class Wood extends MaterialByAreaImpl {
     @Override
     public String materialNameBuilder() {
         return "Wood";
@@ -90,7 +90,7 @@ class Wood extends costByAreaImpl{
     }
 }
 
-class Brick extends costByAreaImpl{
+class Brick extends MaterialByAreaImpl {
 
     @Override
     public String materialNameBuilder() {
@@ -103,7 +103,7 @@ class Brick extends costByAreaImpl{
     }
 }
 
-class ClayBrick extends costByAreaImpl{
+class ClayBrick extends MaterialByAreaImpl {
 
     @Override
     public String materialNameBuilder() {
@@ -116,7 +116,7 @@ class ClayBrick extends costByAreaImpl{
     }
 }
 
-class ConcreteBrick extends costByAreaImpl{
+class ConcreteBrick extends MaterialByAreaImpl {
 
     @Override
     public String materialNameBuilder() {
@@ -129,7 +129,7 @@ class ConcreteBrick extends costByAreaImpl{
     }
 }
 
-class TwoByFour extends costByAreaImpl{
+class TwoByFour extends MaterialByAreaImpl {
 
     @Override
     public String materialNameBuilder() {
@@ -142,7 +142,7 @@ class TwoByFour extends costByAreaImpl{
     }
 }
 
-class TwoByThree extends costByAreaImpl{
+class TwoByThree extends MaterialByAreaImpl {
 
     @Override
     public String materialNameBuilder() {

@@ -6,8 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class costByArea_Test {
-    private costByArea areaMaterial;
+public class MaterialByArea_Test {
+    private MaterialByArea areaMaterial;
 
     @BeforeEach
     void setup(){
