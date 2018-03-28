@@ -11,6 +11,3 @@ Create a text-based blueprint of a house with square footage, exterior walls, a 
 
 %Class Diagram #1:
 https://drive.google.com/file/d/1QBEQV0W5qgyIKo9BNCyeSXJpWasZnOlm/view?usp=sharing
-
-%State Diagram #1:
-https://drive.google.com/file/d/1OfGPrD4PvDKXij2Dn5CcGk29qdFmobxq/view?usp=sharing
