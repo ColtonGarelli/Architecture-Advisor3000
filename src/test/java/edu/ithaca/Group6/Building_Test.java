@@ -7,11 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class Building_Test {
     private costByArea newMaterial1;
     private costByArea newMaterial2;
-    private costByArea defaultMaterial;
 
     @BeforeEach
     void setup() {
-        defaultMaterial = new costByAreaImpl();
         newMaterial1 = new costByAreaImpl("Concrete",70.00);
         newMaterial2 = new costByAreaImpl("Wood",1.00);
     }
@@ -29,9 +27,6 @@ public class Building_Test {
         //test height
         double height1 = building1.getHeight();
         assertEquals(0.0, height1, "Innacurate height - Default Constructor");
-        //test external wall material
-        String material1 = building1.extWallMaterial.getMaterialName();
-        assertEquals("", material1, "Innacurate Material - Default Constructor");
 
         Building building2 = new BuildingImpl(80.0, 50.0, 10.0, newMaterial1);
         //test length

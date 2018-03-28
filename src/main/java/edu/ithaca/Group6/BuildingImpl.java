@@ -11,8 +11,6 @@ public class BuildingImpl implements Building{
         this.length = 0.0;
         this.width = 0.0;
         this.height = 0.0;
-        costByArea defaultMaterial = new costByAreaImpl();
-        this.extWallMaterial = defaultMaterial;
     }
 
     public BuildingImpl(double length, double width, double height, costByArea extWallMaterial){
@@ -80,8 +78,8 @@ public class BuildingImpl implements Building{
         //Calculate the total cost of the walls
         double perim = this.getPerimeter();
         double surfaceArea = perim*this.height;
-        double costExtWall = surfaceArea*this.extWallMaterial.getCostPerSquareMEter();
-        totalCost += costExtwall;
+        double costExtWall = surfaceArea*this.extWallMaterial.getCostPerSquareMeter();
+        totalCost += costExtWall;
 
         return totalCost;
     }
