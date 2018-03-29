@@ -40,7 +40,7 @@ public class Building_Test {
         assertEquals(10.0, height2, "Innacurate height");
         //test external wall material
         String material2 = building2.getExtWallMaterial();
-        assertEquals("Concrete", material2, "Innacurate Material");
+        assertEquals("Clay Brick", material2, "Innacurate Material");
     }
 
     @Test
@@ -69,6 +69,13 @@ public class Building_Test {
         //test perimeter calculation
         double perim1 = building1.getPerimeter();
         assertEquals(240.0, perim1, "Innaccurate calculation of perimeter");
+    }
+
+    @Test
+    void calcTotalCostTest(){
+        Building building1 = new BuildingImpl(60.0, 60.0, 12.0, newMaterial1);
+        double totalCost1 = building1.calcTotalCost();
+        assertEquals(115.2, totalCost1, "Innacurate calculation of total cost");
     }
 
     @Test
@@ -106,12 +113,5 @@ public class Building_Test {
     @Test
     public void removeWallFeatureTest(){
         assertEquals(true,false,"remove wall features test failed");
-    }
-
-    @Test
-    void calcTotalCostTest(){
-        Building building1 = new BuildingImpl(60.0, 60.0, 12.0, newMaterial1);
-        double totalCost1 = building1.calcTotalCost();
-        assertEquals(115.2, totalCost1, "Innacurate calculation of total cost");
     }
 }
