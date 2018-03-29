@@ -65,42 +65,6 @@ public class Building_Test {
         assertEquals(240.0, perim1, "Innaccurate calculation of perimeter");
     }
 
-    @Test
-    public void setWallDimensionsTest(){
-       assertEquals(true,false,"set wall dimensions test failed");
-    }
-
-    @Test
-    public void getWallDimensionTest(){
-        assertEquals(true,false,"get wall dimensions test failed");
-    }
-
-    @Test
-    public void setWallMaterialTest(){
-        assertEquals(true,false,"set wall material test failed");
-
-    }
-
-    @Test
-    public void getWallMaterialTest(){
-        assertEquals(true,false,"set wall material test failed");
-
-    }
-
-    @Test
-    public void getWallFeatureTest(){
-        assertEquals(true,false,"get wall features test failed");
-    }
-
-    @Test
-    public void addWallFeatureTest(){
-        assertEquals(true,false,"add wall feature test failed");
-    }
-
-    @Test
-    public void removeWallFeatureTest(){
-        assertEquals(true,false,"remove wall features test failed");
-    }
 
     void calcTotalCostTest(){
         Building building1 = new BuildingImpl(60.0, 60.0, 12.0, "cement");
