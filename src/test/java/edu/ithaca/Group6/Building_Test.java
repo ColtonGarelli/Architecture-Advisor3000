@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Building_Test {
-    private costByArea newMaterial1;
-    private costByArea newMaterial2;
+    private MaterialByArea newMaterial1;
+    private MaterialByArea newMaterial2;
 
     @BeforeEach
     void setup() {
-        newMaterial1 = new costByAreaImpl("Concrete",70.00);
-        newMaterial2 = new costByAreaImpl("Wood",1.00);
+        newMaterial1 = new ClayBrick();
+        newMaterial2 = new Wood();
     }
 
     @Test
@@ -108,9 +108,10 @@ public class Building_Test {
         assertEquals(true,false,"remove wall features test failed");
     }
 
+    @Test
     void calcTotalCostTest(){
         Building building1 = new BuildingImpl(60.0, 60.0, 12.0, newMaterial1);
         double totalCost1 = building1.calcTotalCost();
-        assertEquals(201600, totalCost1, "Innacurate calculation of total cost");
+        assertEquals(115.2, totalCost1, "Innacurate calculation of total cost");
     }
 }
