@@ -1,3 +1,17 @@
+<u>Developers</u>
+- Benjamin Brown-McMillin
+- Alex Gable
+- Colton Garelli
+
+<u>Clientelle</u>
+- Bryce Wheeler
+- Danny Akimchuk
+- Martin Desmery
+- Gerry Roth
+- Eli Wennberg-Smith
+
+
+
 %waffle.io link:
 https://waffle.io/ColtonGarelli/Architecture-Advisor3000
 
