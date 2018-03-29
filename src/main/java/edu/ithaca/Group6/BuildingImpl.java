@@ -5,16 +5,15 @@ public class BuildingImpl implements Building{
     double length;
     double width;
     double height;
-    String extWallMaterial;
+    costByArea extWallMaterial;
 
     public BuildingImpl(){
         this.length = 0.0;
         this.width = 0.0;
         this.height = 0.0;
-        this.extWallMaterial = "drywall";
     }
 
-    public BuildingImpl(double length, double width, double height, String extWallMaterial){
+    public BuildingImpl(double length, double width, double height, costByArea extWallMaterial){
         this.length = length;
         this.width = width;
         this.height = height;
@@ -51,14 +50,14 @@ public class BuildingImpl implements Building{
         return height;
     }
 
-    public void setExtWallMaterial(String newMaterial) {
+    public void setExtWallMaterial(costByArea newMaterial) {
         //set a new material for the external walls
         extWallMaterial = newMaterial;
     }
 
     public String getExtWallMaterial() {
-        //get the material used to construct the exterior walls
-        return extWallMaterial;
+        //return the name of the exterior wall material
+        return extWallMaterial.getMaterialName();
     }
 
     public double getSquareFootage() {
@@ -74,8 +73,14 @@ public class BuildingImpl implements Building{
     }
 
     public double calcTotalCost() {
-        //Calculate the total cost of the walls
         double totalCost = 0;
+
+        //Calculate the total cost of the walls
+        double perim = this.getPerimeter();
+        double surfaceArea = perim*this.height;
+        double costExtWall = surfaceArea*this.extWallMaterial.getCostPerSquareMeter();
+        totalCost += costExtWall;
+
         return totalCost;
     }
 
