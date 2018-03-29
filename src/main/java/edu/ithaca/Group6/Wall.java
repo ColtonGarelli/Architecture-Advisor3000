@@ -8,7 +8,7 @@ public class Wall {
     private costByArea material;
     private ArrayList <costByUnit> featuresList;
 
-    public boolean setHeight(float height){
+    public boolean setHeight(double height){
         if(height > 0) {
             this.height = height;
             return true;
@@ -23,7 +23,7 @@ public class Wall {
     }
 
     public boolean setWidth(double width) {
-        if (height > 0) {
+        if (width > 0) {
             this.width = width;
             return true;
         }
@@ -45,17 +45,23 @@ public class Wall {
         return this.material;
     }
 
-    public ArrayList<costByUnit> addFeature(costByUnit feature){
-        Wall testWall = new Wall();
-        return testWall.featuresList;
+    public boolean addFeature(costByUnit feature){
+        this.featuresList.add(feature);
+        return true;
     }
 
-    public void getFeature(int index){
-
+    public costByUnit getFeature(int index){
+            return this.featuresList.get(index);
     }
 
-    public void removeFeature(int index){
-
+    public boolean removeFeature(int index){
+        if(index > 0 && index < this.featuresList.size()-1){
+            this.featuresList.remove(index);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }
