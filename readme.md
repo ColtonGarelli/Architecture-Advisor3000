@@ -17,12 +17,12 @@ Clientelle
 
 
 
-%Sprint Goal #1:
+<b>Sprint Goal #1:</b>
 Create a text-based blueprint of a house with square footage, exterior walls, a roof and doors.
 
 
 [Class Diagram #1](https://drive.google.com/file/d/1QBEQV0W5qgyIKo9BNCyeSXJpWasZnOlm/view?usp=sharing)
 
 
-$Sprint Goal #2:
+<b>Sprint Goal #2:</b>
 Have a demonstrable system that can construct and display information regarding a structure.
