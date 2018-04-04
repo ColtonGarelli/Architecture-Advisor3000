@@ -1,67 +1,34 @@
 package edu.ithaca.Group6;
 import java.util.ArrayList;
 
-public class Wall {
 
-    private double height;
-    private double width;
-    private costByArea material;
-    private ArrayList <costByUnit> featuresList;
 
-    public boolean setHeight(double height){
-        if(height > 0) {
-            this.height = height;
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+public interface Wall {
 
-    public double getHeight(){
-        return this.height;
-    }
+    public double height = 0;
+    public double width = 0;
+    public MaterialByArea material = new Brick();
+    public ArrayList<MaterialByUnit> featuresList = new ArrayList<MaterialByUnit>();
 
-    public boolean setWidth(double width) {
-        if (width > 0) {
-            this.width = width;
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 
-    public double getWidth(){
-        return this.width;
-    }
+    public boolean setHeight(double height);
 
-    public boolean setMaterial(costByArea wallMaterial) {
-        this.material = wallMaterial;
-        return true;
-    }
+    public double getHeight();
 
-    public costByArea getMaterial(){
-        return this.material;
-    }
+    public boolean setWidth(double width);
 
-    public boolean addFeature(costByUnit feature){
-        this.featuresList.add(feature);
-        return true;
-    }
+    public double getWidth();
 
-    public costByUnit getFeature(int index){
-            return this.featuresList.get(index);
-    }
+    public boolean setMaterial(MaterialByArea wallMaterial);
 
-    public boolean removeFeature(int index){
-        if(index > 0 && index < this.featuresList.size()-1){
-            this.featuresList.remove(index);
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+    public MaterialByArea getMaterial();
+
+    public boolean addFeature(MaterialByUnit feature);
+
+    public MaterialByUnit getFeature(int index);
+
+    public boolean removeFeature(int index);
+
+    public int getFeatureListSize();
 
 }
