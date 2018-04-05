@@ -8,5 +8,5 @@ public interface UI {
      * @param userInput String of what the user responds
      * @return True if valid yes/no, False if invalid
      */
-    public boolean getYesOrNo(String userInput);
+    public boolean checkYesOrNo(String userInput);
 }

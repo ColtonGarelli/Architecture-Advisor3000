@@ -7,7 +7,7 @@ public class UIImpl implements UI{
     }
 
     @Override
-    public boolean getYesOrNo(String userInput) {
+    public boolean checkYesOrNo(String userInput) {
         //Shorten the string
         String shortUserInput = userInput.substring(0,1);
         //Lowercase the string

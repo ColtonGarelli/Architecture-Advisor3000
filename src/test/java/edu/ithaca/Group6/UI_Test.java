@@ -13,13 +13,13 @@ public class UI_Test {
         String testValidYes = "yes";
         String testValidNo = "no";
         String testInvalidInput = "a7j.3";
-        assertEquals(true,testUI.getYesOrNo(testValidYes),"Did not check that string is valid yes");
-        assertEquals(true,testUI.getYesOrNo(testValidNo),"Did not check that string is valid no");
+        assertEquals(true,testUI.checkYesOrNo(testValidYes),"Did not check that string is valid yes");
+        assertEquals(true,testUI.checkYesOrNo(testValidNo),"Did not check that string is valid no");
         testValidYes = "YES";
         testValidNo = "NO";
-        assertEquals(true,testUI.getYesOrNo(testValidYes),"Did not check that string is valid yes");
-        assertEquals(true,testUI.getYesOrNo(testValidNo),"Did not check that string is valid no");
-        assertEquals(false,testUI.getYesOrNo(testInvalidInput),"Did not check invalid input");
+        assertEquals(true,testUI.checkYesOrNo(testValidYes),"Did not check that string is valid yes");
+        assertEquals(true,testUI.checkYesOrNo(testValidNo),"Did not check that string is valid no");
+        assertEquals(false,testUI.checkYesOrNo(testInvalidInput),"Did not check invalid input");
 
     }
 
