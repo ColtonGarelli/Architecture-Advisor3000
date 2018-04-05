@@ -98,7 +98,6 @@ public class WallTest {
         testWall.addFeature(testFeature);
         testWall.addFeature(testFeature);
         testWall.addFeature(testFeature);
-        assertEquals(true,false,"get wall features test failed");
         for (int i=0; i<15; i++){
             testWall.addFeature(testFeature);
 
