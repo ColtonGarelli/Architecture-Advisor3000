@@ -13,6 +13,8 @@ Checkout back to master<br />
 Pull<br />
 Switch back to new branch<br />
 Merge master into separate branch<br />
+&nbsp;&nbsp;-git checkout master<br />
+&nbsp;&nbsp;-git merge feature<br />
 Run all tests<br />
 Issue pull request<br />
 
