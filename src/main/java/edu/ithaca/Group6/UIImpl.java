@@ -9,15 +9,19 @@ public class UIImpl implements UI{
     @Override
     public boolean checkYesOrNo(String userInput) {
         //Shorten the string
-        String shortUserInput = userInput.substring(0,1);
-        //Lowercase the string
-        shortUserInput = shortUserInput.toLowerCase();
-        //Compare if yes or no
-        if(shortUserInput.equals("y") || shortUserInput.equals("n")){
-            return true;
+        if(userInput.length() < 1){
+            return false;
         }
         else{
-            return false;
+            String shortUserInput = userInput.substring(0, 1);
+            //Lowercase the string
+            shortUserInput = shortUserInput.toLowerCase();
+            //Compare if yes or no
+            if (shortUserInput.equals("y") || shortUserInput.equals("n")) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }
