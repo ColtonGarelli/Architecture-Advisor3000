@@ -19,4 +19,10 @@ public class MaterialByUnit_Test {
         assertEquals(3.0, testMaterial.getLength(), "Did not correctly get length");
         assertEquals(6.67, testMaterial.getHeight(), "Did not correctly get height");
     }
+
+    @Test
+    public void toStringTest(){
+        //test that the material's data is outputted as a properly formatted string
+        assertEquals("Door, $900.00, Length: 3.0ft, Height: 6.67ft", testMaterial.toString(), "Did not print a properly formatted string");
+    }
 }

@@ -64,7 +64,10 @@ public abstract class MaterialByUnitImpl implements MaterialByUnit{
     }
 
     @Override
-    public String toString() { return this.materialName + " : $" +this.costPerUnit + " per square foot"; }
+    public String toString() {
+        String costStr = String.format("%.2f",this.costPerUnit);
+        return this.materialName + ", $" + costStr + ", Length: " + this.length + "ft, Height: " + this.height + "ft";
+    }
 
     @Override
     public double getArea() { return this.length * this.height; }
