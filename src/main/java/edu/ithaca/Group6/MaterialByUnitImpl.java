@@ -77,7 +77,7 @@ class Door extends MaterialByUnitImpl {
     }
 
     @Override
-    public double costPerUnitBuilder() { return 899.00; }
+    public double costPerUnitBuilder() { return 900.00; }
 
     @Override
     public double lengthBuilder() { return 3.0; }
