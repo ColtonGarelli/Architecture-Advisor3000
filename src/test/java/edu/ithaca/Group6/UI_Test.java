@@ -51,6 +51,9 @@ public class UI_Test {
         String testValidPoorFormatNegDouble = "-.345";
         String testValidPoorFormatDoubleEnd = "234.";
         String testValidPoorFormatNegDoubleEnd = "-323.";
+        String testValidZeroInt = "0";
+        String testValidPosInt = "23";
+        String testValidNegInt = "-34";
 
         //Normal doubles
         assertTrue(testUI.checkValidDouble(testValidPosDouble), "Did not handle positive double");
@@ -64,12 +67,18 @@ public class UI_Test {
         assertTrue(testUI.checkValidDouble(testValidPoorFormatDoubleEnd),"Did not handle poor format positive double at end");
         assertTrue(testUI.checkValidDouble(testValidPoorFormatNegDoubleEnd),"Did not handle poor format negative double at end");
 
+        //Integers
+        assertTrue(testUI.checkValidDouble(testValidZeroInt),"Did not handle zero");
+        assertTrue(testUI.checkValidDouble(testValidPosInt),"Did not handle positive integer");
+        assertTrue(testUI.checkValidDouble(testValidNegInt),"Did not handle negative integer");
+
         String emptyStr = "";
         String testInvalidStr = "a45d.45";
         String testInvalidStr2 = "43.d43f";
         String testInvalidStr3 = "49d";
         String testInvalidStr4 = "49.d";
 
+        //Invalids
         assertFalse(testUI.checkValidDouble(emptyStr), "Did not handle empty string");
         assertFalse(testUI.checkValidDouble(testInvalidStr),"Did not handle string with char at front");
         assertFalse(testUI.checkValidDouble(testInvalidStr2),"Did not handle string with char at end");
