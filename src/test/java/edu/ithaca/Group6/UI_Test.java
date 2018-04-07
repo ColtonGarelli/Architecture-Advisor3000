@@ -89,6 +89,7 @@ public class UI_Test {
 
     @Test
     public void testValidInt(){
+        testUI = new UIImpl();
         //Valids
         String testValidZeroInt = "0";
         String testValidPosInt = "23";

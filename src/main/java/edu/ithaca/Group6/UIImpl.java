@@ -47,6 +47,18 @@ public class UIImpl implements UI{
 
     @Override
     public boolean checkValidInt(String userInput) {
-        return false;
+       if(userInput.length() < 1){
+           return false;
+       }
+       else{
+           try
+           {
+               Integer.parseInt(userInput);
+               return true;
+           } catch (NumberFormatException e)
+           {
+               return false;
+           }
+       }
     }
 }
