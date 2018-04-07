@@ -42,7 +42,7 @@ public class UI_Test {
     @Test
     public void testValidDouble(){
         testUI = new UIImpl();
-
+        //Valids
         String testValidPosDouble = "114.34";
         String testValidNegDouble = "-23.345";
         String testValidSmallDouble = "0.324";
@@ -72,6 +72,7 @@ public class UI_Test {
         assertTrue(testUI.checkValidDouble(testValidPosInt),"Did not handle positive integer");
         assertTrue(testUI.checkValidDouble(testValidNegInt),"Did not handle negative integer");
 
+        //Invalids
         String emptyStr = "";
         String testInvalidStr = "a45d.45";
         String testInvalidStr2 = "43.d43f";
@@ -84,8 +85,40 @@ public class UI_Test {
         assertFalse(testUI.checkValidDouble(testInvalidStr2),"Did not handle string with char at end");
         assertFalse(testUI.checkValidDouble(testInvalidStr3),"Did not handle string with char only at end");
         assertFalse(testUI.checkValidDouble(testInvalidStr4),"Did not handle string with char only at end after decimal");
+    }
 
+    @Test
+    public void testValidInt(){
+        //Valids
+        String testValidZeroInt = "0";
+        String testValidPosInt = "23";
+        String testValidNegInt = "-34";
 
+        //Normal Ints
+        assertTrue(testUI.checkValidInt(testValidZeroInt),"Did not handle zero");
+        assertTrue(testUI.checkValidInt(testValidPosInt),"Did not handle positive valid integer");
+        assertTrue(testUI.checkValidInt(testValidNegInt),"Did not handle negative valid integer");
+
+        //Invalids
+        String testInvalidPosDouble = "0.4";
+        String testInvalidNegDouble = "-1.9999";
+        String testInvalidPosInt = "49f";
+        String testInvalidPosInt2 = "f30";
+        String testInvalidNegInt = "-23d";
+        String testInvalidNegInt2 = "-p32";
+        String emptyStr = "";
+
+        //Doubles
+        assertFalse(testUI.checkValidInt(testInvalidPosDouble),"Did not handle positive double");
+        assertFalse(testUI.checkValidInt(testInvalidNegDouble),"Did not handle negative double");
+
+        //Integers with letters
+        assertFalse(testUI.checkValidInt(testInvalidPosInt),"Did not handle invalid positive integer");
+        assertFalse(testUI.checkValidInt(testInvalidPosInt2),"Did not handle invalid positive integer");
+        assertFalse(testUI.checkValidInt(testInvalidNegInt),"Did not handle invalid negative integer");
+        assertFalse(testUI.checkValidInt(testInvalidNegInt2),"Did not handle invalid negative integer");
+
+        assertFalse(testUI.checkValidInt(emptyStr),"Did not handle empty string");
     }
 
 }

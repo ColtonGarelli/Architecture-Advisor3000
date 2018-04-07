@@ -11,4 +11,6 @@ public interface UI {
     public boolean checkYesOrNo(String userInput);
 
     public boolean checkValidDouble(String userInput);
+
+    public boolean checkValidInt(String userInput);
 }

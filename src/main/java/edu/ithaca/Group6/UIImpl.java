@@ -44,4 +44,9 @@ public class UIImpl implements UI{
             }
         }
     }
+
+    @Override
+    public boolean checkValidInt(String userInput) {
+        return false;
+    }
 }
