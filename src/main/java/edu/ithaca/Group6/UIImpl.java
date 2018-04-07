@@ -24,4 +24,9 @@ public class UIImpl implements UI{
             }
         }
     }
+
+    @Override
+    public boolean checkValidDouble(String userInput) {
+        return false;
+    }
 }

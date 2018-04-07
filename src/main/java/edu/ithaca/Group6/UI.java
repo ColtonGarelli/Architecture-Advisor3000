@@ -9,4 +9,6 @@ public interface UI {
      * @return True if valid yes/no, False if invalid
      */
     public boolean checkYesOrNo(String userInput);
+
+    public boolean checkValidDouble(String userInput);
 }
