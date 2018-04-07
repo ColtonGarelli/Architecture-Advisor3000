@@ -29,14 +29,14 @@ public class UIImpl implements UI{
 
     @Override
     public boolean checkValidDouble(String userInput) {
-        if(userInput.length() < 1){
+        if(userInput.length() < 1){ //quick false for empty string
             return false;
         }
-        else if(isLetter(userInput.charAt(userInput.length()-1))){
+        else if(isLetter(userInput.charAt(userInput.length()-1))){ //fixes error with parseDouble
             return false;
         }
         else{
-            try {
+            try {   //tries to parse as a double, throws exception if not double
                 Double.parseDouble(userInput);
                 return true;
             } catch (NumberFormatException e) {
@@ -47,7 +47,7 @@ public class UIImpl implements UI{
 
     @Override
     public boolean checkValidInt(String userInput) {
-       if(userInput.length() < 1){
+       if(userInput.length() < 1){  //quick false for empty string
            return false;
        }
        else{
