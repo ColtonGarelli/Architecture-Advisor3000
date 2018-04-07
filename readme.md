@@ -25,6 +25,10 @@ Create a text-based blueprint of a house with square footage, exterior walls, a 
 
 [Class Diagram #1](https://drive.google.com/file/d/1QBEQV0W5qgyIKo9BNCyeSXJpWasZnOlm/view?usp=sharing)
 
+[Sprint Retrospective #1](https://docs.google.com/document/d/1pxdmXzKCwMCIkynqdoqfoY0CWJCZgn8spzt3YMobkhs/edit?usp=sharing)
+
+[Sprint Review #1](https://docs.google.com/document/d/1OGyLclMphoIlv1aBs0NJTWXg-saNKKWvQzJ4RbCCGq0/edit?usp=sharing)
+
 
 <b>Sprint Goal #2:</b>
 Have a demonstrable system that can construct and display information regarding a structure.
