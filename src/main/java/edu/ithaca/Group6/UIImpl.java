@@ -1,5 +1,7 @@
 package edu.ithaca.Group6;
 
+import static java.lang.Character.isLetter;
+
 public class UIImpl implements UI{
     @Override
     public void main() {
@@ -27,6 +29,19 @@ public class UIImpl implements UI{
 
     @Override
     public boolean checkValidDouble(String userInput) {
-        return false;
+        if(userInput.length() < 1){
+            return false;
+        }
+        else if(isLetter(userInput.charAt(userInput.length()-1))){
+            return false;
+        }
+        else{
+            try {
+                Double.parseDouble(userInput);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
     }
 }

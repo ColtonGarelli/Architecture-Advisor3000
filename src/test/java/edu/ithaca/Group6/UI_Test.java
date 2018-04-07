@@ -67,10 +67,15 @@ public class UI_Test {
         String emptyStr = "";
         String testInvalidStr = "a45d.45";
         String testInvalidStr2 = "43.d43f";
+        String testInvalidStr3 = "49d";
+        String testInvalidStr4 = "49.d";
 
         assertFalse(testUI.checkValidDouble(emptyStr), "Did not handle empty string");
         assertFalse(testUI.checkValidDouble(testInvalidStr),"Did not handle string with char at front");
         assertFalse(testUI.checkValidDouble(testInvalidStr2),"Did not handle string with char at end");
+        assertFalse(testUI.checkValidDouble(testInvalidStr3),"Did not handle string with char only at end");
+        assertFalse(testUI.checkValidDouble(testInvalidStr4),"Did not handle string with char only at end after decimal");
+
 
     }
 
