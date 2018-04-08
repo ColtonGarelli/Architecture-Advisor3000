@@ -46,4 +46,13 @@ public class MaterialByUnit_Test {
         double[] newPoint = new double[]{1, 2, 3};
         assertArrayEquals(newPoint, testMaterial.getStartPoint(), "Start point not properly set");
     }
+
+    @Test
+    public void getEndPointTest(){
+        testMaterial.setStartPoint(0, 0, 0);
+        double[] endPoint = testMaterial.getEndPoint();
+        assertEquals(3.0, endPoint[0], "x value of endpoint not properly set");
+        assertEquals(0.15, endPoint[1], "y value of endpoint not properly set");
+        assertEquals(6.67, endPoint[2], "z value of endpoint not properly set");
+    }
 }
