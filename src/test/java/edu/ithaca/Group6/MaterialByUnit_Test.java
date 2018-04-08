@@ -60,8 +60,8 @@ public class MaterialByUnit_Test {
         assertEquals(6.67, endPoint1[2], "z value of endpoint not properly set for horizontal object");
         testMaterial2.setOrientation(1);
         double[] endPoint2 = testMaterial2.getEndPoint();
-        assertEquals(0.15, endPoint1[0], "x value of endpoint not properly set for vertical object");
-        assertEquals(3.0, endPoint1[1], "y value of endpoint not properly set for vertical object");
-        assertEquals(6.67, endPoint1[2], "z value of endpoint not properly set for vertical object");
+        assertEquals(0.15, endPoint2[0], "x value of endpoint not properly set for vertical object");
+        assertEquals(3.0, endPoint2[1], "y value of endpoint not properly set for vertical object");
+        assertEquals(6.67, endPoint2[2], "z value of endpoint not properly set for vertical object");
     }
 }

@@ -85,8 +85,17 @@ public abstract class MaterialByUnitImpl implements MaterialByUnit{
 
     @Override
     public double[] getEndPoint(){
-        double[] defPos = new double[]{0, 0, 0};
-        return defPos;
+        double[] endpoint = new double[3];
+        if(this.orientation == 0){
+            endpoint[0] = this.startPoint[0] + this.length;
+            endpoint[1] = this.startPoint[1] + this.width;
+        }
+        else{
+            endpoint[0] = this.startPoint[0] + this.width;
+            endpoint[1] = this.startPoint[1] + this.length;
+        }
+        endpoint[2] = this.startPoint[2] + this.height;
+        return endpoint;
     }
 }
 
