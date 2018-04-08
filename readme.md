@@ -35,6 +35,6 @@ Have a demonstrable system that can construct and display information regarding 
 
 
 
-[Class Diagram #1](https://drive.google.com/file/d/1QBEQV0W5qgyIKo9BNCyeSXJpWasZnOlm/view?usp=sharing)
+[Class Diagram](https://drive.google.com/file/d/1QBEQV0W5qgyIKo9BNCyeSXJpWasZnOlm/view?usp=sharing)
 
 [State Diagram #2](https://drive.google.com/file/d/1ZY8h7gXfp3BiRBdtOt0j0_a5F3bCfRzq/view?usp=sharing)
