@@ -32,8 +32,8 @@ public class MaterialByUnit_Test {
     }
 
     @Test
-    public void setterTest(){
+    public void setOrientationTest(){
         testMaterial.setOrientation(1);
-        testMaterial.setStartPoint(4, 7, 2);
+        assertEquals(1, testMaterial.getOrientation(), "Did not correctly set orientation");
     }
 }

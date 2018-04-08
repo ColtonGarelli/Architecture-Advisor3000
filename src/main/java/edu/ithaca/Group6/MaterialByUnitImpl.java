@@ -52,7 +52,14 @@ public abstract class MaterialByUnitImpl implements MaterialByUnit{
     public int getOrientation(){ return this.orientation; }
 
     @Override
-    public void setOrientation(int newVal){}
+    public void setOrientation(int newVal){
+        if(newVal != 0 && newVal != 1) {
+            throw new IndexOutOfBoundsException("Must be either 0 or 1");
+        }
+        else{
+            this.orientation = newVal;
+        }
+    }
 
     @Override
     public double[] getStartPoint(){
