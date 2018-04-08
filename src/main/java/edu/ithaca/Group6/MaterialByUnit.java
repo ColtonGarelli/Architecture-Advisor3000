@@ -59,7 +59,7 @@ public interface MaterialByUnit {
     public double getHeight();
 
     /**
-     *
+     * For showing the user what materials are available
      * @return String of the form:
      * MaterialName + ": $" + amount per unit
      * Rounds up to the nearest cent

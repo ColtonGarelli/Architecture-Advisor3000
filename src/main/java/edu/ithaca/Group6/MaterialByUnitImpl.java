@@ -49,9 +49,8 @@ public abstract class MaterialByUnitImpl implements MaterialByUnit{
     @Override
     public double getLength() { return this.length; }
 
-
     @Override
-    public double getWidth() { return -1; }
+    public double getWidth() { return this.width; }
 
     @Override
     public double getHeight() { return this.height; }
@@ -63,16 +62,14 @@ public abstract class MaterialByUnitImpl implements MaterialByUnit{
     }
 
     @Override
-    public int getOrientation(){ return -1; }
+    public int getOrientation(){ return this.orientation; }
 
     @Override
     public void setOrientation(int newVal){}
 
     @Override
     public double[] getStartPoint(){
-        double[] defPos = new double[]{0, 0, 0};
-        return defPos;
-    }
+        return this.startPoint; }
 
     @Override
     public void setStartPoint(double newX, double newY, double newZ){}

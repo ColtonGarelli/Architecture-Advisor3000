@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class MaterialByUnit_Test {
     private MaterialByUnit testMaterial;
@@ -14,14 +15,14 @@ public class MaterialByUnit_Test {
     @Test
     public void getterTest(){
         //Test the getters of the object
-        double[] defaultPos = new double[]{0, 0, 0};
+        double[] defaultPos = new double[]{0.0, 0.0, 0.0};
         assertEquals("Door", testMaterial.getMaterialName(), "Did not correctly get material name");
         assertEquals(900.00, testMaterial.getCostPerUnit(), "Did not correctly get cost per unit");
         assertEquals(3.0, testMaterial.getLength(), "Did not correctly get length");
         assertEquals(.15, testMaterial.getWidth(), "Did not correctly get width");
         assertEquals(6.67, testMaterial.getHeight(), "Did not correctly get height");
         assertEquals(0, testMaterial.getOrientation(), "Did not correctly get orientation");
-        assertEquals(defaultPos, testMaterial.getStartPoint(), "Did not correctly get start point");
+        assertArrayEquals(defaultPos, testMaterial.getStartPoint(), "Did not correctly get start point");
     }
 
     @Test
