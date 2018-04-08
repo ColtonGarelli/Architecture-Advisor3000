@@ -47,37 +47,16 @@ public interface MaterialByUnit {
     public double getLength();
 
     /**
-     * Set a new length (in feet)
-     * @param newLength
-     * @post length becomes newLength
-     */
-    public void setLength(double newLength);
-
-    /**
      * Get the width
      * @return Width
      */
     public double getWidth();
 
     /**
-     * Set a new width (in feet)
-     * @param newWidth
-     * @post width becomes newWidth
-     */
-    public void setWidth(double newWidth);
-
-    /**
      * Get the height
      * @return height
      */
     public double getHeight();
-
-    /**
-     * Set a new height (in feet)
-     * @param newHeight
-     * @post height becomes newHeight
-     */
-    public void setHeight(double newHeight);
 
     /**
      *

@@ -49,34 +49,12 @@ public abstract class MaterialByUnitImpl implements MaterialByUnit{
     @Override
     public double getLength() { return this.length; }
 
-    @Override
-    public void setLength(double newLength) {
-        if(newLength < 0){
-            throw new IndexOutOfBoundsException("Cannot set length to be negative");
-        }
-        else{
-            this.length = newLength;
-        }
-    }
 
     @Override
     public double getWidth() { return -1; }
 
     @Override
-    public void setWidth(double newWidth){}
-
-    @Override
     public double getHeight() { return this.height; }
-
-    @Override
-    public void setHeight(double newHeight) {
-        if(newHeight < 0){
-            throw new IndexOutOfBoundsException("Cannot set height to be negative");
-        }
-        else{
-            this.length = newHeight;
-        }
-    }
 
     @Override
     public String toString() {
