@@ -31,20 +31,7 @@ public abstract class MaterialByUnitImpl implements MaterialByUnit{
     public String getMaterialName() { return this.materialName; }
 
     @Override
-    public void setMaterialName(String newMaterial) { this.materialName = newMaterial; }
-
-    @Override
     public double getCostPerUnit() { return this.costPerUnit; }
-
-    @Override
-    public void setCostPerUnit(double newCost) {
-        if(newCost < 0){
-            throw new IndexOutOfBoundsException("Cannot set cost to be negative");
-        }
-        else{
-            this.costPerUnit = newCost;
-        }
-    }
 
     @Override
     public double getLength() { return this.length; }
@@ -58,7 +45,7 @@ public abstract class MaterialByUnitImpl implements MaterialByUnit{
     @Override
     public String toString() {
         String costStr = String.format("%.2f",this.costPerUnit);
-        return this.materialName + ", $" + costStr + ", Length: " + this.length + "ft, Height: " + this.height + "ft";
+        return this.materialName + ", $" + costStr + ", Length: " + this.length + "ft, Width: " + this.width + "ft, Height: " + this.height + "ft";
     }
 
     @Override

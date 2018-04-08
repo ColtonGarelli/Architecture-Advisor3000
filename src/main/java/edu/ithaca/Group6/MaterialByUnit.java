@@ -21,24 +21,10 @@ public interface MaterialByUnit {
     public String getMaterialName();
 
     /**
-     * Set a new material name
-     * @param newMaterial
-     * @post materialName becomes newMaterial
-     */
-    public void setMaterialName(String newMaterial);
-
-    /**
      * Get the cost of an individual unit of the material
      * @return costPerUnit
      */
     public double getCostPerUnit();
-
-    /**
-     * Set a new cost per unit
-     * @param newCost
-     * @post costPerUnit becomes newCost
-     */
-    public void setCostPerUnit(double newCost);
 
     /**
      * Get the length
