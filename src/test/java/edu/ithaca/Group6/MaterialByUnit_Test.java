@@ -40,6 +40,9 @@ public class MaterialByUnit_Test {
     @Test
     public void setStartPointTest(){
         testMaterial.setStartPoint(1, 2, 3);
+        assertEquals(1.0, testMaterial.getStartPoint()[0], "Start point x not set");
+        assertEquals(2.0, testMaterial.getStartPoint()[1], "Start point y not set");
+        assertEquals(3.0, testMaterial.getStartPoint()[2], "Start point z not set");
         double[] newPoint = new double[]{1, 2, 3};
         assertArrayEquals(newPoint, testMaterial.getStartPoint(), "Start point not properly set");
     }
