@@ -4,7 +4,10 @@ public interface MaterialByUnit {
     String materialName = "";
     double costPerUnit = 0.00;
     double length = 0.0;
+    double width = 0.0;
     double height = 0.0;
+    int orientation = 0;
+    double[] startPoint = new double[3];
 
     public String materialNameBuilder();
     public double costPerUnitBuilder();
@@ -51,6 +54,19 @@ public interface MaterialByUnit {
     public void setLength(double newLength);
 
     /**
+     * Get the width
+     * @return Width
+     */
+    public double getWidth();
+
+    /**
+     * Set a new width (in feet)
+     * @param newWidth
+     * @post width becomes newWidth
+     */
+    public void setWidth(double newWidth);
+
+    /**
      * Get the height
      * @return height
      */
@@ -72,8 +88,40 @@ public interface MaterialByUnit {
     public String toString();
 
     /**
-     * calculate the area of the object
-     * @return length * height
+     * Get the orientation
+     * The orientation can either be horizontal (0) or vertical (1)
+     * @return orientation (0 or 1)
      */
-    public double getArea();
+    public int getOrientation();
+
+    /**
+     * set the orientation of the object
+     * @param newVal
+     * @post orientation becomes newVal
+     */
+    public void setOrientation(int newVal);
+
+    /**
+     * Get the start point
+     * The start point of a unit is an array of 3 values representing a position in a 3D space
+     * [x, y, z]
+     * @return 3D array representing start point
+     */
+    public double[] getStartPoint();
+
+    /**
+     * set the start point of the object
+     * @param newX
+     * @param newY
+     * @param newZ
+     * @post start point becomes [newX, newY, newZ]
+     */
+    public void setStartPoint(double newX, double newY, double newZ);
+
+
+    /**
+     * use the start coordinates to calculate the position of the end coordinate
+     * @return an array with 3 values representing coordinates in a 3d space
+     */
+    public double[] getEndPoint();
 }
