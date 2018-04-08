@@ -8,9 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class MaterialByUnit_Test {
     private MaterialByUnit testMaterial;
+    private MaterialByUnit testMaterial2;
 
     @BeforeEach
-    void setup() {testMaterial = new Door();}
+    void setup() {
+        testMaterial = new Door();
+        testMaterial2 = new Door();
+    }
 
     @Test
     public void getterTest(){
@@ -50,9 +54,14 @@ public class MaterialByUnit_Test {
     @Test
     public void getEndPointTest(){
         testMaterial.setStartPoint(0, 0, 0);
-        double[] endPoint = testMaterial.getEndPoint();
-        assertEquals(3.0, endPoint[0], "x value of endpoint not properly set");
-        assertEquals(0.15, endPoint[1], "y value of endpoint not properly set");
-        assertEquals(6.67, endPoint[2], "z value of endpoint not properly set");
+        double[] endPoint1 = testMaterial.getEndPoint();
+        assertEquals(3.0, endPoint1[0], "x value of endpoint not properly set for horizontal object");
+        assertEquals(0.15, endPoint1[1], "y value of endpoint not properly set for horizontal object");
+        assertEquals(6.67, endPoint1[2], "z value of endpoint not properly set for horizontal object");
+        testMaterial2.setOrientation(1);
+        double[] endPoint2 = testMaterial2.getEndPoint();
+        assertEquals(0.15, endPoint1[0], "x value of endpoint not properly set for vertical object");
+        assertEquals(3.0, endPoint1[1], "y value of endpoint not properly set for vertical object");
+        assertEquals(6.67, endPoint1[2], "z value of endpoint not properly set for vertical object");
     }
 }
