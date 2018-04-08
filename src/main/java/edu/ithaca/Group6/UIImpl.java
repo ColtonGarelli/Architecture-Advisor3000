@@ -1,5 +1,7 @@
 package edu.ithaca.Group6;
 
+import static java.lang.Character.isLetter;
+
 public class UIImpl implements UI{
     @Override
     public void main() {
@@ -23,5 +25,40 @@ public class UIImpl implements UI{
                 return false;
             }
         }
+    }
+
+    @Override
+    public boolean checkValidDouble(String userInput) {
+        if(userInput.length() < 1){ //quick false for empty string
+            return false;
+        }
+        else if(isLetter(userInput.charAt(userInput.length()-1))){ //fixes error with parseDouble
+            return false;
+        }
+        else{
+            try {   //tries to parse as a double, throws exception if not double
+                Double.parseDouble(userInput);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+    }
+
+    @Override
+    public boolean checkValidInt(String userInput) {
+       if(userInput.length() < 1){  //quick false for empty string
+           return false;
+       }
+       else{
+           try
+           {
+               Integer.parseInt(userInput);
+               return true;
+           } catch (NumberFormatException e)
+           {
+               return false;
+           }
+       }
     }
 }
