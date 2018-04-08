@@ -36,4 +36,11 @@ public class MaterialByUnit_Test {
         testMaterial.setOrientation(1);
         assertEquals(1, testMaterial.getOrientation(), "Did not correctly set orientation");
     }
+
+    @Test
+    public void setStartPointTest(){
+        testMaterial.setStartPoint(1, 2, 3);
+        double[] newPoint = new double[]{1, 2, 3};
+        assertArrayEquals(newPoint, testMaterial.getStartPoint(), "Start point not properly set");
+    }
 }

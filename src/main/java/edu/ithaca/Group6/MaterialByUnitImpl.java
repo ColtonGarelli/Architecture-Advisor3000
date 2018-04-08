@@ -66,7 +66,22 @@ public abstract class MaterialByUnitImpl implements MaterialByUnit{
         return this.startPoint; }
 
     @Override
-    public void setStartPoint(double newX, double newY, double newZ){}
+    public void setStartPoint(double newX, double newY, double newZ){
+        if (newX < 0) {
+            throw new IndexOutOfBoundsException("Cannot have a negative x value");
+        }
+        else if (newY < 0) {
+            throw new IndexOutOfBoundsException("Cannot have a negative y value");
+        }
+        else if (newZ < 0) {
+            throw new IndexOutOfBoundsException("Cannot have a negative z value");
+        }
+        else{
+            this.startPoint[0] = newX;
+            this.startPoint[1] = newY;
+            this.startPoint[2] = newZ;
+        }
+    }
 
     @Override
     public double[] getEndPoint(){
