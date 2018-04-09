@@ -126,3 +126,144 @@ class Door extends MaterialByUnitImpl {
         return defPos;
     }
 }
+
+class InteriorDoor extends MaterialByUnitImpl {
+    @Override
+    public String materialNameBuilder() {
+        return "Interior Door";
+    }
+
+    @Override
+    public double costPerUnitBuilder() { return 377.76; }
+
+    @Override
+    public double lengthBuilder() { return 3.0; }
+
+    @Override
+    public double widthBuilder() { return .15; }
+
+    @Override
+    public double heightBuilder() { return 6.67; }
+
+    @Override
+    public int orientationBuilder() { return 0; }
+
+    @Override
+    public double[] startPointBuilder(){
+        double[] defPos = new double[]{0, 0, 0};
+        return defPos;
+    }
+}
+
+class SlidingDoor extends MaterialByUnitImpl {
+    @Override
+    public String materialNameBuilder() {
+        return "Sliding Door";
+    }
+
+    @Override
+    public double costPerUnitBuilder() { return 84.98; }
+
+    @Override
+    public double lengthBuilder() { return 4.0; }
+
+    @Override
+    public double widthBuilder() { return 0.021; }
+
+    @Override
+    public double heightBuilder() { return 6.67; }
+
+    @Override
+    public int orientationBuilder() { return 0; }
+
+    @Override
+    public double[] startPointBuilder(){
+        double[] defPos = new double[]{0, 0, 0};
+        return defPos;
+    }
+}
+
+class StormDoor extends MaterialByUnitImpl {
+    @Override
+    public String materialNameBuilder() {
+        return "Storm Door";
+    }
+
+    @Override
+    public double costPerUnitBuilder() { return 199.00; }
+
+    @Override
+    public double lengthBuilder() { return 3.0; }
+
+    @Override
+    public double widthBuilder() { return .083; }
+
+    @Override
+    public double heightBuilder() { return 6.67; }
+
+    @Override
+    public int orientationBuilder() { return 0; }
+
+    @Override
+    public double[] startPointBuilder(){
+        double[] defPos = new double[]{0, 0, 0};
+        return defPos;
+    }
+}
+
+class ScreenDoor extends MaterialByUnitImpl {
+    @Override
+    public String materialNameBuilder() {
+        return "Screen Door";
+    }
+
+    @Override
+    public double costPerUnitBuilder() { return 179.00; }
+
+    @Override
+    public double lengthBuilder() { return 3.0; }
+
+    @Override
+    public double widthBuilder() { return .167; }
+
+    @Override
+    public double heightBuilder() { return 6.67; }
+
+    @Override
+    public int orientationBuilder() { return 0; }
+
+    @Override
+    public double[] startPointBuilder(){
+        double[] defPos = new double[]{0, 0, 0};
+        return defPos;
+    }
+}
+
+class GarageDoor extends MaterialByUnitImpl {
+    @Override
+    public String materialNameBuilder() {
+        return "Garage Door";
+    }
+
+    @Override
+    public double costPerUnitBuilder() { return 264.00; }
+
+    @Override
+    public double lengthBuilder() { return 9.0; }
+
+    @Override
+    public double widthBuilder() { return .167; }
+
+    @Override
+    public double heightBuilder() { return 7.00; }
+
+    @Override
+    public int orientationBuilder() { return 0; }
+
+    @Override
+    public double[] startPointBuilder(){
+        double[] defPos = new double[]{0, 0, 0};
+        return defPos;
+    }
+}
+
