@@ -23,7 +23,7 @@ Clientelle
 Create a text-based blueprint of a house with square footage, exterior walls, a roof and doors.
 
 
-[Class Diagram #1](https://drive.google.com/file/d/1QBEQV0W5qgyIKo9BNCyeSXJpWasZnOlm/view?usp=sharing)
+[Class Diagram #1](https://drive.google.com/file/d/1Aq8Uqu79zcZH3n4ezrGr0LbH7X7-hISq/view?usp=sharing)
 
 [Sprint Retrospective #1](https://docs.google.com/document/d/1pxdmXzKCwMCIkynqdoqfoY0CWJCZgn8spzt3YMobkhs/edit?usp=sharing)
 
@@ -34,5 +34,7 @@ Create a text-based blueprint of a house with square footage, exterior walls, a 
 Have a demonstrable system that can construct and display information regarding a structure.
 
 
+
+[Class Diagram #2](https://drive.google.com/file/d/1QBEQV0W5qgyIKo9BNCyeSXJpWasZnOlm/view?usp=sharing)
 
 [State Diagram #2](https://drive.google.com/file/d/1ZY8h7gXfp3BiRBdtOt0j0_a5F3bCfRzq/view?usp=sharing)
