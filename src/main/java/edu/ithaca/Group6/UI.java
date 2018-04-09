@@ -9,4 +9,18 @@ public interface UI {
      * @return True if valid yes/no, False if invalid
      */
     public boolean checkYesOrNo(String userInput);
+
+    /**
+     * Determines if the user input is a valid double
+     * @param userInput String of what the user inputs
+     * @return True if a valid double, False if invalid entry
+     */
+    public boolean checkValidDouble(String userInput);
+
+    /**
+     * Determines if the user input is a valid integer
+     * @param userInput String of what the user inputs
+     * @return True if a valid integer, False if invalid entry
+     */
+    public boolean checkValidInt(String userInput);
 }
