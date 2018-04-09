@@ -154,3 +154,4 @@ class TwoByThree extends MaterialByAreaImpl {
         return 1.23;
     }
 }
+
