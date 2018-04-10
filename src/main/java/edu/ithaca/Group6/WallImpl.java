@@ -1,14 +1,25 @@
 package edu.ithaca.Group6;
 import java.util.ArrayList;
 
-public class WallImpl implements Wall {
+
+public abstract class WallImpl implements Wall{
+    double height;
+    double length;
+    double width;
+    MaterialByArea material;
+}
+
+
+
+ class ExternalWall extends WallImpl {
 
     private double height;
+    private double length;
     private double width;
-    private MaterialByArea material = new Wood();
+    private MaterialByArea material = new Brick();
     private ArrayList <MaterialByUnit> featuresList;
 
-    public WallImpl(){
+    public ExternalWall(){
         this.featuresList = new ArrayList<MaterialByUnit>();
     }
 
@@ -22,12 +33,27 @@ public class WallImpl implements Wall {
         }
     }
 
-
     public double getHeight(){
         return this.height;
     }
 
-    public boolean setWidth(double width) {
+    @Override
+    public boolean setLength(double length) {
+        if(length > 0){
+            this.length = length;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public double getLength() {
+        return this.length;
+    }
+
+    public boolean setThickness(double width) {
         if (width > 0) {
             this.width = width;
             return true;
@@ -77,4 +103,17 @@ public class WallImpl implements Wall {
     public int getFeatureListSize(){
         return this.featuresList.size();
     }
+
+    class InternalWall extends WallImpl{
+        private double height;
+        private double length;
+        private double width;
+        private MaterialByArea material;
+
+
+        public InternalWall(){
+
+        }
+
+     }
 }

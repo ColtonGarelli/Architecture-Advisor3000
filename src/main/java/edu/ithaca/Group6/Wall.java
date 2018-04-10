@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public interface Wall {
 
     public double height = 0;
+    public double length = 0;
     public double width = 0;
     public MaterialByArea material = new Brick();
     public ArrayList<MaterialByUnit> featuresList = new ArrayList<MaterialByUnit>();
@@ -15,7 +16,11 @@ public interface Wall {
 
     public double getHeight();
 
-    public boolean setWidth(double width);
+    public boolean setLength(double length);
+
+    public double getLength();
+
+    public boolean setThickness(double width);
 
     public double getWidth();
 
