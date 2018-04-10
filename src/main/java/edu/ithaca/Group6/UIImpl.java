@@ -64,8 +64,19 @@ public class UIImpl implements UI{
 
     @Override
     public String displayMaterialsByArea(){
+        Brick brick = new Brick();
+        ClayBrick clayBrick = new ClayBrick();
+        ConcreteBrick concreteBrick = new ConcreteBrick();
+        TwoByFour twoByFour = new TwoByFour();
+        TwoByThree twoByThree = new TwoByThree();
+        Wood wood = new Wood();
         String display = "Building Materials:";
-        display = display + "\n" + Brick.toString();
-        return "this";
+        display = display + "\n" + brick.toString();
+        display = display + "\n" + clayBrick.toString();
+        display = display + "\n" + concreteBrick.toString();
+        display = display + "\n" + twoByFour.toString();
+        display = display + "\n" + twoByThree.toString();
+        display = display + "\n" + wood.toString();
+        return display;
     }
 }
