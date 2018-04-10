@@ -23,4 +23,11 @@ public interface UI {
      * @return True if a valid integer, False if invalid entry
      */
     public boolean checkValidInt(String userInput);
+
+    /**
+     * Displays a list of available MaterialByArea objects as a string
+     * Includes names and cost per square unit
+     * @Return String containing MaterialByArea object data
+     */
+    public String displayMaterialsByArea();
 }

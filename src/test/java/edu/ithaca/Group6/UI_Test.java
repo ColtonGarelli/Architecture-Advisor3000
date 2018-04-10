@@ -122,4 +122,16 @@ public class UI_Test {
         assertFalse(testUI.checkValidInt(emptyStr),"Did not handle empty string");
     }
 
+    @Test
+    public void displayAvailableAreaTest(){
+        testUI = new UIImpl();
+        String display = "Building Materials:\n" +
+                "Brick : $142.34 per square foot\n" +
+                "Clay Brick : $0.04 per square foot\n" +
+                "Concrete Brick : $0.03 per square foot\n" +
+                "Two by Four Wood : $1.66 per square foot\n" +
+                "Two by Three Wood : $1.23 per square foot\n" +
+                "Wood : $1.00 per square foot";
+        assertTrue(testUI.displayMaterialsByArea().equals(display), "Did not generate the list of available materialByArea objects");
+    }
 }

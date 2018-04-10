@@ -61,4 +61,9 @@ public class UIImpl implements UI{
            }
        }
     }
+
+    @Override
+    public String displayMaterialsByArea(){
+        return "this";
+    }
 }
