@@ -64,6 +64,8 @@ public class UIImpl implements UI{
 
     @Override
     public String displayMaterialsByArea(){
+        String display = "Building Materials:";
+        display = display + "\n" + Brick.toString();
         return "this";
     }
 }
