@@ -26,8 +26,15 @@ public interface UI {
 
     /**
      * Displays a list of available MaterialByArea objects as a string
-     * Includes names and cost per square unit
+     * Includes names and cost per square foot
      * @Return String containing MaterialByArea object data
      */
     public String displayMaterialsByArea();
+
+    /**
+     * Displays a list of available door (MaterialByUnit objects as a string
+     * Includes names, cost per unit, and dimensions
+     * @Return String containing door data
+     */
+    public String displayDoors();
 }

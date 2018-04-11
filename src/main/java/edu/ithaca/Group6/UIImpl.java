@@ -79,4 +79,9 @@ public class UIImpl implements UI{
         display = display + "\n" + wood.toString();
         return display;
     }
+
+    @Override
+    public String displayDoors(){
+        return "";
+    }
 }

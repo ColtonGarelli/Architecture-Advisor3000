@@ -134,4 +134,17 @@ public class UI_Test {
                 "Wood : $1.00 per square foot";
         assertTrue(testUI.displayMaterialsByArea().equals(display), "Did not generate the list of available materialByArea objects");
     }
+
+    @Test
+    public void displayAvailableDoorTest() {
+        testUI = new UIImpl();
+        String display = "Doors:\n" +
+                "Door : $900.00, Length: 3.00ft, Width: 0.15ft, Heigth: 6.67ft\n" +
+                "Garage Door : $264.00, Length: 9.00ft, Width: 0.17ft, Height: 7.00ft\n" +
+                "Interior Door : $377.76, Length: 3.00ft, Width: 0.15ft, Height: 6.67ft\n" +
+                "Screen Door : $179.00, Length: 3.00ft, Width: 0.17ft, Height: 6.67ft\n" +
+                "Sliding Door : $84.98, Length: 4.00ft, Width: 0.02ft, Height: 6.67ft\n" +
+                "Storm Door : $199.00, Length: 3.00ft, Width: 0.08ft, Height: 6.67ft\n";
+        assertTrue(testUI.displayDoors().equals(display), "Did not generate list of doors");
+    }
 }
