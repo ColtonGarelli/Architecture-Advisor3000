@@ -100,6 +100,17 @@ public class UIImpl implements UI{
 
     @Override
     public String displayWindows(){
-        return "";
+        BayWindow bayWindow = new BayWindow();
+        DoubleHungWindow doubleHungWindow = new DoubleHungWindow();
+        PictureWindow pictureWindow = new PictureWindow();
+        SingleHungWindow singleHungWindow = new SingleHungWindow();
+        SlidingWindow slidingWindow = new SlidingWindow();
+        String display = "Windows:";
+        display = display + "\n" + bayWindow.toString();
+        display = display + "\n" + doubleHungWindow.toString();
+        display = display + "\n" + pictureWindow.toString();
+        display = display + "\n" + singleHungWindow.toString();
+        display = display + "\n" + slidingWindow.toString();
+        return display;
     }
 }
