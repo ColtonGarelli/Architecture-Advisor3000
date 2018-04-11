@@ -1,12 +1,15 @@
 package edu.ithaca.Group6;
+import java.awt.*;
 import java.util.ArrayList;
 
 
 public abstract class WallImpl implements Wall{
-    double height;
-    double length;
-    double width;
-    MaterialByArea material;
+//    an abstract class that defines both kinds of walls
+    public abstract boolean setHeight(double height);
+    public abstract double getHeight();
+    public abstract boolean setLength(double length);
+    public abstract double getLength();
+    public abstract boolean setThickness(double width);
 }
 
 
@@ -14,8 +17,8 @@ public abstract class WallImpl implements Wall{
 class ExternalWall extends WallImpl {
     private double height;
     private double length;
-    private double width;
-    private MaterialByArea material = new Brick();
+    private double thickness;
+    private MaterialByArea material;
     private ArrayList<MaterialByUnit> featuresList;
 
     public ExternalWall() {
@@ -44,14 +47,13 @@ class ExternalWall extends WallImpl {
         }
     }
 
-    @Override
     public double getLength() {
         return this.length;
     }
 
     public boolean setThickness(double width) {
         if (width > 0) {
-            this.width = width;
+            this.thickness = width;
             return true;
         } else {
             return false;
@@ -59,8 +61,8 @@ class ExternalWall extends WallImpl {
     }
 
 
-    public double getWidth() {
-        return this.width;
+    public double getThickness() {
+        return this.thickness;
     }
 
     public boolean setMaterial(MaterialByArea wallMaterial) {
@@ -98,7 +100,7 @@ class ExternalWall extends WallImpl {
     }
 }
 
-class InternalWall extends WallImpl{
+class InternalWall extends WallImpl {
     private double height;
     private double length;
     private double width;
@@ -106,9 +108,20 @@ class InternalWall extends WallImpl{
     private ArrayList<MaterialByUnit> featuresList;
 
 
-    public InternalWall(){
+    public InternalWall() {
         this.featuresList = new ArrayList<MaterialByUnit>();
     }
+    @Override
+    public boolean addFeature(MaterialByUnit feature){
+        if(feature.getClass() == Door.class){
+            this.featuresList.add(feature);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 
     public boolean setHeight(double height) {
         if (height > 0) {
@@ -154,7 +167,7 @@ class InternalWall extends WallImpl{
     }
 
 
-    public double getWidth() {
+    public double getThickness() {
         return this.width;
     }
 
@@ -167,13 +180,6 @@ class InternalWall extends WallImpl{
     public MaterialByArea getMaterial() {
         return this.material;
     }
-
-
-    public boolean addFeature(MaterialByUnit feature) {
-        this.featuresList.add(feature);
-        return true;
-    }
-
 
     public MaterialByUnit getFeature(int index) {
         return this.featuresList.get(index);

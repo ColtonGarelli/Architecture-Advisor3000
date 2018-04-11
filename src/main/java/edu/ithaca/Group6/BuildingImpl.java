@@ -6,6 +6,7 @@ public class BuildingImpl implements Building{
     double width;
     double height;
     MaterialByArea extWallMaterial;
+
     public BuildingImpl(){
         this.length = 0.0;
         this.width = 0.0;

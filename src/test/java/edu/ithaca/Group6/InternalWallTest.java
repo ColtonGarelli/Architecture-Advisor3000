@@ -75,27 +75,66 @@ public class InternalWallTest {
     public void setInternalWallThicknessTest(){
         double double_dec = 0.5;
         testWall.setThickness(double_dec);
-        assertEquals(testWall.getWidth(), 0.5, "set internal wall width test failed");
+        assertEquals(testWall.getThickness(), 0.5, "set internal wall width test failed");
         double_dec = 0.001;
         testWall.setThickness(double_dec);
-        assertEquals(testWall.getWidth(), .001, "set internal wall width test failed");
+        assertEquals(testWall.getThickness(), .001, "set internal wall width test failed");
         double_dec = 10.1;
         testWall.setThickness(double_dec);
-        assertEquals(testWall.getWidth(), 10.1, "set internal wall width test failed");
+        assertEquals(testWall.getThickness(), 10.1, "set internal wall width test failed");
         double_dec = 100.05;
         testWall.setThickness(double_dec);
-        assertEquals(testWall.getWidth(), 100.05, "set internal wall width test failed");
+        assertEquals(testWall.getThickness(), 100.05, "set internal wall width test failed");
         double_dec = 45.34561;
         testWall.setThickness(double_dec);
-        assertEquals(testWall.getWidth(), 45.34561, "set internal wall width test failed");
+        assertEquals(testWall.getThickness(), 45.34561, "set internal wall width test failed");
         testWall.setThickness(1);
-        assertEquals(testWall.getWidth(),1,"set internal wall width test  failed");
+        assertEquals(testWall.getThickness(),1,"set internal wall width test  failed");
         testWall.setThickness(10);
-        assertEquals(testWall.getWidth(),10,"set internal wall width test failed");
+        assertEquals(testWall.getThickness(),10,"set internal wall width test failed");
         testWall.setThickness(100);
-        assertEquals(testWall.getWidth(),100,"set internal wall width test failed");
+        assertEquals(testWall.getThickness(),100,"set internal wall width test failed");
         testWall.setThickness(2342344);
-        assertEquals(testWall.getWidth(),2342344,"set internal wall width test failed");
+        assertEquals(testWall.getThickness(),2342344,"set internal wall width test failed");
+    }
+
+    @Test
+    public void setInternalWallMaterialTest(){
+        MaterialByArea testMaterial = new ClayBrick();
+        this.testWall.setMaterial(testMaterial);
+        assertEquals(testMaterial.getMaterialName(), testWall.getMaterial().getMaterialName(), "set external wall material test failed");
+        testMaterial = new Brick();
+        this.testWall.setMaterial(testMaterial);
+        assertEquals(testMaterial.getMaterialName(), testWall.getMaterial().getMaterialName(), "set external wall material test failed");
+        testMaterial = new ConcreteBrick();
+        this.testWall.setMaterial(testMaterial);
+        assertEquals(testMaterial.getMaterialName(), testWall.getMaterial().getMaterialName(), "set external wall material test failed");
+        testMaterial =  new TwoByFour();
+        this.testWall.setMaterial(testMaterial);
+        assertEquals(testMaterial.getMaterialName(), testWall.getMaterial().getMaterialName(), "set external wall material test failed");
+        testMaterial = new TwoByThree();
+        this.testWall.setMaterial(testMaterial);
+        assertEquals(testMaterial.getMaterialName(), testWall.getMaterial().getMaterialName(), "set external wall material test failed");
+        testMaterial = new Wood();
+        this.testWall.setMaterial(testMaterial);
+        assertEquals(testMaterial.getMaterialName(), testWall.getMaterial().getMaterialName(), "set external wall material test failed");
+    }
+
+    @Test
+    public void getInternalWallFeatureTest(){
+        MaterialByUnit testDoor = new Door();
+        testWall.addFeature(testDoor);
+        assertEquals(testDoor, testWall.getFeature(0),"get wall features test failed");
+        testWall.addFeature(testDoor);
+        testWall.addFeature(testDoor);
+        testWall.addFeature(testDoor);
+        testWall.addFeature(testDoor);
+        for (int i=0; i<15; i++){
+            testWall.addFeature(testDoor);
+        }
+        for(int i = 0; i<testWall.getFeatureListSize(); i++){
+            assertEquals(testDoor, testWall.getFeature(i),"get wall features test failed");
+        }
     }
 
 }
