@@ -122,4 +122,41 @@ public class UI_Test {
         assertFalse(testUI.checkValidInt(emptyStr),"Did not handle empty string");
     }
 
+    @Test
+    public void displayAvailableAreaTest(){
+        testUI = new UIImpl();
+        String display = "Building Materials:\n" +
+                "Brick : $142.34 per square foot\n" +
+                "Clay Brick : $0.04 per square foot\n" +
+                "Concrete Brick : $0.03 per square foot\n" +
+                "Two by Four Wood : $1.66 per square foot\n" +
+                "Two by Three Wood : $1.23 per square foot\n" +
+                "Wood : $1.00 per square foot";
+        assertTrue(testUI.displayMaterialsByArea().equals(display), "Did not generate the list of available materialByArea objects");
+    }
+
+    @Test
+    public void displayAvailableDoorTest() {
+        testUI = new UIImpl();
+        String display = "Doors:\n" +
+                "Door : $900.00, Length: 3.00ft, Width: 0.15ft, Height: 6.67ft\n" +
+                "Garage Door : $264.00, Length: 9.00ft, Width: 0.17ft, Height: 7.00ft\n" +
+                "Interior Door : $377.76, Length: 3.00ft, Width: 0.15ft, Height: 6.67ft\n" +
+                "Screen Door : $179.00, Length: 3.00ft, Width: 0.17ft, Height: 6.67ft\n" +
+                "Sliding Door : $84.98, Length: 4.00ft, Width: 0.02ft, Height: 6.67ft\n" +
+                "Storm Door : $199.00, Length: 3.00ft, Width: 0.08ft, Height: 6.67ft";
+        assertTrue(testUI.displayDoors().equals(display), "Did not generate list of doors");
+    }
+
+    @Test
+    public void displayAvailableWindowsTest() {
+        testUI = new UIImpl();
+        String display = "Windows:\n" +
+                "Bay Window : $1198.66, Length: 6.13ft, Width: 1.00ft, Height: 5.08ft\n" +
+                "Double Hung Window : $167.00, Length: 2.48ft, Width: 0.38ft, Height: 4.44ft\n" +
+                "Picture Window : $252.00, Length: 4.00ft, Width: 0.27ft, Height: 4.00ft\n" +
+                "Single Hung Window : $68.75, Length: 2.00ft, Width: 0.19ft, Height: 4.00ft\n" +
+                "Sliding Window : $104.00, Length: 2.58ft, Width: 0.38ft, Height: 1.58ft";
+        assertTrue(testUI.displayWindows().equals(display), "Did not generate list of windows");
+    }
 }
