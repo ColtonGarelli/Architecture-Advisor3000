@@ -61,4 +61,56 @@ public class UIImpl implements UI{
            }
        }
     }
+
+    @Override
+    public String displayMaterialsByArea(){
+        Brick brick = new Brick();
+        ClayBrick clayBrick = new ClayBrick();
+        ConcreteBrick concreteBrick = new ConcreteBrick();
+        TwoByFour twoByFour = new TwoByFour();
+        TwoByThree twoByThree = new TwoByThree();
+        Wood wood = new Wood();
+        String display = "Building Materials:";
+        display = display + "\n" + brick.toString();
+        display = display + "\n" + clayBrick.toString();
+        display = display + "\n" + concreteBrick.toString();
+        display = display + "\n" + twoByFour.toString();
+        display = display + "\n" + twoByThree.toString();
+        display = display + "\n" + wood.toString();
+        return display;
+    }
+
+    @Override
+    public String displayDoors(){
+        Door door = new Door();
+        GarageDoor garageDoor = new GarageDoor();
+        InteriorDoor interiorDoor = new InteriorDoor();
+        ScreenDoor screenDoor = new ScreenDoor();
+        SlidingDoor slidingDoor = new SlidingDoor();
+        StormDoor stormDoor = new StormDoor();
+        String display = "Doors:";
+        display = display + "\n" + door.toString();
+        display = display + "\n" + garageDoor.toString();
+        display = display + "\n" + interiorDoor.toString();
+        display = display + "\n" + screenDoor.toString();
+        display = display + "\n" + slidingDoor.toString();
+        display = display + "\n" + stormDoor.toString();
+        return display;
+    }
+
+    @Override
+    public String displayWindows(){
+        BayWindow bayWindow = new BayWindow();
+        DoubleHungWindow doubleHungWindow = new DoubleHungWindow();
+        PictureWindow pictureWindow = new PictureWindow();
+        SingleHungWindow singleHungWindow = new SingleHungWindow();
+        SlidingWindow slidingWindow = new SlidingWindow();
+        String display = "Windows:";
+        display = display + "\n" + bayWindow.toString();
+        display = display + "\n" + doubleHungWindow.toString();
+        display = display + "\n" + pictureWindow.toString();
+        display = display + "\n" + singleHungWindow.toString();
+        display = display + "\n" + slidingWindow.toString();
+        return display;
+    }
 }
