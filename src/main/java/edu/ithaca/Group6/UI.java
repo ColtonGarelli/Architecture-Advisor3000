@@ -37,4 +37,11 @@ public interface UI {
      * @Return String containing door data
      */
     public String displayDoors();
+
+    /**
+     * Displays a list of available window (MaterialByUnit objects as a string
+     * Includes names, cost per unit, and dimensions
+     * @Return String containing window data
+     */
+    public String displayWindows();
 }

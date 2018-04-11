@@ -147,4 +147,16 @@ public class UI_Test {
                 "Storm Door : $199.00, Length: 3.00ft, Width: 0.08ft, Height: 6.67ft";
         assertTrue(testUI.displayDoors().equals(display), "Did not generate list of doors");
     }
+
+    @Test
+    public void displayAvailableWindowsTest() {
+        testUI = new UIImpl();
+        String display = "Windows:\n" +
+                "Bay Window : $1198.66, Length: 6.13ft, Width: 1.00ft, Height: 5.08ft\n" +
+                "Double Hung Window : $167.00, Length: 2.48ft, Width: 0.38ft, Height: 4.44ft\n" +
+                "Picture Window : $252.00, Length: 4.00ft, Width: 0.27ft, Height: 4.00ft\n" +
+                "Single Hung Window : $68.75, Length: 2.00ft, Width: 0.19ft, Height: 4.00ft\n" +
+                "Sliding Window : $104.00, Length: 2.58ft, Width: 0.38ft, Height: 1.58ft";
+        assertTrue(testUI.displayWindows().equals(display), "Did not generate list of windows");
+    }
 }

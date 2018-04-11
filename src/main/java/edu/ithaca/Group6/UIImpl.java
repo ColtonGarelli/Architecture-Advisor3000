@@ -97,4 +97,9 @@ public class UIImpl implements UI{
         display = display + "\n" + stormDoor.toString();
         return display;
     }
+
+    @Override
+    public String displayWindows(){
+        return "";
+    }
 }
