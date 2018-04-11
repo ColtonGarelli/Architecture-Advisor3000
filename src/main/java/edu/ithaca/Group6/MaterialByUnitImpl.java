@@ -45,9 +45,9 @@ public abstract class MaterialByUnitImpl implements MaterialByUnit{
     @Override
     public String toString() {
         String costStr = String.format("%.2f",this.costPerUnit);
-        String lengthStr = String.format("$.2f", this.length);
-        String widthStr = String.format("$.2f", this.width);
-        String heightStr = String.format("$.2f", this.height);
+        String lengthStr = String.format("%.2f", this.length);
+        String widthStr = String.format("%.2f", this.width);
+        String heightStr = String.format("%.2f", this.height);
         return this.materialName + " : $" + costStr + ", Length: " + lengthStr + "ft, Width: " + widthStr + "ft, Height: " + heightStr + "ft";
     }
 

@@ -82,6 +82,19 @@ public class UIImpl implements UI{
 
     @Override
     public String displayDoors(){
-        return "";
+        Door door = new Door();
+        GarageDoor garageDoor = new GarageDoor();
+        InteriorDoor interiorDoor = new InteriorDoor();
+        ScreenDoor screenDoor = new ScreenDoor();
+        SlidingDoor slidingDoor = new SlidingDoor();
+        StormDoor stormDoor = new StormDoor();
+        String display = "Doors:";
+        display = display + "\n" + door.toString();
+        display = display + "\n" + garageDoor.toString();
+        display = display + "\n" + interiorDoor.toString();
+        display = display + "\n" + screenDoor.toString();
+        display = display + "\n" + slidingDoor.toString();
+        display = display + "\n" + stormDoor.toString();
+        return display;
     }
 }
