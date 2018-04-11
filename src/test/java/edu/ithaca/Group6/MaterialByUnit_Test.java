@@ -32,7 +32,7 @@ public class MaterialByUnit_Test {
     @Test
     public void toStringTest(){
         //test that the material's data is outputted as a properly formatted string
-        assertEquals("Door, $900.00, Length: 3.0ft, Width: 0.15ft, Height: 6.67ft", testMaterial.toString(), "Did not print a properly formatted string");
+        assertEquals("Door : $900.00, Length: 3.00ft, Width: 0.15ft, Height: 6.67ft", testMaterial.toString(), "Did not print a properly formatted string");
     }
 
     @Test
