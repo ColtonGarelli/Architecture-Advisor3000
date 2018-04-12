@@ -10,6 +10,7 @@ public abstract class WallImpl implements Wall{
     public abstract boolean setLength(double length);
     public abstract double getLength();
     public abstract boolean setThickness(double width);
+    public abstract double getThickness();
 }
 
 
