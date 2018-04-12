@@ -8,10 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InternalWallTest {
     Wall testWall;
-
     public InternalWallTest(){
         this.testWall = new InternalWall();
-
     }
 
     @Test
