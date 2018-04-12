@@ -13,7 +13,7 @@ public class BuildingImpl implements Building{
         this.height = 0.0;
     }
 
-    public BuildingImpl(double length, double width, double height, MaterialByArea extWallMaterial){
+    public BuildingImpl(double length, double width, double height, MaterialByArea extWallMaterial) {
         this.length = length;
         this.width = width;
         this.height = height;

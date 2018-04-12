@@ -36,4 +36,5 @@ public interface Building {
 
     public double calcTotalCost();
     //Calculate the total cost of the walls
+
 }
