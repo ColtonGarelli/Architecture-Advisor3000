@@ -100,28 +100,28 @@ public class BuildingImpl implements Building{
                 }
                 //Can't start a wall inside an existing wall
                 //Check the x value
-                else if (wall.getBottomLeftOutsideCoordinates()[0] >= walls[n].getBottomLeftOutsideCoordinates()[0] && wall.getBottomLeftOutsideCoordinates()[0] <= walls[n].getTopRightInsideCoordinates()[0]) {
+                else if (wall.getBottomLeftOutsideCoordinates()[0] > walls[n].getBottomLeftOutsideCoordinates()[0] && wall.getBottomLeftOutsideCoordinates()[0] < walls[n].getTopRightInsideCoordinates()[0]) {
                     return false;
                 }
                 //Check the y value
-                else if (wall.getBottomLeftOutsideCoordinates()[1] >= walls[n].getBottomLeftOutsideCoordinates()[1] && wall.getBottomLeftOutsideCoordinates()[0] <= walls[n].getTopRightInsideCoordinates()[1]) {
+                else if (wall.getBottomLeftOutsideCoordinates()[1] > walls[n].getBottomLeftOutsideCoordinates()[1] && wall.getBottomLeftOutsideCoordinates()[0] < walls[n].getTopRightInsideCoordinates()[1]) {
                     return false;
                 }
                 //Check the z value
-                else if (wall.getBottomLeftOutsideCoordinates()[2] >= walls[n].getBottomLeftOutsideCoordinates()[2] && wall.getBottomLeftOutsideCoordinates()[0] <= walls[n].getTopRightInsideCoordinates()[2]) {
+                else if (wall.getBottomLeftOutsideCoordinates()[2] > walls[n].getBottomLeftOutsideCoordinates()[2] && wall.getBottomLeftOutsideCoordinates()[0] < walls[n].getTopRightInsideCoordinates()[2]) {
                     return false;
                 }
                 //Can't end the wall inside an existing wall
                 //Check the x value
-                else if (wall.getTopRightInsideCoordinates()[0] >= walls[n].getBottomLeftOutsideCoordinates()[0] && wall.getTopRightInsideCoordinates()[0] + length <= walls[n].getTopRightInsideCoordinates()[0]) {
+                else if (wall.getTopRightInsideCoordinates()[0] > walls[n].getBottomLeftOutsideCoordinates()[0] && wall.getTopRightInsideCoordinates()[0] + length < walls[n].getTopRightInsideCoordinates()[0]) {
                     return false;
                 }
                 //Check the y value
-                else if (wall.getTopRightInsideCoordinates()[1] >= walls[n].getBottomLeftOutsideCoordinates()[1] && wall.getTopRightInsideCoordinates()[1] + length <= walls[n].getTopRightInsideCoordinates()[1]) {
+                else if (wall.getTopRightInsideCoordinates()[1] > walls[n].getBottomLeftOutsideCoordinates()[1] && wall.getTopRightInsideCoordinates()[1] + length < walls[n].getTopRightInsideCoordinates()[1]) {
                     return false;
                 }
                 //Check the z value
-                else if (wall.getTopRightInsideCoordinates()[2] >= walls[n].getBottomLeftOutsideCoordinates()[2] && wall.getTopRightInsideCoordinates()[2] + length <= walls[n].getTopRightInsideCoordinates()[2]) {
+                else if (wall.getTopRightInsideCoordinates()[2] > walls[n].getBottomLeftOutsideCoordinates()[2] && wall.getTopRightInsideCoordinates()[2] + length < walls[n].getTopRightInsideCoordinates()[2]) {
                     return false;
                 }
                 //Can't have the wall overlap another wall

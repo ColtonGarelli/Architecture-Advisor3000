@@ -187,9 +187,9 @@ class InternalWall extends WallImpl {
 
     public boolean setBottomLeftOutsideCoordinates(double x, double y, double z){
         if(x>=0.0 && y>=0.0 && z>=0.0){
-            this.topRightInsideCoordinates[0] = x;
-            this.topRightInsideCoordinates[1] = y;
-            this.topRightInsideCoordinates[2] = z;
+            this.bottomLeftOutsideCoordinates[0] = x;
+            this.bottomLeftOutsideCoordinates[1] = y;
+            this.bottomLeftOutsideCoordinates[2] = z;
             return true;
         }
         else{
