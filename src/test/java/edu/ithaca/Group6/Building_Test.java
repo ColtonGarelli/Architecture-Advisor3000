@@ -71,4 +71,12 @@ public class Building_Test {
         double totalCost1 = building1.calcTotalCost();
         assertEquals(115.2, totalCost1, "Innacurate calculation of total cost");
     }
+
+    @Test
+    void addWallTest(){
+        Building building = new BuildingImpl(50.0, 50.0, 50.0);
+        double[] startPoint = new double[]{0.0, 0.0, 0.0};
+        Wood wood = new Wood();
+        building.addWall(1.0, 1.0, 1.0, startPoint, wood);
+    }
 }

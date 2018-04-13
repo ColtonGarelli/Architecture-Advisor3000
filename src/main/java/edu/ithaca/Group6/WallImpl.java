@@ -33,6 +33,21 @@ class ExternalWall extends WallImpl {
         this.setBottomLeftOutsideCoordinates(0,0,0);
     }
 
+    public ExternalWall(double height, double length, double thickness, MaterialByArea material){
+        this.height = height;
+        this.length = length;
+        this.thickness = thickness;
+        this.material = material;
+        this.featuresList = new ArrayList<MaterialByUnit>();
+        this.setBottomLeftOutsideCoordinates(0,0,0);
+        if(this.thickness > this.length){
+            this.setTopRightInsideCoordinates(this.thickness, this.length, this.height);
+        }
+        else{
+            this.setTopRightInsideCoordinates(this.length, this.thickness, this.height);
+        }
+    }
+
     public boolean setBottomLeftOutsideCoordinates(double x, double y, double z){
         if(x>0 && y>0 && z>0){
             this.bottomLeftOutsideCoordinates[0] = x;
@@ -153,6 +168,21 @@ class InternalWall extends WallImpl {
     public InternalWall() {
         this.featuresList = new ArrayList<MaterialByUnit>();
         setBottomLeftOutsideCoordinates(0,0,0);
+    }
+
+    public InternalWall(double height, double length, double width, MaterialByArea material){
+        this.height = height;
+        this.length = length;
+        this.width = width;
+        this.material = material;
+        this.featuresList = new ArrayList<MaterialByUnit>();
+        this.setBottomLeftOutsideCoordinates(0,0,0);
+        if(this.width > this.length){
+            this.setTopRightInsideCoordinates(this.width, this.length, this.height);
+        }
+        else{
+            this.setTopRightInsideCoordinates(this.length, this.width, this.height);
+        }
     }
 
     public boolean setBottomLeftOutsideCoordinates(double x, double y, double z){
