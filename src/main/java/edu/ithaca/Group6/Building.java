@@ -39,8 +39,9 @@ public interface Building {
      * @param startPoint
      * @param material
      * @post Wall array in building gets incremented
+     * @return true or false value indicating whether a wall was added
      */
-    public void addWall(double length, double width, double height, double[] startPoint, MaterialByArea material);
+    public boolean addWall(double length, double width, double height, double[] startPoint, MaterialByArea material);
 
     /**
      * Remove a wall from the array

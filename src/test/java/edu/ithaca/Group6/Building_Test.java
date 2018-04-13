@@ -74,17 +74,21 @@ public class Building_Test {
 
     @Test
     void addWallTest(){
+        //Adding a wall
         BuildingImpl building = new BuildingImpl(50.0, 50.0, 50.0);
         double[] startPoint = new double[]{0.0, 0.0, 0.0};
         Wood wood = new Wood();
         InternalWall wall1 = new InternalWall(1.0, 1.0, 1.0, startPoint, wood);
-        building.addWall(wall1.getLength(), wall1.getThickness(), wall1.getHeight(), wall1.getBottomLeftOutsideCoordinates(), wall1.getMaterial());
+        boolean added = building.addWall(wall1.getLength(), wall1.getThickness(), wall1.getHeight(), wall1.getBottomLeftOutsideCoordinates(), wall1.getMaterial());
         double[] endPoint = new double[]{1.0, 1.0, 1.0};
         assertEquals(1.0, wall1.getLength(), "Wall length not properly set when adding");
         assertEquals(1.0, wall1.getThickness(), "Wall width not properly set when adding");
         assertEquals(1.0, wall1.getHeight(), "Wall height not properly set when adding");
         assertArrayEquals(startPoint, wall1.getBottomLeftOutsideCoordinates(), "Wall start point not properly set when adding");
         assertEquals(wood, wall1.getMaterial(), "Wall material not properly set when adding");
-        assertArrayEquals(endPoint, building.walls[0].getTopRightInsideCoordinates(), "Wall not added to building");
+        assertArrayEquals(endPoint, building.walls[0].getTopRightInsideCoordinates(), "Wall end point not properly set when adding");
+        assertTrue(added, "Wall not added");
+
+        //InternalWall wall2 = new InternalWall()
     }
 }

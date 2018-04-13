@@ -11,14 +11,14 @@ public class BuildingImpl implements Building{
         this.length = 0.0;
         this.width = 0.0;
         this.height = 0.0;
-        this.walls = new InternalWall[1];
+        this.walls = new InternalWall[0];
     }
 
     public BuildingImpl(double length, double width, double height) {
         this.length = length;
         this.width = width;
         this.height = height;
-        this.walls = new InternalWall[1];
+        this.walls = new InternalWall[0];
     }
 
     public void setLength(double newVal) {
@@ -75,9 +75,68 @@ public class BuildingImpl implements Building{
         return totalCost;
     }
 
-    public void addWall(double length, double width, double height, double[] startPoint, MaterialByArea material){
+    public boolean addWall(double length, double width, double height, double[] startPoint, MaterialByArea material){
+        //Check if the wall is being added outside of the building dimensions
+        //Check x dimensions
+        if(startPoint[0] < 0 || startPoint[0] > this.length || (startPoint[0] + length) < 0 || (startPoint[0] + length) > this.length){
+            return false;
+        }
+        //Check y dimensions
+        else if(startPoint[1] < 0 || startPoint[1] > this.width || (startPoint[1] + width) < 0 || (startPoint[1] + width) > this.width){
+            return false;
+        }
+        //Check z dimensions
+        else if(startPoint[2] < 0 || startPoint[2] > this.height || (startPoint[2] + height) < 0 || (startPoint[2] + height) > this.height){
+            return false;
+        }
+        //check if the wall being added will overlap any existing walls
+        if(walls.length > 0) {
+            for (int n = 0; n < walls.length; n++) {
+                //Can't have the same start point as an existing wall
+                if (startPoint.equals(walls[n].getBottomLeftOutsideCoordinates())) {
+                    return false;
+                }
+                //Can't start a wall inside an existing wall
+                //Check the x value
+                else if (startPoint[0] >= walls[n].getBottomLeftOutsideCoordinates()[0] && startPoint[0] <= walls[n].getTopRightInsideCoordinates()[0]) {
+                    return false;
+                }
+                //Check the y value
+                else if (startPoint[1] >= walls[n].getBottomLeftOutsideCoordinates()[1] && startPoint[1] <= walls[n].getTopRightInsideCoordinates()[1]) {
+                    return false;
+                }
+                //Check the z value
+                else if (startPoint[2] >= walls[n].getBottomLeftOutsideCoordinates()[2] && startPoint[2] <= walls[n].getTopRightInsideCoordinates()[2]) {
+                    return false;
+                }
+                //Can't end the wall inside an existing wall
+                //Check the x value
+                else if (startPoint[0] + length >= walls[n].getBottomLeftOutsideCoordinates()[0] && startPoint[0] + length <= walls[n].getTopRightInsideCoordinates()[0]) {
+                    return false;
+                }
+                //Check the y value
+                else if (startPoint[1] + width >= walls[n].getBottomLeftOutsideCoordinates()[1] && startPoint[1] + length <= walls[n].getTopRightInsideCoordinates()[1]) {
+                    return false;
+                }
+                //Check the z value
+                else if (startPoint[2] + height >= walls[n].getBottomLeftOutsideCoordinates()[2] && startPoint[2] + length <= walls[n].getTopRightInsideCoordinates()[2]) {
+                    return false;
+                }
+                //Can't have the wall overlap another wall
+                else if ((startPoint[0] < walls[n].getBottomLeftOutsideCoordinates()[0] || startPoint[1] < walls[n].getBottomLeftOutsideCoordinates()[1] || startPoint[2] < walls[n].getBottomLeftOutsideCoordinates()[2]) && (startPoint[0] + length > walls[n].getTopRightInsideCoordinates()[0] || startPoint[1] + length > walls[n].getTopRightInsideCoordinates()[1] || startPoint[2] + length > walls[n].getTopRightInsideCoordinates()[2])) {
+                    return false;
+                }
+            }
+        }
         InternalWall wall = new InternalWall(height, length, width, startPoint, material);
-        walls[walls.length-1] = wall;
+        if(walls.length == 0){
+            InternalWall[] temp = new InternalWall[]{wall};
+            walls = temp;
+        }
+        else {
+            walls[walls.length] = wall;
+        }
+        return true;
     }
 
     public void removeWall(int wallIdx){
