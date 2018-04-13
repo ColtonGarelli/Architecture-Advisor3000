@@ -28,7 +28,7 @@ public class Building_Test {
         double height1 = building1.getHeight();
         assertEquals(0.0, height1, "Innacurate height - Default Constructor");
 
-        Building building2 = new BuildingImpl(80.0, 50.0, 10.0, newMaterial1);
+        Building building2 = new BuildingImpl(80.0, 50.0, 10.0);
         //test length
         double length2 = building2.getLength();
         assertEquals(80.0, length2, "Innacurate length");
@@ -38,9 +38,6 @@ public class Building_Test {
         //test height
         double height2 = building2.getHeight();
         assertEquals(10.0, height2, "Innacurate height");
-        //test external wall material
-        String material2 = building2.getExtWallMaterial();
-        assertEquals("Clay Brick", material2, "Innacurate Material");
     }
 
     @Test
@@ -55,14 +52,11 @@ public class Building_Test {
         //test height setter
         building1.setHeight(50.0);
         assertEquals(50.0, building1.getHeight(), "Height not set");
-        //test ext wall material set
-        building1.setExtWallMaterial(newMaterial2);
-        assertEquals("Wood", building1.getExtWallMaterial(), "Material of Exterior Wall not set");
     }
 
     @Test
     void dimensionTest() {
-        Building building1 = new BuildingImpl(60.0, 60.0, 12.0, newMaterial1);
+        Building building1 = new BuildingImpl(60.0, 60.0, 12.0);
         //test square footage calculation
         double sqftg1 = building1.getSquareFootage();
         assertEquals(3600.0, sqftg1, "Innacurate calculation of square footage");
@@ -73,7 +67,7 @@ public class Building_Test {
 
     @Test
     void calcTotalCostTest(){
-        Building building1 = new BuildingImpl(60.0, 60.0, 12.0, newMaterial1);
+        Building building1 = new BuildingImpl(60.0, 60.0, 12.0);
         double totalCost1 = building1.calcTotalCost();
         assertEquals(115.2, totalCost1, "Innacurate calculation of total cost");
     }

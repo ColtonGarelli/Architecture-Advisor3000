@@ -1,68 +1,91 @@
 package edu.ithaca.Group6;
 
-public interface Building {
+public class BuildingImpl implements Building{
     //Creating a building in the shape of a rectangular prism
-    //Assume that the main function will prevent the user from inputting a negative dimension (i.e. -60.0 for the width)
+    double length;
+    double width;
+    double height;
+    Wall[] walls = new Wall[0];
 
-    public void setLength(double newVal);
-    //set a new length of the building
+    public BuildingImpl(){
+        this.length = 0.0;
+        this.width = 0.0;
+        this.height = 0.0;
+    }
 
-    public double getLength();
-    //get the length of the building
+    public BuildingImpl(double length, double width, double height) {
+        this.length = length;
+        this.width = width;
+        this.height = height;
+    }
 
-    public void setWidth(double newVal);
-    //set a new width for the building
+    public void setLength(double newVal) {
+        //set a new length of the building
+        length = newVal;
+    }
 
-    public double getWidth();
-    //get the width of the building
+    public double getLength() {
+        //get the length of the building
+        return length;
+    }
 
-    public void setHeight(double newVal);
-    //set a new height for the building
+    public void setWidth(double newVal) {
+        //set a new width for the building
+        width = newVal;
+    }
 
-    public double getHeight();
-    //get the height of the building
+    public double getWidth() {
+        //get the width of the building
+        return width;
+    }
 
-    public double getSquareFootage();
-    //get the square footage of the building
+    public void setHeight(double newVal) {
+        //set a new height for the building
+        height = newVal;
+    }
 
-    public double getPerimeter();
-    //calculate the perimeter of the building
+    public double getHeight() {
+        //get the height of the building
+        return height;
+    }
 
-    public double calcTotalCost();
-    //Calculate the total cost of the walls
+    public double getSquareFootage() {
+        //get the square footage of the building
+        double sqftg = length * width;
+        return sqftg;
+    }
 
-    /**
-     * Add a wall to the array of walls in the building
-     * @param length
-     * @param width
-     * @param height
-     * @param startPoint
-     * @param material
-     * @post Wall array in building gets incremented
-     */
-    public void addWall(double length, double width, double height, double[] startPoint, MaterialByArea material);
+    public double getPerimeter() {
+        //calculate the perimeter of the building
+        double perim = (length * 2) + (width * 2);
+        return perim;
+    }
 
-    /**
-     * Remove a wall from the array
-     * @param wallIdx
-     * @post delete a wall from the array of walls in the building
-     */
-    public void removeWall(int wallIdx);
+    public double calcTotalCost() {
+        double totalCost = 0;
 
-    /**
-     * Add a feature (door, window) to a wall
-     * @param wallIdx
-     * @param feature
-     * @param startPoint
-     * @post add a wall feature to the array in a wall object
-     */
-    public void addWallFeature(int wallIdx, MaterialByUnit feature, double[] startPoint);
+        //Calculate the total cost of the walls
+        double perim = this.getPerimeter();
+        double surfaceArea = perim*this.height;
+        //double costExtWall = this.extWallMaterial.calcCost(surfaceArea);
+        //totalCost += costExtWall;
 
-    /**
-     * Remove a feature (door, window) to a wall
-     * @param wallIdx
-     * @param featureIdx
-     * @post delete a feature from the array of features in the wall
-     */
-    public void removeWallFeature(int wallIdx, int featureIdx);
+        return totalCost;
+    }
+
+    public void addWall(double length, double width, double height, double[] startPoint, MaterialByArea material){
+
+    }
+
+    public void removeWall(int wallIdx){
+
+    }
+
+    public void addWallFeature(int wallIdx, MaterialByUnit feature, double[] startPoint){
+
+    }
+
+    public void removeWallFeature(int wallIdx, int featureIdx){
+
+    }
 }
