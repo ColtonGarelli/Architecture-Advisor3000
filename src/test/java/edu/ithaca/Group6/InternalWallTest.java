@@ -39,7 +39,9 @@ public class InternalWallTest {
         assertEquals( testWall.getHeight(),100,"set internal wall height test failed");
         testWall.setHeight(3242341);
         assertEquals( testWall.getHeight(),3242341,"set internal wall height test failed");
+
     }
+
     @Test
     public void setInternalWallLengthTest(){
         double double_dec = 0.5;
