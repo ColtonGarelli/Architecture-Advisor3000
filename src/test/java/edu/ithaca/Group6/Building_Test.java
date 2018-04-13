@@ -138,11 +138,22 @@ public class Building_Test {
         assertFalse(building.addWall(wall2), "Added wall whose start point overlaps exising wall in x position");
         //y value
         double[] startPoint3 = new double[]{0.0, 15.0, 0.0};
-        InternalWall wall3 = new InternalWall(41.0, 30.0, 41.0, startPoint3, wood);
+        InternalWall wall3 = new InternalWall(41.0, 41.0, 30.0, startPoint3, wood);
         assertFalse(building.addWall(wall3), "Added wall whose start point overlaps exising wall in y position");
         //z value
         double[] startPoint4 = new double[]{0.0, 0.0, 15.0};
-        InternalWall wall4 = new InternalWall(41.0, 41.0, 30.0, startPoint4, wood);
+        InternalWall wall4 = new InternalWall(30.0, 41.0, 41.0, startPoint4, wood);
         assertFalse(building.addWall(wall4), "Added wall whose start point overlaps exising wall in z position");
+        //Case 2: End point of new wall is within existing wall
+        //x value
+        double[] startPoint5 = new double[]{0.0, 0.0, 0.0};
+        InternalWall wall5 = new InternalWall(5.0, 15.0, 5.0, startPoint5, wood);
+        assertFalse(building.addWall(wall5), "Added wall whose end point overlaps exising wall in x position");
+        //y value
+        InternalWall wall6 = new InternalWall(5.0, 5.0, 15.0, startPoint5, wood);
+        assertFalse(building.addWall(wall6), "Added wall whose end point overlaps exising wall in y position");
+        //z value
+        InternalWall wall7 = new InternalWall(15.0, 5.0, 5.0, startPoint5, wood);
+        assertFalse(building.addWall(wall7), "Added wall whose end point overlaps exising wall in z position");
     }
 }
