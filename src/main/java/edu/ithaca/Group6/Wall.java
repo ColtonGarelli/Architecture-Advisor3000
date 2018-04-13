@@ -10,12 +10,19 @@ public interface Wall {
     double thickness = 0;
     MaterialByArea material = new Brick();
     ArrayList<MaterialByUnit> featuresList = new ArrayList<MaterialByUnit>();
-    HashMap<String, Double> dimensions = new HashMap<String, Double>();
+    double[] bottomLeftOutsideCoordinates = new double[3];
+    double[] topRightInsideCoordinates = new double[3];
 
 
-    public boolean calculateDimensions();
+    // each coordinate set equal to 0 as origin point for wall upon instantiation
+    public boolean setBottomLeftOutsideCoordinates(double x, double y, double z);
 
-    public boolean setDimensions();
+    public double[] getBottomLeftOutsideCoordinates();
+
+    // x=wall height, y= wall length, z = wall thickness
+    public boolean setTopRightInsideCoordinates(double x, double y, double z);
+
+    public double[] getTopRightInsideCoordinates();
 
     public boolean setHeight(double height);
 
