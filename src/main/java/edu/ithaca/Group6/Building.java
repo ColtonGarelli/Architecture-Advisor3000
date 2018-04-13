@@ -33,15 +33,11 @@ public interface Building {
 
     /**
      * Add a wall to the array of walls in the building
-     * @param length
-     * @param width
-     * @param height
-     * @param startPoint
-     * @param material
+     * @param Wall
      * @post Wall array in building gets incremented
      * @return true or false value indicating whether a wall was added
      */
-    public boolean addWall(InternalWall wall);
+    public boolean addWall(ExternalWall wall);
 
     /**
      * Remove a wall from the array

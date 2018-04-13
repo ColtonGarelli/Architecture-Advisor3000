@@ -7,20 +7,20 @@ public class BuildingImpl implements Building{
     double length;
     double width;
     double height;
-    InternalWall[] walls;
+    ExternalWall[] walls;
 
     public BuildingImpl(){
         this.length = 0.0;
         this.width = 0.0;
         this.height = 0.0;
-        this.walls = new InternalWall[0];
+        this.walls = new ExternalWall[0];
     }
 
     public BuildingImpl(double length, double width, double height) {
         this.length = length;
         this.width = width;
         this.height = height;
-        this.walls = new InternalWall[0];
+        this.walls = new ExternalWall[0];
     }
 
     public void setLength(double newVal) {
@@ -77,81 +77,117 @@ public class BuildingImpl implements Building{
         return totalCost;
     }
 
-    public boolean addWall(InternalWall wall){
+    public boolean addWall(ExternalWall wall){
         //Check if the wall is being added outside of the building dimensions
         //Check x dimensions
-        if(wall.getBottomLeftOutsideCoordinates()[0] < 0.0 || wall.getBottomLeftOutsideCoordinates()[0] > this.length || wall.getTopRightInsideCoordinates()[0] < 0 || wall.getTopRightInsideCoordinates()[0] > this.length){
+        if(wall.getBottomCoordinates()[0] < 0.0 || wall.getBottomCoordinates()[0] > this.length || wall.getTopCoordinates()[0] < 0 || wall.getTopCoordinates()[0] > this.length){
             return false;
         }
         //Check y dimensions
-        else if(wall.getBottomLeftOutsideCoordinates()[1] < 0 || wall.getBottomLeftOutsideCoordinates()[1] > this.width || wall.getTopRightInsideCoordinates()[1] < 0 || wall.getTopRightInsideCoordinates()[1] > this.width){
+        else if(wall.getBottomCoordinates()[1] < 0 || wall.getBottomCoordinates()[1] > this.width || wall.getTopCoordinates()[1] < 0 || wall.getTopCoordinates()[1] > this.width){
             return false;
         }
         //Check z dimensions
-        else if(wall.getBottomLeftOutsideCoordinates()[2] < 0 || wall.getBottomLeftOutsideCoordinates()[2] > this.height || wall.getTopRightInsideCoordinates()[2] < 0 || wall.getTopRightInsideCoordinates()[2] > this.height){
+        else if(wall.getBottomCoordinates()[2] < 0 || wall.getBottomCoordinates()[2] > this.height || wall.getTopCoordinates()[2] < 0 || wall.getTopCoordinates()[2] > this.height){
             return false;
         }
         //check if the wall being added will overlap any existing walls
         if(walls.length > 0) {
             for (int n = 0; n < walls.length; n++) {
                 //Can't have the same start point as an existing wall
-                if (Arrays.equals(wall.getBottomLeftOutsideCoordinates(), walls[n].getBottomLeftOutsideCoordinates())) {
+                if (Arrays.equals(wall.getBottomCoordinates(), walls[n].getBottomCoordinates())) {
                     return false;
                 }
                 //Can't start a wall inside an existing wall
                 //Check the x value
-                else if (wall.getBottomLeftOutsideCoordinates()[0] > walls[n].getBottomLeftOutsideCoordinates()[0] && wall.getBottomLeftOutsideCoordinates()[0] < walls[n].getTopRightInsideCoordinates()[0]) {
-                    System.out.println("1");
+                else if (wall.getBottomCoordinates()[0] > walls[n].getBottomCoordinates()[0] && wall.getBottomCoordinates()[0] < walls[n].getTopCoordinates()[0]) {
                     return false;
                 }
                 //Check the y value
-                else if (wall.getBottomLeftOutsideCoordinates()[1] > walls[n].getBottomLeftOutsideCoordinates()[1] && wall.getBottomLeftOutsideCoordinates()[1] < walls[n].getTopRightInsideCoordinates()[1]) {
-                    System.out.println("2");
+                else if (wall.getBottomCoordinates()[1] > walls[n].getBottomCoordinates()[1] && wall.getBottomCoordinates()[1] < walls[n].getTopCoordinates()[1]) {
                     return false;
                 }
                 //Check the z value
-                else if (wall.getBottomLeftOutsideCoordinates()[2] > walls[n].getBottomLeftOutsideCoordinates()[2] && wall.getBottomLeftOutsideCoordinates()[2] < walls[n].getTopRightInsideCoordinates()[2]) {
-                    System.out.println("3");
+                else if (wall.getBottomCoordinates()[2] > walls[n].getBottomCoordinates()[2] && wall.getBottomCoordinates()[2] < walls[n].getTopCoordinates()[2]) {
                     return false;
                 }
                 //Can't end the wall inside an existing wall
                 //Check the x value
-                else if (wall.getTopRightInsideCoordinates()[0] > walls[n].getBottomLeftOutsideCoordinates()[0] && wall.getTopRightInsideCoordinates()[0] < walls[n].getTopRightInsideCoordinates()[0]) {
-                    System.out.println("4");
+                else if (wall.getTopCoordinates()[0] > walls[n].getBottomCoordinates()[0] && wall.getTopCoordinates()[0] < walls[n].getTopCoordinates()[0]) {
                     return false;
                 }
                 //Check the y value
-                else if (wall.getTopRightInsideCoordinates()[1] > walls[n].getBottomLeftOutsideCoordinates()[1] && wall.getTopRightInsideCoordinates()[1] < walls[n].getTopRightInsideCoordinates()[1]) {
-                    System.out.println("5");
+                else if (wall.getTopCoordinates()[1] > walls[n].getBottomCoordinates()[1] && wall.getTopCoordinates()[1] < walls[n].getTopCoordinates()[1]) {
                     return false;
                 }
                 //Check the z value
-                else if (wall.getTopRightInsideCoordinates()[2] > walls[n].getBottomLeftOutsideCoordinates()[2] && wall.getTopRightInsideCoordinates()[2] < walls[n].getTopRightInsideCoordinates()[2]) {
-                    System.out.println("6");
+                else if (wall.getTopCoordinates()[2] > walls[n].getBottomCoordinates()[2] && wall.getTopCoordinates()[2] < walls[n].getTopCoordinates()[2]) {
                     return false;
                 }
                 //Can't have the wall overlap another wall
-                else if ((wall.getBottomLeftOutsideCoordinates()[0] < walls[n].getBottomLeftOutsideCoordinates()[0] && wall.getTopRightInsideCoordinates()[0] > walls[n].getTopRightInsideCoordinates()[0]) && (wall.getBottomLeftOutsideCoordinates()[1] < walls[n].getBottomLeftOutsideCoordinates()[1] && wall.getTopRightInsideCoordinates()[1] > walls[n].getTopRightInsideCoordinates()[1])) {
-                    System.out.println("7");
-                    return false;
+                else if ((wall.getBottomCoordinates()[0] < walls[n].getBottomCoordinates()[0]) && (wall.getTopCoordinates()[0] > walls[n].getTopCoordinates()[0])){
+                    if((wall.getBottomCoordinates()[1] < walls[n].getBottomCoordinates()[1]) && (wall.getTopCoordinates()[1] > walls[n].getTopCoordinates()[1])){
+                        if ((wall.getBottomCoordinates()[2] < walls[n].getBottomCoordinates()[2]) && (wall.getTopCoordinates()[2] < walls[n].getTopCoordinates()[2] && wall.getTopCoordinates()[2] > walls[n].getBottomCoordinates()[2])){
+                            return false;
+                        }
+                        else if ((wall.getTopCoordinates()[2] < walls[n].getTopCoordinates()[2]) && (wall.getBottomCoordinates()[2] < walls[n].getTopCoordinates()[2] && wall.getBottomCoordinates()[2] > walls[n].getBottomCoordinates()[2])) {
+                            return false;
+                        }
+                    }
+                    if((wall.getBottomCoordinates()[2] < walls[n].getBottomCoordinates()[2]) && (wall.getTopCoordinates()[2] > walls[n].getTopCoordinates()[2])){
+                        if ((wall.getBottomCoordinates()[1] < walls[n].getBottomCoordinates()[1]) && (wall.getTopCoordinates()[1] < walls[n].getTopCoordinates()[1] && wall.getTopCoordinates()[1] > walls[n].getBottomCoordinates()[1])){
+                            return false;
+                        }
+                        else if ((wall.getTopCoordinates()[1] < walls[n].getTopCoordinates()[1]) && (wall.getBottomCoordinates()[1] < walls[n].getTopCoordinates()[1] && wall.getBottomCoordinates()[1] > walls[n].getBottomCoordinates()[1])) {
+                            return false;
+                        }
+                    }
                 }
-                else if ((wall.getBottomLeftOutsideCoordinates()[0] < walls[n].getBottomLeftOutsideCoordinates()[0] && wall.getTopRightInsideCoordinates()[0] > walls[n].getTopRightInsideCoordinates()[0]) && (wall.getBottomLeftOutsideCoordinates()[2] < walls[n].getBottomLeftOutsideCoordinates()[2] && wall.getTopRightInsideCoordinates()[2] > walls[n].getTopRightInsideCoordinates()[2])){
-                    System.out.println("8");
-                    return false;
+                else if ((wall.getBottomCoordinates()[1] < walls[n].getBottomCoordinates()[1]) && (wall.getTopCoordinates()[1] > walls[n].getTopCoordinates()[1])){
+                    if((wall.getBottomCoordinates()[0] < walls[n].getBottomCoordinates()[0]) && (wall.getTopCoordinates()[0] > walls[n].getTopCoordinates()[0])){
+                        if ((wall.getBottomCoordinates()[2] < walls[n].getBottomCoordinates()[2]) && (wall.getTopCoordinates()[2] < walls[n].getTopCoordinates()[2] && wall.getTopCoordinates()[2] > walls[n].getBottomCoordinates()[2])){
+                            return false;
+                        }
+                        else if ((wall.getTopCoordinates()[2] < walls[n].getTopCoordinates()[2]) && (wall.getBottomCoordinates()[2] < walls[n].getTopCoordinates()[2] && wall.getBottomCoordinates()[2] > walls[n].getBottomCoordinates()[2])) {
+                            return false;
+                        }
+                    }
+                    if((wall.getBottomCoordinates()[2] < walls[n].getBottomCoordinates()[2]) && (wall.getTopCoordinates()[2] > walls[n].getTopCoordinates()[2])){
+                        if ((wall.getBottomCoordinates()[0] < walls[n].getBottomCoordinates()[0]) && (wall.getTopCoordinates()[0] < walls[n].getTopCoordinates()[0] && wall.getTopCoordinates()[0] > walls[n].getBottomCoordinates()[0])){
+                            return false;
+                        }
+                        else if ((wall.getTopCoordinates()[0] < walls[n].getTopCoordinates()[0]) && (wall.getBottomCoordinates()[0] < walls[n].getTopCoordinates()[0] && wall.getBottomCoordinates()[0] > walls[n].getBottomCoordinates()[0])) {
+                            return false;
+                        }
+                    }
                 }
-                else if ((wall.getBottomLeftOutsideCoordinates()[1] < walls[n].getBottomLeftOutsideCoordinates()[1] && wall.getTopRightInsideCoordinates()[1] > walls[n].getTopRightInsideCoordinates()[1]) && (wall.getBottomLeftOutsideCoordinates()[2] < walls[n].getBottomLeftOutsideCoordinates()[2] && wall.getTopRightInsideCoordinates()[2] > walls[n].getTopRightInsideCoordinates()[2])){
-                    System.out.println("9");
-                    return false;
+                else if ((wall.getBottomCoordinates()[2] < walls[n].getBottomCoordinates()[2]) && (wall.getTopCoordinates()[2] > walls[n].getTopCoordinates()[2])){
+                    if((wall.getBottomCoordinates()[1] < walls[n].getBottomCoordinates()[1]) && (wall.getTopCoordinates()[1] > walls[n].getTopCoordinates()[1])){
+                        if ((wall.getBottomCoordinates()[0] < walls[n].getBottomCoordinates()[0]) && (wall.getTopCoordinates()[0] < walls[n].getTopCoordinates()[0] && wall.getTopCoordinates()[0] > walls[n].getBottomCoordinates()[0])){
+                            return false;
+                        }
+                        else if ((wall.getTopCoordinates()[0] < walls[n].getTopCoordinates()[0]) && (wall.getBottomCoordinates()[0] < walls[n].getTopCoordinates()[0] && wall.getBottomCoordinates()[0] > walls[n].getBottomCoordinates()[0])) {
+                            return false;
+                        }
+                    }
+                    if((wall.getBottomCoordinates()[0] < walls[n].getBottomCoordinates()[0]) && (wall.getTopCoordinates()[0] > walls[n].getTopCoordinates()[0])){
+                        if ((wall.getBottomCoordinates()[1] < walls[n].getBottomCoordinates()[1]) && (wall.getTopCoordinates()[1] < walls[n].getTopCoordinates()[1] && wall.getTopCoordinates()[1] > walls[n].getBottomCoordinates()[1])){
+                            return false;
+                        }
+                        else if ((wall.getTopCoordinates()[1] < walls[n].getTopCoordinates()[1]) && (wall.getBottomCoordinates()[1] < walls[n].getTopCoordinates()[1] && wall.getBottomCoordinates()[1] > walls[n].getBottomCoordinates()[1])) {
+                            return false;
+                        }
+                    }
                 }
             }
         }
-        InternalWall[] temp;
+        ExternalWall[] temp;
         if(walls.length == 0){
-            temp = new InternalWall[]{wall};
+            temp = new ExternalWall[]{wall};
             walls = temp;
         }
         else {
-            temp = new InternalWall[walls.length+1];
+            temp = new ExternalWall[walls.length+1];
             for (int a = 0; a < walls.length; a++) {
                 temp[a] = walls[a];
             }

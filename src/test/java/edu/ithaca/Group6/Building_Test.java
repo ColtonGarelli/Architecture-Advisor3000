@@ -81,97 +81,109 @@ public class Building_Test {
         //trying to add the first wall out of bounds (start point)
         //x position out of bounds
         double[] firstStartPointOutX = new double[]{51.0, 0.0, 0.0};
-        InternalWall firstWallOutX = new InternalWall(1.0, 1.0, 1.0, firstStartPointOutX, wood);
+        ExternalWall firstWallOutX = new ExternalWall(1.0, 1.0, 1.0, firstStartPointOutX, wood);
         assertFalse(building.addWall(firstWallOutX), "Added a wall when the start point of the first wall x value was out of bounds");
         //y position out of bounds
         double[] firstStartPointOutY = new double[]{0.0, 51.0, 0.0};
-        InternalWall firstWallOutY = new InternalWall(1.0, 1.0, 1.0, firstStartPointOutY, wood);
+        ExternalWall firstWallOutY = new ExternalWall(1.0, 1.0, 1.0, firstStartPointOutY, wood);
         assertFalse(building.addWall(firstWallOutY), "Added a wall when the start point of the first wall y value was out of bounds");
         //z position out of bounds
         double[] firstStartPointOutZ = new double[]{0.0, 0.0, 51.0};
-        InternalWall firstWallOutZ = new InternalWall(1.0, 1.0, 1.0, firstStartPointOutZ, wood);
-        assertFalse(building.addWall(firstWallOutZ), "Added a wall when the start point of the first wall x value was out of bounds");
+        ExternalWall firstWallOutZ = new ExternalWall(1.0, 1.0, 1.0, firstStartPointOutZ, wood);
+        assertFalse(building.addWall(firstWallOutZ), "Added a wall when the start point of the first wall z value was out of bounds");
 
         //trying to add the first wall out of bounds (end point)
         //x position out of bounds
         double[] firstEndPointOut = new double[]{0.0, 0.0, 0.0};
-        firstWallOutX = new InternalWall(1.0, 51.0, 1.0, firstEndPointOut, wood);
+        firstWallOutX = new ExternalWall(1.0, 51.0, 1.0, firstEndPointOut, wood);
         assertFalse(building.addWall(firstWallOutX), "Added a wall when the end point of the first wall x value was out of bounds");
         //y position out of bounds
-        firstWallOutY = new InternalWall(1.0, 1.0, 51.0, firstEndPointOut, wood);
+        firstWallOutY = new ExternalWall(1.0, 1.0, 51.0, firstEndPointOut, wood);
         assertFalse(building.addWall(firstWallOutY), "Added a wall when the end point of the first wall y value was out of bounds");
         //z position out of bounds
-        firstWallOutZ = new InternalWall(51.0, 1.0, 1.0, firstEndPointOut, wood);
-        assertFalse(building.addWall(firstWallOutZ), "Added a wall when the end point of the first wall x value was out of bounds");
+        firstWallOutZ = new ExternalWall(51.0, 1.0, 1.0, firstEndPointOut, wood);
+        assertFalse(building.addWall(firstWallOutZ), "Added a wall when the end point of the first wall z value was out of bounds");
 
         //Testing for a wall starting somewhere within the building ending out of bounds
         //x position out of bounds
         double[] endPointOut = new double[]{25.0, 25.0, 25.0};
-        InternalWall wallOutX = new InternalWall(1.0, 26.0, 1.0, endPointOut, wood);
+        ExternalWall wallOutX = new ExternalWall(1.0, 26.0, 1.0, endPointOut, wood);
         assertFalse(building.addWall(wallOutX), "Added a wall when the end point of the first wall x value was out of bounds");
         //y position out of bounds
-        InternalWall wallOutY = new InternalWall(1.0, 1.0, 26.0, endPointOut, wood);
+        ExternalWall wallOutY = new ExternalWall(1.0, 1.0, 26.0, endPointOut, wood);
         assertFalse(building.addWall(wallOutY), "Added a wall when the end point of the first wall y value was out of bounds");
         //z position out of bounds
-        InternalWall wallOutZ = new InternalWall(26.0, 1.0, 1.0, endPointOut, wood);
-        assertFalse(building.addWall(wallOutZ), "Added a wall when the end point of the first wall x value was out of bounds");
+        ExternalWall wallOutZ = new ExternalWall(26.0, 1.0, 1.0, endPointOut, wood);
+        assertFalse(building.addWall(wallOutZ), "Added a wall when the end point of the first wall z value was out of bounds");
 
         //Adding the first wall
         double[] startPoint = new double[]{10.0, 10.0, 10.0};
-        InternalWall wall1 = new InternalWall(30.0, 30.0, 30.0, startPoint, wood);
+        ExternalWall wall1 = new ExternalWall(30.0, 30.0, 30.0, startPoint, wood);
         boolean added = building.addWall(wall1);
         double[] endPoint = new double[]{40.0, 40.0, 40.0};
         assertTrue(added, "Wall not added");
         assertEquals(30.0, wall1.getLength(), "Wall length not properly set when adding");
         assertEquals(30.0, wall1.getThickness(), "Wall width not properly set when adding");
         assertEquals(30.0, wall1.getHeight(), "Wall height not properly set when adding");
-        assertArrayEquals(startPoint, wall1.getBottomLeftOutsideCoordinates(), "Wall start point not properly set when adding");
+        assertArrayEquals(startPoint, wall1.getBottomCoordinates(), "Wall start point not properly set when adding");
         assertEquals(wood, wall1.getMaterial(), "Wall material not properly set when adding");
-        assertArrayEquals(endPoint, building.walls[0].getTopRightInsideCoordinates(), "Wall end point not properly set when adding");
+        assertArrayEquals(endPoint, building.walls[0].getTopCoordinates(), "Wall end point not properly set when adding");
 
         //Test for overlapping walls
         //Case 1: start point of new wall is within existing wall
         //x value
         double[] startPoint2 = new double[]{15.0, 0.0, 0.0};
-        InternalWall wall2 = new InternalWall(41.0, 30.0, 41.0, startPoint2, wood);
+        ExternalWall wall2 = new ExternalWall(41.0, 30.0, 41.0, startPoint2, wood);
         assertFalse(building.addWall(wall2), "Added wall whose start point overlaps exising wall in x position");
         //y value
         double[] startPoint3 = new double[]{0.0, 15.0, 0.0};
-        InternalWall wall3 = new InternalWall(41.0, 41.0, 30.0, startPoint3, wood);
+        ExternalWall wall3 = new ExternalWall(41.0, 41.0, 30.0, startPoint3, wood);
         assertFalse(building.addWall(wall3), "Added wall whose start point overlaps exising wall in y position");
         //z value
         double[] startPoint4 = new double[]{0.0, 0.0, 15.0};
-        InternalWall wall4 = new InternalWall(30.0, 41.0, 41.0, startPoint4, wood);
+        ExternalWall wall4 = new ExternalWall(30.0, 41.0, 41.0, startPoint4, wood);
         assertFalse(building.addWall(wall4), "Added wall whose start point overlaps exising wall in z position");
         //Case 2: End point of new wall is within existing wall
         //x value
         double[] startPoint5 = new double[]{0.0, 0.0, 0.0};
-        InternalWall wall5 = new InternalWall(5.0, 15.0, 5.0, startPoint5, wood);
+        ExternalWall wall5 = new ExternalWall(5.0, 15.0, 5.0, startPoint5, wood);
         assertFalse(building.addWall(wall5), "Added wall whose end point overlaps exising wall in x position");
         //y value
-        InternalWall wall6 = new InternalWall(5.0, 5.0, 15.0, startPoint5, wood);
+        ExternalWall wall6 = new ExternalWall(5.0, 5.0, 15.0, startPoint5, wood);
         assertFalse(building.addWall(wall6), "Added wall whose end point overlaps exising wall in y position");
         //z value
-        InternalWall wall7 = new InternalWall(15.0, 5.0, 5.0, startPoint5, wood);
+        ExternalWall wall7 = new ExternalWall(15.0, 5.0, 5.0, startPoint5, wood);
         assertFalse(building.addWall(wall7), "Added wall whose end point overlaps exising wall in z position");
         //Case 3: New wall overlaps existing wall, regardless of start or end point
         //Partial overlap
-        InternalWall wall8 = new InternalWall(11, 50, 11, startPoint5, wood);
+        ExternalWall wall8 = new ExternalWall(11, 50, 11, startPoint5, wood);
         assertFalse(building.addWall(wall8), "Added wall which overlaps an existing wall");
         //Whole overlap
-        InternalWall wall9 = new InternalWall(50, 50, 50, startPoint5, wood);
+        ExternalWall wall9 = new ExternalWall(50, 50, 50, startPoint5, wood);
         assertFalse(building.addWall(wall9), "Added new wall which encompasses an existing wall");
         //Case 4: New wall is directly adjacent to existing wall
         //Corner
-        InternalWall wall10 = new InternalWall(10, 10, 10, startPoint5, wood);
+        double[] startPoint6 = new double[]{0, 0, 0};
+        ExternalWall wall10 = new ExternalWall(10, 10, 10, startPoint6, wood);
         assertTrue(building.addWall(wall10), "Did not add a new wall which was touching the corner of an existing wall");
         //edge
-        double[] startPoint6 = new double[]{0, 0, 40};
-        InternalWall wall11 = new InternalWall(10, 50, 10, startPoint6, wood);
+        for(int y = 0; y < building.walls.length; y++){
+            //System.out.println("Wall " + y + ": ");
+            //System.out.println("Start: [" + building.walls[y].getBottomCoordinates()[0] + ", " + building.walls[y].getBottomCoordinates()[1] + ", " + building.walls[y].getBottomCoordinates()[2] + "]");
+            //System.out.println("End: [" + building.walls[y].getTopCoordinates()[0] + ", " + building.walls[y].getTopCoordinates()[1] + ", " + building.walls[y].getTopCoordinates()[2] + "]");
+        }
+        double[] startPoint7 = new double[]{0.0, 0.0, 40.0};
+        ExternalWall wall11 = new ExternalWall(10, 50, 10, startPoint7, wood);
+        //System.out.println("Wall 2: ");
+        //System.out.println("Start: [" + wall11.getBottomCoordinates()[0] + ", " + wall11.getBottomCoordinates()[1] + ", " + wall11.getBottomCoordinates()[2] + "]");
+        //System.out.println("End: [" + wall11.getTopCoordinates()[0] + ", " + wall11.getTopCoordinates()[1] + ", " + wall11.getTopCoordinates()[2] + "]");
         assertTrue(building.addWall(wall11), "Did not add a new wall which was touching the edge of an existing wall");
         //side
-        double[] startPoint7 = new double[]{0, 40.0, 0};
-        InternalWall wall12 = new InternalWall(50, 50, 10, startPoint7, wood);
+        double[] startPoint8 = new double[]{0, 40.0, 0};
+        ExternalWall wall12 = new ExternalWall(50, 50, 10, startPoint8, wood);
+        System.out.println("Wall 2: ");
+        System.out.println("Start: [" + wall12.getBottomCoordinates()[0] + ", " + wall12.getBottomCoordinates()[1] + ", " + wall12.getBottomCoordinates()[2] + "]");
+        System.out.println("End: [" + wall12.getTopCoordinates()[0] + ", " + wall12.getTopCoordinates()[1] + ", " + wall12.getTopCoordinates()[2] + "]");
         assertTrue(building.addWall(wall12), "Did not add a new wall which was touching the side of an existing wall");
     }
 }
