@@ -33,13 +33,13 @@ class ExternalWall extends WallImpl {
         this.setBottomLeftOutsideCoordinates(0,0,0);
     }
 
-    public ExternalWall(double height, double length, double thickness, MaterialByArea material){
+    public ExternalWall(double height, double length, double thickness, double[] startPoint, MaterialByArea material){
         this.height = height;
         this.length = length;
         this.thickness = thickness;
         this.material = material;
         this.featuresList = new ArrayList<MaterialByUnit>();
-        this.setBottomLeftOutsideCoordinates(0,0,0);
+        this.setBottomLeftOutsideCoordinates(startPoint[0], startPoint[1], startPoint[2]);
         if(this.thickness > this.length){
             this.setTopRightInsideCoordinates(this.thickness, this.length, this.height);
         }
@@ -170,13 +170,13 @@ class InternalWall extends WallImpl {
         setBottomLeftOutsideCoordinates(0,0,0);
     }
 
-    public InternalWall(double height, double length, double width, MaterialByArea material){
+    public InternalWall(double height, double length, double width, double[] startPoint, MaterialByArea material){
         this.height = height;
         this.length = length;
         this.width = width;
         this.material = material;
         this.featuresList = new ArrayList<MaterialByUnit>();
-        this.setBottomLeftOutsideCoordinates(0,0,0);
+        this.setBottomLeftOutsideCoordinates(startPoint[0], startPoint[1], startPoint[2]);
         if(this.width > this.length){
             this.setTopRightInsideCoordinates(this.width, this.length, this.height);
         }

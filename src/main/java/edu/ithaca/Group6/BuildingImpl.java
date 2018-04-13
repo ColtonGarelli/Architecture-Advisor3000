@@ -5,18 +5,20 @@ public class BuildingImpl implements Building{
     double length;
     double width;
     double height;
-    Wall[] walls = new Wall[0];
+    InternalWall[] walls;
 
     public BuildingImpl(){
         this.length = 0.0;
         this.width = 0.0;
         this.height = 0.0;
+        this.walls = new InternalWall[]{};
     }
 
     public BuildingImpl(double length, double width, double height) {
         this.length = length;
         this.width = width;
         this.height = height;
+        this.walls = new InternalWall[]{};
     }
 
     public void setLength(double newVal) {

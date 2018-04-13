@@ -65,18 +65,20 @@ public class Building_Test {
         assertEquals(240.0, perim1, "Innaccurate calculation of perimeter");
     }
 
-    @Test
+    /**@Test
     void calcTotalCostTest(){
         Building building1 = new BuildingImpl(60.0, 60.0, 12.0);
         double totalCost1 = building1.calcTotalCost();
         assertEquals(115.2, totalCost1, "Innacurate calculation of total cost");
-    }
+    }*/
 
     @Test
     void addWallTest(){
-        Building building = new BuildingImpl(50.0, 50.0, 50.0);
+        BuildingImpl building = new BuildingImpl(50.0, 50.0, 50.0);
         double[] startPoint = new double[]{0.0, 0.0, 0.0};
         Wood wood = new Wood();
-        building.addWall(1.0, 1.0, 1.0, startPoint, wood);
+        ExternalWall wall1 = new ExternalWall(1.0, 1.0, 1.0, startPoint, wood);
+        building.addWall(wall1.getLength(), wall1.getThickness(), wall1.getHeight(), wall1.getBottomLeftOutsideCoordinates(), wall1.getMaterial());
+        assertEquals(wall1, building.walls[0], "Wall not added to building");
     }
 }
