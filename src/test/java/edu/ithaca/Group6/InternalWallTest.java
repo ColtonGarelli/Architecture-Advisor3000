@@ -39,7 +39,9 @@ public class InternalWallTest {
         assertEquals( testWall.getHeight(),100,"set internal wall height test failed");
         testWall.setHeight(3242341);
         assertEquals( testWall.getHeight(),3242341,"set internal wall height test failed");
+
     }
+
     @Test
     public void setInternalWallLengthTest(){
         double double_dec = 0.5;
@@ -143,47 +145,95 @@ public class InternalWallTest {
         test_dimensions[0] = 1;
         test_dimensions[1] = 2;
         test_dimensions[2] = 3;
-        setCheck = this.testWall.setTopRightInsideCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
-        assertEquals(test_dimensions[0], testWall.getTopRightInsideCoordinates()[0], "set Interior Wall dimensions test fail");
-        assertEquals(test_dimensions[1], testWall.getTopRightInsideCoordinates()[1], "set Interior Wall dimensions test fail");
-        assertEquals(test_dimensions[2], testWall.getTopRightInsideCoordinates()[2], "set Interior Wall dimensions test fail");
+        setCheck = this.testWall.setTopCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
+        assertEquals(test_dimensions[0], testWall.getTopCoordinates()[0], "set Interior Wall dimensions test fail");
+        assertEquals(test_dimensions[1], testWall.getTopCoordinates()[1], "set Interior Wall dimensions test fail");
+        assertEquals(test_dimensions[2], testWall.getTopCoordinates()[2], "set Interior Wall dimensions test fail");
 
         test_dimensions[0] = 10;
         test_dimensions[1] = 25;
         test_dimensions[2] = 2;
-        setCheck = this.testWall.setTopRightInsideCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
-        assertEquals(test_dimensions[0], testWall.getTopRightInsideCoordinates()[0], "set Interior Wall dimensions test fail");
-        assertEquals(test_dimensions[1], testWall.getTopRightInsideCoordinates()[1], "set Interior Wall dimensions test fail");
-        assertEquals(test_dimensions[2], testWall.getTopRightInsideCoordinates()[2], "set Interior Wall dimensions test fail");
+        setCheck = this.testWall.setTopCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
+        assertEquals(test_dimensions[0], testWall.getTopCoordinates()[0], "set Interior Wall dimensions test fail");
+        assertEquals(test_dimensions[1], testWall.getTopCoordinates()[1], "set Interior Wall dimensions test fail");
+        assertEquals(test_dimensions[2], testWall.getTopCoordinates()[2], "set Interior Wall dimensions test fail");
 
         test_dimensions[0] = 45;
         test_dimensions[1] = 20;
         test_dimensions[2] = 1;
-        setCheck = this.testWall.setTopRightInsideCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
-        assertEquals(test_dimensions[0], testWall.getTopRightInsideCoordinates()[0], "set Interior Wall dimensions test fail");
-        assertEquals(test_dimensions[1], testWall.getTopRightInsideCoordinates()[1], "set Interior Wall dimensions test fail");
-        assertEquals(test_dimensions[2], testWall.getTopRightInsideCoordinates()[2], "set Interior Wall dimensions test fail");
+        setCheck = this.testWall.setTopCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
+        assertEquals(test_dimensions[0], testWall.getTopCoordinates()[0], "set Interior Wall dimensions test fail");
+        assertEquals(test_dimensions[1], testWall.getTopCoordinates()[1], "set Interior Wall dimensions test fail");
+        assertEquals(test_dimensions[2], testWall.getTopCoordinates()[2], "set Interior Wall dimensions test fail");
 
         test_dimensions[0] = 0;
         test_dimensions[1] = 2;
         test_dimensions[2] = 3;
-        setCheck = this.testWall.setTopRightInsideCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
+        setCheck = this.testWall.setTopCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
         Assertions.assertFalse(setCheck);
-        Assertions.assertNotEquals(test_dimensions, testWall.getBottomLeftOutsideCoordinates(), "set Interior Wall dimensions test fail");
+        Assertions.assertNotEquals(test_dimensions, testWall.getTopCoordinates(), "set Interior Wall dimensions test fail");
 
         test_dimensions[0] = 1;
         test_dimensions[1] = -2;
         test_dimensions[2] = 3;
-        setCheck = this.testWall.setTopRightInsideCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
+        setCheck = this.testWall.setTopCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
         Assertions.assertFalse(setCheck);
-        Assertions.assertNotEquals(test_dimensions, testWall.getBottomLeftOutsideCoordinates(), "set Interior Wall dimensions test fail");
+        Assertions.assertNotEquals(test_dimensions, testWall.getTopCoordinates(), "set Interior Wall dimensions test fail");
 
         test_dimensions[0] = 1;
         test_dimensions[1] = 2;
         test_dimensions[2] = 0;
-        setCheck = this.testWall.setTopRightInsideCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
+        setCheck = this.testWall.setTopCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
         Assertions.assertFalse(setCheck);
-        Assertions.assertNotEquals(test_dimensions, testWall.getBottomLeftOutsideCoordinates(), "set Interior Wall dimensions test fail");
+        Assertions.assertNotEquals(test_dimensions, testWall.getTopCoordinates(), "set Interior Wall dimensions test fail");
+
+
+
+        test_dimensions[0] = 1;
+        test_dimensions[1] = 2;
+        test_dimensions[2] = 3;
+        setCheck = this.testWall.setBottomCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
+        assertEquals(test_dimensions[0], testWall.getBottomCoordinates()[0], "set Interior Wall dimensions test fail");
+        assertEquals(test_dimensions[1], testWall.getBottomCoordinates()[1], "set Interior Wall dimensions test fail");
+        assertEquals(test_dimensions[2], testWall.getBottomCoordinates()[2], "set Interior Wall dimensions test fail");
+
+        test_dimensions[0] = 10;
+        test_dimensions[1] = 25;
+        test_dimensions[2] = 2;
+        setCheck = this.testWall.setBottomCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
+        assertEquals(test_dimensions[0], testWall.getBottomCoordinates()[0], "set Interior Wall dimensions test fail");
+        assertEquals(test_dimensions[1], testWall.getBottomCoordinates()[1], "set Interior Wall dimensions test fail");
+        assertEquals(test_dimensions[2], testWall.getBottomCoordinates()[2], "set Interior Wall dimensions test fail");
+
+        test_dimensions[0] = 45;
+        test_dimensions[1] = 20;
+        test_dimensions[2] = 1;
+        setCheck = this.testWall.setBottomCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
+        assertEquals(test_dimensions[0], testWall.getBottomCoordinates()[0], "set Interior Wall dimensions test fail");
+        assertEquals(test_dimensions[1], testWall.getBottomCoordinates()[1], "set Interior Wall dimensions test fail");
+        assertEquals(test_dimensions[2], testWall.getBottomCoordinates()[2], "set Interior Wall dimensions test fail");
+
+        test_dimensions[0] = 0;
+        test_dimensions[1] = 2;
+        test_dimensions[2] = 3;
+        setCheck = this.testWall.setBottomCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
+        Assertions.assertFalse(setCheck);
+        Assertions.assertNotEquals(test_dimensions, testWall.getBottomCoordinates(), "set Interior Wall dimensions test fail");
+
+        test_dimensions[0] = 1;
+        test_dimensions[1] = -2;
+        test_dimensions[2] = 3;
+        setCheck = this.testWall.setBottomCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
+        Assertions.assertFalse(setCheck);
+        Assertions.assertNotEquals(test_dimensions, testWall.getBottomCoordinates(), "set Interior Wall dimensions test fail");
+
+        test_dimensions[0] = 1;
+        test_dimensions[1] = 2;
+        test_dimensions[2] = 0;
+        setCheck = this.testWall.setBottomCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
+        Assertions.assertFalse(setCheck);
+        Assertions.assertNotEquals(test_dimensions, testWall.getBottomCoordinates(), "set Interior Wall dimensions test fail");
+
     }
 
 
