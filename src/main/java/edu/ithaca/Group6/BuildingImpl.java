@@ -11,14 +11,14 @@ public class BuildingImpl implements Building{
         this.length = 0.0;
         this.width = 0.0;
         this.height = 0.0;
-        this.walls = new InternalWall[]{};
+        this.walls = new InternalWall[1];
     }
 
     public BuildingImpl(double length, double width, double height) {
         this.length = length;
         this.width = width;
         this.height = height;
-        this.walls = new InternalWall[]{};
+        this.walls = new InternalWall[1];
     }
 
     public void setLength(double newVal) {
@@ -76,7 +76,8 @@ public class BuildingImpl implements Building{
     }
 
     public void addWall(double length, double width, double height, double[] startPoint, MaterialByArea material){
-
+        InternalWall wall = new InternalWall(height, length, width, startPoint, material);
+        walls[walls.length-1] = wall;
     }
 
     public void removeWall(int wallIdx){
