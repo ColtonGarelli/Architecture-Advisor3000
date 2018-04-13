@@ -134,4 +134,14 @@ public class ExternalWallTest {
              assertEquals(testDoor, testWall.getFeature(i),"get wall features test failed");
         }
     }
+
+    @Test
+    public void setExteriorWallDimensionsTest(){
+        assertEquals(true, false);
+    }
+
+    @Test
+    public void calculateExteriorWallDimensions(){
+        assertEquals(true, false);
+    }
 }

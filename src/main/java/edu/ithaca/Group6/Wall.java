@@ -1,6 +1,6 @@
 package edu.ithaca.Group6;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 
 public interface Wall {
@@ -10,7 +10,12 @@ public interface Wall {
     double thickness = 0;
     MaterialByArea material = new Brick();
     ArrayList<MaterialByUnit> featuresList = new ArrayList<MaterialByUnit>();
+    HashMap<String, Double> dimensions = new HashMap<String, Double>();
 
+
+    public boolean calculateDimensions();
+
+    public boolean setDimensions();
 
     public boolean setHeight(double height);
 

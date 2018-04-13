@@ -1,6 +1,7 @@
 package edu.ithaca.Group6;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public abstract class WallImpl implements Wall{
@@ -11,6 +12,9 @@ public abstract class WallImpl implements Wall{
     public abstract double getLength();
     public abstract boolean setThickness(double width);
     public abstract double getThickness();
+    public abstract boolean calculateDimensions();
+    public abstract boolean setDimensions();
+
 }
 
 
@@ -21,9 +25,23 @@ class ExternalWall extends WallImpl {
     private double thickness;
     private MaterialByArea material;
     private ArrayList<MaterialByUnit> featuresList;
+    private HashMap<String, Double> dimensions = new HashMap<String, Double>();
+
 
     public ExternalWall() {
         this.featuresList = new ArrayList<MaterialByUnit>();
+    }
+
+
+    public boolean calculateDimensions(){
+        int something = 0;
+        return true;
+
+    }
+
+    public boolean setDimensions(){
+        int something = 0;
+        return true;
     }
 
     public boolean setHeight(double height) {
@@ -112,6 +130,18 @@ class InternalWall extends WallImpl {
     public InternalWall() {
         this.featuresList = new ArrayList<MaterialByUnit>();
     }
+
+    public boolean calculateDimensions(){
+        int something = 0;
+        return true;
+
+    }
+
+    public boolean setDimensions(){
+        int something = 0;
+        return true;
+    }
+
     @Override
     public boolean addFeature(MaterialByUnit feature){
         if(feature.getClass() == Door.class){

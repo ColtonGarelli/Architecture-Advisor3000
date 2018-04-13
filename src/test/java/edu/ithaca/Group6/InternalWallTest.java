@@ -135,4 +135,14 @@ public class InternalWallTest {
         }
     }
 
+    @Test
+    public void setInteriorWallDimensionsTest(){
+        assertEquals(true, false);
+    }
+
+    @Test
+    public void calculateInteriorWallDimensions(){
+        assertEquals(true, false);
+    }
+
 }
