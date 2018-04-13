@@ -121,7 +121,6 @@ public class Building_Test {
         InternalWall wall1 = new InternalWall(30.0, 30.0, 30.0, startPoint, wood);
         boolean added = building.addWall(wall1);
         double[] endPoint = new double[]{40.0, 40.0, 40.0};
-        System.out.println(wall1.getBottomLeftOutsideCoordinates()[0]);
         assertTrue(added, "Wall not added");
         assertEquals(30.0, wall1.getLength(), "Wall length not properly set when adding");
         assertEquals(30.0, wall1.getThickness(), "Wall width not properly set when adding");
@@ -134,7 +133,7 @@ public class Building_Test {
         //Case 1: start point of new wall is within existing wall
         //x value
         double[] startPoint2 = new double[]{15.0, 0.0, 0.0};
-        InternalWall wall2 = new InternalWall(30.0, 41.0, 41.0, startPoint2, wood);
+        InternalWall wall2 = new InternalWall(41.0, 30.0, 41.0, startPoint2, wood);
         assertFalse(building.addWall(wall2), "Added wall whose start point overlaps exising wall in x position");
         //y value
         double[] startPoint3 = new double[]{0.0, 15.0, 0.0};
@@ -155,5 +154,24 @@ public class Building_Test {
         //z value
         InternalWall wall7 = new InternalWall(15.0, 5.0, 5.0, startPoint5, wood);
         assertFalse(building.addWall(wall7), "Added wall whose end point overlaps exising wall in z position");
+        //Case 3: New wall overlaps existing wall, regardless of start or end point
+        //Partial overlap
+        InternalWall wall8 = new InternalWall(11, 50, 11, startPoint5, wood);
+        assertFalse(building.addWall(wall8), "Added wall which overlaps an existing wall");
+        //Whole overlap
+        InternalWall wall9 = new InternalWall(50, 50, 50, startPoint5, wood);
+        assertFalse(building.addWall(wall9), "Added new wall which encompasses an existing wall");
+        //Case 4: New wall is directly adjacent to existing wall
+        //Corner
+        InternalWall wall10 = new InternalWall(10, 10, 10, startPoint5, wood);
+        assertTrue(building.addWall(wall10), "Did not add a new wall which was touching the corner of an existing wall");
+        //edge
+        double[] startPoint6 = new double[]{0, 0, 40};
+        InternalWall wall11 = new InternalWall(10, 50, 10, startPoint6, wood);
+        assertTrue(building.addWall(wall11), "Did not add a new wall which was touching the edge of an existing wall");
+        //side
+        double[] startPoint7 = new double[]{0, 40.0, 0};
+        InternalWall wall12 = new InternalWall(50, 50, 10, startPoint7, wood);
+        assertTrue(building.addWall(wall12), "Did not add a new wall which was touching the side of an existing wall");
     }
 }
