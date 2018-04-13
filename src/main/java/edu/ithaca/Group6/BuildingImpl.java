@@ -83,5 +83,4 @@ public class BuildingImpl implements Building{
 
         return totalCost;
     }
-
 }
