@@ -41,7 +41,7 @@ public interface Building {
      * @post Wall array in building gets incremented
      * @return true or false value indicating whether a wall was added
      */
-    public boolean addWall(double length, double width, double height, double[] startPoint, MaterialByArea material);
+    public boolean addWall(InternalWall wall);
 
     /**
      * Remove a wall from the array

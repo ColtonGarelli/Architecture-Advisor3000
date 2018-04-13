@@ -74,20 +74,36 @@ public class Building_Test {
 
     @Test
     void addWallTest(){
-        //Adding a wall
+        //setup
         BuildingImpl building = new BuildingImpl(50.0, 50.0, 50.0);
-        double[] startPoint = new double[]{0.0, 0.0, 0.0};
         Wood wood = new Wood();
+
+        //trying add the first wall out of bounds
+        //x position out of bounds
+        double[] firstStartPointOutX = new double[]{51.0, 0.0, 0.0};
+        InternalWall firstWallOutX = new InternalWall(1.0, 1.0, 1.0, firstStartPointOutX, wood);
+        assertFalse(building.addWall(firstWallOutX), "Added a wall when the start point of the first wall x value was out of bounds");
+        //y position out of bounds
+        double[] firstStartPointOutY = new double[]{0.0, 51.0, 0.0};
+        InternalWall firstWallOutY = new InternalWall(1.0, 1.0, 1.0, firstStartPointOutY, wood);
+        assertFalse(building.addWall(firstWallOutY), "Added a wall when the start point of the first wall y value was out of bounds");
+        //z position out of bounds
+        double[] firstStartPointOutZ = new double[]{0.0, 0.0, 51.0};
+        InternalWall firstWallOutZ = new InternalWall(1.0, 1.0, 1.0, firstStartPointOutZ, wood);
+        assertFalse(building.addWall(firstWallOutZ), "Added a wall when the start point of the first wall x value was out of bounds");
+
+        //Adding the first wall
+        double[] startPoint = new double[]{0.0, 0.0, 0.0};
         InternalWall wall1 = new InternalWall(1.0, 1.0, 1.0, startPoint, wood);
-        boolean added = building.addWall(wall1.getLength(), wall1.getThickness(), wall1.getHeight(), wall1.getBottomLeftOutsideCoordinates(), wall1.getMaterial());
+        boolean added = building.addWall(wall1);
         double[] endPoint = new double[]{1.0, 1.0, 1.0};
+        assertTrue(added, "Wall not added");
         assertEquals(1.0, wall1.getLength(), "Wall length not properly set when adding");
         assertEquals(1.0, wall1.getThickness(), "Wall width not properly set when adding");
         assertEquals(1.0, wall1.getHeight(), "Wall height not properly set when adding");
         assertArrayEquals(startPoint, wall1.getBottomLeftOutsideCoordinates(), "Wall start point not properly set when adding");
         assertEquals(wood, wall1.getMaterial(), "Wall material not properly set when adding");
         assertArrayEquals(endPoint, building.walls[0].getTopRightInsideCoordinates(), "Wall end point not properly set when adding");
-        assertTrue(added, "Wall not added");
 
         //InternalWall wall2 = new InternalWall()
     }

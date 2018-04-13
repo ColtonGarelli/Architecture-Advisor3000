@@ -49,7 +49,7 @@ class ExternalWall extends WallImpl {
     }
 
     public boolean setBottomLeftOutsideCoordinates(double x, double y, double z){
-        if(x>0 && y>0 && z>0){
+        if(x>=0 && y>=0 && z>=0){
             this.bottomLeftOutsideCoordinates[0] = x;
             this.bottomLeftOutsideCoordinates[1] = y;
             this.bottomLeftOutsideCoordinates[2] = z;
@@ -65,7 +65,7 @@ class ExternalWall extends WallImpl {
     }
 
     public boolean setTopRightInsideCoordinates(double x, double y, double z){
-        if(x>0 && y>0 && z>0){
+        if(x>=0 && y>=0 && z>=0){
             this.topRightInsideCoordinates[0] = x;
             this.topRightInsideCoordinates[1] = y;
             this.topRightInsideCoordinates[2] = z;
@@ -178,15 +178,15 @@ class InternalWall extends WallImpl {
         this.featuresList = new ArrayList<MaterialByUnit>();
         this.setBottomLeftOutsideCoordinates(startPoint[0], startPoint[1], startPoint[2]);
         if(this.width > this.length){
-            this.setTopRightInsideCoordinates(this.width, this.length, this.height);
+            this.setTopRightInsideCoordinates(startPoint[0] + this.width, startPoint[1] + this.length, startPoint[2] + this.height);
         }
         else{
-            this.setTopRightInsideCoordinates(this.length, this.width, this.height);
+            this.setTopRightInsideCoordinates(startPoint[0] + this.length, startPoint[1] + this.width, startPoint[2] + this.height);
         }
     }
 
     public boolean setBottomLeftOutsideCoordinates(double x, double y, double z){
-        if(x>0 && y>0 && z>0){
+        if(x>=0.0 && y>=0.0 && z>=0.0){
             this.topRightInsideCoordinates[0] = x;
             this.topRightInsideCoordinates[1] = y;
             this.topRightInsideCoordinates[2] = z;
@@ -203,7 +203,7 @@ class InternalWall extends WallImpl {
 
     public boolean setTopRightInsideCoordinates(double x, double y, double z){
 
-        if(x>0 && y>0 && z>0){
+        if(x>=0 && y>=0 && z>=0){
             this.topRightInsideCoordinates[0] = x;
             this.topRightInsideCoordinates[1] = y;
             this.topRightInsideCoordinates[2] = z;
