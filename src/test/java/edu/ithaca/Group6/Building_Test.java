@@ -78,7 +78,7 @@ public class Building_Test {
         BuildingImpl building = new BuildingImpl(50.0, 50.0, 50.0);
         Wood wood = new Wood();
 
-        //trying add the first wall out of bounds
+        //trying to add the first wall out of bounds (start point)
         //x position out of bounds
         double[] firstStartPointOutX = new double[]{51.0, 0.0, 0.0};
         InternalWall firstWallOutX = new InternalWall(1.0, 1.0, 1.0, firstStartPointOutX, wood);
@@ -91,6 +91,18 @@ public class Building_Test {
         double[] firstStartPointOutZ = new double[]{0.0, 0.0, 51.0};
         InternalWall firstWallOutZ = new InternalWall(1.0, 1.0, 1.0, firstStartPointOutZ, wood);
         assertFalse(building.addWall(firstWallOutZ), "Added a wall when the start point of the first wall x value was out of bounds");
+
+        //trying to add the first wall out of bounds (end point)
+        //x position out of bounds
+        double[] firstEndPointOut = new double[]{0.0, 0.0, 0.0};
+        firstWallOutX = new InternalWall(1.0, 51.0, 1.0, firstEndPointOut, wood);
+        assertFalse(building.addWall(firstWallOutX), "Added a wall when the end point of the first wall x value was out of bounds");
+        //y position out of bounds
+        firstWallOutY = new InternalWall(1.0, 1.0, 51.0, firstEndPointOut, wood);
+        assertFalse(building.addWall(firstWallOutY), "Added a wall when the end point of the first wall y value was out of bounds");
+        //z position out of bounds
+        firstWallOutZ = new InternalWall(51.0, 1.0, 1.0, firstEndPointOut, wood);
+        assertFalse(building.addWall(firstWallOutZ), "Added a wall when the end point of the first wall x value was out of bounds");
 
         //Adding the first wall
         double[] startPoint = new double[]{0.0, 0.0, 0.0};
