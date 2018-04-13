@@ -1,6 +1,7 @@
 package edu.ithaca.Group6;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public abstract class WallImpl implements Wall{
@@ -11,8 +12,11 @@ public abstract class WallImpl implements Wall{
     public abstract double getLength();
     public abstract boolean setThickness(double width);
     public abstract double getThickness();
+    public abstract boolean setBottomLeftOutsideCoordinates(double x, double y, double z);
+    public abstract double[] getBottomLeftOutsideCoordinates();
+    public abstract boolean setTopRightInsideCoordinates(double x, double y, double z);
+    public abstract double[] getTopRightInsideCoordinates();
 }
-
 
 
 class ExternalWall extends WallImpl {
@@ -21,9 +25,44 @@ class ExternalWall extends WallImpl {
     private double thickness;
     private MaterialByArea material;
     private ArrayList<MaterialByUnit> featuresList;
+    private double[] bottomLeftOutsideCoordinates = new double[3];
+    private double[] topRightInsideCoordinates = new double[3];
 
     public ExternalWall() {
         this.featuresList = new ArrayList<MaterialByUnit>();
+        this.setBottomLeftOutsideCoordinates(0,0,0);
+    }
+
+    public boolean setBottomLeftOutsideCoordinates(double x, double y, double z){
+        if(x>0 && y>0 && z>0){
+            this.bottomLeftOutsideCoordinates[0] = x;
+            this.bottomLeftOutsideCoordinates[1] = y;
+            this.bottomLeftOutsideCoordinates[2] = z;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public double[] getBottomLeftOutsideCoordinates(){
+        return this.bottomLeftOutsideCoordinates;
+    }
+
+    public boolean setTopRightInsideCoordinates(double x, double y, double z){
+        if(x>0 && y>0 && z>0){
+            this.topRightInsideCoordinates[0] = x;
+            this.topRightInsideCoordinates[1] = y;
+            this.topRightInsideCoordinates[2] = z;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public double[] getTopRightInsideCoordinates(){
+        return this.topRightInsideCoordinates;
     }
 
     public boolean setHeight(double height) {
@@ -107,11 +146,49 @@ class InternalWall extends WallImpl {
     private double width;
     private MaterialByArea material;
     private ArrayList<MaterialByUnit> featuresList;
+    private double[] bottomLeftOutsideCoordinates = new double[3];
+    private double[] topRightInsideCoordinates = new double[3];
 
 
     public InternalWall() {
         this.featuresList = new ArrayList<MaterialByUnit>();
+        setBottomLeftOutsideCoordinates(0,0,0);
     }
+
+    public boolean setBottomLeftOutsideCoordinates(double x, double y, double z){
+        if(x>0 && y>0 && z>0){
+            this.topRightInsideCoordinates[0] = x;
+            this.topRightInsideCoordinates[1] = y;
+            this.topRightInsideCoordinates[2] = z;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public double[] getBottomLeftOutsideCoordinates(){
+        return this.bottomLeftOutsideCoordinates;
+    }
+
+    public boolean setTopRightInsideCoordinates(double x, double y, double z){
+
+        if(x>0 && y>0 && z>0){
+            this.topRightInsideCoordinates[0] = x;
+            this.topRightInsideCoordinates[1] = y;
+            this.topRightInsideCoordinates[2] = z;
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    public double[] getTopRightInsideCoordinates(){
+        return this.topRightInsideCoordinates;
+    }
+
     @Override
     public boolean addFeature(MaterialByUnit feature){
         if(feature.getClass() == Door.class){
