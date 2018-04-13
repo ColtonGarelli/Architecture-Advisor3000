@@ -22,12 +22,6 @@ public interface Building {
     public double getHeight();
     //get the height of the building
 
-    public void setExtWallMaterial(MaterialByArea newMaterial);
-    //set a new material for the external walls
-
-    public String getExtWallMaterial();
-    //get the material used to construct the exterior walls
-
     public double getSquareFootage();
     //get the square footage of the building
 
@@ -37,4 +31,35 @@ public interface Building {
     public double calcTotalCost();
     //Calculate the total cost of the walls
 
+    /**
+     * Add a wall to the array of walls in the building
+     * @param Wall
+     * @post Wall array in building gets incremented
+     * @return true or false value indicating whether a wall was added
+     */
+    public boolean addWall(ExternalWall wall);
+
+    /**
+     * Remove a wall from the array
+     * @param wallIdx
+     * @post delete a wall from the array of walls in the building
+     */
+    public void removeWall(int wallIdx);
+
+    /**
+     * Add a feature (door, window) to a wall
+     * @param wallIdx
+     * @param feature
+     * @param startPoint
+     * @post add a wall feature to the array in a wall object
+     */
+    public void addWallFeature(int wallIdx, MaterialByUnit feature, double[] startPoint);
+
+    /**
+     * Remove a feature (door, window) to a wall
+     * @param wallIdx
+     * @param featureIdx
+     * @post delete a feature from the array of features in the wall
+     */
+    public void removeWallFeature(int wallIdx, int featureIdx);
 }
