@@ -1,6 +1,6 @@
 package edu.ithaca.Group6;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 
 public interface Wall {
@@ -10,7 +10,19 @@ public interface Wall {
     double thickness = 0;
     MaterialByArea material = new Brick();
     ArrayList<MaterialByUnit> featuresList = new ArrayList<MaterialByUnit>();
+    double[] bottomLeftOutsideCoordinates = new double[3];
+    double[] topRightInsideCoordinates = new double[3];
 
+
+    // each coordinate set equal to 0 as origin point for wall upon instantiation
+    public boolean setBottomLeftOutsideCoordinates(double x, double y, double z);
+
+    public double[] getBottomLeftOutsideCoordinates();
+
+    // x=wall height, y= wall length, z = wall thickness
+    public boolean setTopRightInsideCoordinates(double x, double y, double z);
+
+    public double[] getTopRightInsideCoordinates();
 
     public boolean setHeight(double height);
 
