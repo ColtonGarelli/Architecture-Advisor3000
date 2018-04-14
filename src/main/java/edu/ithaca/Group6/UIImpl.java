@@ -1,14 +1,66 @@
 package edu.ithaca.Group6;
-
+import java.util.Scanner;
 import static java.lang.Character.isLetter;
 
 public class UIImpl implements UI{
-    @Override
-    public void main() {
+    public Scanner userIn;
 
-
+    public UIImpl(){
+        this.userIn = new Scanner(System.in);
     }
 
+    public static void main(String[] args) {
+        UI demo = new UIImpl();
+        demo.sprintTwoDemo();
+    }
+
+    //    in a list of options, quit will always be 0
+    public void sprintTwoDemo(){
+        System.out.println("Welcome to the Architecture Advisor3000");
+        System.out.println("\nWhen you would like to begin modifying your project," +
+                " enter Yes. To quit enter No.");
+        String entry = userIn.next();
+        boolean goodEntry = checkYesOrNo(entry);
+        while(goodEntry==false){
+            System.out.println("Please enter Yes or No.");
+            entry = userIn.next();
+            goodEntry = checkYesOrNo(entry);
+        }
+        System.out.println("Enter the height of the structure");
+        Building demoBuilding = new BuildingImpl();
+        String height = userIn.next();
+        goodEntry = checkValidDouble(height);
+        while(!goodEntry){
+            height = userIn.next();
+            goodEntry = checkValidDouble(height);
+            System.out.println("Invalid entry. Please enter the height of the structure");
+        }
+        double setHeight = Double.parseDouble(height);
+        demoBuilding.setHeight(setHeight);
+        System.out.println("Enter the width of the structure");
+        String width = userIn.next();
+        goodEntry = checkValidDouble(width);
+        while(!goodEntry){
+            width = userIn.next();
+            goodEntry = checkValidDouble(height);
+            System.out.println("Invalid entry. Please enter the width of the structure");
+        }
+        double setWidth = Double.parseDouble(width);
+
+        boolean modificationsDone = false;
+        while(!modificationsDone){
+            modificationsDone = modifyWalls();
+        }
+
+
+
+        this.userIn.close();
+    }
+//    will modify all 4
+    public boolean modifyWalls(){
+        System.out.println("Enter 1 to set wall thickness, 2 to set wall material, 3 to add a feature");
+        return true;
+    }
     @Override
     public boolean checkYesOrNo(String userInput) {
         //Shorten the string

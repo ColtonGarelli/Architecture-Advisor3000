@@ -1,7 +1,11 @@
 package edu.ithaca.Group6;
 
 public interface UI {
-    public void main();
+
+    /**
+     * A function that runs a demo of the features completed for Sprint 2
+     */
+    public void sprintTwoDemo();
 
     /**
      * Determines if the user input a valid yes or no answer
