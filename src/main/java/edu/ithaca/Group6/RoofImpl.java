@@ -38,12 +38,20 @@ public class RoofImpl implements Roof {
 
     @Override
     public boolean setFirstCornerCoordinates(double x, double y, double z) {
-        return false;
+        double[] coordArray = {x,y,z};
+        return setFirstCornerCoordinates(coordArray);
     }
 
     @Override
     public boolean setFirstCornerCoordinates(double[] xyzCoord) {
-        return false;
+        if(xyzCoord[2] < 0){
+            throw new IndexOutOfBoundsException("Cannot input negative height!");
+        }
+        try{firstCornerCoordinates = xyzCoord;
+        return true;}
+        catch(Exception e){
+            return false;
+        }
     }
 
     @Override
@@ -53,12 +61,20 @@ public class RoofImpl implements Roof {
 
     @Override
     public boolean setSecondCornerCoordinates(double x, double y, double z) {
-        return false;
+        double[] coordArray = {x,y,z};
+        return setSecondCornerCoordinates(coordArray);
     }
 
     @Override
     public boolean setSecondCornerCoordinates(double[] xyzCoord) {
-        return false;
+        if(xyzCoord[2] < 0){
+            throw new IndexOutOfBoundsException("Cannot input negative height!");
+        }
+        try{secondCornerCoordinates = xyzCoord;
+            return true;}
+        catch(Exception e){
+            return false;
+        }
     }
 
     @Override
