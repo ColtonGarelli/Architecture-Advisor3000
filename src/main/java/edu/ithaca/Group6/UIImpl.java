@@ -6,6 +6,7 @@ public class UIImpl implements UI{
     @Override
     public void main() {
 
+
     }
 
     @Override
