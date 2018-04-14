@@ -42,8 +42,13 @@ public class RoofImpl implements Roof {
     }
 
     @Override
+    public boolean setFirstCornerCoordinates(double[] xyzCoord) {
+        return false;
+    }
+
+    @Override
     public double[] getFirstCornerCoordinates() {
-        return new double[0];
+        return firstCornerCoordinates;
     }
 
     @Override
@@ -52,8 +57,13 @@ public class RoofImpl implements Roof {
     }
 
     @Override
+    public boolean setSecondCornerCoordinates(double[] xyzCoord) {
+        return false;
+    }
+
+    @Override
     public double[] getSecondCornerCoordinates() {
-        return new double[0];
+        return secondCornerCoordinates;
     }
 
     @Override

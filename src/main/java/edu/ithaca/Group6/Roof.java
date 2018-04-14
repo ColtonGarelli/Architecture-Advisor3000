@@ -12,10 +12,14 @@ public interface Roof {
     // each coordinate set equal to 0 as origin point for wall upon instantiation
     public boolean setFirstCornerCoordinates(double x, double y, double z);
 
+    public boolean setFirstCornerCoordinates(double[] xyzCoord);
+
     public double[] getFirstCornerCoordinates();
 
     // x=wall height, y= wall length, z = wall thickness
     public boolean setSecondCornerCoordinates(double x, double y, double z);
+
+    public boolean setSecondCornerCoordinates(double[] xyzCoord);
 
     public double[] getSecondCornerCoordinates();
 
