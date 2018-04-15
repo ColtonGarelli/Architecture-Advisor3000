@@ -62,7 +62,7 @@ public class Roof_Test {
         assertArrayEquals(endCoords,testRoof.getSecondCornerCoordinates(),"Did not get second coords");
     }
     @org.junit.jupiter.api.Test
-    public void setInternalWallHeightTest(){
+    public void setRoofHeightTest(){
         testRoof = new RoofImpl();
         double double_dec = 0.5;
         testRoof.setHeight(double_dec);
@@ -91,7 +91,7 @@ public class Roof_Test {
     }
 
     @org.junit.jupiter.api.Test
-    public void setInternalWallLengthTest(){
+    public void setRoofLengthTest(){
         testRoof = new RoofImpl();
         double double_dec = 0.5;
         testRoof.setLength(double_dec);
