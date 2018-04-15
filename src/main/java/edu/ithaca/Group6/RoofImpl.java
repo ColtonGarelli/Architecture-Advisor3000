@@ -45,7 +45,7 @@ public class RoofImpl implements Roof {
     @Override
     public boolean setFirstCornerCoordinates(double[] xyzCoord) {
         if(xyzCoord[2] < 0){
-            throw new IndexOutOfBoundsException("Cannot input negative height!");
+            return false;
         }
         try{firstCornerCoordinates = xyzCoord;
         return true;}
@@ -68,7 +68,7 @@ public class RoofImpl implements Roof {
     @Override
     public boolean setSecondCornerCoordinates(double[] xyzCoord) {
         if(xyzCoord[2] < 0){
-            throw new IndexOutOfBoundsException("Cannot input negative height!");
+            return false;
         }
         try{secondCornerCoordinates = xyzCoord;
             return true;}
@@ -84,31 +84,57 @@ public class RoofImpl implements Roof {
 
     @Override
     public boolean setHeight(double height) {
-        return false;
+        if(height > 0){
+            this.height = height;
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
     public double getHeight() {
-        return 0;
+        return this.height;
+    }
+
+    @Override
+    public boolean setWidth(double width) {
+        if(width > 0){
+            this.width = width;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public double getWidth() {
+        return this.width;
     }
 
     @Override
     public boolean setLength(double length) {
-        return false;
+        if (length > 0) {
+            this.length = length;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public double getLength() {
-        return 0;
+        return this.length;
     }
 
     @Override
     public boolean setMaterial(MaterialByArea wallMaterial) {
-        return false;
+        this.material = wallMaterial;
+        return true;
     }
 
     @Override
     public MaterialByArea getMaterial() {
-        return null;
+        return this.material;
     }
 }

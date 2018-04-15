@@ -27,6 +27,10 @@ public interface Roof {
 
     public double getHeight();
 
+    public boolean setWidth(double width);
+
+    public double getWidth();
+
     public boolean setLength(double length);
 
     public double getLength();
