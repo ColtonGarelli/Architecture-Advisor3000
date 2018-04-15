@@ -129,8 +129,10 @@ class ExternalWall extends WallImpl {
 
 
     public boolean addFeature(MaterialByUnit feature) {
-        this.featuresList.add(feature);
-        return true;
+        try{this.featuresList.add(feature);
+        return true;}catch(Exception e){
+            return false;
+        }
     }
 
 
@@ -140,7 +142,7 @@ class ExternalWall extends WallImpl {
 
 
     public boolean removeFeature(int index) {
-        if (index > 0 && index < this.featuresList.size() - 1) {
+        if (index > -1 && index < this.featuresList.size()) {
             this.featuresList.remove(index);
             return true;
         } else {

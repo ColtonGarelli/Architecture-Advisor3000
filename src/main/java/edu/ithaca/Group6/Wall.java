@@ -1,6 +1,5 @@
 package edu.ithaca.Group6;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public interface Wall {
@@ -18,11 +17,20 @@ public interface Wall {
 
     public double[] getBottomCoordinates();
 
-    // x=wall height, y= wall length, z = wall thickness
+    // x=wall thickness, y= wall length, z = wall height
     public boolean setTopCoordinates(double x, double y, double z);
 
+    /**
+     *
+     * @return coordinates of top corner in {x,y,z}
+     */
     public double[] getTopCoordinates();
 
+    /**
+     *
+     * @param height height of the wall
+     * @return true if successful, false otherwise
+     */
     public boolean setHeight(double height);
 
     public double getHeight();
@@ -35,16 +43,44 @@ public interface Wall {
 
     public double getThickness();
 
+    /**
+     * Sets the material of the wall
+     * @param wallMaterial MaterialByArea, such as brick
+     * @return true if success, false otherwise
+     */
     public boolean setMaterial(MaterialByArea wallMaterial);
 
+    /**
+     *
+     * @return the material of the wall
+     */
     public MaterialByArea getMaterial();
 
+    /**
+     * Adds a feature to a wall
+     * @param feature a MaterialByUnit feature such as window/door
+     * @return true if successful, false otherwise
+     */
     public boolean addFeature(MaterialByUnit feature);
 
+    /**
+     * Gets a feature
+     * @param index index of the feature
+     * @return the feature as a MaterialByUnit object such as door/window
+     */
     public MaterialByUnit getFeature(int index);
 
+    /**
+     * Removes a feature by its index
+     * @param index index of the feature
+     * @return true is successful, false if invalid index
+     */
     public boolean removeFeature(int index);
 
+    /**
+     *
+     * @return length of the list of features
+     */
     public int getFeatureListSize();
 
 }
