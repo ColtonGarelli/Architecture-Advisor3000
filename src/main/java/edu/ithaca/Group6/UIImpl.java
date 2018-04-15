@@ -69,6 +69,15 @@ public class UIImpl implements UI{
         return true;
     }
 
+    public int enterValidInt(int startInt, int endInt){
+        String userInput = userIn.next();
+        while(!checkValidInt(userInput)){
+            System.out.println("Please enter a valid option, "+startInt+" - "+endInt + "");
+            userInput = userIn.next();
+        }
+        return Integer.parseInt(userInput);
+    }
+
     //    will modify all 4
     public boolean modifyWalls(Building demoBuilding) {
         boolean goodEntry;
@@ -76,28 +85,29 @@ public class UIImpl implements UI{
         int option;
         while (!done) {
             System.out.println("Choose a wall, 1-4, to modify");
-            int wallToChange = userIn.nextInt();
+            int wallToChange = enterValidInt(1,4);
+
             while(wallToChange<1 || wallToChange>4){
                 System.out.println("Choose a wall, 1-4, to modify");
-                wallToChange = userIn.nextInt();
+                wallToChange = enterValidInt(1,4);
             }
             int wallIndex = wallToChange;
             System.out.println("Enter 1 to change wall material, 2 to add a feature, 3 to remove a feature," +
                     " and 0 to finish modifying");
-            option = userIn.nextInt();
+            option = enterValidInt(1,3);
             while (option < 0 || option > 3) {
                 System.out.println("Enter 1 to change wall material, 2 to add a feature, 3 to remove a feature," +
                         " and 0 to finish modifying");
-                option = userIn.nextInt();
+                option = enterValidInt(1,3);
             }
 
             int chooseFromDisplay;
             if (option == 1) {
                 System.out.println(displayMaterialsByArea());
-                chooseFromDisplay = userIn.nextInt();
+                chooseFromDisplay = enterValidInt(1,6);
                 while(chooseFromDisplay<1 || chooseFromDisplay > 6){
                     System.out.println("Please enter a valid choice.");
-                    chooseFromDisplay = userIn.nextInt();
+                    chooseFromDisplay = enterValidInt(1,6);
                 }
 //                demoBuilding
 
@@ -106,20 +116,20 @@ public class UIImpl implements UI{
 
             else if (option == 2) {
                 System.out.println("Enter 1 to add a door, or 2 to add a window");
-                chooseFromDisplay = userIn.nextInt();
-                while (chooseFromDisplay != 1 || chooseFromDisplay != 2) {
+                chooseFromDisplay = enterValidInt(1,2);
+                while (chooseFromDisplay != 1 && chooseFromDisplay != 2) {
                     System.out.println("Enter 1 to add a door, or 2 to add a window");
-                    chooseFromDisplay = userIn.nextInt();
+                    chooseFromDisplay = enterValidInt(1,2);
                 }
 
 //                change a wall material
                 if (chooseFromDisplay == 1) {
                     System.out.println(displayDoors());
                     System.out.println("\n Enter the number associated with the kind of door you would like to add");
-                    chooseFromDisplay = userIn.nextInt();
+                    chooseFromDisplay = enterValidInt(1,6);
                     while (chooseFromDisplay < 1 || chooseFromDisplay > 6) {
                         System.out.println("Please enter a valid choice.");
-                        chooseFromDisplay = userIn.nextInt();
+                        chooseFromDisplay = enterValidInt(1,6);
                     }
                     demoBuilding.addWallFeature(wallIndex, chooseDoors(chooseFromDisplay));
 
@@ -130,10 +140,10 @@ public class UIImpl implements UI{
                 else if(chooseFromDisplay==2){
                     System.out.println(displayWindows());
                     System.out.println("\n Enter the number associated with the kind of window you would like to add");
-                    chooseFromDisplay = userIn.nextInt();
+                    chooseFromDisplay = enterValidInt(1,6);
                     while(chooseFromDisplay<1 || chooseFromDisplay > 6){
                         System.out.println("Please enter a valid choice.");
-                        chooseFromDisplay = userIn.nextInt();
+                        chooseFromDisplay = enterValidInt(1,6);
                     }
                     demoBuilding.addWallFeature(wallIndex, chooseWindows(chooseFromDisplay));
                 }

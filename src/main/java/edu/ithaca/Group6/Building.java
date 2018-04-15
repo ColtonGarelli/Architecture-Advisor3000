@@ -32,6 +32,13 @@ public interface Building {
     //Calculate the total cost of the walls
 
     /**
+     *
+     * @param wallIdx index of the wall in list of walls
+     * @return the Wall at that index
+     */
+    public Wall getWall(int wallIdx);
+
+    /**
      * Add a wall to the array of walls in the building
      * @param wall wall to be added
      * @post Wall array in building gets incremented
@@ -64,6 +71,15 @@ public interface Building {
     public void removeWallFeature(int wallIdx, int featureIdx);
 
     /**
+     * Changes the material of a wall
+     * @param wallIdx index of the wall
+     * @param wallMaterial new material of the wall
+     * @return true if success, false if otherwise
+     */
+    public boolean setWallMaterial(int wallIdx, MaterialByArea wallMaterial);
+
+
+    /**
      * Adds a roof to the building
      * @param roofToAdd
      * @return true if successful add, false otherwise
@@ -75,4 +91,5 @@ public interface Building {
      * @return the roof of the building
      */
     public Roof getRoof();
+
 }

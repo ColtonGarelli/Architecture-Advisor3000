@@ -1,7 +1,5 @@
 package edu.ithaca.Group6;
 
-import java.util.Arrays;
-
 public class BuildingImpl implements Building{
     //Creating a building in the shape of a rectangular prism
     double length;
@@ -78,6 +76,18 @@ public class BuildingImpl implements Building{
         //totalCost += costExtWall;
 
         return totalCost;
+    }
+
+    @Override
+    public Wall getWall(int wallIdx) {
+        if(wallIdx > -1 && wallIdx < this.walls.length){
+            try{
+                return this.walls[wallIdx];
+            }catch(Exception e){
+                return null;
+            }
+        }
+        return null;
     }
 
     public boolean addWall(ExternalWall wall){
@@ -201,8 +211,15 @@ public class BuildingImpl implements Building{
         return true;
     }
 
+    //NEEDS REPLACING, DOESN'T ACTUALLY HELP
     public void removeWall(int wallIdx){
-
+        if(wallIdx > -1 && wallIdx < this.walls.length){
+            try{
+                this.walls[wallIdx] = null;
+            }catch(Exception e){
+                System.out.println("Oops this code is broken");
+            }
+        }
     }
 
     public void addWallFeature(int wallIdx, MaterialByUnit feature){
@@ -212,6 +229,18 @@ public class BuildingImpl implements Building{
 
     public void removeWallFeature(int wallIdx, int featureIdx){
         this.walls[wallIdx].removeFeature(featureIdx);
+    }
+
+    @Override
+    public boolean setWallMaterial(int wallIdx, MaterialByArea wallMaterial) {
+        if(wallIdx > -1 && wallIdx < this.walls.length){
+            try{
+                return this.walls[wallIdx].setMaterial(wallMaterial);
+            }catch(Exception e){
+                return false;
+            }
+        }
+        return false;
     }
 
     @Override

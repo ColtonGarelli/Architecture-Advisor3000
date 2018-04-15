@@ -204,4 +204,21 @@ public class Building_Test {
         assertEquals(height,testBuilding.getRoof().getHeight(),delta,"Did not properly set roof");
 
     }
+
+    @Test void testSetWallMaterial(){
+        ExternalWall testWall = new ExternalWall();
+        ExternalWall testWall2 = new ExternalWall();
+        Building testBuilding = new BuildingImpl();
+        MaterialByArea testMaterial = new Wood();
+        MaterialByArea testMaterial2 = new Brick();
+
+        testBuilding.addWall(testWall);
+        testBuilding.addWall(testWall2);
+
+        assertTrue(testBuilding.setWallMaterial(0,testMaterial));
+        assertTrue(testBuilding.setWallMaterial(1,testMaterial2));
+
+        assertEquals(testMaterial,testBuilding.getWall(0).getMaterial());
+        assertEquals(testMaterial2,testBuilding.getWall(1).getMaterial());
+    }
 }
