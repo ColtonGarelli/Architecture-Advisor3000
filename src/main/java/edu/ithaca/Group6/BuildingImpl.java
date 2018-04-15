@@ -8,12 +8,14 @@ public class BuildingImpl implements Building{
     double width;
     double height;
     ExternalWall[] walls;
+    Roof roof;
 
     public BuildingImpl(){
         this.length = 0.0;
         this.width = 0.0;
         this.height = 0.0;
         this.walls = new ExternalWall[0];
+        this.roof = null;
     }
 
     public BuildingImpl(double length, double width, double height) {
@@ -21,6 +23,7 @@ public class BuildingImpl implements Building{
         this.width = width;
         this.height = height;
         this.walls = new ExternalWall[0];
+        this.roof = new RoofImpl(width,length,0.2,height);
     }
 
     public void setLength(double newVal) {
@@ -207,5 +210,18 @@ public class BuildingImpl implements Building{
 
     public void removeWallFeature(int wallIdx, int featureIdx){
 
+    }
+
+    @Override
+    public boolean setRoof(Roof roofToAdd) {
+        try{this.roof = roofToAdd; return true;}
+        catch(Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public Roof getRoof() {
+        return this.roof;
     }
 }

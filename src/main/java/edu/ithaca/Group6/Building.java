@@ -33,7 +33,7 @@ public interface Building {
 
     /**
      * Add a wall to the array of walls in the building
-     * @param Wall
+     * @param wall wall to be added
      * @post Wall array in building gets incremented
      * @return true or false value indicating whether a wall was added
      */
@@ -62,4 +62,17 @@ public interface Building {
      * @post delete a feature from the array of features in the wall
      */
     public void removeWallFeature(int wallIdx, int featureIdx);
+
+    /**
+     * Adds a roof to the building
+     * @param roofToAdd
+     * @return true if successful add, false otherwise
+     */
+    public boolean setRoof(Roof roofToAdd);
+
+    /**
+     *
+     * @return the roof of the building
+     */
+    public Roof getRoof();
 }

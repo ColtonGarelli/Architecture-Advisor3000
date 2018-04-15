@@ -4,6 +4,7 @@ public class RoofImpl implements Roof {
     private double length;
     private double width;
     private double height;
+    private double startHeight;
 
     private MaterialByArea material;
     private double[] firstCornerCoordinates = new double[3];
@@ -21,10 +22,11 @@ public class RoofImpl implements Roof {
         secondCornerCoordinates[1] = 0;//y
         secondCornerCoordinates[2] = 0;//z
     }
-    public RoofImpl(double lengthIn, double widthIn, double roofThickness, double startHeight){
+    public RoofImpl(double widthIn, double lengthIn, double roofThickness, double startHeight){
         this.length = lengthIn;
         this.width = widthIn;
         this.height = roofThickness;
+        this.startHeight = startHeight;
 
         firstCornerCoordinates[0] = 0;//x
         firstCornerCoordinates[1] = 0;//y
