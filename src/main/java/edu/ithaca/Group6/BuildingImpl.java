@@ -94,6 +94,7 @@ public class BuildingImpl implements Building{
         else if(wall.getBottomCoordinates()[2] < 0 || wall.getBottomCoordinates()[2] > this.height || wall.getTopCoordinates()[2] < 0 || wall.getTopCoordinates()[2] > this.height){
             return false;
         }
+        /**
         //check if the wall being added will overlap any existing walls
         if(walls.length > 0) {
             for (int n = 0; n < walls.length; n++) {
@@ -183,7 +184,7 @@ public class BuildingImpl implements Building{
                     }
                 }
             }
-        }
+        }*/
         ExternalWall[] temp;
         if(walls.length == 0){
             temp = new ExternalWall[]{wall};
