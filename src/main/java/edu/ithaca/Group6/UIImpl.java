@@ -26,8 +26,19 @@ public class UIImpl implements UI{
             entry = userIn.next();
             goodEntry = checkYesOrNo(entry);
         }
-        System.out.println("Enter the height of the structure");
         Building demoBuilding = new BuildingImpl();
+        demoBuilding.setHeight(initializeHeight());
+        demoBuilding.setWidth(initializeWidth());
+        boolean modificationsDone = false;
+        while(!modificationsDone){
+            modificationsDone = modifyWalls();
+        }
+        this.userIn.close();
+    }
+
+    public double initializeHeight(){
+        boolean goodEntry;
+        System.out.println("Enter the height of the structure");
         String height = userIn.next();
         goodEntry = checkValidDouble(height);
         while(!goodEntry){
@@ -35,32 +46,55 @@ public class UIImpl implements UI{
             goodEntry = checkValidDouble(height);
             System.out.println("Invalid entry. Please enter the height of the structure");
         }
-        double setHeight = Double.parseDouble(height);
-        demoBuilding.setHeight(setHeight);
+        return Double.parseDouble(height);
+    }
+
+
+    public double initializeWidth(){
+        boolean goodEntry;
         System.out.println("Enter the width of the structure");
         String width = userIn.next();
         goodEntry = checkValidDouble(width);
         while(!goodEntry){
             width = userIn.next();
-            goodEntry = checkValidDouble(height);
+            goodEntry = checkValidDouble(width);
             System.out.println("Invalid entry. Please enter the width of the structure");
         }
-        double setWidth = Double.parseDouble(width);
-
-        boolean modificationsDone = false;
-        while(!modificationsDone){
-            modificationsDone = modifyWalls();
-        }
-
-
-
-        this.userIn.close();
+        return Double.parseDouble(width);
     }
+
 //    will modify all 4
     public boolean modifyWalls(){
+        boolean goodEntry;
+        boolean done =false;
         System.out.println("Enter 1 to set wall thickness, 2 to set wall material, 3 to add a feature");
+        int option;
+        while(!done){
+            System.out.println("Enter 1 to set wall thickness, 2 to set wall material, 3 to add a feature," +
+                    " and 0 to finish modifying");
+            option = userIn.nextInt();
+            while(option<0 || option >3){
+                System.out.println("Enter 1 to set wall thickness, 2 to set wall material, 3 to add a feature," +
+                        " and 0 to finish modifying");
+                option = userIn.nextInt();
+            }
+        }
         return true;
     }
+
+    public double requestWallThickness(){
+        System.out.println("Please enter desired wall thickness");
+        double thickness = userIn.nextInt();
+        while(thickness<1){
+            System.out.println("Invalid entry. Please enter desired wall thickness");
+            thickness = userIn.nextDouble();
+        }
+        return thickness;
+    }
+
+
+
+
     @Override
     public boolean checkYesOrNo(String userInput) {
         //Shorten the string
