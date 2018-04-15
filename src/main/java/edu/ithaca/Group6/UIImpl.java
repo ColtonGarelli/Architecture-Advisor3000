@@ -27,14 +27,206 @@ public class UIImpl implements UI{
             goodEntry = checkYesOrNo(entry);
         }
         Building demoBuilding = new BuildingImpl();
-        demoBuilding.setHeight(initializeHeight());
-        demoBuilding.setWidth(initializeWidth());
+        double height = initializeHeight();
+        demoBuilding.setHeight(height);
+        double width = initializeWidth();
+        demoBuilding.setWidth(width);
+        double length =initializeLength();
+        demoBuilding.setLength(length);
+        Roof roof = new RoofImpl(width, length, 2, height);
+
+        ExternalWall newWall = new ExternalWall();
+        double thickness = requestWallThickness();
+
+
+        newWall.setHeight(demoBuilding.getHeight());
+        newWall.setLength(demoBuilding.getLength());
+        newWall.setThickness(thickness);
+        demoBuilding.addWall(newWall);
+        newWall.setHeight(demoBuilding.getHeight());
+        newWall.setLength(demoBuilding.getWidth());
+        newWall.setThickness(thickness);
+        demoBuilding.addWall(newWall);
+        newWall.setHeight(demoBuilding.getHeight());
+        newWall.setLength(demoBuilding.getLength());
+        newWall.setThickness(thickness);
+        demoBuilding.addWall(newWall);
+        newWall.setHeight(demoBuilding.getHeight());
+        newWall.setLength(demoBuilding.getWidth());
+        newWall.setThickness(thickness);
+        demoBuilding.addWall(newWall);
+
+
+
         boolean modificationsDone = false;
         while(!modificationsDone){
-            modificationsDone = modifyWalls();
+            modificationsDone = modifyWalls(demoBuilding);
         }
         this.userIn.close();
     }
+
+    public boolean outputStructureInfo() {
+        return true;
+    }
+
+    //    will modify all 4
+    public boolean modifyWalls(Building demoBuilding) {
+        boolean goodEntry;
+        boolean done = false;
+        int option;
+        while (!done) {
+            System.out.println("Choose a wall, 1-4, to modify");
+            int wallToChange = userIn.nextInt();
+            while(wallToChange<1 || wallToChange>4){
+                System.out.println("Choose a wall, 1-4, to modify");
+                wallToChange = userIn.nextInt();
+            }
+            int wallIndex = wallToChange;
+            System.out.println("Enter 1 to change wall material, 2 to add a feature, 3 to remove a feature," +
+                    " and 0 to finish modifying");
+            option = userIn.nextInt();
+            while (option < 0 || option > 3) {
+                System.out.println("Enter 1 to change wall material, 2 to add a feature, 3 to remove a feature," +
+                        " and 0 to finish modifying");
+                option = userIn.nextInt();
+            }
+
+            int chooseFromDisplay;
+            if (option == 1) {
+                System.out.println(displayMaterialsByArea());
+                chooseFromDisplay = userIn.nextInt();
+                while(chooseFromDisplay<1 || chooseFromDisplay > 6){
+                    System.out.println("Please enter a valid choice.");
+                    chooseFromDisplay = userIn.nextInt();
+                }
+//                demoBuilding
+
+//                use chooseMaterial method to create object of choice, then add it to the wall
+            }
+
+            else if (option == 2) {
+                System.out.println("Enter 1 to add a door, or 2 to add a window");
+                chooseFromDisplay = userIn.nextInt();
+                while (chooseFromDisplay != 1 || chooseFromDisplay != 2) {
+                    System.out.println("Enter 1 to add a door, or 2 to add a window");
+                    chooseFromDisplay = userIn.nextInt();
+                }
+
+//                change a wall material
+                if (chooseFromDisplay == 1) {
+                    System.out.println(displayDoors());
+                    System.out.println("\n Enter the number associated with the kind of door you would like to add");
+                    chooseFromDisplay = userIn.nextInt();
+                    while (chooseFromDisplay < 1 || chooseFromDisplay > 6) {
+                        System.out.println("Please enter a valid choice.");
+                        chooseFromDisplay = userIn.nextInt();
+                    }
+                    demoBuilding.addWallFeature(wallIndex, chooseDoors(chooseFromDisplay));
+
+
+
+                }
+//                add features to a wall
+                else if(chooseFromDisplay==2){
+                    System.out.println(displayWindows());
+                    System.out.println("\n Enter the number associated with the kind of window you would like to add");
+                    chooseFromDisplay = userIn.nextInt();
+                    while(chooseFromDisplay<1 || chooseFromDisplay > 6){
+                        System.out.println("Please enter a valid choice.");
+                        chooseFromDisplay = userIn.nextInt();
+                    }
+                    demoBuilding.addWallFeature(wallIndex, chooseWindows(chooseFromDisplay));
+                }
+            }
+//            Remove features from a wall
+            else if (option == 3) {
+
+            }
+
+            else {
+                    done = true;
+            }
+        }
+
+        return done;
+    }
+
+    public MaterialByUnit chooseWindows(int option) {
+        if(option==1){
+            return new BayWindow();
+        }
+        else if(option==2){
+            return new DoubleHungWindow();
+        }
+        else if(option==3){
+            return new PictureWindow();
+        }
+        else if(option==4){
+            return new SingleHungWindow();
+        }
+        else{
+            return new SlidingWindow();
+        }
+    }
+
+    public MaterialByUnit chooseDoors(int option) {
+        if(option==1){
+            return new Door();
+        }
+        else if(option==2){
+            return new GarageDoor();
+        }
+        else if(option==3){
+            return new InteriorDoor();
+        }
+        else if(option==4){
+            return new ScreenDoor();
+        }
+        else if(option==5){
+            return new SlidingDoor();
+
+        }
+        else{
+            return new StormDoor();
+        }
+    }
+
+
+    public MaterialByArea chooseMaterial(int option) {
+        if(option==1){
+            return new Brick();
+        }
+        else if(option==2){
+            return new ClayBrick();
+        }
+        else if(option==3){
+            return new ConcreteBrick();
+        }
+        else if(option==4){
+            return new TwoByFour();
+        }
+        else if(option==5){
+            return new TwoByThree();
+
+        }
+        else{
+            return new Wood();
+        }
+    }
+
+    public double initializeLength(){
+        boolean goodEntry;
+        System.out.println("Enter the height of the structure");
+        String length = userIn.next();
+        goodEntry = checkValidDouble(length);
+        while(!goodEntry){
+            length = userIn.next();
+            goodEntry = checkValidDouble(length);
+            System.out.println("Invalid entry. Please enter the height of the structure");
+        }
+        return Double.parseDouble(length);
+    }
+
 
     public double initializeHeight(){
         boolean goodEntry;
@@ -63,34 +255,18 @@ public class UIImpl implements UI{
         return Double.parseDouble(width);
     }
 
-//    will modify all 4
-    public boolean modifyWalls(){
-        boolean goodEntry;
-        boolean done =false;
-        System.out.println("Enter 1 to set wall thickness, 2 to set wall material, 3 to add a feature");
-        int option;
-        while(!done){
-            System.out.println("Enter 1 to set wall thickness, 2 to set wall material, 3 to add a feature," +
-                    " and 0 to finish modifying");
-            option = userIn.nextInt();
-            while(option<0 || option >3){
-                System.out.println("Enter 1 to set wall thickness, 2 to set wall material, 3 to add a feature," +
-                        " and 0 to finish modifying");
-                option = userIn.nextInt();
-            }
-        }
-        return true;
-    }
-
     public double requestWallThickness(){
         System.out.println("Please enter desired wall thickness");
-        double thickness = userIn.nextInt();
+        double thickness = userIn.nextDouble();
         while(thickness<1){
             System.out.println("Invalid entry. Please enter desired wall thickness");
             thickness = userIn.nextDouble();
         }
         return thickness;
     }
+
+
+
 
 
 
@@ -158,12 +334,12 @@ public class UIImpl implements UI{
         TwoByThree twoByThree = new TwoByThree();
         Wood wood = new Wood();
         String display = "Building Materials:";
-        display = display + "\n" + brick.toString();
-        display = display + "\n" + clayBrick.toString();
-        display = display + "\n" + concreteBrick.toString();
-        display = display + "\n" + twoByFour.toString();
-        display = display + "\n" + twoByThree.toString();
-        display = display + "\n" + wood.toString();
+        display = display + "\n1: " + brick.toString();
+        display = display + "\n2: " + clayBrick.toString();
+        display = display + "\n3: " + concreteBrick.toString();
+        display = display + "\n4: " + twoByFour.toString();
+        display = display + "\n5: " + twoByThree.toString();
+        display = display + "\n6: " + wood.toString();
         return display;
     }
 
@@ -176,12 +352,12 @@ public class UIImpl implements UI{
         SlidingDoor slidingDoor = new SlidingDoor();
         StormDoor stormDoor = new StormDoor();
         String display = "Doors:";
-        display = display + "\n" + door.toString();
-        display = display + "\n" + garageDoor.toString();
-        display = display + "\n" + interiorDoor.toString();
-        display = display + "\n" + screenDoor.toString();
-        display = display + "\n" + slidingDoor.toString();
-        display = display + "\n" + stormDoor.toString();
+        display = display + "\n1: " + door.toString();
+        display = display + "\n2: " + garageDoor.toString();
+        display = display + "\n3: " + interiorDoor.toString();
+        display = display + "\n4: " + screenDoor.toString();
+        display = display + "\n5: " + slidingDoor.toString();
+        display = display + "\n6: " + stormDoor.toString();
         return display;
     }
 
@@ -193,11 +369,11 @@ public class UIImpl implements UI{
         SingleHungWindow singleHungWindow = new SingleHungWindow();
         SlidingWindow slidingWindow = new SlidingWindow();
         String display = "Windows:";
-        display = display + "\n" + bayWindow.toString();
-        display = display + "\n" + doubleHungWindow.toString();
-        display = display + "\n" + pictureWindow.toString();
-        display = display + "\n" + singleHungWindow.toString();
-        display = display + "\n" + slidingWindow.toString();
+        display = display + "\n1: " + bayWindow.toString();
+        display = display + "\n2: " + doubleHungWindow.toString();
+        display = display + "\n3: " + pictureWindow.toString();
+        display = display + "\n4: " + singleHungWindow.toString();
+        display = display + "\n5: " + slidingWindow.toString();
         return display;
     }
 }

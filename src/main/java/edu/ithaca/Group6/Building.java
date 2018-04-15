@@ -3,7 +3,7 @@ package edu.ithaca.Group6;
 public interface Building {
     //Creating a building in the shape of a rectangular prism
     //Assume that the main function will prevent the user from inputting a negative dimension (i.e. -60.0 for the width)
-
+    public ExternalWall[] walls = new ExternalWall[0];
     public void setLength(double newVal);
     //set a new length of the building
 
@@ -53,7 +53,7 @@ public interface Building {
      * @param startPoint
      * @post add a wall feature to the array in a wall object
      */
-    public void addWallFeature(int wallIdx, MaterialByUnit feature, double[] startPoint);
+    public void addWallFeature(int wallIdx, MaterialByUnit feature);
 
     /**
      * Remove a feature (door, window) to a wall

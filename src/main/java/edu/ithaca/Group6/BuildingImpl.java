@@ -7,7 +7,7 @@ public class BuildingImpl implements Building{
     double length;
     double width;
     double height;
-    ExternalWall[] walls;
+    public ExternalWall[] walls;
     Roof roof;
 
     public BuildingImpl(){
@@ -205,12 +205,13 @@ public class BuildingImpl implements Building{
 
     }
 
-    public void addWallFeature(int wallIdx, MaterialByUnit feature, double[] startPoint){
+    public void addWallFeature(int wallIdx, MaterialByUnit feature){
+        this.walls[wallIdx].addFeature(feature);
 
     }
 
     public void removeWallFeature(int wallIdx, int featureIdx){
-
+        this.walls[wallIdx].removeFeature(featureIdx);
     }
 
     @Override
