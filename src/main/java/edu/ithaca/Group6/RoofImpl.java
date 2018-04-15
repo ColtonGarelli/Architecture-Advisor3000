@@ -44,7 +44,7 @@ public class RoofImpl implements Roof {
 
     @Override
     public boolean setFirstCornerCoordinates(double[] xyzCoord) {
-        if(xyzCoord[2] < 0){
+        if(xyzCoord[2] < 0){    //no negative height
             return false;
         }
         try{firstCornerCoordinates = xyzCoord;
@@ -67,7 +67,7 @@ public class RoofImpl implements Roof {
 
     @Override
     public boolean setSecondCornerCoordinates(double[] xyzCoord) {
-        if(xyzCoord[2] < 0){
+        if(xyzCoord[2] < 0){    //no negative height
             return false;
         }
         try{secondCornerCoordinates = xyzCoord;
