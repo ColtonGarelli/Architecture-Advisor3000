@@ -16,13 +16,16 @@ public class UIImpl implements UI{
 
     public int enterValidInt(int startInt, int endInt){
         int userInt = startInt - 1;
-        String userInput = userIn.next();
         while(userInt < startInt || userInt > endInt) {
+            String userInput = userIn.next();
             while (!checkValidInt(userInput)) {
                 System.out.println("Please enter a valid option, " + startInt + " - " + endInt + "");
                 userInput = userIn.next();
             }
             userInt = Integer.parseInt(userInput);
+            if(userInt < startInt || userInt > endInt){
+                System.out.println("Please enter a valid option, " + startInt + " - " + endInt + "");
+            }
         }
         return userInt;
     }
@@ -206,9 +209,9 @@ public class UIImpl implements UI{
         String length = userIn.next();
         goodEntry = checkValidDouble(length);
         while(!goodEntry){
+            System.out.println("Invalid entry. Please enter the length of the structure");
             length = userIn.next();
             goodEntry = checkValidDouble(length);
-            System.out.println("Invalid entry. Please enter the length of the structure");
         }
         return Double.parseDouble(length);
     }
@@ -220,9 +223,9 @@ public class UIImpl implements UI{
         String height = userIn.next();
         goodEntry = checkValidDouble(height);
         while(!goodEntry){
+            System.out.println("Invalid entry. Please enter the height of the structure");
             height = userIn.next();
             goodEntry = checkValidDouble(height);
-            System.out.println("Invalid entry. Please enter the height of the structure");
         }
         return Double.parseDouble(height);
     }
@@ -234,9 +237,9 @@ public class UIImpl implements UI{
         String width = userIn.next();
         goodEntry = checkValidDouble(width);
         while(!goodEntry){
+            System.out.println("Invalid entry. Please enter the width of the structure");
             width = userIn.next();
             goodEntry = checkValidDouble(width);
-            System.out.println("Invalid entry. Please enter the width of the structure");
         }
         return Double.parseDouble(width);
     }
@@ -244,7 +247,7 @@ public class UIImpl implements UI{
     public double requestWallThickness(){
         System.out.println("Please enter desired wall thickness");
         double thickness = userIn.nextDouble();
-        while(thickness<1){
+        while(thickness<0.1){
             System.out.println("Invalid entry. Please enter desired wall thickness");
             thickness = userIn.nextDouble();
         }
