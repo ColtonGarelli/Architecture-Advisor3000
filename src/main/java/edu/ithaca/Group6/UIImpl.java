@@ -17,12 +17,11 @@ public class UIImpl implements UI{
     //    in a list of options, quit will always be 0
     public void sprintTwoDemo(){
         System.out.println("Welcome to the Architecture Advisor3000");
-        System.out.println("\nWhen you would like to begin modifying your project," +
-                " enter Yes. To quit enter No.");
+        System.out.println("\nWhen you would like to begin modifying your project enter Yes.");
         String entry = userIn.next();
         boolean goodEntry = checkYesOrNo(entry);
         while(goodEntry==false){
-            System.out.println("Please enter Yes or No.");
+            System.out.println("Please enter Yes when ready");
             entry = userIn.next();
             goodEntry = checkYesOrNo(entry);
         }
@@ -35,39 +34,37 @@ public class UIImpl implements UI{
         demoBuilding.setLength(length);
         Roof roof = new RoofImpl(width, length, 2, height);
 
-        ExternalWall newWall = new ExternalWall();
+        ExternalWall newWall1 = new ExternalWall();
+        ExternalWall newWall2 = new ExternalWall();
         double thickness = requestWallThickness();
 
 
-        newWall.setHeight(demoBuilding.getHeight());
-        newWall.setLength(demoBuilding.getLength());
-        newWall.setThickness(thickness);
-        demoBuilding.addWall(newWall);
-        newWall.setHeight(demoBuilding.getHeight());
-        newWall.setLength(demoBuilding.getWidth());
-        newWall.setThickness(thickness);
-        demoBuilding.addWall(newWall);
-        newWall.setHeight(demoBuilding.getHeight());
-        newWall.setLength(demoBuilding.getLength());
-        newWall.setThickness(thickness);
-        demoBuilding.addWall(newWall);
-        newWall.setHeight(demoBuilding.getHeight());
-        newWall.setLength(demoBuilding.getWidth());
-        newWall.setThickness(thickness);
-        demoBuilding.addWall(newWall);
-
-
+        newWall1.setHeight(demoBuilding.getHeight());
+        newWall1.setLength(demoBuilding.getLength());
+        newWall1.setThickness(thickness);
+        demoBuilding.addWall(newWall1);
+        newWall2.setHeight(demoBuilding.getHeight());
+        newWall2.setLength(demoBuilding.getWidth());
+        newWall2.setThickness(thickness);
+        demoBuilding.addWall(newWall2);
+        newWall1.setHeight(demoBuilding.getHeight());
+        newWall1.setLength(demoBuilding.getLength());
+        newWall1.setThickness(thickness);
+        demoBuilding.addWall(newWall2);
+        newWall2.setHeight(demoBuilding.getHeight());
+        newWall2.setLength(demoBuilding.getWidth());
+        newWall2.setThickness(thickness);
+        demoBuilding.addWall(newWall2);
 
         boolean modificationsDone = false;
         while(!modificationsDone){
             modificationsDone = modifyWalls(demoBuilding);
         }
-
+        System.out.println(buildingOutput(demoBuilding));
+        for(int i=0; i<4; i++) {
+            System.out.println(displayWalls(demoBuilding.getWall(i)));
+        }
         this.userIn.close();
-    }
-
-    public boolean outputStructureInfo() {
-        return true;
     }
 
     //    will modify all 4
@@ -75,14 +72,15 @@ public class UIImpl implements UI{
         boolean goodEntry;
         boolean done = false;
         int option;
+        int wallToChange;
         while (!done) {
             System.out.println("Choose a wall, 1-4, to modify");
-            int wallToChange = userIn.nextInt();
+            wallToChange = userIn.nextInt();
             while (wallToChange < 1 || wallToChange > 4) {
                 System.out.println("Choose a wall, 1-4, to modify");
                 wallToChange = userIn.nextInt();
             }
-            int wallIndex = wallToChange;
+            int wallIndex = wallToChange-1;
             System.out.println("Wall being modified:\n" + displayWalls(demoBuilding.getWall(wallIndex)));
             System.out.println("Enter 1 to change wall material, 2 to add a feature, 3 to remove a feature," +
                     " and 0 to finish modifying");
@@ -101,7 +99,7 @@ public class UIImpl implements UI{
                     System.out.println("Please enter a valid choice.");
                     chooseFromDisplay = userIn.nextInt();
                 }
-                demoBuilding.getWall(wallToChange).setMaterial(chooseMaterial(chooseFromDisplay));
+                demoBuilding.getWall(wallIndex).setMaterial(chooseMaterial(chooseFromDisplay));
 
 //                use chooseMaterial method to create object of choice, then add it to the wall
             } else if (option == 2) {
@@ -138,11 +136,12 @@ public class UIImpl implements UI{
             else if (option == 3) {
                 System.out.println("\n Enter the number associated with the feature you would like to remove");
                 chooseFromDisplay = userIn.nextInt();
-                while (chooseFromDisplay<1 || chooseFromDisplay > demoBuilding.getWall(wallToChange).getFeatureListSize()){
+                while (chooseFromDisplay<1 || chooseFromDisplay > demoBuilding.getWall(wallIndex).getFeatureListSize()){
                     System.out.println("Please enter a valid choice.");
                     chooseFromDisplay = userIn.nextInt();
                 }
-                demoBuilding.getWall(wallToChange).removeFeature(chooseFromDisplay);
+                displayWalls(demoBuilding.getWall(wallIndex));
+                demoBuilding.getWall(wallIndex).removeFeature(chooseFromDisplay);
             }
             else{
                     done = true;
@@ -382,7 +381,7 @@ public class UIImpl implements UI{
     public String buildingOutput(Building demoBuilding){
         String buildingString;
 //        print structure params, each wall by parameter, print roof
-        buildingString = "Building Information:\n\n\n";
+        buildingString = "Building Information:\n";
         buildingString += "Height: " + Double.toString(demoBuilding.getHeight())+ "\n";
         buildingString += "Width: " + Double.toString(demoBuilding.getWidth()) + "\n";
         buildingString += "Length: " + Double.toString(demoBuilding.getLength()) + "\n\n";
@@ -391,9 +390,10 @@ public class UIImpl implements UI{
     }
     public String displayWalls(Wall wallIn){
         String wallString;
-        wallString = "Height: " + Double.toString(wallIn.getHeight()) + "\n";
-        wallString += "Width: " + Double.toString(wallIn.getHeight()) + "\n";
-        wallString += "Thickness: " + Double.toString(wallIn.getHeight()) + "\n";
+        wallString = "Wall Information:\n\n";
+        wallString += "\n\nHeight: " + Double.toString(wallIn.getHeight()) + "\n";
+        wallString += "Length: " + Double.toString(wallIn.getLength()) + "\n";
+        wallString += "Thickness: " + Double.toString(wallIn.getThickness()) + "\n";
         wallString += "\nMaterial: " + wallIn.getMaterial();
         wallString += "\nFeatures List:\n\n";
         for(int i =0; i<wallIn.getFeatureListSize(); i++){
