@@ -93,7 +93,7 @@ public class UIImpl implements UI{
             System.out.println("Wall being modified:\n" + displayWalls(demoBuilding.getWall(wallIndex)));
             System.out.println("Enter 1 to change wall material, 2 to add a feature, 3 to remove a feature," +
                     " and 0 to finish modifying");
-            option = enterValidInt(1,3);
+            option = enterValidInt(0,3);
 
             int chooseFromDisplay;
             if (option == 1) {
