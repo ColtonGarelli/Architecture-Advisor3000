@@ -249,6 +249,9 @@ public class UIImpl implements UI{
         String thicknessStr = userIn.next();
         boolean goodEntry = checkValidDouble(thicknessStr);
         double thickness = -1;
+        if(goodEntry){
+            thickness = Double.parseDouble(thicknessStr);
+        }
         while(thickness  < 0.1 || !goodEntry){
             System.out.println("Invalid entry. Please enter desired wall thickness");
             thicknessStr = userIn.next();
