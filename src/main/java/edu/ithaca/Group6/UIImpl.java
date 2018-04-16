@@ -78,11 +78,12 @@ public class UIImpl implements UI{
         while (!done) {
             System.out.println("Choose a wall, 1-4, to modify");
             int wallToChange = userIn.nextInt();
-            while(wallToChange<1 || wallToChange>4){
+            while (wallToChange < 1 || wallToChange > 4) {
                 System.out.println("Choose a wall, 1-4, to modify");
                 wallToChange = userIn.nextInt();
             }
             int wallIndex = wallToChange;
+            System.out.println("Wall being modified:\n" + displayWalls(demoBuilding.getWall(wallIndex)));
             System.out.println("Enter 1 to change wall material, 2 to add a feature, 3 to remove a feature," +
                     " and 0 to finish modifying");
             option = userIn.nextInt();
@@ -96,24 +97,20 @@ public class UIImpl implements UI{
             if (option == 1) {
                 System.out.println(displayMaterialsByArea());
                 chooseFromDisplay = userIn.nextInt();
-                while(chooseFromDisplay<1 || chooseFromDisplay > 6){
+                while (chooseFromDisplay < 1 || chooseFromDisplay > 6) {
                     System.out.println("Please enter a valid choice.");
                     chooseFromDisplay = userIn.nextInt();
                 }
-                
-//                demoBuilding
+                demoBuilding.getWall(wallToChange).setMaterial(chooseMaterial(chooseFromDisplay));
 
 //                use chooseMaterial method to create object of choice, then add it to the wall
-            }
-
-            else if (option == 2) {
+            } else if (option == 2) {
                 System.out.println("Enter 1 to add a door, or 2 to add a window");
                 chooseFromDisplay = userIn.nextInt();
-                while (chooseFromDisplay != 1 || chooseFromDisplay != 2) {
+                while (chooseFromDisplay != 1 && chooseFromDisplay != 2) {
                     System.out.println("Enter 1 to add a door, or 2 to add a window");
                     chooseFromDisplay = userIn.nextInt();
                 }
-
 //                change a wall material
                 if (chooseFromDisplay == 1) {
                     System.out.println(displayDoors());
@@ -124,16 +121,13 @@ public class UIImpl implements UI{
                         chooseFromDisplay = userIn.nextInt();
                     }
                     demoBuilding.addWallFeature(wallIndex, chooseDoors(chooseFromDisplay));
-
-
-
                 }
 //                add features to a wall
-                else if(chooseFromDisplay==2){
+                else if (chooseFromDisplay == 2) {
                     System.out.println(displayWindows());
                     System.out.println("\n Enter the number associated with the kind of window you would like to add");
                     chooseFromDisplay = userIn.nextInt();
-                    while(chooseFromDisplay<1 || chooseFromDisplay > 6){
+                    while (chooseFromDisplay < 1 || chooseFromDisplay > 6) {
                         System.out.println("Please enter a valid choice.");
                         chooseFromDisplay = userIn.nextInt();
                     }
@@ -142,13 +136,19 @@ public class UIImpl implements UI{
             }
 //            Remove features from a wall
             else if (option == 3) {
-
+                System.out.println("\n Enter the number associated with the feature you would like to remove");
+                chooseFromDisplay = userIn.nextInt();
+                while (chooseFromDisplay<1 || chooseFromDisplay > demoBuilding.getWall(wallToChange).getFeatureListSize()){
+                    System.out.println("Please enter a valid choice.");
+                    chooseFromDisplay = userIn.nextInt();
+                }
+                demoBuilding.getWall(wallToChange).removeFeature(chooseFromDisplay);
             }
-
-            else {
+            else{
                     done = true;
+                }
+
             }
-        }
 
         return done;
     }
@@ -218,13 +218,13 @@ public class UIImpl implements UI{
 
     public double initializeLength(){
         boolean goodEntry;
-        System.out.println("Enter the height of the structure");
+        System.out.println("Enter the length of the structure");
         String length = userIn.next();
         goodEntry = checkValidDouble(length);
         while(!goodEntry){
             length = userIn.next();
             goodEntry = checkValidDouble(length);
-            System.out.println("Invalid entry. Please enter the height of the structure");
+            System.out.println("Invalid entry. Please enter the length of the structure");
         }
         return Double.parseDouble(length);
     }
@@ -377,5 +377,30 @@ public class UIImpl implements UI{
         display = display + "\n4: " + singleHungWindow.toString();
         display = display + "\n5: " + slidingWindow.toString();
         return display;
+    }
+
+    public String buildingOutput(Building demoBuilding){
+        String buildingString;
+//        print structure params, each wall by parameter, print roof
+        buildingString = "Building Information:\n\n\n";
+        buildingString += "Height: " + Double.toString(demoBuilding.getHeight())+ "\n";
+        buildingString += "Width: " + Double.toString(demoBuilding.getWidth()) + "\n";
+        buildingString += "Length: " + Double.toString(demoBuilding.getLength()) + "\n\n";
+        buildingString += "Total Cost: $" + Double.toString(demoBuilding.calcTotalCost());
+        return buildingString;
+    }
+    public String displayWalls(Wall wallIn){
+        String wallString;
+        wallString = "Height: " + Double.toString(wallIn.getHeight()) + "\n";
+        wallString += "Width: " + Double.toString(wallIn.getHeight()) + "\n";
+        wallString += "Thickness: " + Double.toString(wallIn.getHeight()) + "\n";
+        wallString += "\nMaterial: " + wallIn.getMaterial();
+        wallString += "\nFeatures List:\n\n";
+        for(int i =0; i<wallIn.getFeatureListSize(); i++){
+            wallString += wallIn.getFeature(i).toString() + "\n";
+        }
+        wallString+="\n\n";
+        return wallString;
+
     }
 }
