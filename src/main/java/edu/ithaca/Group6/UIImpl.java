@@ -120,7 +120,7 @@ public class UIImpl implements UI{
                 else if (chooseFromDisplay == 2) {
                     System.out.println(displayWindows());
                     System.out.println("\n Enter the number associated with the kind of window you would like to add");
-                    chooseFromDisplay = enterValidInt(1,6);
+                    chooseFromDisplay = enterValidInt(1,5);
                     demoBuilding.addWallFeature(wallIndex, chooseWindows(chooseFromDisplay));
                 }
             }
@@ -246,10 +246,16 @@ public class UIImpl implements UI{
 
     public double requestWallThickness(){
         System.out.println("Please enter desired wall thickness");
-        double thickness = userIn.nextDouble();
-        while(thickness<0.1){
+        String thicknessStr = userIn.next();
+        boolean goodEntry = checkValidDouble(thicknessStr);
+        double thickness = -1;
+        while(thickness  < 0.1 || !goodEntry){
             System.out.println("Invalid entry. Please enter desired wall thickness");
-            thickness = userIn.nextDouble();
+            thicknessStr = userIn.next();
+            goodEntry = checkValidDouble(thicknessStr);
+            if(goodEntry){
+                thickness = Double.parseDouble(thicknessStr);
+            }
         }
         return thickness;
     }

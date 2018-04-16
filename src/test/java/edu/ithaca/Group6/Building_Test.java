@@ -72,62 +72,62 @@ public class Building_Test {
         assertEquals(115.2, totalCost1, "Innacurate calculation of total cost");
     }*/
 
-    @Test
-    void addWallTest(){
-        //setup
-        BuildingImpl building = new BuildingImpl(50.0, 50.0, 50.0);
-        Wood wood = new Wood();
-
-        //trying to add the first wall out of bounds (start point)
-        //x position out of bounds
-        double[] firstStartPointOutX = new double[]{51.0, 0.0, 0.0};
-        ExternalWall firstWallOutX = new ExternalWall(1.0, 1.0, 1.0, firstStartPointOutX, wood);
-        assertFalse(building.addWall(firstWallOutX), "Added a wall when the start point of the first wall x value was out of bounds");
-        //y position out of bounds
-        double[] firstStartPointOutY = new double[]{0.0, 51.0, 0.0};
-        ExternalWall firstWallOutY = new ExternalWall(1.0, 1.0, 1.0, firstStartPointOutY, wood);
-        assertFalse(building.addWall(firstWallOutY), "Added a wall when the start point of the first wall y value was out of bounds");
-        //z position out of bounds
-        double[] firstStartPointOutZ = new double[]{0.0, 0.0, 51.0};
-        ExternalWall firstWallOutZ = new ExternalWall(1.0, 1.0, 1.0, firstStartPointOutZ, wood);
-        assertFalse(building.addWall(firstWallOutZ), "Added a wall when the start point of the first wall z value was out of bounds");
-
-        //trying to add the first wall out of bounds (end point)
-        //x position out of bounds
-        double[] firstEndPointOut = new double[]{0.0, 0.0, 0.0};
-        firstWallOutX = new ExternalWall(1.0, 51.0, 1.0, firstEndPointOut, wood);
-        assertFalse(building.addWall(firstWallOutX), "Added a wall when the end point of the first wall x value was out of bounds");
-        //y position out of bounds
-        firstWallOutY = new ExternalWall(1.0, 1.0, 51.0, firstEndPointOut, wood);
-        assertFalse(building.addWall(firstWallOutY), "Added a wall when the end point of the first wall y value was out of bounds");
-        //z position out of bounds
-        firstWallOutZ = new ExternalWall(51.0, 1.0, 1.0, firstEndPointOut, wood);
-        assertFalse(building.addWall(firstWallOutZ), "Added a wall when the end point of the first wall z value was out of bounds");
-
-        //Testing for a wall starting somewhere within the building ending out of bounds
-        //x position out of bounds
-        double[] endPointOut = new double[]{25.0, 25.0, 25.0};
-        ExternalWall wallOutX = new ExternalWall(1.0, 26.0, 1.0, endPointOut, wood);
-        assertFalse(building.addWall(wallOutX), "Added a wall when the end point of the first wall x value was out of bounds");
-        //y position out of bounds
-        ExternalWall wallOutY = new ExternalWall(1.0, 1.0, 26.0, endPointOut, wood);
-        assertFalse(building.addWall(wallOutY), "Added a wall when the end point of the first wall y value was out of bounds");
-        //z position out of bounds
-        ExternalWall wallOutZ = new ExternalWall(26.0, 1.0, 1.0, endPointOut, wood);
-        assertFalse(building.addWall(wallOutZ), "Added a wall when the end point of the first wall z value was out of bounds");
-
-        //Adding the first wall
-        double[] startPoint = new double[]{10.0, 10.0, 10.0};
-        ExternalWall wall1 = new ExternalWall(30.0, 30.0, 30.0, startPoint, wood);
-        boolean added = building.addWall(wall1);
-        double[] endPoint = new double[]{40.0, 40.0, 40.0};
-        assertTrue(added, "Wall not added");
-        assertEquals(30.0, wall1.getLength(), "Wall length not properly set when adding");
-        assertEquals(30.0, wall1.getThickness(), "Wall width not properly set when adding");
-        assertEquals(30.0, wall1.getHeight(), "Wall height not properly set when adding");
-        assertArrayEquals(startPoint, wall1.getBottomCoordinates(), "Wall start point not properly set when adding");
-        assertEquals(wood, wall1.getMaterial(), "Wall material not properly set when adding");
-        assertArrayEquals(endPoint, building.walls[0].getTopCoordinates(), "Wall end point not properly set when adding");
+//    @Test
+//    void addWallTest(){
+//        //setup
+//        BuildingImpl building = new BuildingImpl(50.0, 50.0, 50.0);
+//        Wood wood = new Wood();
+//
+//        //trying to add the first wall out of bounds (start point)
+//        //x position out of bounds
+//        double[] firstStartPointOutX = new double[]{51.0, 0.0, 0.0};
+//        ExternalWall firstWallOutX = new ExternalWall(1.0, 1.0, 1.0, firstStartPointOutX, wood);
+//        assertFalse(building.addWall(firstWallOutX), "Added a wall when the start point of the first wall x value was out of bounds");
+//        //y position out of bounds
+//        double[] firstStartPointOutY = new double[]{0.0, 51.0, 0.0};
+//        ExternalWall firstWallOutY = new ExternalWall(1.0, 1.0, 1.0, firstStartPointOutY, wood);
+//        assertFalse(building.addWall(firstWallOutY), "Added a wall when the start point of the first wall y value was out of bounds");
+//        //z position out of bounds
+//        double[] firstStartPointOutZ = new double[]{0.0, 0.0, 51.0};
+//        ExternalWall firstWallOutZ = new ExternalWall(1.0, 1.0, 1.0, firstStartPointOutZ, wood);
+//        assertFalse(building.addWall(firstWallOutZ), "Added a wall when the start point of the first wall z value was out of bounds");
+//
+//        //trying to add the first wall out of bounds (end point)
+//        //x position out of bounds
+//        double[] firstEndPointOut = new double[]{0.0, 0.0, 0.0};
+//        firstWallOutX = new ExternalWall(1.0, 51.0, 1.0, firstEndPointOut, wood);
+//        assertFalse(building.addWall(firstWallOutX), "Added a wall when the end point of the first wall x value was out of bounds");
+//        //y position out of bounds
+//        firstWallOutY = new ExternalWall(1.0, 1.0, 51.0, firstEndPointOut, wood);
+//        assertFalse(building.addWall(firstWallOutY), "Added a wall when the end point of the first wall y value was out of bounds");
+//        //z position out of bounds
+//        firstWallOutZ = new ExternalWall(51.0, 1.0, 1.0, firstEndPointOut, wood);
+//        assertFalse(building.addWall(firstWallOutZ), "Added a wall when the end point of the first wall z value was out of bounds");
+//
+//        //Testing for a wall starting somewhere within the building ending out of bounds
+//        //x position out of bounds
+//        double[] endPointOut = new double[]{25.0, 25.0, 25.0};
+//        ExternalWall wallOutX = new ExternalWall(1.0, 26.0, 1.0, endPointOut, wood);
+//        assertFalse(building.addWall(wallOutX), "Added a wall when the end point of the first wall x value was out of bounds");
+//        //y position out of bounds
+//        ExternalWall wallOutY = new ExternalWall(1.0, 1.0, 26.0, endPointOut, wood);
+//        assertFalse(building.addWall(wallOutY), "Added a wall when the end point of the first wall y value was out of bounds");
+//        //z position out of bounds
+//        ExternalWall wallOutZ = new ExternalWall(26.0, 1.0, 1.0, endPointOut, wood);
+//        assertFalse(building.addWall(wallOutZ), "Added a wall when the end point of the first wall z value was out of bounds");
+//
+//        //Adding the first wall
+//        double[] startPoint = new double[]{10.0, 10.0, 10.0};
+//        ExternalWall wall1 = new ExternalWall(30.0, 30.0, 30.0, startPoint, wood);
+//        boolean added = building.addWall(wall1);
+//        double[] endPoint = new double[]{40.0, 40.0, 40.0};
+//        assertTrue(added, "Wall not added");
+//        assertEquals(30.0, wall1.getLength(), "Wall length not properly set when adding");
+//        assertEquals(30.0, wall1.getThickness(), "Wall width not properly set when adding");
+//        assertEquals(30.0, wall1.getHeight(), "Wall height not properly set when adding");
+//        assertArrayEquals(startPoint, wall1.getBottomCoordinates(), "Wall start point not properly set when adding");
+//        assertEquals(wood, wall1.getMaterial(), "Wall material not properly set when adding");
+//        assertArrayEquals(endPoint, building.walls[0].getTopCoordinates(), "Wall end point not properly set when adding");
 
 //        //Test for overlapping walls
 //        //Case 1: start point of new wall is within existing wall
@@ -185,7 +185,7 @@ public class Building_Test {
 //        System.out.println("Start: [" + wall12.getBottomCoordinates()[0] + ", " + wall12.getBottomCoordinates()[1] + ", " + wall12.getBottomCoordinates()[2] + "]");
 //        System.out.println("End: [" + wall12.getTopCoordinates()[0] + ", " + wall12.getTopCoordinates()[1] + ", " + wall12.getTopCoordinates()[2] + "]");
 //        assertTrue(building.addWall(wall12), "Did not add a new wall which was touching the side of an existing wall");
-    }
+//    }
 
     @Test
     public void testSetRoof(){
