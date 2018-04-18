@@ -82,7 +82,7 @@ public class UIImpl implements UI{
         }
         this.userIn.close();
     }
-
+    
     //    will modify all 4
     public boolean modifyWalls(Building demoBuilding) {
         boolean goodEntry;
@@ -93,7 +93,7 @@ public class UIImpl implements UI{
             System.out.println("Choose a wall, 1-4, to modify");
             wallToChange = enterValidInt(1,4);
             int wallIndex = wallToChange-1;
-            System.out.println("Wall being modified:\n" + displayWalls(demoBuilding.getWall(wallIndex)));
+            System.out.println("Wall being modified:"+wallToChange+"\n" + displayWalls(demoBuilding.getWall(wallIndex)));
             System.out.println("Enter 1 to change wall material, 2 to add a feature, 3 to remove a feature," +
                     " and 0 to finish modifying");
             option = enterValidInt(0,3);
@@ -136,9 +136,10 @@ public class UIImpl implements UI{
                 }
 
             }
-
         return done;
+
     }
+
 
     public MaterialByUnit chooseWindows(int option) {
         if(option==1){

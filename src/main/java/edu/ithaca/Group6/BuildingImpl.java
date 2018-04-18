@@ -72,8 +72,11 @@ public class BuildingImpl implements Building{
         //Calculate the total cost of the walls
         double perim = this.getPerimeter();
         double surfaceArea = perim*this.height;
-        //double costExtWall = this.extWallMaterial.calcCost(surfaceArea);
-        //totalCost += costExtWall;
+//        double costExtWall;
+//        for(int i=0;i<walls.length; i++) {
+//            costExtWall = this.walls[i].getMaterial().calcCost(surfaceArea);
+//            totalCost += costExtWall;
+//        }
 
         return totalCost;
     }
