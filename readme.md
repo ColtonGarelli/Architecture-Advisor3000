@@ -45,3 +45,7 @@ Have a demonstrable system that can construct and display information regarding 
 
 <b>Sprint Goal #3:</b>
 Have a functional system that allows an architect user to create and edit buildings, and a builder user to view the properties and dimensions of the buildings. Everything that is in the background must be able to be demonstrated from the UI.
+
+[Class Diagram #3](https://drive.google.com/file/d/1gZwMg5N_X5N-64YmetWtnCHCPFulPbJB/view?usp=sharing)
+
+[State Diagram #3](https://drive.google.com/file/d/1fkV9hLJhzICGWCu5Wl7Qdb4n00ZdyMgk/view?usp=sharing)
