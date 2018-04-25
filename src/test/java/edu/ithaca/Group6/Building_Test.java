@@ -87,7 +87,11 @@ public class Building_Test {
 
         MaterialByUnit testDoor = new Door();
         building1.addWallFeature(0, testDoor, startPoint1);
-        assertEquals(1998, building1.calcTotalCost(), "Innaccurate Calculation of total cost - One Feature");
+        assertEquals(1998, building1.calcTotalCost(), "Innaccurate Calculation of total cost - One Feature in One Wall");
+        MaterialByUnit testWindow = new PictureWindow();
+        double[] startPoint4 = new double[]{0.0, 0.0, 10.0};
+        building1.addWallFeature(0, testWindow, startPoint4);
+        assertEquals(2250, building1.calcTotalCost(), "Innaccurate Calculation of total cost - Two Features in One Wall");
     }
 
     @Test
