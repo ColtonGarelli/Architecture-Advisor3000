@@ -84,6 +84,10 @@ public class Building_Test {
         ExternalWall wall3 = new ExternalWall(12, 5, 5, startPoint3, testMaterial2);
         building1.addWall(wall3);
         assertEquals(1098, building1.calcTotalCost(), "Innacurate calculation of total cost - Walls of Different Materials");
+
+        MaterialByUnit testDoor = new Door();
+        building1.addWallFeature(0, testDoor, startPoint1);
+        assertEquals(1998, building1.calcTotalCost(), "Innaccurate Calculation of total cost - One Feature");
     }
 
     @Test
