@@ -74,6 +74,9 @@ public class BuildingImpl implements Building{
         //Calculate the total cost of the walls
         for(int x = 0; x < this.walls.length; x++){
             totalCost += this.walls[x].calcCost();
+            for(int y = 0; y < this.walls[x].getFeatureListSize(); y++){
+                totalCost += this.walls[x].getFeature(y).getCostPerUnit();
+            }
         }
 
         return totalCost;
@@ -205,7 +208,7 @@ public class BuildingImpl implements Building{
     }
 
     public void addWallFeature(int wallIdx, MaterialByUnit feature, double[] startPoint){
-
+        this.walls[wallIdx].addFeature(feature);
     }
 
     public void removeWallFeature(int wallIdx, int featureIdx){
