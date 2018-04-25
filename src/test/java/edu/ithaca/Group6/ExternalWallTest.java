@@ -277,6 +277,9 @@ public class ExternalWallTest {
         MaterialByArea testMaterial = new Wood();
         this.testWall.setMaterial(testMaterial);
         assertEquals(8.0, this.testWall.calcCost(), "Did not correctly calculate cost");
+        testMaterial = new TwoByFour();
+        this.testWall.setMaterial(testMaterial);
+        assertEquals(13.28, this.testWall.calcCost(), "Did not correctly calculate cost - Two-By-Four");
     }
 
     @Test
