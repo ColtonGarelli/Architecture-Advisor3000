@@ -57,6 +57,18 @@ public interface Wall {
     public MaterialByArea getMaterial();
 
     /**
+     * calculate the area of the wall in square feet
+     * @return volume
+     */
+    public double getArea();
+
+    /**
+     * calculate the cost of the wall based on the area and material
+     * @return cost
+     */
+    public double calcCost();
+
+    /**
      * Adds a feature to a wall
      * @param feature a MaterialByUnit feature such as window/door
      * @return true if successful, false otherwise
