@@ -237,6 +237,39 @@ public class ExternalWallTest {
     }
 
     @Test
+    public void testCalcArea(){
+        double[] test_dimensions = new double[3];
+        test_dimensions[0] = 2;
+        test_dimensions[1] = 2;
+        test_dimensions[2] = 2;
+        this.testWall.setLength(test_dimensions[0]);
+        this.testWall.setThickness(test_dimensions[1]);
+        this.testWall.setHeight(test_dimensions[2]);
+        assertEquals(8, this.testWall.getArea(), "Did not correctly calculate area");
+        test_dimensions[0] = 3;
+        test_dimensions[1] = 2;
+        test_dimensions[2] = 2;
+        this.testWall.setLength(test_dimensions[0]);
+        this.testWall.setThickness(test_dimensions[1]);
+        this.testWall.setHeight(test_dimensions[2]);
+        assertEquals(12, this.testWall.getArea(), "Did not correctly calculate area - x");
+        test_dimensions[0] = 2;
+        test_dimensions[1] = 3;
+        test_dimensions[2] = 2;
+        this.testWall.setLength(test_dimensions[0]);
+        this.testWall.setThickness(test_dimensions[1]);
+        this.testWall.setHeight(test_dimensions[2]);
+        assertEquals(12, this.testWall.getArea(), "Did not correctly calculate area - y");
+        test_dimensions[0] = 2;
+        test_dimensions[1] = 2;
+        test_dimensions[2] = 3;
+        this.testWall.setLength(test_dimensions[0]);
+        this.testWall.setThickness(test_dimensions[1]);
+        this.testWall.setHeight(test_dimensions[2]);
+        assertEquals(12, this.testWall.getArea(), "Did not correctly calculate area - z");
+    }
+
+    @Test
     public void testAddFeature(){
         MaterialByUnit testDoor = new SlidingDoor();
         MaterialByUnit testWindow = new PictureWindow();
