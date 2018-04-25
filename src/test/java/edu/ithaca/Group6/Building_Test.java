@@ -80,6 +80,10 @@ public class Building_Test {
         ExternalWall wall2 = new ExternalWall(12, 5, 5, startPoint2, testMaterial1);
         building1.addWall(wall2);
         assertEquals(600, building1.calcTotalCost(), "Innacurate calculation of total cost - Two Walls");
+        double[] startPoint3 = new double[]{30.0, 0.0, 0.0};
+        ExternalWall wall3 = new ExternalWall(12, 5, 5, startPoint3, testMaterial2);
+        building1.addWall(wall3);
+        assertEquals(1098, building1.calcTotalCost(), "Innacurate calculation of total cost - Walls of Different Materials");
     }
 
     @Test
