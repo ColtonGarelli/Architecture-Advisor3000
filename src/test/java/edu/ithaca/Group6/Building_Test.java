@@ -92,6 +92,8 @@ public class Building_Test {
         double[] startPoint4 = new double[]{0.0, 0.0, 10.0};
         building1.addWallFeature(0, testWindow, startPoint4);
         assertEquals(2250, building1.calcTotalCost(), "Innaccurate Calculation of total cost - Two Features in One Wall");
+        building1.addWallFeature(0, testDoor, startPoint2);
+        assertEquals(3150, building1.calcTotalCost(), "Innaccurate Calculation of total cost - Mulitple Features in Multiple Walls");
     }
 
     @Test
