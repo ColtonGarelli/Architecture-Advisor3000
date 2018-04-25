@@ -270,6 +270,16 @@ public class ExternalWallTest {
     }
 
     @Test
+    public void testCalcCost(){
+        this.testWall.setLength(2);
+        this.testWall.setThickness(2);
+        this.testWall.setHeight(2);
+        MaterialByArea testMaterial = new Wood();
+        this.testWall.setMaterial(testMaterial);
+        assertEquals(8.0, this.testWall.calcCost(), "Did not correctly calculate cost");
+    }
+
+    @Test
     public void testAddFeature(){
         MaterialByUnit testDoor = new SlidingDoor();
         MaterialByUnit testWindow = new PictureWindow();
