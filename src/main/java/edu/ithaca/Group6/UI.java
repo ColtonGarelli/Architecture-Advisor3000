@@ -48,4 +48,24 @@ public interface UI {
      * @Return String containing window data
      */
     public String displayWindows();
+
+    /**
+     * Prompts user for input, and creates a new building based on user input values
+     * @post add a new building to BuildingList
+     */
+    public void createBuilding();
+
+    /**
+     * Add an existing building to the building list
+     * @param Building
+     * @post add Building to BuildingList
+     */
+    public void addBuilding(Building building);
+
+    /**
+     * Prompts user for input, and creates a new wall based on user input values
+     * @param idx
+     * @post Adds wall to buildingList[idx]
+     */
+    public void addWall(int idx);
 }
