@@ -11,7 +11,7 @@ public class UIImpl implements UI{
 
     public static void main(String[] args) {
         UI demo = new UIImpl();
-        demo.sprintTwoDemo();
+        demo.sprintThreeDemo();
     }
 
     public int enterValidInt(int startInt, int endInt){
@@ -31,7 +31,7 @@ public class UIImpl implements UI{
     }
 
     //    in a list of options, quit will always be 0
-    public void sprintTwoDemo(){
+    public void sprintThreeDemo(){
         System.out.println("Welcome to the Architecture Advisor3000");
         System.out.println("\nWhen you would like to begin modifying your project enter Yes.");
         String entry = userIn.next();
@@ -263,7 +263,15 @@ public class UIImpl implements UI{
         return thickness;
     }
 
-
+    public void addWall(Building building){
+        System.out.println("Enter a length for the new wall");
+        String lengthStr = userIn.next();
+        boolean lengthEntry = checkValidDouble(lengthStr);
+        double length = -1;
+        if(lengthEntry){
+            length = Double.parseDouble(lengthStr);
+        }
+    }
 
 
 

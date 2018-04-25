@@ -159,4 +159,10 @@ public class UI_Test {
                 "5: Sliding Window : $104.00, Length: 2.58ft, Width: 0.38ft, Height: 1.58ft";
         assertTrue(testUI.displayWindows().equals(display), "Did not generate list of windows");
     }
+
+    @Test
+    public void addWallTest(){
+        testUI = new UIImpl();
+        ExternalWall wall = new ExternalWall();
+    }
 }

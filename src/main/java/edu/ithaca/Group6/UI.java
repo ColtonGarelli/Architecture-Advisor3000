@@ -5,7 +5,7 @@ public interface UI {
     /**
      * A function that runs a demo of the features completed for Sprint 2
      */
-    public void sprintTwoDemo();
+    public void sprintThreeDemo();
 
     /**
      * Determines if the user input a valid yes or no answer
