@@ -68,13 +68,18 @@ public class Building_Test {
     @Test
     void calcTotalCostTest(){
         Building building1 = new BuildingImpl(60.0, 60.0, 12.0);
-        MaterialByArea testMaterial = new Wood();
+        MaterialByArea testMaterial1 = new Wood();
+        MaterialByArea testMaterial2 = new TwoByFour();
         double[] startPoint1 = new double[]{0.0, 0.0, 0.0};
         double totalCost1 = building1.calcTotalCost();
         assertEquals(0, totalCost1, "Innacurate calculation of total cost - No Walls");
-        ExternalWall wall1 = new ExternalWall(5, 5, 12, startPoint1, testMaterial);
+        ExternalWall wall1 = new ExternalWall(12, 5, 5, startPoint1, testMaterial1);
         building1.addWall(wall1);
         assertEquals(300, building1.calcTotalCost(), "Innacurate calculation of total cost - One Wall");
+        double[] startPoint2 = new double[]{55.0, 0.0, 0.0};
+        ExternalWall wall2 = new ExternalWall(12, 5, 5, startPoint2, testMaterial1);
+        building1.addWall(wall2);
+        assertEquals(600, building1.calcTotalCost(), "Innacurate calculation of total cost - Two Walls");
     }
 
     @Test
