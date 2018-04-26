@@ -428,6 +428,14 @@ public class UIImpl implements UI{
         if(lengthEntry){
             length = Double.parseDouble(lengthStr);
         }**/
-        return true;
+        if(idx < 0){
+            return false;
+        }
+        else if(idx > this.buildingList.size()-1){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 }

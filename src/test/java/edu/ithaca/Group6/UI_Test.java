@@ -163,7 +163,10 @@ public class UI_Test {
     @Test
     public void addWallTest(){
         testUI = new UIImpl();
+        assertFalse(testUI.addWall(0), "addWall tried to operate on an empty array");
         testUI.dummyBuilding();
         assertFalse(testUI.addWall(-1), "addWall Index Out of Bounds - Negative Number");
+        assertFalse(testUI.addWall(1), "addWall Index Out of Bounds - Bigger than array");
+
     }
 }
