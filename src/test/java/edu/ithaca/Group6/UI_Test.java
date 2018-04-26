@@ -163,6 +163,7 @@ public class UI_Test {
     @Test
     public void addWallTest(){
         testUI = new UIImpl();
-        ExternalWall wall = new ExternalWall();
+        testUI.dummyBuilding();
+        assertFalse(testUI.addWall(-1), "addWall Index Out of Bounds - Negative Number");
     }
 }

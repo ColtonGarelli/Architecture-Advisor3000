@@ -50,6 +50,11 @@ public interface UI {
     public String displayWindows();
 
     /**
+     * Creates a dummy building for testing purposes
+     */
+    public void dummyBuilding();
+
+    /**
      * Prompts user for input, and creates a new building based on user input values
      * @post add a new building to BuildingList
      */
@@ -57,8 +62,8 @@ public interface UI {
 
     /**
      * Add an existing building to the building list
-     * @param Building
-     * @post add Building to BuildingList
+     * @param building
+     * @post add building to BuildingList
      */
     public void addBuilding(Building building);
 
@@ -67,5 +72,5 @@ public interface UI {
      * @param idx
      * @post Adds wall to buildingList[idx]
      */
-    public void addWall(int idx);
+    public boolean addWall(int idx);
 }

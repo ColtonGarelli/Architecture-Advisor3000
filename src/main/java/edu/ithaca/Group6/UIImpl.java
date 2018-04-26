@@ -73,7 +73,7 @@ public class UIImpl implements UI{
         newWall2.setLength(demoBuilding.getWidth());
         newWall2.setThickness(thickness);
         demoBuilding.addWall(newWall2);
-
+        this.addBuilding(demoBuilding);
 
         boolean modificationsDone = false;
         while(!modificationsDone){
@@ -402,6 +402,13 @@ public class UIImpl implements UI{
 
     }
 
+    //creates a dummy building for testing purposes
+    @Override
+    public void dummyBuilding(){
+        Building newBuilding = new BuildingImpl(60, 60, 12);
+        buildingList.add(newBuilding);
+    }
+
     @Override
     public void createBuilding(){
 
@@ -409,17 +416,18 @@ public class UIImpl implements UI{
 
     @Override
     public void addBuilding(Building building){
-
+        buildingList.add(building);
     }
 
     @Override
-    public void addWall(int idx){
-        System.out.println("Enter a length for the new wall");
+    public boolean addWall(int idx){
+        /**System.out.println("Enter a length for the new wall");
         String lengthStr = userIn.next();
         boolean lengthEntry = checkValidDouble(lengthStr);
         double length = -1;
         if(lengthEntry){
             length = Double.parseDouble(lengthStr);
-        }
+        }**/
+        return true;
     }
 }
