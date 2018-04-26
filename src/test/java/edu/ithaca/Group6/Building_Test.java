@@ -65,12 +65,36 @@ public class Building_Test {
         assertEquals(240.0, perim1, "Innaccurate calculation of perimeter");
     }
 
-    /**@Test
+    @Test
     void calcTotalCostTest(){
         Building building1 = new BuildingImpl(60.0, 60.0, 12.0);
+        MaterialByArea testMaterial1 = new Wood();
+        MaterialByArea testMaterial2 = new TwoByFour();
+        double[] startPoint1 = new double[]{0.0, 0.0, 0.0};
         double totalCost1 = building1.calcTotalCost();
-        assertEquals(115.2, totalCost1, "Innacurate calculation of total cost");
-    }*/
+        assertEquals(0, totalCost1, "Innacurate calculation of total cost - No Walls");
+        ExternalWall wall1 = new ExternalWall(12, 5, 5, startPoint1, testMaterial1);
+        building1.addWall(wall1);
+        assertEquals(300, building1.calcTotalCost(), "Innacurate calculation of total cost - One Wall");
+        double[] startPoint2 = new double[]{55.0, 0.0, 0.0};
+        ExternalWall wall2 = new ExternalWall(12, 5, 5, startPoint2, testMaterial1);
+        building1.addWall(wall2);
+        assertEquals(600, building1.calcTotalCost(), "Innacurate calculation of total cost - Two Walls");
+        double[] startPoint3 = new double[]{30.0, 0.0, 0.0};
+        ExternalWall wall3 = new ExternalWall(12, 5, 5, startPoint3, testMaterial2);
+        building1.addWall(wall3);
+        assertEquals(1098, building1.calcTotalCost(), "Innacurate calculation of total cost - Walls of Different Materials");
+
+        MaterialByUnit testDoor = new Door();
+        building1.addWallFeature(0, testDoor, startPoint1);
+        assertEquals(1998, building1.calcTotalCost(), "Innaccurate Calculation of total cost - One Feature in One Wall");
+        MaterialByUnit testWindow = new PictureWindow();
+        double[] startPoint4 = new double[]{0.0, 0.0, 10.0};
+        building1.addWallFeature(0, testWindow, startPoint4);
+        assertEquals(2250, building1.calcTotalCost(), "Innaccurate Calculation of total cost - Two Features in One Wall");
+        building1.addWallFeature(0, testDoor, startPoint2);
+        assertEquals(3150, building1.calcTotalCost(), "Innaccurate Calculation of total cost - Mulitple Features in Multiple Walls");
+    }
 
     @Test
     void addWallTest(){
