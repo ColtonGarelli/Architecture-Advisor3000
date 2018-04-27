@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ExternalWallTest {
     Wall testWall;
@@ -168,7 +170,7 @@ public class ExternalWallTest {
         test_dimensions[1] = 2;
         test_dimensions[2] = 3;
         setCheck = this.testWall.setTopCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
-        Assertions.assertFalse(setCheck);
+        assertTrue(setCheck);
         Assertions.assertNotEquals(test_dimensions, testWall.getTopCoordinates(), "set Interior Wall dimensions test fail");
 
         test_dimensions[0] = 1;
@@ -182,7 +184,7 @@ public class ExternalWallTest {
         test_dimensions[1] = 2;
         test_dimensions[2] = 0;
         setCheck = this.testWall.setTopCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
-        Assertions.assertFalse(setCheck);
+        assertTrue(setCheck);
         Assertions.assertNotEquals(test_dimensions, testWall.getTopCoordinates(), "set Interior Wall dimensions test fail");
 
 
@@ -215,7 +217,7 @@ public class ExternalWallTest {
         test_dimensions[1] = 2;
         test_dimensions[2] = 3;
         setCheck = this.testWall.setBottomCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
-        Assertions.assertFalse(setCheck);
+        assertTrue(setCheck);
         Assertions.assertNotEquals(test_dimensions, testWall.getBottomCoordinates(), "set Interior Wall dimensions test fail");
 
         test_dimensions[0] = 1;
@@ -229,9 +231,85 @@ public class ExternalWallTest {
         test_dimensions[1] = 2;
         test_dimensions[2] = 0;
         setCheck = this.testWall.setBottomCoordinates(test_dimensions[0],test_dimensions[1], test_dimensions[2]);
-        Assertions.assertFalse(setCheck);
+        assertTrue(setCheck);
         Assertions.assertNotEquals(test_dimensions, testWall.getBottomCoordinates(), "set Interior Wall dimensions test fail");
 
+    }
+
+    @Test
+    public void testCalcArea(){
+        double[] test_dimensions = new double[3];
+        test_dimensions[0] = 2;
+        test_dimensions[1] = 2;
+        test_dimensions[2] = 2;
+        this.testWall.setLength(test_dimensions[0]);
+        this.testWall.setThickness(test_dimensions[1]);
+        this.testWall.setHeight(test_dimensions[2]);
+        assertEquals(8, this.testWall.getArea(), "Did not correctly calculate area");
+        test_dimensions[0] = 3;
+        test_dimensions[1] = 2;
+        test_dimensions[2] = 2;
+        this.testWall.setLength(test_dimensions[0]);
+        this.testWall.setThickness(test_dimensions[1]);
+        this.testWall.setHeight(test_dimensions[2]);
+        assertEquals(12, this.testWall.getArea(), "Did not correctly calculate area - x");
+        test_dimensions[0] = 2;
+        test_dimensions[1] = 3;
+        test_dimensions[2] = 2;
+        this.testWall.setLength(test_dimensions[0]);
+        this.testWall.setThickness(test_dimensions[1]);
+        this.testWall.setHeight(test_dimensions[2]);
+        assertEquals(12, this.testWall.getArea(), "Did not correctly calculate area - y");
+        test_dimensions[0] = 2;
+        test_dimensions[1] = 2;
+        test_dimensions[2] = 3;
+        this.testWall.setLength(test_dimensions[0]);
+        this.testWall.setThickness(test_dimensions[1]);
+        this.testWall.setHeight(test_dimensions[2]);
+        assertEquals(12, this.testWall.getArea(), "Did not correctly calculate area - z");
+    }
+
+    @Test
+    public void testCalcCost(){
+        this.testWall.setLength(2);
+        this.testWall.setThickness(2);
+        this.testWall.setHeight(2);
+        MaterialByArea testMaterial = new Wood();
+        this.testWall.setMaterial(testMaterial);
+        assertEquals(8.0, this.testWall.calcCost(), "Did not correctly calculate cost");
+        testMaterial = new TwoByFour();
+        this.testWall.setMaterial(testMaterial);
+        assertEquals(13.28, this.testWall.calcCost(), "Did not correctly calculate cost - Two-By-Four");
+    }
+
+    @Test
+    public void testAddFeature(){
+        MaterialByUnit testDoor = new SlidingDoor();
+        MaterialByUnit testWindow = new PictureWindow();
+
+        assertTrue(this.testWall.addFeature(testDoor),"Did not properly add door");
+        assertTrue(this.testWall.addFeature(testWindow),"Did not add window");
+        assertTrue(this.testWall.addFeature(testDoor),"Did not add a second door");
+
+        assertEquals(testDoor,this.testWall.getFeature(0),"Did not get door");
+        assertEquals(testWindow,this.testWall.getFeature(1),"Did not get window");
+        assertEquals(testDoor,this.testWall.getFeature(2),"Did not get second door");
+    }
+
+    @Test
+    public void testRemoveFeature(){
+        MaterialByUnit testDoor = new SlidingDoor();
+        MaterialByUnit testWindow = new PictureWindow();
+        this.testWall.addFeature(testDoor);
+        this.testWall.addFeature(testWindow);
+
+        assertFalse(this.testWall.removeFeature(this.testWall.getFeatureListSize()),"Removed improper index");
+
+        assertTrue(this.testWall.removeFeature(0),"Did not remove door");
+        assertTrue(this.testWall.removeFeature(0),"Did not remove window");
+
+        assertFalse(this.testWall.removeFeature(this.testWall.getFeatureListSize()),"Removed nonexistent feature");
+        assertFalse(this.testWall.removeFeature(-1),"Removed improper index");
     }
 
 }
