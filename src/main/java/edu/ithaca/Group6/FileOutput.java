@@ -12,6 +12,11 @@ public interface FileOutput {
     public void generateOutStream();
 
 
+    /**
+     * Generates a string to be written to a file
+     * @param buildingToOutput the building wished to be put into the file
+     * @return string representing the building and all its walls/features
+     */
     public String generateOutString(Building buildingToOutput);
 
 }

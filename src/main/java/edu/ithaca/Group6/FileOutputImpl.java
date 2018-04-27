@@ -23,6 +23,8 @@ public class FileOutputImpl implements FileOutput {
 
     @Override
     public String generateOutString(Building buildingToOutput) {
-        return null;
+        String buildString = "";
+        //buildString += buildingToOutput
+        return "";
     }
 }
