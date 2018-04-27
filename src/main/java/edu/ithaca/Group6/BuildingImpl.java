@@ -70,10 +70,12 @@ public class BuildingImpl implements Building{
         double totalCost = 0;
 
         //Calculate the total cost of the walls
-        double perim = this.getPerimeter();
-        double surfaceArea = perim*this.height;
-        //double costExtWall = this.extWallMaterial.calcCost(surfaceArea);
-        //totalCost += costExtWall;
+        for(int x = 0; x < this.walls.length; x++){
+            totalCost += this.walls[x].calcCost();
+            for(int y = 0; y < this.walls[x].getFeatureListSize(); y++){
+                totalCost += this.walls[x].getFeature(y).getCostPerUnit();
+            }
+        }
 
         return totalCost;
     }
@@ -225,6 +227,10 @@ public class BuildingImpl implements Building{
 
     public void addWallFeature(int wallIdx, MaterialByUnit feature){
         this.walls[wallIdx].addFeature(feature);
+
+        //For when features have position
+//    public void addWallFeature(int wallIdx, MaterialByUnit feature, double[] startPoint){
+//        this.walls[wallIdx].addFeature(feature);
 
     }
 
