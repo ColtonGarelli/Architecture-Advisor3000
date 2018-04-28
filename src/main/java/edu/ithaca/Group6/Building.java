@@ -57,10 +57,18 @@ public interface Building {
      * Add a feature (door, window) to a wall
      * @param wallIdx
      * @param feature
-     * @param startPoint
      * @post add a wall feature to the array in a wall object
      */
     public void addWallFeature(int wallIdx, MaterialByUnit feature);
+
+    /**
+     * Add a feature (door, window) to a wall
+     * @param wallIdx
+     * @param feature
+     * @param startPoint
+     * @post add a wall feature to the array in a wall object
+     */
+    public void addWallFeature(int wallIdx, MaterialByUnit feature, double[] startPoint);
 
     /**
      * Remove a feature (door, window) to a wall
