@@ -3,7 +3,7 @@ package edu.ithaca.Group6;
 public interface Building {
     //Creating a building in the shape of a rectangular prism
     //Assume that the main function will prevent the user from inputting a negative dimension (i.e. -60.0 for the width)
-
+    public ExternalWall[] walls = new ExternalWall[0];
     public void setLength(double newVal);
     //set a new length of the building
 
@@ -32,6 +32,13 @@ public interface Building {
     //Calculate the total cost of the walls
 
     /**
+     *
+     * @param wallIdx index of the wall in list of walls
+     * @return the Wall at that index
+     */
+    public Wall getWall(int wallIdx);
+
+    /**
      * Add a wall to the array of walls in the building
      * @param wall wall to be added
      * @post Wall array in building gets incremented
@@ -45,6 +52,14 @@ public interface Building {
      * @post delete a wall from the array of walls in the building
      */
     public void removeWall(int wallIdx);
+
+    /**
+     * Add a feature (door, window) to a wall
+     * @param wallIdx
+     * @param feature
+     * @post add a wall feature to the array in a wall object
+     */
+    public void addWallFeature(int wallIdx, MaterialByUnit feature);
 
     /**
      * Add a feature (door, window) to a wall
@@ -64,6 +79,15 @@ public interface Building {
     public void removeWallFeature(int wallIdx, int featureIdx);
 
     /**
+     * Changes the material of a wall
+     * @param wallIdx index of the wall
+     * @param wallMaterial new material of the wall
+     * @return true if success, false if otherwise
+     */
+    public boolean setWallMaterial(int wallIdx, MaterialByArea wallMaterial);
+
+
+    /**
      * Adds a roof to the building
      * @param roofToAdd
      * @return true if successful add, false otherwise
@@ -75,4 +99,5 @@ public interface Building {
      * @return the roof of the building
      */
     public Roof getRoof();
+
 }
