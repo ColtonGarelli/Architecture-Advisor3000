@@ -127,6 +127,15 @@ class ExternalWall extends WallImpl {
         return this.material;
     }
 
+    public double getArea(){
+        double area = this.length * this.thickness * this.height;
+        return area;
+    }
+
+    public double calcCost(){
+        double cost = this.getArea() * this.getMaterial().getCostPerSquareFoot();
+        return cost;
+    }
 
     public boolean addFeature(MaterialByUnit feature) {
         try{this.featuresList.add(feature);
