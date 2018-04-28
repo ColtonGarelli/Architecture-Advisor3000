@@ -225,9 +225,9 @@ public class BuildingImpl implements Building{
         }
     }
 
-    public void addWallFeature(int wallIdx, MaterialByUnit feature){
+    /**public void addWallFeature(int wallIdx, MaterialByUnit feature){
         this.walls[wallIdx].addFeature(feature);
-    }
+    }*/
 
         //For when features have position
     public void addWallFeature(int wallIdx, MaterialByUnit feature, double[] startPoint){
