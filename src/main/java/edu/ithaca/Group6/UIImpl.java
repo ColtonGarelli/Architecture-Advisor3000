@@ -15,7 +15,7 @@ public class UIImpl implements UI{
 
     public static void main(String[] args) {
         UI demo = new UIImpl();
-        demo.sprintThreeDemo();
+        //demo.sprintThreeDemo();
     }
 
     public int enterValidInt(int startInt, int endInt){
