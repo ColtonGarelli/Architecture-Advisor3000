@@ -37,8 +37,8 @@ public class UIImpl implements UI{
     //    in a list of options, quit will always be 0
     public void sprintThreeDemo(){
         //Testing addWall
-        this.dummyBuilding();
-        this.addWall(0);
+        //this.dummyBuilding();
+        //this.addWall(0);
         System.out.println("Welcome to the Architecture Advisor3000");
         System.out.println("\nWhen you would like to begin modifying your project enter Yes.");
         String entry = userIn.next();
