@@ -230,6 +230,7 @@ public class BuildingImpl implements Building{
     }*/
 
         //For when features have position
+    @Override
     public void addWallFeature(int wallIdx, MaterialByUnit feature, double[] startPoint){
         this.walls[wallIdx].addFeature(feature);
 
