@@ -20,8 +20,26 @@ public class BuildingImpl implements Building{
         this.length = length;
         this.width = width;
         this.height = height;
-        this.walls = new ExternalWall[0];
+        this.walls = new ExternalWall[4];
         this.roof = new RoofImpl(width,length,0.2,height);
+        double thickness = 0.2;
+
+
+        this.walls[0] = new ExternalWall();
+        this.walls[0].setBottomCoordinates(0,0,0);
+        this.walls[0].setTopCoordinates(thickness,width,height);
+
+        this.walls[1] = new ExternalWall();
+        this.walls[1].setBottomCoordinates(0,width,0);
+        this.walls[1].setTopCoordinates(length,width-thickness,height);
+
+        this.walls[2] = new ExternalWall();
+        this.walls[2].setBottomCoordinates(length,width,0);
+        this.walls[2].setTopCoordinates(length-thickness,0,height);
+
+        this.walls[3] = new ExternalWall();
+        this.walls[3].setBottomCoordinates(length,0,0);
+        this.walls[3].setTopCoordinates(0,thickness,height);
     }
 
     public void setLength(double newVal) {
@@ -261,5 +279,10 @@ public class BuildingImpl implements Building{
     @Override
     public Roof getRoof() {
         return this.roof;
+    }
+
+    @Override
+    public int getWallAmount() {
+        return this.walls.length;
     }
 }

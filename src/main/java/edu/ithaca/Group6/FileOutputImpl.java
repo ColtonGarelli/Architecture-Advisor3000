@@ -7,8 +7,8 @@ public class FileOutputImpl implements FileOutput {
     private String fileOutName;
     private FileOutputStream outputStream;
 
-    public FileOutputImpl(String outputStr){
-        this.fileOutName = outputStr;
+    public FileOutputImpl(String outputFileStr){
+        this.fileOutName = outputFileStr;
         generateOutStream();
     }
 
@@ -24,7 +24,11 @@ public class FileOutputImpl implements FileOutput {
     @Override
     public String generateOutString(Building buildingToOutput) {
         String buildString = "";
-        //buildString += buildingToOutput
-        return "";
+        for(int i = 0; i < buildingToOutput.getWallAmount(); i++) {
+            buildString += buildingToOutput.getWall(i).outString();
+        }
+        buildString += buildingToOutput.getRoof().getFirstCornerCoordinates() + "_";
+        buildString += buildingToOutput.getRoof().getSecondCornerCoordinates() + "_";
+        return buildString;
     }
 }

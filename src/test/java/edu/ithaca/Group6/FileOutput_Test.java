@@ -10,6 +10,11 @@ public class FileOutput_Test {
 
     @Test
     public void testOutString(){
-        assertEquals(true,testOut.generateOutString(testBuilding),"Did not properly output a building string");
+        testOut = new FileOutputImpl("test.txt");
+        testBuilding = new BuildingImpl(2,3,4);
+        BayWindow testWindow = new BayWindow();
+        testBuilding.addWallFeature(0,testWindow);
+        String buildingString = "[0,0,0]_[";
+        assertEquals(buildingString,testOut.generateOutString(testBuilding),"Did not properly output a building string");
     }
 }

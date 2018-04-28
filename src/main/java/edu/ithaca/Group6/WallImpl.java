@@ -14,6 +14,7 @@ public abstract class WallImpl implements Wall{
     public abstract double[] getBottomCoordinates();
     public abstract boolean setTopCoordinates(double x, double y, double z);
     public abstract double[] getTopCoordinates();
+    public abstract String outString();
 }
 
 
@@ -161,5 +162,15 @@ class ExternalWall extends WallImpl {
 
     public int getFeatureListSize() {
         return this.featuresList.size();
+    }
+
+    @Override
+    public String outString() {
+        String wallString = "" + this.bottomCoordinates + "_" + this.topCoordinates +"_";
+        for(int i = 0; i < this.featuresList.size(); i++){
+            wallString += this.getFeature(i).toString() + "_";
+        }
+        wallString += "\n";
+        return wallString;
     }
 }
