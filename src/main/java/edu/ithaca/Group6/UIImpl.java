@@ -604,7 +604,7 @@ public class UIImpl implements UI{
         System.out.println("2.) Builder Login");
         String entry = userIn.next();
         boolean goodEntry = checkValidInt(entry);
-        while(goodEntry==false || (!entry.equals("1") && !entry.equals("2"))){
+        while(goodEntry==false){
             System.out.println("Invalid Entry.");
             System.out.println("Please Log In.");
             System.out.println("1.) Architect login");
@@ -612,16 +612,37 @@ public class UIImpl implements UI{
             entry = userIn.next();
             goodEntry = checkValidInt(entry);
         }
-        if(entry.equals("1")){
-            this.architectMain();
-        }
-        else if(entry.equals("2")){
-            this.builderMain();
+        int entryInt = Integer.parseInt(entry);
+        switch (entryInt) {
+            case 1: architectMain();
+            case 2: builderMain();
+            default: break;
         }
     }
 
     public void architectMain(){
-        System.out.println("Architect Main");
+        System.out.println("Hello Architect.");
+        System.out.println("What would you like to do?");
+        System.out.println("1.) Display Existing Buildings");
+        System.out.println("2.) Create Building");
+        System.out.println("3.) Modify an existing building");
+        String entry = userIn.next();
+        boolean goodEntry = checkValidInt(entry);
+        while(goodEntry==false){
+            System.out.println("Invalid Entry.");
+            System.out.println("What would you like to do?");
+            System.out.println("1.) Display Existing Buildings");
+            System.out.println("2.) Create Building");
+            System.out.println("3.) Modify an existing building");
+            entry = userIn.next();
+            goodEntry = checkValidInt(entry);
+        }
+        int entryInt = Integer.parseInt(entry);
+        switch (entryInt) {
+            case 1: break;
+            case 2: break;
+            case 3: break;
+        }
     }
 
     public void builderMain(){
