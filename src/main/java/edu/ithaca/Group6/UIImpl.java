@@ -640,9 +640,13 @@ public class UIImpl implements UI{
         int entryInt = Integer.parseInt(entry);
         switch (entryInt) {
             case 1: break;
-            case 2: break;
+            case 2: this.createBuilding();
             case 3: break;
         }
+    }
+
+    public void architectModify(){
+
     }
 
     public void builderMain(){

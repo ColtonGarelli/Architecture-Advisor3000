@@ -86,6 +86,12 @@ public interface UI {
     public void architectMain();
 
     /**
+     * display building modification features
+     * includes adding walls, adding features, removing features
+     */
+    public void architectModify();
+
+    /**
      * Displays builder functions
      */
     public void builderMain();
