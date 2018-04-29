@@ -75,6 +75,12 @@ public interface UI {
     public boolean addWall(int idx);
 
     /**
+     * Prompts user for input, and adds a wall feature to a wall based on user input values
+     * @param building
+     */
+    public void addWallFeature(Building building);
+
+    /**
      * User can login as an architect or a builder
      * @post runs architectMain or buildingMain
      */

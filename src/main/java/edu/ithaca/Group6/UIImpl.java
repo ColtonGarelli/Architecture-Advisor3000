@@ -15,7 +15,6 @@ public class UIImpl implements UI{
 
     public static void main(String[] args) {
         UI demo = new UIImpl();
-        demo.dummyBuilding();
         demo.login();
         //demo.sprintThreeDemo();
     }
@@ -413,6 +412,19 @@ public class UIImpl implements UI{
     @Override
     public void dummyBuilding(){
         Building newBuilding = new BuildingImpl(60, 60, 12);
+        double[] startPoint1 = new double[]{0.0, 0.0, 0.0};
+        double[] startPoint2 = new double[]{0.0, 0.0, 0.0};
+        double[] startPoint3 = new double[]{0.0, 55.0, 0.0};
+        double[] startPoint4 = new double[]{55.0, 0.0, 0.0};
+        MaterialByArea wood = new Wood();
+        ExternalWall wall1 = new ExternalWall(12, 60, 5, startPoint1, wood);
+        newBuilding.addWall(wall1);
+        ExternalWall wall2 = new ExternalWall(12, 5, 60, startPoint2, wood);
+        newBuilding.addWall(wall2);
+        ExternalWall wall3 = new ExternalWall(12, 60, 5, startPoint3, wood);
+        newBuilding.addWall(wall3);
+        ExternalWall wall4 = new ExternalWall(12, 5, 60, startPoint4, wood);
+        newBuilding.addWall(wall4);
         buildingList.add(newBuilding);
     }
 
@@ -598,7 +610,61 @@ public class UIImpl implements UI{
         }
     }
 
+    @Override
+    public void addWallFeature(Building building){
+        System.out.println("Choose a wall to modify");
+        System.out.println(building.walls.length);
+        int count = 0;
+        for(int x = 0; x < building.walls.length; x++) {
+            count++;
+        }
+        System.out.println("Number of Existing walls: " + count);
+        int wallToChange = enterValidInt(1, count);
+        int wallIndex = wallToChange-1;
+        System.out.println("Wall being modified:\n" + displayWalls(building.getWall(wallIndex)));
+        int option = enterValidInt(0,3);
+
+        int chooseFromDisplay;
+        /**if (option == 1) {
+            System.out.println(displayMaterialsByArea());
+            chooseFromDisplay = enterValidInt(1,6);
+            this.buildingList.get(idx).getWall(wallIndex).setMaterial(chooseMaterial(chooseFromDisplay));
+
+//                use chooseMaterial method to create object of choice, then add it to the wall
+        } else if (option == 2) {*/
+        System.out.println("Enter 1 to add a door, or 2 to add a window");
+        chooseFromDisplay = enterValidInt(1,2);
+
+//      change a wall material
+        if (chooseFromDisplay == 1) {
+            System.out.println(displayDoors());
+            System.out.println("\n Enter the number associated with the kind of door you would like to add");
+            chooseFromDisplay = enterValidInt(1,6);
+            building.addWallFeature(wallIndex, chooseDoors(chooseFromDisplay));
+        }
+//                add features to a wall
+        else if (chooseFromDisplay == 2) {
+            System.out.println(displayWindows());
+            System.out.println("\n Enter the number associated with the kind of window you would like to add");
+            chooseFromDisplay = enterValidInt(1,5);
+            building.addWallFeature(wallIndex, chooseWindows(chooseFromDisplay));
+        }
+        /*}
+//            Remove features from a wall
+        else if (option == 3) {
+            System.out.println("\n Enter the number associated with the feature you would like to remove");
+            chooseFromDisplay = enterValidInt(1,this.buildingList.get(idx).getWall(wallIndex).getFeatureListSize());
+            displayWalls(this.buildingList.get(idx).getWall(wallIndex));
+            this.buildingList.get(idx).getWall(wallIndex).removeFeature(chooseFromDisplay-1);//minus one bc index
+        }
+        else{
+        }**/
+
+    }
+
     public void login(){
+        this.dummyBuilding();
+        //System.out.println(displayWalls(this.buildingList.get(0).getWall(0)));
         System.out.println("Welcome to the Architecture Advisor3000");
         System.out.println("Please Log In.");
         System.out.println("1.) Architect login");
@@ -671,9 +737,9 @@ public class UIImpl implements UI{
         }
         int entryInt = Integer.parseInt(entry);
         switch (entryInt) {
-            case 1: this.addWall(0);
+            case 1: this.addWall(idx);
                     break;
-            case 2: this.createBuilding();
+            case 2: this.addWallFeature(this.buildingList.get(idx));
                     break;
             case 3:
                     break;

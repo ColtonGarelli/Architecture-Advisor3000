@@ -1,18 +1,20 @@
 package edu.ithaca.Group6;
 
+import java.util.ArrayList;
+
 public class BuildingImpl implements Building{
     //Creating a building in the shape of a rectangular prism
     double length;
     double width;
     double height;
-    public ExternalWall[] walls;
+    public ArrayList<ExternalWall> walls;
     Roof roof;
 
     public BuildingImpl(){
         this.length = 0.0;
         this.width = 0.0;
         this.height = 0.0;
-        this.walls = new ExternalWall[0];
+        this.walls = new ArrayList<ExternalWall>();
         this.roof = null;
     }
 
@@ -20,7 +22,7 @@ public class BuildingImpl implements Building{
         this.length = xEdge;
         this.width = yEdge;
         this.height = height;
-        this.walls = new ExternalWall[0];
+        this.walls = new ArrayList<ExternalWall>();
         this.roof = new RoofImpl(yEdge,xEdge,0.2,height);
         double thickness = 0.2;
 
@@ -88,10 +90,10 @@ public class BuildingImpl implements Building{
         double totalCost = 0;
 
         //Calculate the total cost of the walls
-        for(int x = 0; x < this.walls.length; x++){
-            totalCost += this.walls[x].calcCost();
-            for(int y = 0; y < this.walls[x].getFeatureListSize(); y++){
-                totalCost += this.walls[x].getFeature(y).getCostPerUnit();
+        for(int x = 0; x < this.walls.size(); x++){
+            totalCost += this.walls.get(x).calcCost();
+            for(int y = 0; y < this.walls.get(x).getFeatureListSize(); y++){
+                totalCost += this.walls.get(x).getFeature(y).getCostPerUnit();
             }
         }
 
@@ -100,9 +102,9 @@ public class BuildingImpl implements Building{
 
     @Override
     public Wall getWall(int wallIdx) {
-        if(wallIdx > -1 && wallIdx < this.walls.length){
+        if(wallIdx > -1 && wallIdx < this.walls.size()){
             try{
-                return this.walls[wallIdx];
+                return this.walls.get(wallIdx);
             }catch(Exception e){
                 return null;
             }
@@ -111,19 +113,7 @@ public class BuildingImpl implements Building{
     }
 
     public boolean addWall(ExternalWall wall){
-        ExternalWall[] temp;
-        if(walls.length == 0){
-            temp = new ExternalWall[]{wall};
-            walls = temp;
-        }
-        else {
-            temp = new ExternalWall[walls.length+1];
-            for (int a = 0; a < walls.length; a++) {
-                temp[a] = walls[a];
-            }
-            temp[walls.length] = wall;
-            walls = temp;
-        }
+        this.walls.add(wall);
         return true;
     }
         //Check if the wall is being added outside of the building dimensions
@@ -234,33 +224,33 @@ public class BuildingImpl implements Building{
 
     //NEEDS REPLACING, DOESN'T ACTUALLY HELP
     public void removeWall(int wallIdx){
-        if(wallIdx > -1 && wallIdx < this.walls.length){
+        /**if(wallIdx > -1 && wallIdx < this.walls.length){
             try{
                 this.walls[wallIdx] = null;
             }catch(Exception e){
                 System.out.println("Oops this code is broken");
             }
-        }
+        }*/
     }
 
     public void addWallFeature(int wallIdx, MaterialByUnit feature){
-        this.walls[wallIdx].addFeature(feature);
+        this.walls.get(wallIdx).addFeature(feature);
     }
 
         //For when features have position
     public void addWallFeature(int wallIdx, MaterialByUnit feature, double[] startPoint){
-        this.walls[wallIdx].addFeature(feature);
+        this.walls.get(wallIdx).addFeature(feature);
     }
 
     public void removeWallFeature(int wallIdx, int featureIdx){
-        this.walls[wallIdx].removeFeature(featureIdx);
+        this.walls.get(wallIdx).removeFeature(featureIdx);
     }
 
     @Override
     public boolean setWallMaterial(int wallIdx, MaterialByArea wallMaterial) {
-        if(wallIdx > -1 && wallIdx < this.walls.length){
+        if(wallIdx > -1 && wallIdx < this.walls.size()){
             try{
-                return this.walls[wallIdx].setMaterial(wallMaterial);
+                return this.walls.get(wallIdx).setMaterial(wallMaterial);
             }catch(Exception e){
                 return false;
             }
@@ -283,6 +273,6 @@ public class BuildingImpl implements Building{
 
     @Override
     public int getWallAmount() {
-        return this.walls.length;
+        return this.walls.size();
     }
 }
