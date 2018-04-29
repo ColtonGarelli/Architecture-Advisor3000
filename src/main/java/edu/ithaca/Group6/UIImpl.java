@@ -748,6 +748,11 @@ public class UIImpl implements UI{
     }
 
     public void builderMain(){
-        System.out.println("Builder Main");
+        System.out.println("Hello Builder.");
+        System.out.println("Existing Buildings:");
+        //Display list of existing buildings
+        System.out.println("Select a building for a cost estimate.");
+        int entry = enterValidInt(1, this.buildingList.size());
+        System.out.println("Estimated Cost: $" + this.buildingList.get(entry-1).calcTotalCost());
     }
 }
