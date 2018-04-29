@@ -32,8 +32,8 @@ public class RoofImpl implements Roof {
         firstCornerCoordinates[1] = 0;//y
         firstCornerCoordinates[2] = startHeight;//z
 
-        secondCornerCoordinates[0] = widthIn;//x
-        secondCornerCoordinates[1] = lengthIn;//y
+        secondCornerCoordinates[0] = lengthIn;//x
+        secondCornerCoordinates[1] = widthIn;//y
         secondCornerCoordinates[2] = startHeight + roofThickness;//z
     }
 
@@ -138,5 +138,15 @@ public class RoofImpl implements Roof {
     @Override
     public MaterialByArea getMaterial() {
         return this.material;
+    }
+
+    @Override
+    public String getFirstCornerCoordString() {
+        return "[" + this.firstCornerCoordinates[0] + "," + this.firstCornerCoordinates[1] + "," + this.firstCornerCoordinates[2] + "]";
+    }
+
+    @Override
+    public String getSecondCornerCoordString() {
+        return "[" + this.secondCornerCoordinates[0] + "," + this.secondCornerCoordinates[1] + "," + this.secondCornerCoordinates[2] + "]";
     }
 }

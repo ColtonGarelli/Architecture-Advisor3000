@@ -16,30 +16,30 @@ public class BuildingImpl implements Building{
         this.roof = null;
     }
 
-    public BuildingImpl(double length, double width, double height) {
-        this.length = length;
-        this.width = width;
+    public BuildingImpl(double xEdge, double yEdge, double height) {
+        this.length = xEdge;
+        this.width = yEdge;
         this.height = height;
-        this.walls = new ExternalWall[4];
-        this.roof = new RoofImpl(width,length,0.2,height);
+        this.walls = new ExternalWall[0];
+        this.roof = new RoofImpl(yEdge,xEdge,0.2,height);
         double thickness = 0.2;
 
 
-        this.walls[0] = new ExternalWall();
-        this.walls[0].setBottomCoordinates(0,0,0);
-        this.walls[0].setTopCoordinates(thickness,width,height);
-
-        this.walls[1] = new ExternalWall();
-        this.walls[1].setBottomCoordinates(0,width,0);
-        this.walls[1].setTopCoordinates(length,width-thickness,height);
-
-        this.walls[2] = new ExternalWall();
-        this.walls[2].setBottomCoordinates(length,width,0);
-        this.walls[2].setTopCoordinates(length-thickness,0,height);
-
-        this.walls[3] = new ExternalWall();
-        this.walls[3].setBottomCoordinates(length,0,0);
-        this.walls[3].setTopCoordinates(0,thickness,height);
+//        this.walls[0] = new ExternalWall();
+//        this.walls[0].setBottomCoordinates(0,0,0);
+//        this.walls[0].setTopCoordinates(thickness,width,height);
+//
+//        this.walls[1] = new ExternalWall();
+//        this.walls[1].setBottomCoordinates(0,width,0);
+//        this.walls[1].setTopCoordinates(length,width-thickness,height);
+//
+//        this.walls[2] = new ExternalWall();
+//        this.walls[2].setBottomCoordinates(length,width,0);
+//        this.walls[2].setTopCoordinates(length-thickness,0,height);
+//
+//        this.walls[3] = new ExternalWall();
+//        this.walls[3].setBottomCoordinates(length,0,0);
+//        this.walls[3].setTopCoordinates(0,thickness,height);
     }
 
     public void setLength(double newVal) {
