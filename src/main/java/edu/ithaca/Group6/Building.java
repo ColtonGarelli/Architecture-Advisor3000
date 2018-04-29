@@ -100,4 +100,9 @@ public interface Building {
      */
     public Roof getRoof();
 
+    /**
+     *
+     * @return the amount of walls in a building
+     */
+    public int getWallAmount();
 }

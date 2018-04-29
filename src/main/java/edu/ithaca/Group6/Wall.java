@@ -95,4 +95,9 @@ public interface Wall {
      */
     public int getFeatureListSize();
 
+    /**
+     *
+     * @return a string of the wall to be used in the output file
+     */
+    public String outString();
 }

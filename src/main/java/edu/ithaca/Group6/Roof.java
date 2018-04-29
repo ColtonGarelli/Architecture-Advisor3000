@@ -71,4 +71,8 @@ public interface Roof {
     public boolean setMaterial(MaterialByArea wallMaterial);
 
     public MaterialByArea getMaterial();
+
+    public String getFirstCornerCoordString();
+
+    public String getSecondCornerCoordString();
     }
