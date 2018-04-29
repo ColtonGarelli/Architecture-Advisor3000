@@ -36,9 +36,6 @@ public class UIImpl implements UI{
 
     //    in a list of options, quit will always be 0
     public void sprintThreeDemo(){
-        //Testing addWall
-        this.dummyBuilding();
-        this.addWall(0);
         System.out.println("Welcome to the Architecture Advisor3000");
         System.out.println("\nWhen you would like to begin modifying your project enter Yes.");
         String entry = userIn.next();
@@ -48,47 +45,77 @@ public class UIImpl implements UI{
             entry = userIn.next();
             goodEntry = checkYesOrNo(entry);
         }
-        Building demoBuilding = new BuildingImpl();
-        double height = initializeHeight();
-        demoBuilding.setHeight(height);
-        double width = initializeWidth();
-        demoBuilding.setWidth(width);
-        double length =initializeLength();
-        demoBuilding.setLength(length);
-        Roof roof = new RoofImpl(width, length, 2, height);
-
-        ExternalWall newWall1 = new ExternalWall();
-        ExternalWall newWall2 = new ExternalWall();
-        double thickness = requestWallThickness();
-
-
-        newWall1.setHeight(demoBuilding.getHeight());
-        newWall1.setLength(demoBuilding.getLength());
-        newWall1.setThickness(thickness);
-        demoBuilding.addWall(newWall1);
-        newWall2.setHeight(demoBuilding.getHeight());
-        newWall2.setLength(demoBuilding.getWidth());
-        newWall2.setThickness(thickness);
-        demoBuilding.addWall(newWall2);
-        newWall1.setHeight(demoBuilding.getHeight());
-        newWall1.setLength(demoBuilding.getLength());
-        newWall1.setThickness(thickness);
-        demoBuilding.addWall(newWall2);
-        newWall2.setHeight(demoBuilding.getHeight());
-        newWall2.setLength(demoBuilding.getWidth());
-        newWall2.setThickness(thickness);
-        demoBuilding.addWall(newWall2);
+        Building demoBuilding = createNewBuilding();
         this.addBuilding(demoBuilding);
-
         boolean modificationsDone = false;
         while(!modificationsDone){
             modificationsDone = modifyWalls(demoBuilding);
+        }
+        System.out.println("To create or select another building, enter 1. To quit enter 0.");
+        int switchBuildings = enterValidInt(0,1);
+        while(switchBuildings == 1){
+            System.out.println("Enter 1 to modify an existing building.\nEnter 2 to create a new building.\nEnter 0 to go back.");
+            int option = enterValidInt(0,2);
+            try {
+                switch (option) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 0:
+                        switchBuildings = 0;
+                        break;
+                    default:
+                        System.out.println("There was a problem selecting buildings");
+                }
+            }
+            catch (Exception e){
+                System.out.println("Error type " + e.getMessage() + " occured.");
+            }
         }
         System.out.println(buildingOutput(demoBuilding));
         for(int i=0; i<4; i++) {
             System.out.println(displayWalls(demoBuilding.getWall(i)));
         }
         this.userIn.close();
+    }
+
+    public Building createNewBuilding(){
+        double height = initializeHeight();
+        double width = initializeWidth();
+        double length =initializeLength();
+        Building demoBuilding = new BuildingImpl(length, width, height);
+        Roof roof = new RoofImpl(width, length, 2, height);
+        ExternalWall newWall1 = new ExternalWall();
+        ExternalWall newWall2 = new ExternalWall();
+        double thickness = requestWallThickness();
+        System.out.println("Select a material from the list below\n"+ displayMaterialsByArea());
+        int option = enterValidInt(1,6);
+        MaterialByArea selectMaterial = chooseMaterial(option);
+        newWall1.setHeight(demoBuilding.getHeight());
+        newWall1.setLength(demoBuilding.getLength());
+        newWall1.setThickness(thickness);
+        newWall1.setMaterial(selectMaterial);
+        demoBuilding.addWall(newWall1);
+        newWall2.setHeight(demoBuilding.getHeight());
+        newWall2.setLength(demoBuilding.getWidth());
+        newWall2.setThickness(thickness);
+        newWall2.setMaterial(selectMaterial);
+        demoBuilding.addWall(newWall2);
+        newWall1 = new ExternalWall();
+        newWall1.setHeight(demoBuilding.getHeight());
+        newWall1.setLength(demoBuilding.getLength());
+        newWall1.setThickness(thickness);
+        newWall1.setMaterial(selectMaterial);
+        demoBuilding.addWall(newWall1);
+        newWall2 = new ExternalWall();
+        newWall2.setHeight(demoBuilding.getHeight());
+        newWall2.setLength(demoBuilding.getWidth());
+        newWall2.setThickness(thickness);
+        newWall2.setMaterial(selectMaterial);
+        demoBuilding.addWall(newWall2);
+        return demoBuilding;
+
     }
     
     //    will modify all 4
@@ -98,117 +125,146 @@ public class UIImpl implements UI{
         int option;
         int wallToChange;
         while (!done) {
-            System.out.println("Choose a wall, 1-4, to modify");
-            wallToChange = enterValidInt(1,4);
-            int wallIndex = wallToChange-1;
-            System.out.println("Wall being modified:"+wallToChange+"\n" + displayWalls(demoBuilding.getWall(wallIndex)));
-            System.out.println("Enter 1 to change wall material, 2 to add a feature, 3 to remove a feature," +
-                    " and 0 to finish modifying");
-            option = enterValidInt(0,3);
+            System.out.println("Choose a wall, 1-4, to modify, or enter 0 to quit");
+            wallToChange = enterValidInt(0, 4);
+            if (wallToChange != 0) {
+                int wallIndex = wallToChange - 1;
+                System.out.println("\nWall being modified: " + wallToChange + "\n" + displayWalls(demoBuilding.getWall(wallIndex)));
+                System.out.println("Enter 1 to change wall material, 2 to add a feature, 3 to remove a feature," +
+                        " and 0 to return to wall selection menu");
+                option = enterValidInt(0, 3);
 
-            int chooseFromDisplay;
-            if (option == 1) {
-                System.out.println(displayMaterialsByArea());
-                chooseFromDisplay = enterValidInt(1,6);
-                demoBuilding.getWall(wallIndex).setMaterial(chooseMaterial(chooseFromDisplay));
+                int chooseFromDisplay;
+                try {
+                    switch (option) {
+                        case 1:
+                            System.out.println(displayMaterialsByArea());
+                            chooseFromDisplay = enterValidInt(1, 6);
+                            demoBuilding.getWall(wallIndex).setMaterial(chooseMaterial(chooseFromDisplay));
+                            break;
+                        //                use chooseMaterial method to create object of choice, then add it to the wall
+                        case 2:
+                            System.out.println("Enter 1 to add a door, or 2 to add a window");
+                            chooseFromDisplay = enterValidInt(1, 2);
+                            try {
+                                switch (chooseFromDisplay) {
+                                    //                      change a wall material
+                                    case 1:
+                                        System.out.println(displayDoors());
+                                        System.out.println("\nEnter the number associated with the kind of door you would like to add");
+                                        chooseFromDisplay = enterValidInt(1, 6);
+                                        demoBuilding.addWallFeature(wallIndex, chooseDoors(chooseFromDisplay));
+                                        break;
+                                    //                      add features to a wall
+                                    case 2:
+                                        System.out.println(displayWindows());
+                                        System.out.println("\nEnter the number associated with the kind of window you would like to add");
+                                        chooseFromDisplay = enterValidInt(1, 5);
+                                        demoBuilding.addWallFeature(wallIndex, chooseWindows(chooseFromDisplay));
+                                        break;
 
-//                use chooseMaterial method to create object of choice, then add it to the wall
-            } else if (option == 2) {
-                System.out.println("Enter 1 to add a door, or 2 to add a window");
-                chooseFromDisplay = enterValidInt(1,2);
+                                    default:
+                                        System.out.println("Invalid entry");
+                                        break;
+                                }
+                            } catch (Exception e) {
+                                String message = e.getMessage();
+                                System.out.println("Error of type" + message + " occurred.");
+                            }
+                            break;
+                        //Remove features from a wall
+                        case 3:
+                            if(demoBuilding.getWall(wallIndex).getFeatureListSize() > 0) {
+                                System.out.println(displayWalls(demoBuilding.getWall(wallIndex)));
+                                System.out.println("\nEnter the number associated with the feature you would like to remove");
+                                chooseFromDisplay = enterValidInt(1, demoBuilding.getWall(wallIndex).getFeatureListSize());
+                                displayWalls(demoBuilding.getWall(wallIndex));
+                                demoBuilding.getWall(wallIndex).removeFeature(chooseFromDisplay - 1);//minus one bc index
+                            }
+                            else if (demoBuilding.getWall(wallIndex).getFeatureListSize() == 0){
+                                System.out.println("There are no features to remove from this wall.");
+                            }
+                            break;
+                        case 0:
+                            break;
 
-//                change a wall material
-                if (chooseFromDisplay == 1) {
-                    System.out.println(displayDoors());
-                    System.out.println("\n Enter the number associated with the kind of door you would like to add");
-                    chooseFromDisplay = enterValidInt(1,6);
-                    demoBuilding.addWallFeature(wallIndex, chooseDoors(chooseFromDisplay));
-                }
-//                add features to a wall
-                else if (chooseFromDisplay == 2) {
-                    System.out.println(displayWindows());
-                    System.out.println("\n Enter the number associated with the kind of window you would like to add");
-                    chooseFromDisplay = enterValidInt(1,5);
-                    demoBuilding.addWallFeature(wallIndex, chooseWindows(chooseFromDisplay));
+                        default:
+                            System.out.println("Invalid entry. Please enter an option from the menu.");
+                            break;
+                    }
+                } catch (Exception e) {
+                    String message = e.getMessage();
+                    System.out.println("Error of type " + message + " occurred.");
                 }
             }
-//            Remove features from a wall
-            else if (option == 3) {
-                System.out.println("\n Enter the number associated with the feature you would like to remove");
-                chooseFromDisplay = enterValidInt(1,demoBuilding.getWall(wallIndex).getFeatureListSize());
-                displayWalls(demoBuilding.getWall(wallIndex));
-                demoBuilding.getWall(wallIndex).removeFeature(chooseFromDisplay-1);//minus one bc index
+            else {
+                done = true;
             }
-            else{
-                    done = true;
-                }
-
-            }
+        }
         return done;
-
     }
 
 
     public MaterialByUnit chooseWindows(int option) {
-        if(option==1){
-            return new BayWindow();
-        }
-        else if(option==2){
-            return new DoubleHungWindow();
-        }
-        else if(option==3){
-            return new PictureWindow();
-        }
-        else if(option==4){
-            return new SingleHungWindow();
-        }
-        else{
-            return new SlidingWindow();
+        switch (option){
+            case 1:
+                return new BayWindow();
+            case 2:
+                return new DoubleHungWindow();
+            case 3:
+                return new PictureWindow();
+            case 4:
+                return new SingleHungWindow();
+            case 5:
+                return new SlidingWindow();
+            default:
+                System.out.println("Invalid window selection");
+                return null;
         }
     }
 
     public MaterialByUnit chooseDoors(int option) {
-        if(option==1){
-            return new Door();
-        }
-        else if(option==2){
-            return new GarageDoor();
-        }
-        else if(option==3){
-            return new InteriorDoor();
-        }
-        else if(option==4){
-            return new ScreenDoor();
-        }
-        else if(option==5){
-            return new SlidingDoor();
+        // change option menus to map <K, V>??
+        switch (option){
+            case 1:
+                return new Door();
+            case 2:
+                return new GarageDoor();
+            case 3:
+                return new InteriorDoor();
 
-        }
-        else{
-            return new StormDoor();
+            case 4:
+                return new ScreenDoor();
+
+            case 5:
+                return new SlidingDoor();
+
+            case 6:
+                return new StormDoor();
+            default:
+                System.out.println("Invalid door selection");
+                return null;
         }
     }
 
 
     public MaterialByArea chooseMaterial(int option) {
-        if(option==1){
-            return new Brick();
-        }
-        else if(option==2){
-            return new ClayBrick();
-        }
-        else if(option==3){
-            return new ConcreteBrick();
-        }
-        else if(option==4){
-            return new TwoByFour();
-        }
-        else if(option==5){
-            return new TwoByThree();
-
-        }
-        else{
-            return new Wood();
+        switch (option) {
+            case 1:
+                return new Brick();
+            case 2:
+                return new ClayBrick();
+            case 3:
+                return new ConcreteBrick();
+            case 4:
+                return new TwoByFour();
+            case 5:
+                return new TwoByThree();
+            case 6:
+                return new Wood();
+            default:
+                System.out.println("Invalid material selection");
+                return null;
         }
     }
 
@@ -383,27 +439,34 @@ public class UIImpl implements UI{
     }
 
     public String buildingOutput(Building demoBuilding){
-        String buildingString;
+        try {
+            String buildingString;
 //        print structure params, each wall by parameter, print roof
-        buildingString = "Building Information:\n";
-        buildingString += "Height: " + Double.toString(demoBuilding.getHeight())+ "\n";
-        buildingString += "Width: " + Double.toString(demoBuilding.getWidth()) + "\n";
-        buildingString += "Length: " + Double.toString(demoBuilding.getLength()) + "\n\n";
-        buildingString += "Total Cost: $" + Double.toString(demoBuilding.calcTotalCost());
-        return buildingString;
+            buildingString = "Building Information:\n";
+            buildingString += "Height: " + Double.toString(demoBuilding.getHeight()) + "\n";
+            buildingString += "Width: " + Double.toString(demoBuilding.getWidth()) + "\n";
+            buildingString += "Length: " + Double.toString(demoBuilding.getLength()) + "\n\n";
+            buildingString += "Total Cost: $" + Double.toString(demoBuilding.calcTotalCost());
+            return buildingString;
+        }
+        catch (Exception e){
+            System.out.println("Error of type " + e.getMessage() + " occurred.");
+            return null;
+        }
     }
+
     public String displayWalls(Wall wallIn){
         String wallString;
-        wallString = "Wall Information:\n\n";
-        wallString += "\n\nHeight: " + Double.toString(wallIn.getHeight()) + "\n";
+        wallString = "\nWall Information: ";
+        wallString += "\nHeight: " + Double.toString(wallIn.getHeight()) + "\n";
         wallString += "Length: " + Double.toString(wallIn.getLength()) + "\n";
         wallString += "Thickness: " + Double.toString(wallIn.getThickness()) + "\n";
-        wallString += "\nMaterial: " + wallIn.getMaterial();
-        wallString += "\nFeatures List:\n\n";
+        wallString += "Material: " + wallIn.getMaterial();
+        wallString += "\n\nFeatures List:\n";
         for(int i =0; i<wallIn.getFeatureListSize(); i++){
-            wallString += wallIn.getFeature(i).toString() + "\n";
+            wallString += (i+1) + ": " + wallIn.getFeature(i).toString() + "\n";
         }
-        wallString+="\n\n";
+        wallString+="\n";
         return wallString;
 
     }
@@ -560,25 +623,33 @@ public class UIImpl implements UI{
                 }
             }
             MaterialByArea newMaterial;
-            if(selection == 1){
-                newMaterial = new Brick();
+            switch (selection){
+                case 1:
+                    newMaterial = new Brick();
+                    break;
+                case 2:
+                    newMaterial = new ClayBrick();
+                    break;
+                case 3:
+                    newMaterial = new ConcreteBrick();
+                    break;
+                case 4:
+                    newMaterial = new TwoByFour();
+                    break;
+                case 5:
+                    newMaterial = new TwoByThree();
+                    break;
+                case 6:
+                    newMaterial = new Wood();
+                    break;
+                default:
+                    System.out.println("Invalid selection. Wall material has been set to Wood.");
+                    newMaterial = new Wood();
+                    break;
             }
-            else if(selection == 2){
-                newMaterial = new ClayBrick();
-            }
-            else if(selection == 3){
-                newMaterial = new ConcreteBrick();
-            }
-            else if(selection == 4){
-                newMaterial = new TwoByFour();
-            }
-            else if(selection == 5){
-                newMaterial = new TwoByThree();
-            }
-            else{
-                newMaterial = new Wood();
-            }
+
             ExternalWall wall = new ExternalWall(height, length, width, start, newMaterial);
+
             if(wall.getTopCoordinates()[0] > this.buildingList.get(idx).getLength()){
                 System.out.print("Error: Wall is longer than the building");
                 return false;

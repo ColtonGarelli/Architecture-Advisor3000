@@ -138,8 +138,11 @@ class ExternalWall extends WallImpl {
     }
 
     public boolean addFeature(MaterialByUnit feature) {
-        try{this.featuresList.add(feature);
-        return true;}catch(Exception e){
+        try{
+            this.featuresList.add(feature);
+            return true;
+        }
+        catch(Exception e){
             return false;
         }
     }
