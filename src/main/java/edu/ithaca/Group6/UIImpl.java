@@ -748,11 +748,24 @@ public class UIImpl implements UI{
     }
 
     public void builderMain(){
+        String repeat = "yes";
         System.out.println("Hello Builder.");
-        System.out.println("Existing Buildings:");
-        //Display list of existing buildings
-        System.out.println("Select a building for a cost estimate.");
-        int entry = enterValidInt(1, this.buildingList.size());
-        System.out.println("Estimated Cost: $" + this.buildingList.get(entry-1).calcTotalCost());
+        while(repeat.equals("yes")) {
+            System.out.println("Existing Buildings:");
+            //Display list of existing buildings
+            System.out.println("Select a building for a cost estimate.");
+            int entry = enterValidInt(1, this.buildingList.size());
+            System.out.println("Estimated Cost: $" + this.buildingList.get(entry - 1).calcTotalCost());
+            System.out.println("Would you like to get another cost estimate?");
+            String repeatEntry = userIn.next().toLowerCase();
+            boolean goodEntry = checkYesOrNo(repeatEntry);
+            while(goodEntry==false){
+                System.out.println("Please enter Yes or No");
+                repeatEntry = userIn.next().toLowerCase();
+                goodEntry = checkYesOrNo(repeatEntry);
+            }
+            repeat = repeatEntry;
+        }
+        System.out.println("Thank you for using our system!");
     }
 }
