@@ -88,8 +88,10 @@ public interface UI {
     /**
      * display building modification features
      * includes adding walls, adding features, removing features
+     * @param idx
+     * The functions operate on the building stored in the building array list at index idx
      */
-    public void architectModify();
+    public void architectModify(int idx);
 
     /**
      * Displays builder functions

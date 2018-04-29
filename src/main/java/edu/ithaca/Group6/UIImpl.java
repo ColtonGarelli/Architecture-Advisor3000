@@ -15,6 +15,7 @@ public class UIImpl implements UI{
 
     public static void main(String[] args) {
         UI demo = new UIImpl();
+        demo.dummyBuilding();
         demo.login();
         //demo.sprintThreeDemo();
     }
@@ -615,7 +616,9 @@ public class UIImpl implements UI{
         int entryInt = Integer.parseInt(entry);
         switch (entryInt) {
             case 1: architectMain();
+                    break;
             case 2: builderMain();
+                    break;
             default: break;
         }
     }
@@ -641,12 +644,41 @@ public class UIImpl implements UI{
         switch (entryInt) {
             case 1: break;
             case 2: this.createBuilding();
-            case 3: break;
+                    break;
+            case 3: //select a building from the arrayList
+                    architectModify(0);
+                    break;
+            default: break;
         }
     }
 
-    public void architectModify(){
-
+    public void architectModify(int idx){
+        //System.out.println("Existing buildings:");
+        //Display list of buildings
+        System.out.println("1.) Add a New Wall to an Existing Building");
+        System.out.println("2.) Add a Feature to a Wall");
+        System.out.println("3.) Remove a Feature from a Wall");
+        String entry = userIn.next();
+        boolean goodEntry = checkValidInt(entry);
+        while(goodEntry==false){
+            System.out.println("Invalid Entry.");
+            System.out.println("What would you like to do?");
+            System.out.println("1.) Add a New Wall to an Existing Building");
+            System.out.println("2.) Add a Feature to a Wall");
+            System.out.println("3.) Remove a Feature from a Wall");
+            entry = userIn.next();
+            goodEntry = checkValidInt(entry);
+        }
+        int entryInt = Integer.parseInt(entry);
+        switch (entryInt) {
+            case 1: this.addWall(0);
+                    break;
+            case 2: this.createBuilding();
+                    break;
+            case 3:
+                    break;
+            default: break;
+        }
     }
 
     public void builderMain(){
