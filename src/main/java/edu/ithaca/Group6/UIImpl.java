@@ -599,26 +599,32 @@ public class UIImpl implements UI{
 
     public void login(){
         System.out.println("Welcome to the Architecture Advisor3000");
-        System.out.println("\nPlease Log In.");
-        System.out.println("\n1.) Architect login");
-        System.out.println("\n2.) Builder Login");
+        System.out.println("Please Log In.");
+        System.out.println("1.) Architect login");
+        System.out.println("2.) Builder Login");
         String entry = userIn.next();
         boolean goodEntry = checkValidInt(entry);
-        while(goodEntry==false || !entry.equals("1") || !entry.equals("2")){
+        while(goodEntry==false || (!entry.equals("1") && !entry.equals("2"))){
             System.out.println("Invalid Entry.");
-            System.out.println("\nPlease Log In.");
-            System.out.println("\n1.) Architect login");
-            System.out.println("\n2.) Builder Login");
+            System.out.println("Please Log In.");
+            System.out.println("1.) Architect login");
+            System.out.println("2.) Builder Login");
             entry = userIn.next();
             goodEntry = checkValidInt(entry);
+        }
+        if(entry.equals("1")){
+            this.architectMain();
+        }
+        else if(entry.equals("2")){
+            this.builderMain();
         }
     }
 
     public void architectMain(){
-
+        System.out.println("Architect Main");
     }
 
     public void builderMain(){
-
+        System.out.println("Builder Main");
     }
 }
