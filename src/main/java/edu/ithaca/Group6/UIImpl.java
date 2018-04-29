@@ -1,9 +1,13 @@
 package edu.ithaca.Group6;
+//import javafx.scene.paint.Material;
+
 import java.util.Scanner;
+import java.util.ArrayList;
 import static java.lang.Character.isLetter;
 
 public class UIImpl implements UI{
     public Scanner userIn;
+    public ArrayList<Building> buildingList = new ArrayList<Building>();
 
     public UIImpl(){
         this.userIn = new Scanner(System.in);
@@ -11,7 +15,7 @@ public class UIImpl implements UI{
 
     public static void main(String[] args) {
         UI demo = new UIImpl();
-        demo.sprintTwoDemo();
+        demo.sprintThreeDemo();
     }
 
     public int enterValidInt(int startInt, int endInt){
@@ -31,7 +35,10 @@ public class UIImpl implements UI{
     }
 
     //    in a list of options, quit will always be 0
-    public void sprintTwoDemo(){
+    public void sprintThreeDemo(){
+        //Testing addWall
+        this.dummyBuilding();
+        this.addWall(0);
         System.out.println("Welcome to the Architecture Advisor3000");
         System.out.println("\nWhen you would like to begin modifying your project enter Yes.");
         String entry = userIn.next();
@@ -71,6 +78,7 @@ public class UIImpl implements UI{
         newWall2.setLength(demoBuilding.getWidth());
         newWall2.setThickness(thickness);
         demoBuilding.addWall(newWall2);
+        this.addBuilding(demoBuilding);
 
         boolean modificationsDone = false;
         while(!modificationsDone){
@@ -268,8 +276,6 @@ public class UIImpl implements UI{
 
 
 
-
-
     @Override
     public boolean checkYesOrNo(String userInput) {
         //Shorten the string
@@ -400,5 +406,194 @@ public class UIImpl implements UI{
         wallString+="\n\n";
         return wallString;
 
+    }
+
+    //creates a dummy building for testing purposes
+    @Override
+    public void dummyBuilding(){
+        Building newBuilding = new BuildingImpl(60, 60, 12);
+        buildingList.add(newBuilding);
+    }
+
+    @Override
+    public void createBuilding(){
+
+    }
+
+    @Override
+    public void addBuilding(Building building){
+        buildingList.add(building);
+    }
+
+    @Override
+    public boolean addWall(int idx) {
+        /**System.out.println("Enter a length for the new wall");
+         String lengthStr = userIn.next();
+         boolean lengthEntry = checkValidDouble(lengthStr);
+         double length = -1;
+         if(lengthEntry){
+         length = Double.parseDouble(lengthStr);
+         }**/
+        if (idx < 0) {
+            return false;
+        } else if (idx > this.buildingList.size() - 1) {
+            return false;
+        } else {
+            //Input wall start point
+            double[] start = new double[3];
+            System.out.println("Enter a starting point for the new wall.");
+            //x position
+            System.out.print("X position: ");
+            String xStr = userIn.next();
+            boolean xEntry = checkValidDouble(xStr);
+            double x = -1;
+            if (xEntry) {
+                x = Double.parseDouble(xStr);
+            }
+            while (x < 0 || !xEntry || x > this.buildingList.get(idx).getLength()) {
+                System.out.println("Invalid entry.");
+                System.out.print("X position: ");
+                xStr = userIn.next();
+                xEntry = checkValidDouble(xStr);
+                if (xEntry) {
+                    x = Double.parseDouble(xStr);
+                }
+            }
+            //y position
+            System.out.print("Y position: ");
+            String yStr = userIn.next();
+            boolean yEntry = checkValidDouble(yStr);
+            double y = -1;
+            if (yEntry) {
+                y = Double.parseDouble(yStr);
+            }
+            while (y < 0 || !yEntry || x > this.buildingList.get(idx).getWidth()) {
+                System.out.println("Invalid entry.");
+                System.out.print("Z position: ");
+                yStr = userIn.next();
+                yEntry = checkValidDouble(yStr);
+                if (yEntry) {
+                    y = Double.parseDouble(yStr);
+                }
+            }
+            //z position
+            System.out.print("Z position: ");
+            String zStr = userIn.next();
+            boolean zEntry = checkValidDouble(zStr);
+            double z = -1;
+            if (zEntry) {
+                z = Double.parseDouble(zStr);
+            }
+            while (z < 0 || !zEntry || x > this.buildingList.get(idx).getHeight()) {
+                System.out.println("Invalid entry.");
+                System.out.print("Z position: ");
+                zStr = userIn.next();
+                zEntry = checkValidDouble(zStr);
+                if (zEntry) {
+                    z = Double.parseDouble(zStr);
+                }
+            }
+            //Input wall length
+            System.out.println("Enter a length for the new wall");
+            String lengthStr = userIn.next();
+            boolean lengthEntry = checkValidDouble(lengthStr);
+            double length = -1;
+            if (lengthEntry) {
+                length = Double.parseDouble(lengthStr);
+            }
+            while (length < 0.1 || !lengthEntry) {
+                System.out.println("Invalid entry. Please enter desired wall length");
+                lengthStr = userIn.next();
+                lengthEntry = checkValidDouble(lengthStr);
+                if (lengthEntry) {
+                    length = Double.parseDouble(lengthStr);
+                }
+            }
+            //Input wall width
+            System.out.println("Enter a width for the new wall");
+            String widthStr = userIn.next();
+            boolean widthEntry = checkValidDouble(widthStr);
+            double width = -1;
+            if (widthEntry) {
+                width = Double.parseDouble(widthStr);
+            }
+            while (width < 0.1 || !widthEntry) {
+                System.out.println("Invalid entry. Please enter desired wall width");
+                widthStr = userIn.next();
+                widthEntry = checkValidDouble(widthStr);
+                if (widthEntry) {
+                    width = Double.parseDouble(widthStr);
+                }
+            }
+            //Input wall height
+            System.out.println("Enter a height for the new wall");
+            String heightStr = userIn.next();
+            boolean heightEntry = checkValidDouble(heightStr);
+            double height = -1;
+            if (heightEntry) {
+                height = Double.parseDouble(heightStr);
+            }
+            while (height < 0.1 || !heightEntry) {
+                System.out.println("Invalid entry. Please enter desired wall height");
+                heightStr = userIn.next();
+                heightEntry = checkValidDouble(heightStr);
+                if (heightEntry) {
+                    height = Double.parseDouble(heightStr);
+                }
+            }
+            //Input wall material
+            System.out.println("Select a material to make the new wall out of");
+            System.out.println(this.displayMaterialsByArea());
+            String selectionStr = userIn.next();
+            boolean selectionEntry = checkValidInt(selectionStr);
+            int selection = 0;
+            if (selectionEntry) {
+                selection = Integer.parseInt(selectionStr);
+            }
+            while (selection < 1 || !selectionEntry || selection > 6) {
+                System.out.println("Invalid entry. Please select one of the available materials.");
+                System.out.println(this.displayMaterialsByArea());
+                selectionStr = userIn.next();
+                selectionEntry = checkValidInt(selectionStr);
+                if (selectionEntry) {
+                    selection = Integer.parseInt(selectionStr);
+                }
+            }
+            MaterialByArea newMaterial;
+            if(selection == 1){
+                newMaterial = new Brick();
+            }
+            else if(selection == 2){
+                newMaterial = new ClayBrick();
+            }
+            else if(selection == 3){
+                newMaterial = new ConcreteBrick();
+            }
+            else if(selection == 4){
+                newMaterial = new TwoByFour();
+            }
+            else if(selection == 5){
+                newMaterial = new TwoByThree();
+            }
+            else{
+                newMaterial = new Wood();
+            }
+            ExternalWall wall = new ExternalWall(height, length, width, start, newMaterial);
+            if(wall.getTopCoordinates()[0] > this.buildingList.get(idx).getLength()){
+                System.out.print("Error: Wall is longer than the building");
+                return false;
+            }
+            else if(wall.getTopCoordinates()[1] > this.buildingList.get(idx).getWidth()){
+                System.out.print("Error: Wall is wider than the building");
+                return false;
+            }
+            else if(wall.getTopCoordinates()[2] > this.buildingList.get(idx).getHeight()){
+                System.out.print("Error: Wall is taller than the building");
+                return false;
+            }
+            this.buildingList.get(idx).addWall(wall);
+            System.out.println("Wall Added");
+            return true;
+        }
     }
 }

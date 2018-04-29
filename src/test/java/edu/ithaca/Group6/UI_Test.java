@@ -159,4 +159,14 @@ public class UI_Test {
                 "5: Sliding Window : $104.00, Length: 2.58ft, Width: 0.38ft, Height: 1.58ft";
         assertTrue(testUI.displayWindows().equals(display), "Did not generate list of windows");
     }
+
+    @Test
+    public void addWallTest(){
+        testUI = new UIImpl();
+        assertFalse(testUI.addWall(0), "addWall tried to operate on an empty list");
+        testUI.dummyBuilding();
+        assertFalse(testUI.addWall(-1), "addWall Index Out of Bounds - Negative Number");
+        assertFalse(testUI.addWall(1), "addWall Index Out of Bounds - Bigger than array");
+        //testUI.addWall(0);
+    }
 }

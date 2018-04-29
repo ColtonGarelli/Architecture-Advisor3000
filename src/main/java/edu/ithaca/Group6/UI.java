@@ -5,7 +5,7 @@ public interface UI {
     /**
      * A function that runs a demo of the features completed for Sprint 2
      */
-    public void sprintTwoDemo();
+    public void sprintThreeDemo();
 
     /**
      * Determines if the user input a valid yes or no answer
@@ -48,4 +48,29 @@ public interface UI {
      * @Return String containing window data
      */
     public String displayWindows();
+
+    /**
+     * Creates a dummy building for testing purposes
+     */
+    public void dummyBuilding();
+
+    /**
+     * Prompts user for input, and creates a new building based on user input values
+     * @post add a new building to BuildingList
+     */
+    public void createBuilding();
+
+    /**
+     * Add an existing building to the building list
+     * @param building
+     * @post add building to BuildingList
+     */
+    public void addBuilding(Building building);
+
+    /**
+     * Prompts user for input, and creates a new wall based on user input values
+     * @param idx
+     * @post Adds wall to buildingList[idx]
+     */
+    public boolean addWall(int idx);
 }
