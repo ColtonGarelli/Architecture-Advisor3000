@@ -613,9 +613,9 @@ public class UIImpl implements UI{
     @Override
     public void addWallFeature(Building building){
         System.out.println("Choose a wall to modify");
-        System.out.println(building.walls.length);
+        System.out.println(building.walls.size());
         int count = 0;
-        for(int x = 0; x < building.walls.length; x++) {
+        for(int x = 0; x < building.walls.size(); x++) {
             count++;
         }
         System.out.println("Number of Existing walls: " + count);

@@ -1,9 +1,11 @@
 package edu.ithaca.Group6;
 
+import java.util.ArrayList;
+
 public interface Building {
     //Creating a building in the shape of a rectangular prism
     //Assume that the main function will prevent the user from inputting a negative dimension (i.e. -60.0 for the width)
-    public ExternalWall[] walls = new ExternalWall[0];
+    public ArrayList<ExternalWall> walls = new ArrayList<ExternalWall>();
     public void setLength(double newVal);
     //set a new length of the building
 
