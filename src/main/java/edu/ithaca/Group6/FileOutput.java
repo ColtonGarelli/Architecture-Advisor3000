@@ -19,4 +19,10 @@ public interface FileOutput {
      */
     public String generateOutString(Building buildingToOutput);
 
+    /**
+     * Saves to the file
+     * @return true if success, false otherwise
+     */
+    public boolean saveToFile(String outStr);
+
 }
