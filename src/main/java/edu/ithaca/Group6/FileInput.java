@@ -1,11 +1,11 @@
 package edu.ithaca.Group6;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 
 public interface FileInput {
     String fileInName = "";
-    FileInputStream inStream = null;
+    BufferedReader inReader = null;
 
     /**
      * Creates the FileInputStream from the fileInName
@@ -24,5 +24,5 @@ public interface FileInput {
      * Loads a building from a file
      * @return Building of the file
      */
-    public Building loadFromFile(String inStr);
+    public Building loadFromFile();
 }
