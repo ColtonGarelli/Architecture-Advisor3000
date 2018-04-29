@@ -14,6 +14,7 @@ public abstract class WallImpl implements Wall{
     public abstract double[] getBottomCoordinates();
     public abstract boolean setTopCoordinates(double x, double y, double z);
     public abstract double[] getTopCoordinates();
+    public abstract String outString();
 }
 
 
@@ -31,19 +32,14 @@ class ExternalWall extends WallImpl {
         this.setBottomCoordinates(0,0,0);
     }
 
-    public ExternalWall(double height, double length, double thickness, double[] startPoint, MaterialByArea material){
+    public ExternalWall(double height, double changeY, double changeX, double[] startPoint, MaterialByArea material){
         this.height = height;
-        this.length = length;
-        this.thickness = thickness;
+        this.length = changeY;
+        this.thickness = changeX;
         this.material = material;
         this.featuresList = new ArrayList<MaterialByUnit>();
         this.setBottomCoordinates(startPoint[0], startPoint[1], startPoint[2]);
-        if(this.thickness > this.length){
-            this.setTopCoordinates(startPoint[0] + this.thickness, startPoint[1] + this.length, startPoint[2] + this.height);
-        }
-        else{
-            this.setTopCoordinates(startPoint[0] + this.length, startPoint[1] + this.thickness, startPoint[2] + this.height);
-        }
+        this.setTopCoordinates(startPoint[0] + this.thickness, startPoint[1] + this.length, startPoint[2] + this.height);
     }
 
     public boolean setBottomCoordinates(double x, double y, double z){
@@ -161,5 +157,15 @@ class ExternalWall extends WallImpl {
 
     public int getFeatureListSize() {
         return this.featuresList.size();
+    }
+
+    @Override
+    public String outString() {
+        String wallString = "W: " + "[" + this.bottomCoordinates[0] + "," + this.bottomCoordinates[1] + "," + this.bottomCoordinates[2] + "]"  + "_" + "[" + this.topCoordinates[0] + "," + this.topCoordinates[1] + "," + this.topCoordinates[2] + "]" +"_";
+        for(int i = 0; i < this.featuresList.size(); i++){
+            wallString += this.getFeature(i).toString() + "_";
+        }
+        wallString += "\n";
+        return wallString;
     }
 }
