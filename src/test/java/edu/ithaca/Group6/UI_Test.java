@@ -169,4 +169,6 @@ public class UI_Test {
         assertFalse(testUI.addWall(1), "addWall Index Out of Bounds - Bigger than array");
         //testUI.addWall(0);
     }
+
+
 }

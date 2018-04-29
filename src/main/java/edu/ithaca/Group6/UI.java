@@ -73,4 +73,20 @@ public interface UI {
      * @post Adds wall to buildingList[idx]
      */
     public boolean addWall(int idx);
+
+    /**
+     * User can login as an architect or a builder
+     * @post runs architectMain or buildingMain
+     */
+    public void login();
+
+    /**
+     * Displays architect functions
+     */
+    public void architectMain();
+
+    /**
+     * Displays builder functions
+     */
+    public void builderMain();
 }
