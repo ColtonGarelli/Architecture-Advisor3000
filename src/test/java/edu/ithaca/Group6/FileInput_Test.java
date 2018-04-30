@@ -42,7 +42,8 @@ public class FileInput_Test {
     @Test
     public void testBuildWall(){
         testIn = new FileInputImpl("bork.txt");
-        Wall testWall = ((FileInputImpl) testIn).buildWall("W: [0.0,0.0,0.0]_[0.2,3.0,4.0]_Wood : $1.00 per square foot_Bay Window : $1198.66, Length: 6.13ft, Width: 1.00ft, Height: 5.08ft_");
+        String wallString = "W: [0.0,0.0,0.0]_[0.2,3.0,4.0]_Wood : $1.00 per square foot_Bay Window : $1198.66, Length: 6.13ft, Width: 1.00ft, Height: 5.08ft_";
+        Wall testWall = ((FileInputImpl) testIn).buildWall(wallString);
         double[] bottomCoords = {0,0,0};
         double[] topCoords = {0.2,3,4};
         MaterialByArea testMaterial = new Wood();
@@ -53,6 +54,17 @@ public class FileInput_Test {
         assertEquals(testMaterial.toString(),testWall.getMaterial().toString(),"Didn't get proper material");
 
         assertEquals(testFeature.toString(),testWall.getFeature(0).toString(),"Didn't get proper feature");
+
+        wallString = "W: [0.0,3.0,0.0]_[2.0,2.8,4.0]_Wood : $1.00 per square foot_";
+        testWall = ((FileInputImpl) testIn).buildWall(wallString);
+        double[] newBottomCoords = {0,3,0};
+        double[] newTopCoords = {2,2.8,4};
+
+        assertArrayEquals(newBottomCoords,testWall.getBottomCoordinates(),"Didn't get bottom coords 2");
+        assertArrayEquals(newTopCoords, testWall.getTopCoordinates(),"Didn't get top coords 2");
+
+        assertEquals(testMaterial.toString(),testWall.getMaterial().toString(),"Didn't get wall material 2");
+
 
     }
 }
