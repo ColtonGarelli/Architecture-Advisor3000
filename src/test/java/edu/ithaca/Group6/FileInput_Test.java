@@ -38,4 +38,21 @@ public class FileInput_Test {
         assertArrayEquals(firstCoords,testRoof.getFirstCornerCoordinates(),"didn't get first corner coords");
         assertArrayEquals(secondCoords,testRoof.getSecondCornerCoordinates(),"didn't get second corner coords");
     }
+
+    @Test
+    public void testBuildWall(){
+        testIn = new FileInputImpl("bork.txt");
+        Wall testWall = ((FileInputImpl) testIn).buildWall("W: [0.0,0.0,0.0]_[0.2,3.0,4.0]_Wood : $1.00 per square foot_Bay Window : $1198.66, Length: 6.13ft, Width: 1.00ft, Height: 5.08ft_");
+        double[] bottomCoords = {0,0,0};
+        double[] topCoords = {0.2,3,4};
+        MaterialByArea testMaterial = new Wood();
+        MaterialByUnit testFeature = new BayWindow();
+        assertArrayEquals(bottomCoords,testWall.getBottomCoordinates(),"Didn't get bottom wall coords");
+        assertArrayEquals(topCoords,testWall.getTopCoordinates(),"Didn't get top wall coords");
+
+        assertEquals(testMaterial.toString(),testWall.getMaterial().toString(),"Didn't get proper material");
+
+        assertEquals(testFeature.toString(),testWall.getFeature(0).toString(),"Didn't get proper feature");
+
+    }
 }
