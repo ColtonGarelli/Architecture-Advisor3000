@@ -59,7 +59,8 @@ public class FileInputImpl implements FileInput {
         return null;
     }
 
-    private ExternalWall buildWall(String wallString){
+    public ExternalWall buildWall(String wallString){
+        wallString = wallString.substring(3);
         String[] stringBreakdown = wallString.split("\\_");
         ExternalWall wallToReturn = new ExternalWall();
         //splits into pieces of strings based on the delimiter "_"
@@ -107,11 +108,34 @@ public class FileInputImpl implements FileInput {
         return wallToReturn;
     }
 
-    private Roof buildRoof(String roofString){
-        return null;
+    public Roof buildRoof(String roofString){
+        roofString = roofString.substring(3);
+        String[] stringBreakdown = roofString.split("\\_");
+        Roof roofToReturn = new RoofImpl();
+        //splits into pieces of strings based on the delimiter "_"
+        String firstCoordStr = stringBreakdown[0].substring(1,stringBreakdown[0].length()-1);
+        String[] firstCoordBreakdown = firstCoordStr.split("\\,");
+        String secondCoordStr = stringBreakdown[1].substring(1,stringBreakdown[1].length()-1);
+        String[] secondCoordBreakdown = secondCoordStr.split("\\,");
+        try{
+            double firstX = Double.parseDouble(firstCoordBreakdown[0]);
+            double firstY = Double.parseDouble(firstCoordBreakdown[1]);
+            double firstZ = Double.parseDouble(firstCoordBreakdown[2]);
+
+            double secondX = Double.parseDouble(secondCoordBreakdown[0]);
+            double secondY = Double.parseDouble(secondCoordBreakdown[1]);
+            double secondZ = Double.parseDouble(secondCoordBreakdown[2]);
+
+            //try to build coordinates and dimensions off of file
+            roofToReturn.setFirstCornerCoordinates(firstX,firstY,firstZ);
+            roofToReturn.setSecondCornerCoordinates(secondX,secondY,secondZ);
+        }catch(NumberFormatException e){
+            return null;
+        }
+        return roofToReturn;
     }
 
-    private MaterialByArea buildMaterialByArea(String materialByAreaString){
+    public MaterialByArea buildMaterialByArea(String materialByAreaString){
         String[] breakdownStr = materialByAreaString.split("\\:");
         String materialName = breakdownStr[0].substring(0,breakdownStr[0].length()-1);
         if(materialName.equals("Wood")){
@@ -131,7 +155,7 @@ public class FileInputImpl implements FileInput {
         }
     }
 
-    private MaterialByUnit buildMaterialByUnit(String materialByUnitString){
+    public MaterialByUnit buildMaterialByUnit(String materialByUnitString){
         String[] breakdownStr = materialByUnitString.split("\\:");
         String featureName = breakdownStr[0].substring(0,breakdownStr[0].length()-1);
         if(featureName.equals("Bay Window")){
