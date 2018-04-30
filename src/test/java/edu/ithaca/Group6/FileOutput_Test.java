@@ -31,10 +31,10 @@ public class FileOutput_Test {
         testBuilding.addWall(wall4);
         BayWindow testWindow = new BayWindow();
         testBuilding.addWallFeature(0,testWindow);
-        String buildingString = "W: [0.0,0.0,0.0]_["+thickness+","+yEdge+","+heightIn+"]_"+testWindow.toString()+"_"+"\n"
-                +"W: [0.0,"+yEdge+",0.0]_"+"["+xEdge+","+(yEdge-thickness)+","+heightIn+"]_"+"\n"
-                +"W: ["+xEdge+","+yEdge+",0.0]_"+"["+(xEdge-thickness)+",0.0,"+heightIn+"]_"+"\n"
-                +"W: ["+xEdge+",0.0,0.0]_"+"[0.0,"+thickness+","+heightIn+"]_"+"\n"
+        String buildingString = "W: [0.0,0.0,0.0]_["+thickness+","+yEdge+","+heightIn+"]_"+testMaterial1.toString()+"_"+testWindow.toString()+"_"+"\n"
+                +"W: [0.0,"+yEdge+",0.0]_"+"["+xEdge+","+(yEdge-thickness)+","+heightIn+"]_"+testMaterial1.toString()+"_"+"\n"
+                +"W: ["+xEdge+","+yEdge+",0.0]_"+"["+(xEdge-thickness)+",0.0,"+heightIn+"]_"+testMaterial1.toString()+"_"+"\n"
+                +"W: ["+xEdge+",0.0,0.0]_"+"[0.0,"+thickness+","+heightIn+"]_"+testMaterial1.toString()+"_"+"\n"
                 +"R: [0.0,0.0,"+heightIn+"]_"+"["+xEdge+","+yEdge+","+(heightIn+thickness)+"]_"+"\n";
         assertEquals(buildingString,testOut.generateOutString(testBuilding),"Did not properly output a building string");
     }
