@@ -81,6 +81,15 @@ public interface UI {
     public void addWallFeature(BuildingImpl building);
 
     /**
+     * User chooses a wall from the building
+     * Tells the user how many features are in the wall
+     * User chooses which one to remove
+     * @param building
+     * @param idx
+     */
+    public void removeWallFeature(BuildingImpl building);
+
+    /**
      * User can login as an architect or a builder
      * @post runs architectMain or buildingMain
      */

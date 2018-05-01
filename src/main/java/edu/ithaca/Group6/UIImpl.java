@@ -784,6 +784,22 @@ public class UIImpl implements UI {
 
     }
 
+    @Override
+    public void removeWallFeature(BuildingImpl building){
+        System.out.println("Choose a wall to modify");
+        System.out.println("Number of Existing walls: " + building.walls.size());
+        int wallToChange = enterValidInt(1, building.walls.size());
+        int wallIndex = wallToChange-1;
+        System.out.println("Wall being modified: Wall " + wallToChange);
+
+        int chooseFromDisplay;
+        System.out.println("Total features of this wall: " + building.walls.get(wallIndex).getFeatureListSize());
+        chooseFromDisplay = enterValidInt(1, building.walls.get(wallIndex).getFeatureListSize());
+        building.walls.get(wallIndex).removeFeature(chooseFromDisplay-1);
+
+        System.out.println("Feature Removed!");
+    }
+
     public void login(){
         this.dummyBuilding();
         //System.out.println(displayWalls(this.buildingList.get(0).getWall(0)));
@@ -891,7 +907,7 @@ public class UIImpl implements UI {
                 break;
             case 4: this.addWallFeature(buildingList.get(idx));
                     break;
-            case 5:
+            case 5: this.removeWallFeature(buildingList.get(idx));
                     break;
             default: break;
         }
