@@ -49,6 +49,9 @@ public class FileInputImpl implements FileInput {
                     System.err.println("File invalid format.");
                 }
             }
+            returnBuilding.setHeight(returnBuilding.getWall(0).getHeight());
+            returnBuilding.setWidth(returnBuilding.getWall(0).getLength());
+            returnBuilding.setLength(returnBuilding.getWall(1).getLength());
             return returnBuilding;
         }catch(IOException e){
             System.out.println("File not found.");

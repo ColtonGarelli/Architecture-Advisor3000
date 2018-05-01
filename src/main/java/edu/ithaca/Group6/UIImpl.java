@@ -107,7 +107,7 @@ public class UIImpl implements UI {
             }
         }
         System.out.println(buildingOutput(demoBuilding));
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < demoBuilding.getWallAmount(); i++) {
             System.out.println(displayWalls(demoBuilding.getWall(i)));
         }
         System.out.println("Select which file to save to.");
