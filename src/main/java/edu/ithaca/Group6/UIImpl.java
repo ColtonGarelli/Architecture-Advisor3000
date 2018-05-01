@@ -687,30 +687,44 @@ public class UIImpl implements UI{
     }
 
     public void architectMain(){
-        System.out.println("What would you like to do?");
-        System.out.println("1.) Display Existing Buildings");
-        System.out.println("2.) Create Building");
-        System.out.println("3.) Modify an existing building");
-        String entry = userIn.next();
-        boolean goodEntry = checkValidInt(entry);
-        while(goodEntry==false){
-            System.out.println("Invalid Entry.");
+        String repeat = "yes";
+        while(repeat.equals("yes")) {
             System.out.println("What would you like to do?");
             System.out.println("1.) Display Existing Buildings");
             System.out.println("2.) Create Building");
             System.out.println("3.) Modify an existing building");
-            entry = userIn.next();
-            goodEntry = checkValidInt(entry);
-        }
-        int entryInt = Integer.parseInt(entry);
-        switch (entryInt) {
-            case 1: break;
-            case 2: this.createBuilding();
+            String entry = userIn.next();
+            boolean goodEntry = checkValidInt(entry);
+            while (goodEntry == false) {
+                System.out.println("Invalid Entry.");
+                System.out.println("What would you like to do?");
+                System.out.println("1.) Display Existing Buildings");
+                System.out.println("2.) Create Building");
+                System.out.println("3.) Modify an existing building");
+                entry = userIn.next();
+                goodEntry = checkValidInt(entry);
+            }
+            int entryInt = Integer.parseInt(entry);
+            switch (entryInt) {
+                case 1:
                     break;
-            case 3: //select a building from the arrayList
+                case 2:
+                    this.createBuilding();
+                    break;
+                case 3: //select a building from the arrayList
                     architectModify(0);
                     break;
-            default: break;
+                default:
+                    break;
+            }
+            System.out.println("Would you like do anything else?");
+            String repeatEntry = userIn.next().toLowerCase();
+            boolean goodEntry2 = checkYesOrNo(repeatEntry);
+            while(goodEntry2==false){
+                System.out.println("Please enter Yes or No");
+                repeatEntry = userIn.next().toLowerCase();
+                goodEntry2 = checkYesOrNo(repeatEntry);
+            }
         }
     }
 
