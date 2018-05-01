@@ -25,7 +25,7 @@ public class FileOutputImpl implements FileOutput {
             }
         }catch(IOException e){
             //what happens when invalid file name if the client doesn't set it?
-            System.out.println("Ooof!");
+            System.out.println("Didn't find file to output to for generating output stream.");
         }
     }
 
@@ -49,14 +49,14 @@ public class FileOutputImpl implements FileOutput {
             this.outputStream.close();
             return true;
         }catch(IOException e){
-            System.out.println("Ooof!");
+            System.out.println("Didn't find file to save to.");
         }finally{
             try{
                 if(this.outputStream != null){
                     this.outputStream.close();
                 }
             }catch(IOException e){
-                System.out.println("Ooof!");
+                System.out.println("Couldn't generate a file to save to.");
             }
         }
         return false;

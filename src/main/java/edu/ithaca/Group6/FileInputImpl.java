@@ -26,13 +26,8 @@ public class FileInputImpl implements FileInput {
             }
         }catch(IOException e){
             //what happens when invalid file name if the client doesn't set it?
-            System.out.println("Ooof!");
+            System.out.println("Didn't generate input stream properly.");
         }
-    }
-
-    @Override
-    public String generateInString(File inFile) {
-        return null;
     }
 
     @Override
@@ -54,7 +49,7 @@ public class FileInputImpl implements FileInput {
             }
             return returnBuilding;
         }catch(IOException e){
-            System.out.println("Ooof!");
+            System.out.println("File not found.");
         }
         return null;
     }

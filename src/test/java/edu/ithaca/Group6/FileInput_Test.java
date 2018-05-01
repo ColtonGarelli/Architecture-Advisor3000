@@ -10,22 +10,32 @@ public class FileInput_Test {
     FileInput testIn;
     Building testBuilding;
 
-//    @Test
-//    public void testGenerateInString(){
-//
-//    }
-
     @Test
     public void testLoad(){
         testIn = new FileInputImpl("bork.txt");
         testBuilding = new BuildingImpl();
-        double[] zeroCoords = {0,0,0};
-        try {
-            testBuilding = testIn.loadFromFile();
-            assertEquals(zeroCoords,testBuilding.getWall(0).getBottomCoordinates(), "Did not properly build first wall");
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        MaterialByArea testMaterial = new Wood();
+        //wall 1
+        double[] bottomCoords = {0,0,0};
+        double[] topCoords = {0.2,3,4};
+        //roof
+        double[] firstCoords = {0,0,4};
+        double[] secondCoords = {2,3,4.2};
+        testBuilding = testIn.loadFromFile();
+        //wall 1
+        assertArrayEquals(bottomCoords,testBuilding.getWall(0).getBottomCoordinates(), "Did not properly build first wall");
+        assertArrayEquals(topCoords,testBuilding.getWall(0).getTopCoordinates(),"Did not get top coordinates");
+        assertEquals(testMaterial.toString(),testBuilding.getWall(0).getMaterial().toString(),"Didn't get wall material");
+        //roof
+        assertArrayEquals(firstCoords,testBuilding.getRoof().getFirstCornerCoordinates(),"Didn't get roof start coords");
+        assertArrayEquals(secondCoords,testBuilding.getRoof().getSecondCornerCoordinates(),"Didn't get roof end coords");
+        //wall 4
+        double[] bottomCoords2 = {2,0,0};
+        double[] topCoords2 = {0,0.2,4};
+        //wall 4
+        assertArrayEquals(bottomCoords2,testBuilding.getWall(3).getBottomCoordinates(), "Did not properly build first wall");
+        assertArrayEquals(topCoords2,testBuilding.getWall(3).getTopCoordinates(),"Did not get top coordinates");
+        assertEquals(testMaterial.toString(),testBuilding.getWall(3).getMaterial().toString(),"Didn't get wall material");
 
     }
     @Test
