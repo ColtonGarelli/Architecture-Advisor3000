@@ -65,7 +65,7 @@ public interface UI {
      * @param building
      * @post add building to BuildingList
      */
-    public void addBuilding(Building building);
+    public void addBuilding(BuildingImpl building);
 
     /**
      * Prompts user for input, and creates a new wall based on user input values
@@ -78,7 +78,7 @@ public interface UI {
      * Prompts user for input, and adds a wall feature to a wall based on user input values
      * @param building
      */
-    public void addWallFeature(Building building);
+    public void addWallFeature(BuildingImpl building);
 
     /**
      * User can login as an architect or a builder

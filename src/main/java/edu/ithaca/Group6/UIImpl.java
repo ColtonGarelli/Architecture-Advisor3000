@@ -7,7 +7,7 @@ import static java.lang.Character.isLetter;
 
 public class UIImpl implements UI{
     public Scanner userIn;
-    public ArrayList<Building> buildingList = new ArrayList<Building>();
+    public ArrayList<BuildingImpl> buildingList = new ArrayList<BuildingImpl>();
 
     public UIImpl(){
         this.userIn = new Scanner(System.in);
@@ -49,7 +49,7 @@ public class UIImpl implements UI{
             entry = userIn.next();
             goodEntry = checkYesOrNo(entry);
         }
-        Building demoBuilding = new BuildingImpl();
+        BuildingImpl demoBuilding = new BuildingImpl();
         double height = initializeHeight();
         demoBuilding.setHeight(height);
         double width = initializeWidth();
@@ -411,7 +411,7 @@ public class UIImpl implements UI{
     //creates a dummy building for testing purposes
     @Override
     public void dummyBuilding(){
-        Building newBuilding = new BuildingImpl(60, 60, 12);
+        BuildingImpl newBuilding = new BuildingImpl(60, 60, 12);
         double[] startPoint1 = new double[]{0.0, 0.0, 0.0};
         double[] startPoint2 = new double[]{0.0, 0.0, 0.0};
         double[] startPoint3 = new double[]{0.0, 55.0, 0.0};
@@ -434,7 +434,7 @@ public class UIImpl implements UI{
     }
 
     @Override
-    public void addBuilding(Building building){
+    public void addBuilding(BuildingImpl building){
         buildingList.add(building);
     }
 
@@ -611,15 +611,10 @@ public class UIImpl implements UI{
     }
 
     @Override
-    public void addWallFeature(Building building){
+    public void addWallFeature(BuildingImpl building){
         System.out.println("Choose a wall to modify");
-        System.out.println(building.walls.size());
-        int count = 0;
-        for(int x = 0; x < building.walls.size(); x++) {
-            count++;
-        }
-        System.out.println("Number of Existing walls: " + count);
-        int wallToChange = enterValidInt(1, count);
+        System.out.println("Number of Existing walls: " + building.walls.size());
+        int wallToChange = enterValidInt(1, building.walls.size());
         int wallIndex = wallToChange-1;
         System.out.println("Wall being modified:\n" + displayWalls(building.getWall(wallIndex)));
         int option = enterValidInt(0,3);
@@ -739,7 +734,7 @@ public class UIImpl implements UI{
         switch (entryInt) {
             case 1: this.addWall(idx);
                     break;
-            case 2: this.addWallFeature(this.buildingList.get(idx));
+            case 2: this.addWallFeature(buildingList.get(idx));
                     break;
             case 3:
                     break;
