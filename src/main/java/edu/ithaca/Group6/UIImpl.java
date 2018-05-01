@@ -6,11 +6,13 @@ import java.util.Scanner;
 
 import static java.lang.Character.isLetter;
 
-public class UIImpl implements UI{
+public class UIImpl implements UI {
     public Scanner userIn;
     public ArrayList<Building> buildingList = new ArrayList<Building>();
+    public FileInput saveFileIn;
+    public FileOutput saveFileOut;
 
-    public UIImpl(){
+    public UIImpl() {
         this.userIn = new Scanner(System.in);
     }
 
@@ -19,44 +21,75 @@ public class UIImpl implements UI{
         demo.sprintThreeDemo();
     }
 
-    public int enterValidInt(int startInt, int endInt){
+    public int enterValidInt(int startInt, int endInt) {
         int userInt = startInt - 1;
-        while(userInt < startInt || userInt > endInt) {
+        while (userInt < startInt || userInt > endInt) {
             String userInput = userIn.next();
             while (!checkValidInt(userInput)) {
                 System.out.println("Please enter a valid option, " + startInt + " - " + endInt + "");
                 userInput = userIn.next();
             }
             userInt = Integer.parseInt(userInput);
-            if(userInt < startInt || userInt > endInt){
+            if (userInt < startInt || userInt > endInt) {
                 System.out.println("Please enter a valid option, " + startInt + " - " + endInt + "");
             }
         }
         return userInt;
     }
 
+    /**
+     * Determines if a user input is both valid and whether it is yes or no
+     *
+     * @param userInput
+     * @return true if yes, false if no
+     */
+    public boolean yesOrNo(String userInput) {
+        while (!checkYesOrNo(userInput)) {
+            System.out.println("Please enter a valid yes or no option.");
+            userInput = userIn.next();
+        }
+        String shortUserInput = userInput.substring(0, 1);
+        //Lowercase the string
+        shortUserInput = shortUserInput.toLowerCase();
+        //Compare if yes or no
+        if (shortUserInput.equals("y")) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     //    in a list of options, quit will always be 0
-    public void sprintThreeDemo(){
+    public void sprintThreeDemo() {
         System.out.println("Welcome to the Architecture Advisor3000");
         System.out.println("\nWhen you would like to begin modifying your project enter Yes.");
         String entry = userIn.next();
-        boolean goodEntry = checkYesOrNo(entry);
-        while(goodEntry==false){
+        Building demoBuilding;
+        boolean userYes = yesOrNo(entry);
+        while (!userYes) {
             System.out.println("Please enter Yes when ready");
             entry = userIn.next();
-            goodEntry = checkYesOrNo(entry);
+            userYes = yesOrNo(entry);
         }
-        Building demoBuilding = createNewBuilding();
+        System.out.println("You have the option to load from a save slot. Would you like to load?");
+        entry = userIn.next();
+        userYes = yesOrNo(entry);
+        if (userYes) {
+            demoBuilding = keepLoading();
+        }else{
+            demoBuilding = createNewBuilding();
+        }
         this.addBuilding(demoBuilding);
         boolean modificationsDone = false;
-        while(!modificationsDone){
+        while (!modificationsDone) {
             modificationsDone = modifyWalls(demoBuilding);
         }
         System.out.println("To create or select another building, enter 1. To quit enter 0.");
-        int switchBuildings = enterValidInt(0,1);
-        while(switchBuildings == 1){
+        int switchBuildings = enterValidInt(0, 1);
+        while (switchBuildings == 1) {
             System.out.println("Enter 1 to modify an existing building.\nEnter 2 to create a new building.\nEnter 0 to go back.");
-            int option = enterValidInt(0,2);
+            int option = enterValidInt(0, 2);
             try {
                 switch (option) {
                     case 1:
@@ -69,29 +102,39 @@ public class UIImpl implements UI{
                     default:
                         System.out.println("There was a problem selecting buildings");
                 }
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Error type " + e.getMessage() + " occured.");
             }
         }
         System.out.println(buildingOutput(demoBuilding));
-        for(int i=0; i<4; i++) {
+        for (int i = 0; i < 4; i++) {
             System.out.println(displayWalls(demoBuilding.getWall(i)));
         }
+        System.out.println("Select which file to save to.");
+        int saveChoice = displayAvailableFiles();
+        this.saveFileOut = selectOutFile(saveChoice);
+        boolean didSave = saveToFile(saveFileOut,demoBuilding);
+        while(!didSave){
+            System.out.println("Save failed. Try again.");
+            saveChoice = displayAvailableFiles();
+            this.saveFileOut = selectOutFile(saveChoice);
+            didSave = saveToFile(saveFileOut,demoBuilding);
+        }
+        System.out.println("Save success!");
         this.userIn.close();
     }
 
-    public Building createNewBuilding(){
+    public Building createNewBuilding() {
         double height = initializeHeight();
         double width = initializeWidth();
-        double length =initializeLength();
+        double length = initializeLength();
         Building demoBuilding = new BuildingImpl(length, width, height);
         Roof roof = new RoofImpl(width, length, 2, height);
         ExternalWall newWall1 = new ExternalWall();
         ExternalWall newWall2 = new ExternalWall();
         double thickness = requestWallThickness();
-        System.out.println("Select a material from the list below\n"+ displayMaterialsByArea());
-        int option = enterValidInt(1,6);
+        System.out.println("Select a material from the list below\n" + displayMaterialsByArea());
+        int option = enterValidInt(1, 6);
         MaterialByArea selectMaterial = chooseMaterial(option);
         newWall1.setHeight(demoBuilding.getHeight());
         newWall1.setLength(demoBuilding.getLength());
@@ -118,7 +161,7 @@ public class UIImpl implements UI{
         return demoBuilding;
 
     }
-    
+
     //    will modify all 4
     public boolean modifyWalls(Building demoBuilding) {
         boolean goodEntry;
@@ -175,14 +218,13 @@ public class UIImpl implements UI{
                             break;
                         //Remove features from a wall
                         case 3:
-                            if(demoBuilding.getWall(wallIndex).getFeatureListSize() > 0) {
+                            if (demoBuilding.getWall(wallIndex).getFeatureListSize() > 0) {
                                 System.out.println(displayWalls(demoBuilding.getWall(wallIndex)));
                                 System.out.println("\nEnter the number associated with the feature you would like to remove");
                                 chooseFromDisplay = enterValidInt(1, demoBuilding.getWall(wallIndex).getFeatureListSize());
                                 displayWalls(demoBuilding.getWall(wallIndex));
                                 demoBuilding.getWall(wallIndex).removeFeature(chooseFromDisplay - 1);//minus one bc index
-                            }
-                            else if (demoBuilding.getWall(wallIndex).getFeatureListSize() == 0){
+                            } else if (demoBuilding.getWall(wallIndex).getFeatureListSize() == 0) {
                                 System.out.println("There are no features to remove from this wall.");
                             }
                             break;
@@ -197,8 +239,7 @@ public class UIImpl implements UI{
                     String message = e.getMessage();
                     System.out.println("Error of type " + message + " occurred.");
                 }
-            }
-            else {
+            } else {
                 done = true;
             }
         }
@@ -207,7 +248,7 @@ public class UIImpl implements UI{
 
 
     public MaterialByUnit chooseWindows(int option) {
-        switch (option){
+        switch (option) {
             case 1:
                 return new BayWindow();
             case 2:
@@ -226,7 +267,7 @@ public class UIImpl implements UI{
 
     public MaterialByUnit chooseDoors(int option) {
         // change option menus to map <K, V>??
-        switch (option){
+        switch (option) {
             case 1:
                 return new Door();
             case 2:
@@ -269,12 +310,12 @@ public class UIImpl implements UI{
         }
     }
 
-    public double initializeLength(){
+    public double initializeLength() {
         boolean goodEntry;
         System.out.println("Enter the length of the structure");
         String length = userIn.next();
         goodEntry = checkValidDouble(length);
-        while(!goodEntry){
+        while (!goodEntry) {
             System.out.println("Invalid entry. Please enter the length of the structure");
             length = userIn.next();
             goodEntry = checkValidDouble(length);
@@ -283,12 +324,12 @@ public class UIImpl implements UI{
     }
 
 
-    public double initializeHeight(){
+    public double initializeHeight() {
         boolean goodEntry;
         System.out.println("Enter the height of the structure");
         String height = userIn.next();
         goodEntry = checkValidDouble(height);
-        while(!goodEntry){
+        while (!goodEntry) {
             System.out.println("Invalid entry. Please enter the height of the structure");
             height = userIn.next();
             goodEntry = checkValidDouble(height);
@@ -297,12 +338,12 @@ public class UIImpl implements UI{
     }
 
 
-    public double initializeWidth(){
+    public double initializeWidth() {
         boolean goodEntry;
         System.out.println("Enter the width of the structure");
         String width = userIn.next();
         goodEntry = checkValidDouble(width);
-        while(!goodEntry){
+        while (!goodEntry) {
             System.out.println("Invalid entry. Please enter the width of the structure");
             width = userIn.next();
             goodEntry = checkValidDouble(width);
@@ -310,19 +351,19 @@ public class UIImpl implements UI{
         return Double.parseDouble(width);
     }
 
-    public double requestWallThickness(){
+    public double requestWallThickness() {
         System.out.println("Please enter desired wall thickness");
         String thicknessStr = userIn.next();
         boolean goodEntry = checkValidDouble(thicknessStr);
         double thickness = -1;
-        if(goodEntry){
+        if (goodEntry) {
             thickness = Double.parseDouble(thicknessStr);
         }
-        while(thickness  < 0.1 || !goodEntry){
+        while (thickness < 0.1 || !goodEntry) {
             System.out.println("Invalid entry. Please enter desired wall thickness");
             thicknessStr = userIn.next();
             goodEntry = checkValidDouble(thicknessStr);
-            if(goodEntry){
+            if (goodEntry) {
                 thickness = Double.parseDouble(thicknessStr);
             }
         }
@@ -330,16 +371,12 @@ public class UIImpl implements UI{
     }
 
 
-
-
-
     @Override
     public boolean checkYesOrNo(String userInput) {
         //Shorten the string
-        if(userInput.length() < 1){
+        if (userInput.length() < 1) {
             return false;
-        }
-        else{
+        } else {
             String shortUserInput = userInput.substring(0, 1);
             //Lowercase the string
             shortUserInput = shortUserInput.toLowerCase();
@@ -354,13 +391,11 @@ public class UIImpl implements UI{
 
     @Override
     public boolean checkValidDouble(String userInput) {
-        if(userInput.length() < 1){ //quick false for empty string
+        if (userInput.length() < 1) { //quick false for empty string
             return false;
-        }
-        else if(isLetter(userInput.charAt(userInput.length()-1))){ //fixes error with parseDouble
+        } else if (isLetter(userInput.charAt(userInput.length() - 1))) { //fixes error with parseDouble
             return false;
-        }
-        else{
+        } else {
             try {   //tries to parse as a double, throws exception if not double
                 Double.parseDouble(userInput);
                 return true;
@@ -372,23 +407,20 @@ public class UIImpl implements UI{
 
     @Override
     public boolean checkValidInt(String userInput) {
-       if(userInput.length() < 1){  //quick false for empty string
-           return false;
-       }
-       else{
-           try
-           {
-               Integer.parseInt(userInput);
-               return true;
-           } catch (NumberFormatException e)
-           {
-               return false;
-           }
-       }
+        if (userInput.length() < 1) {  //quick false for empty string
+            return false;
+        } else {
+            try {
+                Integer.parseInt(userInput);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
     }
 
     @Override
-    public String displayMaterialsByArea(){
+    public String displayMaterialsByArea() {
         Brick brick = new Brick();
         ClayBrick clayBrick = new ClayBrick();
         ConcreteBrick concreteBrick = new ConcreteBrick();
@@ -406,7 +438,7 @@ public class UIImpl implements UI{
     }
 
     @Override
-    public String displayDoors(){
+    public String displayDoors() {
         Door door = new Door();
         GarageDoor garageDoor = new GarageDoor();
         InteriorDoor interiorDoor = new InteriorDoor();
@@ -424,7 +456,7 @@ public class UIImpl implements UI{
     }
 
     @Override
-    public String displayWindows(){
+    public String displayWindows() {
         BayWindow bayWindow = new BayWindow();
         DoubleHungWindow doubleHungWindow = new DoubleHungWindow();
         PictureWindow pictureWindow = new PictureWindow();
@@ -439,7 +471,7 @@ public class UIImpl implements UI{
         return display;
     }
 
-    public String buildingOutput(Building demoBuilding){
+    public String buildingOutput(Building demoBuilding) {
         try {
             String buildingString;
 //        print structure params, each wall by parameter, print roof
@@ -449,14 +481,13 @@ public class UIImpl implements UI{
             buildingString += "Length: " + Double.toString(demoBuilding.getLength()) + "\n\n";
             buildingString += "Total Cost: $" + Double.toString(demoBuilding.calcTotalCost());
             return buildingString;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error of type " + e.getMessage() + " occurred.");
             return null;
         }
     }
 
-    public String displayWalls(Wall wallIn){
+    public String displayWalls(Wall wallIn) {
         String wallString;
         wallString = "\nWall Information: ";
         wallString += "\nHeight: " + Double.toString(wallIn.getHeight()) + "\n";
@@ -464,28 +495,28 @@ public class UIImpl implements UI{
         wallString += "Thickness: " + Double.toString(wallIn.getThickness()) + "\n";
         wallString += "Material: " + wallIn.getMaterial();
         wallString += "\n\nFeatures List:\n";
-        for(int i =0; i<wallIn.getFeatureListSize(); i++){
-            wallString += (i+1) + ": " + wallIn.getFeature(i).toString() + "\n";
+        for (int i = 0; i < wallIn.getFeatureListSize(); i++) {
+            wallString += (i + 1) + ": " + wallIn.getFeature(i).toString() + "\n";
         }
-        wallString+="\n";
+        wallString += "\n";
         return wallString;
 
     }
 
     //creates a dummy building for testing purposes
     @Override
-    public void dummyBuilding(){
+    public void dummyBuilding() {
         Building newBuilding = new BuildingImpl(60, 60, 12);
         buildingList.add(newBuilding);
     }
 
     @Override
-    public void createBuilding(){
+    public void createBuilding() {
 
     }
 
     @Override
-    public void addBuilding(Building building){
+    public void addBuilding(Building building) {
         buildingList.add(building);
     }
 
@@ -624,7 +655,7 @@ public class UIImpl implements UI{
                 }
             }
             MaterialByArea newMaterial;
-            switch (selection){
+            switch (selection) {
                 case 1:
                     newMaterial = new Brick();
                     break;
@@ -651,15 +682,13 @@ public class UIImpl implements UI{
 
             ExternalWall wall = new ExternalWall(height, length, width, start, newMaterial);
 
-            if(wall.getTopCoordinates()[0] > this.buildingList.get(idx).getLength()){
+            if (wall.getTopCoordinates()[0] > this.buildingList.get(idx).getLength()) {
                 System.out.print("Error: Wall is longer than the building");
                 return false;
-            }
-            else if(wall.getTopCoordinates()[1] > this.buildingList.get(idx).getWidth()){
+            } else if (wall.getTopCoordinates()[1] > this.buildingList.get(idx).getWidth()) {
                 System.out.print("Error: Wall is wider than the building");
                 return false;
-            }
-            else if(wall.getTopCoordinates()[2] > this.buildingList.get(idx).getHeight()){
+            } else if (wall.getTopCoordinates()[2] > this.buildingList.get(idx).getHeight()) {
                 System.out.print("Error: Wall is taller than the building");
                 return false;
             }
@@ -669,32 +698,93 @@ public class UIImpl implements UI{
         }
     }
 
-    //displays the available files
-    public void displayAvailableFiles(){
+    /**
+     * Displays the available files
+     *
+     * @return the number of available files
+     */
+    public int displayAvailableFiles() {
         FileInput masterIn = new FileInputImpl("masterFile.txt");
         String[] listOfFiles = masterIn.loadFileNames();
         String displayString = "Available Files:\n";
-        for(int i = 0; i < listOfFiles.length; i++){
-            displayString += i + ": " + listOfFiles[i] + "\n";
+        for (int i = 0; i < listOfFiles.length; i++) {
+            displayString += (i+1) + ": " + listOfFiles[i] + "\n";
         }
         System.out.println(displayString);
+        System.out.println("Select which save file you wish to use:");
+        int selection = enterValidInt(1, listOfFiles.length);
+        return selection-1;
     }
 
     /**
      * Select a file to input/output to from masterFile.txt
+     *
      * @param choice integer valueo of the choice from files
      * @return FileInput object with the file string of the selection
      */
-    public FileInput selectAvailableFile(int choice){
+    public FileInput selectInFile(int choice) {
         FileInput masterIn = new FileInputImpl("masterFile.txt");
         String[] listOfFiles = masterIn.loadFileNames();
         FileInput fileIn;
-        if(choice < listOfFiles.length){
-            fileIn = new FileInputImpl(listOfFiles[choice]+".txt");
+        if (choice < listOfFiles.length) {
+            fileIn = new FileInputImpl(listOfFiles[choice] + ".txt");
             return fileIn;
-        }else{
-            System.out.println("Invalid file number.");
+        } else {
+            System.out.println("Invalid file input name.");
             return null;
         }
+    }
+
+    /**
+     * Generates the FileOutput for a choice from the save slots
+     *
+     * @param choice number for save slot
+     * @return FileOutput of what is to be saved
+     */
+    public FileOutput selectOutFile(int choice) {
+        FileInput masterIn = new FileInputImpl("masterFile.txt");
+        String[] listOfFiles = masterIn.loadFileNames();
+        FileOutput fileOut;
+        if (choice < listOfFiles.length) {
+            fileOut = new FileOutputImpl(listOfFiles[choice] + ".txt");
+            return fileOut;
+        } else {
+            System.out.println("Invalid file output name.");
+            return null;
+        }
+    }
+
+    /**
+     * Saves the building to the file
+     *
+     * @param file           FileOutput save slot
+     * @param buildingToSave Building which is going to be saved to a file
+     * @return true is successful save, false otherwise
+     */
+    public boolean saveToFile(FileOutput file, Building buildingToSave) {
+        String outString = file.generateOutString(buildingToSave);
+        boolean didSave = file.saveToFile(outString);
+        return didSave;
+    }
+
+    public Building keepLoading() {
+        Building demoBuilding;
+        int saveSlotNum = displayAvailableFiles();
+        saveFileIn = selectInFile(saveSlotNum);
+        demoBuilding = saveFileIn.loadFromFile();
+        while (demoBuilding == null) {
+            System.out.println("That file is empty. You may try another or build a new building.");
+            System.out.println("1. Try another save slot. \n2. Build a new building.");
+            int userNum = enterValidInt(1, 2);
+            if(userNum == 1) {
+                saveSlotNum = displayAvailableFiles();
+                saveFileIn = selectInFile(saveSlotNum);
+                demoBuilding = saveFileIn.loadFromFile();
+                saveFileOut = selectOutFile(saveSlotNum);
+            }else {
+                demoBuilding = createNewBuilding();
+            }
+        }
+        return demoBuilding;
     }
 }
