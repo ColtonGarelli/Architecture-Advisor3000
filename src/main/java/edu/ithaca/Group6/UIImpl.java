@@ -84,11 +84,11 @@ public class UIImpl implements UI{
         double height = initializeHeight();
         double width = initializeWidth();
         double length =initializeLength();
+        double thickness = requestWallThickness();
         Building demoBuilding = new BuildingImpl(length, width, height);
         Roof roof = new RoofImpl(width, length, 2, height);
         ExternalWall newWall1 = new ExternalWall();
         ExternalWall newWall2 = new ExternalWall();
-        double thickness = requestWallThickness();
         System.out.println("Select a material from the list below\n"+ displayMaterialsByArea());
         int option = enterValidInt(1,6);
         MaterialByArea selectMaterial = chooseMaterial(option);
@@ -206,6 +206,7 @@ public class UIImpl implements UI{
 
 
     public MaterialByUnit chooseWindows(int option) {
+
         switch (option){
             case 1:
                 return new BayWindow();
@@ -327,11 +328,7 @@ public class UIImpl implements UI{
         }
         return thickness;
     }
-
-
-
-
-
+    
     @Override
     public boolean checkYesOrNo(String userInput) {
         //Shorten the string
