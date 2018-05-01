@@ -6,16 +6,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class FloorTest {
 
-
+    @Test
     void constructorTest(){
-
+        
 
     }
-
+    @Test
     void settersTest(){
 
     }
 
+    @Test
     void gettersTest(){
 
     }
