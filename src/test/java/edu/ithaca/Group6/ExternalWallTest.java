@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.lang.Math;
 
 public class ExternalWallTest {
     Wall testWall;
@@ -331,9 +332,8 @@ public class ExternalWallTest {
         double wall2Cost = 30*60*.5;
         wall2Cost =wall2Cost-(.5*.5)/2;
         wall2Cost = wall2Cost*142.34231564;
-        assertEquals(wall1Cost, testWall.calcCost(), "Wall cost was not corrected for overlap");
-        assertEquals(wall2Cost, testWall2.calcCost(), "Wall cost was not corrected for overlap");
-
+        assertEquals(Math.round(wall1Cost), Math.round(testWall.calcCost()), "Wall cost was not corrected for overlap");
+        assertEquals(Math.round(wall2Cost), Math.round(testWall2.calcCost()), "Wall cost was not corrected for overlap");
 
     }
 
