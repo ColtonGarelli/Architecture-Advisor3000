@@ -1,5 +1,5 @@
 W: [0.0,0.0,0.0]_[0.2,3.0,4.0]_Wood : $1.00 per square foot_Bay Window : $1198.66, Length: 6.13ft, Width: 1.00ft, Height: 5.08ft_
-W: [0.0,3.0,0.0]_[2.0,2.8,4.0]_Wood : $1.00 per square foot_
+W: [0.0,3.0,0.0]_[2.0,2.8,4.0]_Wood : $1.00 per square foot_Interior Door : $377.76, Length: 3.00ft, Width: 0.15ft, Height: 6.67ft_
 W: [2.0,3.0,0.0]_[1.8,0.0,4.0]_Wood : $1.00 per square foot_
 W: [2.0,0.0,0.0]_[0.0,0.2,4.0]_Wood : $1.00 per square foot_
 R: [0.0,0.0,4.0]_[2.0,3.0,4.2]_

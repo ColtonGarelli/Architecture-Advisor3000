@@ -88,13 +88,38 @@ public class UIImpl implements UI {
         System.out.println("To create or select another building, enter 1. To quit enter 0.");
         int switchBuildings = enterValidInt(0, 1);
         while (switchBuildings == 1) {
-            System.out.println("Enter 1 to modify an existing building.\nEnter 2 to create a new building.\nEnter 0 to go back.");
-            int option = enterValidInt(0, 2);
+            System.out.println("Enter 1 to modify an existing building.\nEnter 2 to create a new building.\nEnter 3 to save your existing building.\nEnter 0 to go back.");
+            int option = enterValidInt(0, 3);
             try {
                 switch (option) {
                     case 1:
+                        demoBuilding = keepLoading();
+                        this.addBuilding(demoBuilding);
+                        modificationsDone = false;
+                        while (!modificationsDone) {
+                            modificationsDone = modifyWalls(demoBuilding);
+                        }
                         break;
                     case 2:
+                        demoBuilding = createNewBuilding();
+                        this.addBuilding(demoBuilding);
+                        modificationsDone = false;
+                        while (!modificationsDone) {
+                            modificationsDone = modifyWalls(demoBuilding);
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Select which file to save to.");
+                        int saveChoice = displayAvailableFiles();
+                        this.saveFileOut = selectOutFile(saveChoice);
+                        boolean didSave = saveToFile(saveFileOut,demoBuilding);
+                        while(!didSave){
+                            System.out.println("Save failed. Try again.");
+                            saveChoice = displayAvailableFiles();
+                            this.saveFileOut = selectOutFile(saveChoice);
+                            didSave = saveToFile(saveFileOut,demoBuilding);
+                        }
+                        System.out.println("Save success!");
                         break;
                     case 0:
                         switchBuildings = 0;
