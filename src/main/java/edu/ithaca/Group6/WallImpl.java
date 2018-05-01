@@ -30,6 +30,7 @@ class ExternalWall extends WallImpl {
     public ExternalWall() {
         this.featuresList = new ArrayList<MaterialByUnit>();
         this.setBottomCoordinates(0,0,0);
+        this.material = new Wood();
     }
 
     public ExternalWall(double height, double changeY, double changeX, double[] startPoint, MaterialByArea material){
@@ -134,8 +135,11 @@ class ExternalWall extends WallImpl {
     }
 
     public boolean addFeature(MaterialByUnit feature) {
-        try{this.featuresList.add(feature);
-        return true;}catch(Exception e){
+        try{
+            this.featuresList.add(feature);
+            return true;
+        }
+        catch(Exception e){
             return false;
         }
     }
@@ -162,6 +166,7 @@ class ExternalWall extends WallImpl {
     @Override
     public String outString() {
         String wallString = "W: " + "[" + this.bottomCoordinates[0] + "," + this.bottomCoordinates[1] + "," + this.bottomCoordinates[2] + "]"  + "_" + "[" + this.topCoordinates[0] + "," + this.topCoordinates[1] + "," + this.topCoordinates[2] + "]" +"_";
+        wallString += this.getMaterial().toString()+"_";
         for(int i = 0; i < this.featuresList.size(); i++){
             wallString += this.getFeature(i).toString() + "_";
         }
