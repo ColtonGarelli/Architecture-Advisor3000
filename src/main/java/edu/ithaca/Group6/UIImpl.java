@@ -1,8 +1,9 @@
 package edu.ithaca.Group6;
 //import javafx.scene.paint.Material;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import static java.lang.Character.isLetter;
 
 public class UIImpl implements UI{
@@ -665,6 +666,35 @@ public class UIImpl implements UI{
             this.buildingList.get(idx).addWall(wall);
             System.out.println("Wall Added");
             return true;
+        }
+    }
+
+    //displays the available files
+    public void displayAvailableFiles(){
+        FileInput masterIn = new FileInputImpl("masterFile.txt");
+        String[] listOfFiles = masterIn.loadFileNames();
+        String displayString = "Available Files:\n";
+        for(int i = 0; i < listOfFiles.length; i++){
+            displayString += i + ": " + listOfFiles[i] + "\n";
+        }
+        System.out.println(displayString);
+    }
+
+    /**
+     * Select a file to input/output to from masterFile.txt
+     * @param choice integer valueo of the choice from files
+     * @return FileInput object with the file string of the selection
+     */
+    public FileInput selectAvailableFile(int choice){
+        FileInput masterIn = new FileInputImpl("masterFile.txt");
+        String[] listOfFiles = masterIn.loadFileNames();
+        FileInput fileIn;
+        if(choice < listOfFiles.length){
+            fileIn = new FileInputImpl(listOfFiles[choice]+".txt");
+            return fileIn;
+        }else{
+            System.out.println("Invalid file number.");
+            return null;
         }
     }
 }
