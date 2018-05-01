@@ -820,6 +820,8 @@ public class UIImpl implements UI {
             System.out.println("1.) Display Existing Buildings");
             System.out.println("2.) Create Building");
             System.out.println("3.) Modify an existing building");
+            System.out.println("4.) Import Buildings");
+            System.out.println("5.) Export Buildings");
             String entry = userIn.next();
             boolean goodEntry = checkValidInt(entry);
             while (goodEntry == false) {
@@ -828,6 +830,8 @@ public class UIImpl implements UI {
                 System.out.println("1.) Display Existing Buildings");
                 System.out.println("2.) Create Building");
                 System.out.println("3.) Modify an existing building");
+                System.out.println("4.) Import Buildings");
+                System.out.println("5.) Export Buildings");
                 entry = userIn.next();
                 goodEntry = checkValidInt(entry);
             }
@@ -840,6 +844,10 @@ public class UIImpl implements UI {
                     break;
                 case 3: //select a building from the arrayList
                     architectModify(0);
+                    break;
+                case 4:
+                    break;
+                case 5:
                     break;
                 default:
                     break;
@@ -859,16 +867,17 @@ public class UIImpl implements UI {
         //System.out.println("Existing buildings:");
         //Display list of buildings
         System.out.println("1.) Add a New Wall to an Existing Building");
-        System.out.println("2.) Add a Feature to a Wall");
-        System.out.println("3.) Remove a Feature from a Wall");
+        System.out.println("2.) Add a New Ceiling to an Existing Building");
+        System.out.println("3.) Add a Feature to a Wall");
+        System.out.println("4.) Remove a Feature from a Wall");
         String entry = userIn.next();
         boolean goodEntry = checkValidInt(entry);
         while(goodEntry==false){
-            System.out.println("Invalid Entry.");
-            System.out.println("What would you like to do?");
             System.out.println("1.) Add a New Wall to an Existing Building");
-            System.out.println("2.) Add a Feature to a Wall");
-            System.out.println("3.) Remove a Feature from a Wall");
+            System.out.println("2.) Add a New Ceiling to an Existing Building");
+            System.out.println("3.) Add Stairs to an Existing Building");
+            System.out.println("4.) Add a Feature to a Wall");
+            System.out.println("5.) Remove a Feature from a Wall");
             entry = userIn.next();
             goodEntry = checkValidInt(entry);
         }
@@ -876,9 +885,13 @@ public class UIImpl implements UI {
         switch (entryInt) {
             case 1: this.addWall(idx);
                     break;
-            case 2: this.addWallFeature(buildingList.get(idx));
-                    break;
+            case 2:
+                break;
             case 3:
+                break;
+            case 4: this.addWallFeature(buildingList.get(idx));
+                    break;
+            case 5:
                     break;
             default: break;
         }
