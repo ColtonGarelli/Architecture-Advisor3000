@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 public class FileInputImpl implements FileInput {
     private String fileInName;
@@ -47,7 +49,28 @@ public class FileInputImpl implements FileInput {
                     System.err.println("File invalid format.");
                 }
             }
+            returnBuilding.setHeight(returnBuilding.getWall(0).getHeight());
+            returnBuilding.setWidth(returnBuilding.getWall(0).getLength());
+            returnBuilding.setLength(returnBuilding.getWall(1).getLength());
             return returnBuilding;
+        }catch(IOException e){
+            System.out.println("File not found.");
+        }
+        return null;
+    }
+
+    @Override
+    public String[] loadFileNames() {
+        String line;
+        List<String> fileNameList = new LinkedList<String>();
+        try {
+            while (this.inReader.ready()){
+                line = this.inReader.readLine();
+                fileNameList.add(line);
+            }
+            String[] fileNameArray = new String[fileNameList.size()];
+            fileNameArray = fileNameList.toArray(fileNameArray);
+            return fileNameArray;
         }catch(IOException e){
             System.out.println("File not found.");
         }
