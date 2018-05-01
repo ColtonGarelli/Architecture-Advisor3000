@@ -792,6 +792,10 @@ public class UIImpl implements UI {
         return didSave;
     }
 
+    /**
+     * Makes it so the program only continues if the file isn't empty (not null building!)
+     * @return building loaded from selected file
+     */
     public Building keepLoading() {
         Building demoBuilding;
         int saveSlotNum = displayAvailableFiles();
