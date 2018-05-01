@@ -616,8 +616,7 @@ public class UIImpl implements UI{
         System.out.println("Number of Existing walls: " + building.walls.size());
         int wallToChange = enterValidInt(1, building.walls.size());
         int wallIndex = wallToChange-1;
-        System.out.println("Wall being modified:\n" + displayWalls(building.getWall(wallIndex)));
-        int option = enterValidInt(0,3);
+        System.out.println("Wall being modified: Wall " + wallToChange);
 
         int chooseFromDisplay;
         /**if (option == 1) {
@@ -644,6 +643,7 @@ public class UIImpl implements UI{
             chooseFromDisplay = enterValidInt(1,5);
             building.addWallFeature(wallIndex, chooseWindows(chooseFromDisplay));
         }
+        System.out.println("Feature Added!");
         /*}
 //            Remove features from a wall
         else if (option == 3) {
@@ -676,16 +676,17 @@ public class UIImpl implements UI{
         }
         int entryInt = Integer.parseInt(entry);
         switch (entryInt) {
-            case 1: architectMain();
+            case 1: System.out.println("Hello Architect.");
+                    architectMain();
                     break;
-            case 2: builderMain();
+            case 2: System.out.println("Hello Builder.");
+                    builderMain();
                     break;
             default: break;
         }
     }
 
     public void architectMain(){
-        System.out.println("Hello Architect.");
         System.out.println("What would you like to do?");
         System.out.println("1.) Display Existing Buildings");
         System.out.println("2.) Create Building");
@@ -744,7 +745,6 @@ public class UIImpl implements UI{
 
     public void builderMain(){
         String repeat = "yes";
-        System.out.println("Hello Builder.");
         while(repeat.equals("yes")) {
             System.out.println("Existing Buildings:");
             //Display list of existing buildings
