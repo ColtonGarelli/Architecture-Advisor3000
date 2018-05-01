@@ -312,4 +312,29 @@ public class ExternalWallTest {
         assertFalse(this.testWall.removeFeature(-1),"Removed improper index");
     }
 
+    @Test
+    void testCalcCorrection(){
+        ExternalWall testWall = new ExternalWall();
+        ExternalWall testWall2 = new ExternalWall();
+        //1.00
+        testWall.setMaterial(new Wood());
+        //142.34231564
+        testWall2.setMaterial(new Brick());
+        testWall.setLength(50);
+        testWall.setHeight(60);
+        testWall.setThickness(.5);
+        double wall1Cost = 50*60*.5;
+        wall1Cost = wall1Cost-(.5*.5)/2;
+        testWall2.setLength(30);
+        testWall2.setHeight(60);
+        testWall2.setThickness(.5);
+        double wall2Cost = 30*60*.5;
+        wall2Cost =wall2Cost-(.5*.5)/2;
+        wall2Cost = wall2Cost*142.34231564;
+        assertEquals(wall1Cost, testWall.calcCost(), "Wall cost was not corrected for overlap");
+        assertEquals(wall2Cost, testWall2.calcCost(), "Wall cost was not corrected for overlap");
+
+
+    }
+
 }

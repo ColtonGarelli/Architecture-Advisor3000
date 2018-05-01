@@ -245,4 +245,6 @@ public class Building_Test {
         assertEquals(testMaterial,testBuilding.getWall(0).getMaterial());
         assertEquals(testMaterial2,testBuilding.getWall(1).getMaterial());
     }
+
+
 }
