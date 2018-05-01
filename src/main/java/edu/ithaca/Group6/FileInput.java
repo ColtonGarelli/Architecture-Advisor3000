@@ -16,4 +16,10 @@ public interface FileInput {
      * @return Building of the file
      */
     public Building loadFromFile();
+
+    /**
+     * Loads the master file that contains the smaller files
+     * @return a string array of file names to load from
+     */
+    public String[] loadFileNames();
 }

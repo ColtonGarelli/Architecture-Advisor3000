@@ -74,7 +74,14 @@ public class FileInput_Test {
         assertArrayEquals(newTopCoords, testWall.getTopCoordinates(),"Didn't get top coords 2");
 
         assertEquals(testMaterial.toString(),testWall.getMaterial().toString(),"Didn't get wall material 2");
+    }
 
+    @Test
+    public void testLoadFileNames(){
+        testIn = new FileInputImpl("masterFile.txt");
+        String[] fileList = {"File1","File2","File3","File4","File5"};
+
+        assertArrayEquals(fileList,testIn.loadFileNames(),"Didn't get the proper text files from master file.");
 
     }
 }

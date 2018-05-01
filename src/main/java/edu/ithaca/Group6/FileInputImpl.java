@@ -54,6 +54,11 @@ public class FileInputImpl implements FileInput {
         return null;
     }
 
+    @Override
+    public String[] loadFileNames() {
+        return null;
+    }
+
     public ExternalWall buildWall(String wallString){
         wallString = wallString.substring(3);
         String[] stringBreakdown = wallString.split("\\_");
