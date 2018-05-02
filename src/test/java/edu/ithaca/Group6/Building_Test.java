@@ -75,25 +75,32 @@ public class Building_Test {
         assertEquals(0, totalCost1, "Innacurate calculation of total cost - No Walls");
         ExternalWall wall1 = new ExternalWall(12, 5, 5, startPoint1, testMaterial1);
         building1.addWall(wall1);
-        assertEquals(300, building1.calcTotalCost(), "Innacurate calculation of total cost - One Wall");
+        double expected = (wall1.getHeight()*wall1.getLength()*wall1.getThickness());
+        double correction = ((expected-(wall1.getThickness()*wall1.getThickness())/2))*wall1.getMaterial().getCostPerSquareFoot();
+        assertEquals(correction, building1.calcTotalCost(), "Innacurate calculation of total cost - One Wall");
         double[] startPoint2 = new double[]{55.0, 0.0, 0.0};
         ExternalWall wall2 = new ExternalWall(12, 5, 5, startPoint2, testMaterial1);
         building1.addWall(wall2);
-        assertEquals(600, building1.calcTotalCost(), "Innacurate calculation of total cost - Two Walls");
+        expected = (wall2.getHeight()*wall2.getLength()*wall2.getThickness());
+        correction += ((expected-(wall2.getThickness()*wall2.getThickness())/2))*wall2.getMaterial().getCostPerSquareFoot();
+        assertEquals(correction, building1.calcTotalCost(), "Innacurate calculation of total cost - Two Walls");
         double[] startPoint3 = new double[]{30.0, 0.0, 0.0};
         ExternalWall wall3 = new ExternalWall(12, 5, 5, startPoint3, testMaterial2);
         building1.addWall(wall3);
-        assertEquals(1098, building1.calcTotalCost(), "Innacurate calculation of total cost - Walls of Different Materials");
+        expected = (wall3.getHeight()*wall3.getLength()*wall3.getThickness());
+        correction += ((expected-(wall3.getThickness()*wall3.getThickness())/2))*wall3.getMaterial().getCostPerSquareFoot();
+
+        assertEquals(correction, building1.calcTotalCost(), "Innacurate calculation of total cost - Walls of Different Materials");
 
         MaterialByUnit testDoor = new Door();
         building1.addWallFeature(0, testDoor, startPoint1);
-        assertEquals(1998, building1.calcTotalCost(), "Innaccurate Calculation of total cost - One Feature in One Wall");
+        assertEquals(correction+900, building1.calcTotalCost(), "Innaccurate Calculation of total cost - One Feature in One Wall");
         MaterialByUnit testWindow = new PictureWindow();
         double[] startPoint4 = new double[]{0.0, 0.0, 10.0};
         building1.addWallFeature(0, testWindow, startPoint4);
-        assertEquals(2250, building1.calcTotalCost(), "Innaccurate Calculation of total cost - Two Features in One Wall");
+        assertEquals(correction+900+252, building1.calcTotalCost(), "Innaccurate Calculation of total cost - Two Features in One Wall");
         building1.addWallFeature(0, testDoor, startPoint2);
-        assertEquals(3150, building1.calcTotalCost(), "Innaccurate Calculation of total cost - Mulitple Features in Multiple Walls");
+        assertEquals(correction+900+252+900, building1.calcTotalCost(), "Innaccurate Calculation of total cost - Mulitple Features in Multiple Walls");
     }
 
 //    @Test

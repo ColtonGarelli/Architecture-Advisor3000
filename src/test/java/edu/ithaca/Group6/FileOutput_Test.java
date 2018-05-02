@@ -38,6 +38,7 @@ public class FileOutput_Test {
                 +"R: [0.0,0.0,"+heightIn+"]_"+"["+xEdge+","+yEdge+","+(heightIn+thickness)+"]_"+"\n";
         assertEquals(buildingString,testOut.generateOutString(testBuilding),"Did not properly output a building string");
         buildingString += "F: Brick_10.0\n";
+        testBuilding.addFloor(new FloorImpl(10.0, new Brick()));
         assertEquals(buildingString, testOut.generateOutString(testBuilding));
 
     }

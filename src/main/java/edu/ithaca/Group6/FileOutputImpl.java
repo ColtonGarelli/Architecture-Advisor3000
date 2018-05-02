@@ -38,8 +38,9 @@ public class FileOutputImpl implements FileOutput {
         buildString += "R: " + buildingToOutput.getRoof().getFirstCornerCoordString() + "_";
         buildString += buildingToOutput.getRoof().getSecondCornerCoordString() + "_" +"\n";
         for(int i=0; i< buildingToOutput.getNumberOfFloors(); i++){
-            buildString += buildingToOutput.getFloor(i).floorOutString();
+            buildString += buildingToOutput.getFloor(i).floorOutString() + "\n";
         }
+
         return buildString;
     }
 
