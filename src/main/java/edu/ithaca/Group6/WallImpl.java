@@ -24,6 +24,7 @@ class ExternalWall extends WallImpl {
     private double thickness;
     private MaterialByArea material;
     private ArrayList<MaterialByUnit> featuresList;
+    private Stairs stairs;
     private double[] bottomCoordinates = new double[3];
     private double[] topCoordinates = new double[3];
 
@@ -144,7 +145,6 @@ class ExternalWall extends WallImpl {
         }
     }
 
-
     public MaterialByUnit getFeature(int index) {
         return this.featuresList.get(index);
     }
@@ -172,5 +172,9 @@ class ExternalWall extends WallImpl {
         }
         wallString += "\n";
         return wallString;
+    }
+
+    public void addStairs(Stairs newStairs){
+        this.stairs = newStairs;
     }
 }

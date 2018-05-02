@@ -785,6 +785,117 @@ public class UIImpl implements UI {
     }
 
     @Override
+    public void addStairs(BuildingImpl building){
+        System.out.println("Choose a wall to modify");
+        System.out.println("Number of Existing walls: " + building.walls.size());
+        int wallToChange = enterValidInt(1, building.walls.size());
+        int wallIndex = wallToChange-1;
+        System.out.println("Wall being modified: Wall " + wallToChange);
+
+        //Input stairs height
+        System.out.println("Enter a height for the stairs");
+        String heightStr = userIn.next();
+        boolean heightEntry = checkValidDouble(heightStr);
+        double height = -1;
+        if (heightEntry) {
+            height = Double.parseDouble(heightStr);
+        }
+        while (height < 0.1 || !heightEntry) {
+            System.out.println("Invalid entry. Please enter desired stairs height");
+            heightStr = userIn.next();
+            heightEntry = checkValidDouble(heightStr);
+            if (heightEntry) {
+                height = Double.parseDouble(heightStr);
+            }
+        }
+        //Input number of stairs
+        System.out.println("Enter the desired number of stairs");
+        String numStr = userIn.next();
+        boolean numEntry = checkValidInt(numStr);
+        int num = -1;
+        if (numEntry) {
+            num = Integer.parseInt(numStr);
+        }
+        while (num < 1 || !numEntry) {
+            System.out.println("Invalid entry. Please enter the desired number of stairs");
+            numStr = userIn.next();
+            numEntry = checkValidInt(numStr);
+            if (numEntry) {
+                num = Integer.parseInt(numStr);
+            }
+        }
+        //Input stairs width
+        System.out.println("Enter a width for the stairs");
+        String widthStr = userIn.next();
+        boolean widthEntry = checkValidDouble(widthStr);
+        double width = -1;
+        if (widthEntry) {
+            width = Double.parseDouble(widthStr);
+        }
+        while (width < 0.1 || !widthEntry) {
+            System.out.println("Invalid entry. Please enter desired stairs width");
+            widthStr = userIn.next();
+            widthEntry = checkValidDouble(widthStr);
+            if (widthEntry) {
+                width = Double.parseDouble(widthStr);
+            }
+        }
+        //Input stairs height
+        System.out.println("Enter a thickness for the stairs");
+        String thicknessStr = userIn.next();
+        boolean thicknessEntry = checkValidDouble(thicknessStr);
+        double thickness = -1;
+        if (thicknessEntry) {
+            thickness = Double.parseDouble(thicknessStr);
+        }
+        while (thickness < 0.1 || !thicknessEntry) {
+            System.out.println("Invalid entry. Please enter desired stairs thickness");
+            thicknessStr = userIn.next();
+            thicknessEntry = checkValidDouble(thicknessStr);
+            if (thicknessEntry) {
+                thickness = Double.parseDouble(thicknessStr);
+            }
+        }
+        //Input stairs material
+        System.out.println("Select a material to make the stairs out of");
+        System.out.println(this.displayMaterialsByArea());
+        String selectionStr = userIn.next();
+        boolean selectionEntry = checkValidInt(selectionStr);
+        int selection = 0;
+        if (selectionEntry) {
+            selection = Integer.parseInt(selectionStr);
+        }
+        MaterialByArea newMaterial;
+        switch (selection) {
+            case 1:
+                newMaterial = new Brick();
+                break;
+            case 2:
+                newMaterial = new ClayBrick();
+                break;
+            case 3:
+                newMaterial = new ConcreteBrick();
+                break;
+            case 4:
+                newMaterial = new TwoByFour();
+                break;
+            case 5:
+                newMaterial = new TwoByThree();
+                break;
+            case 6:
+                newMaterial = new Wood();
+                break;
+            default:
+                System.out.println("Invalid selection. Stair material has been set to Wood.");
+                newMaterial = new Wood();
+                break;
+        }
+        Stairs newStairs = new Stairs(height, num, width, thickness, newMaterial);
+        building.walls.get(wallIndex).addStairs(newStairs);
+        System.out.println("Stairs Added!");
+    }
+
+    @Override
     public void removeWallFeature(BuildingImpl building){
         System.out.println("Choose a wall to modify");
         System.out.println("Number of Existing walls: " + building.walls.size());
@@ -884,8 +995,9 @@ public class UIImpl implements UI {
         //Display list of buildings
         System.out.println("1.) Add a New Wall to an Existing Building");
         System.out.println("2.) Add a New Ceiling to an Existing Building");
-        System.out.println("3.) Add a Feature to a Wall");
-        System.out.println("4.) Remove a Feature from a Wall");
+        System.out.println("3.) Add Stairs to an Existing Building");
+        System.out.println("4.) Add a Feature to a Wall");
+        System.out.println("5.) Remove a Feature from a Wall");
         String entry = userIn.next();
         boolean goodEntry = checkValidInt(entry);
         while(goodEntry==false){
@@ -903,7 +1015,7 @@ public class UIImpl implements UI {
                     break;
             case 2:
                 break;
-            case 3:
+            case 3: addStairs(buildingList.get(idx));
                 break;
             case 4: this.addWallFeature(buildingList.get(idx));
                     break;

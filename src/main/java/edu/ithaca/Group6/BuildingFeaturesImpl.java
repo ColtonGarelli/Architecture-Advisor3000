@@ -2,7 +2,7 @@ package edu.ithaca.Group6;
 
 public abstract class BuildingFeaturesImpl implements BuildingFeatures {
 
-   public abstract double getCost();
+   public abstract double getCostPerUnit();
 
    public abstract String getFeatureName();
 
@@ -21,7 +21,7 @@ class Ceiling extends BuildingFeaturesImpl{
 
     }
 
-    public double getCost(){
+    public double getCostPerUnit(){
         return this.cost;
     }
 
@@ -57,7 +57,7 @@ class Stairs extends BuildingFeaturesImpl{
         return name;
     }
 
-    public double getCost(){
+    public double getCostPerUnit(){
         double cost = 0.0;
         double area = 0.0;
         //one side of the stairs is a right triangle which is as wide as the width and as tall as the height.
