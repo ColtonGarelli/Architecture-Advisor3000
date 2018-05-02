@@ -112,4 +112,10 @@ public interface UI {
      * Displays builder functions
      */
     public void builderMain();
+
+    /**
+     * Similar functionality to wall feature implementation
+     * @param building
+     */
+    public void addStairs(BuildingImpl building);
 }
