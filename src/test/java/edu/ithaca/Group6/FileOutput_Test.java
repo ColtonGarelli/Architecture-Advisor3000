@@ -37,6 +37,9 @@ public class FileOutput_Test {
                 +"W: ["+xEdge+",0.0,0.0]_"+"[0.0,"+thickness+","+heightIn+"]_"+testMaterial1.toString()+"_"+"\n"
                 +"R: [0.0,0.0,"+heightIn+"]_"+"["+xEdge+","+yEdge+","+(heightIn+thickness)+"]_"+"\n";
         assertEquals(buildingString,testOut.generateOutString(testBuilding),"Did not properly output a building string");
+        buildingString += "F: Brick_10.0\n";
+        assertEquals(buildingString, testOut.generateOutString(testBuilding));
+
     }
 
     @Test
