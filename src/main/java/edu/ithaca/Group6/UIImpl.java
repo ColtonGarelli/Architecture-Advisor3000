@@ -158,6 +158,8 @@ public class UIImpl implements UI {
         Roof roof = new RoofImpl(width, length, 2, height);
         ExternalWall newWall1 = new ExternalWall();
         ExternalWall newWall2 = new ExternalWall();
+        ExternalWall newWall3 = new ExternalWall();
+        ExternalWall newWall4 = new ExternalWall();
         double thickness = requestWallThickness();
         System.out.println("Select a material from the list below\n" + displayMaterialsByArea());
         int option = enterValidInt(1, 6);
@@ -166,24 +168,35 @@ public class UIImpl implements UI {
         newWall1.setLength(demoBuilding.getLength());
         newWall1.setThickness(thickness);
         newWall1.setMaterial(selectMaterial);
+        newWall1.setBottomCoordinates(0,0,0);
+        newWall1.setTopCoordinates(thickness,width,height);
         demoBuilding.addWall(newWall1);
+
         newWall2.setHeight(demoBuilding.getHeight());
         newWall2.setLength(demoBuilding.getWidth());
         newWall2.setThickness(thickness);
         newWall2.setMaterial(selectMaterial);
+        newWall2.setBottomCoordinates(0,width,0);
+        newWall2.setTopCoordinates(length,width-thickness,height);
         demoBuilding.addWall(newWall2);
-        newWall1 = new ExternalWall();
-        newWall1.setHeight(demoBuilding.getHeight());
-        newWall1.setLength(demoBuilding.getLength());
-        newWall1.setThickness(thickness);
-        newWall1.setMaterial(selectMaterial);
-        demoBuilding.addWall(newWall1);
-        newWall2 = new ExternalWall();
-        newWall2.setHeight(demoBuilding.getHeight());
-        newWall2.setLength(demoBuilding.getWidth());
-        newWall2.setThickness(thickness);
-        newWall2.setMaterial(selectMaterial);
-        demoBuilding.addWall(newWall2);
+
+        newWall3 = new ExternalWall();
+        newWall3.setHeight(demoBuilding.getHeight());
+        newWall3.setLength(demoBuilding.getLength());
+        newWall3.setThickness(thickness);
+        newWall3.setMaterial(selectMaterial);
+        newWall3.setBottomCoordinates(length,width,0);
+        newWall3.setTopCoordinates(length-thickness,0,height);
+        demoBuilding.addWall(newWall3);
+
+        newWall4 = new ExternalWall();
+        newWall4.setHeight(demoBuilding.getHeight());
+        newWall4.setLength(demoBuilding.getWidth());
+        newWall4.setThickness(thickness);
+        newWall4.setMaterial(selectMaterial);
+        newWall4.setBottomCoordinates(length,0,0);
+        newWall4.setTopCoordinates(0,thickness,height);
+        demoBuilding.addWall(newWall4);
         return demoBuilding;
 
     }
@@ -952,6 +965,14 @@ public class UIImpl implements UI {
                     }
                     break;
                 case 3: //select a building from the arrayList
+                    if(buildingList.size()<=0){
+                        System.out.println("There are no buildings available yet to modify! Create or load a building.");
+                        break;
+                    }else {
+                        System.out.println("Enter the number of the building you wish to modify:");
+                        int selection = enterValidInt(1, buildingList.size());
+                        architectModify(selection-1);
+                    }
 
                     break;
                 case 4:
