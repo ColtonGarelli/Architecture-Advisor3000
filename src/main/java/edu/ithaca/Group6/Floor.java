@@ -12,16 +12,16 @@ public interface Floor {
     /**
      *
      */
-    public void getHeight();
+    public double getHeight();
 
     /**
      *
      */
-    public void setMaterial();
+    public void setMaterial(MaterialByArea material);
 
     /**
      *
      */
-    public void getMaterial();
+    public MaterialByArea getMaterial();
 
 }

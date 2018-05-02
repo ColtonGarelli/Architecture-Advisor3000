@@ -8,29 +8,6 @@ public abstract class BuildingFeaturesImpl implements BuildingFeatures {
 
 }
 
-class Ceiling extends BuildingFeaturesImpl{
-    double length;
-    double width;
-    double thickness;
-    MaterialByArea material;
-    String name = "Ceiling";
-    double cost;
-
-    public Ceiling(){
-
-
-    }
-
-    public double getCost(){
-        return this.cost;
-    }
-
-    public String getFeatureName(){
-        return this.name;
-    }
-
-}
-
 class Stairs extends BuildingFeaturesImpl{
     double perStairlength;
     double width;
