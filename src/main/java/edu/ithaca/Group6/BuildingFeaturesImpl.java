@@ -32,23 +32,27 @@ class Ceiling extends BuildingFeaturesImpl{
 }
 
 class Stairs extends BuildingFeaturesImpl{
-    double perStairlength;
+    double height;
+    int numStairs;
     double width;
     double thickness;
     MaterialByArea material;
-    String name = "Ceiling";
-    double cost;
+    String name = "Stairs";
 
-    public double getPerStairlengthLength(){
-        return this.perStairlength;
+    public double getHeight(){
+        return this.height;
     }
+
+    public int getNumStairs() { return numStairs; }
 
     public String getFeatureName(){
         return name;
     }
 
     public double getCost(){
-        return this.cost;
+        double cost = 0.0;
+
+        return cost;
     }
 
     public double getWidth(){
