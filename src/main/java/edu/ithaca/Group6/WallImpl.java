@@ -24,7 +24,7 @@ class ExternalWall extends WallImpl {
     private double thickness;
     private MaterialByArea material;
     private ArrayList<MaterialByUnit> featuresList;
-    private Stairs stairs;
+    private Stairs stairs = new Stairs();
     private double[] bottomCoordinates = new double[3];
     private double[] topCoordinates = new double[3];
 

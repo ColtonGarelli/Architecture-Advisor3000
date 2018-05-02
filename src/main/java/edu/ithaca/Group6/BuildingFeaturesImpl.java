@@ -39,6 +39,15 @@ class Stairs extends BuildingFeaturesImpl{
     MaterialByArea material;
     String name = "Stairs";
 
+    public Stairs(){
+        Wood wood = new Wood();
+        this.height = 0.0;
+        this.numStairs = 0;
+        this.width = 0.0;
+        this.thickness = 0.0;
+        this.material = wood;
+    }
+
     public Stairs(double height, int numStairs, double width, double thickness, MaterialByArea material){
         this.height = height;
         this.numStairs = numStairs;
