@@ -45,7 +45,8 @@ public class FileInputImpl implements FileInput {
                 }else if(line.charAt(0)=='R'){
                     Roof newRoof = buildRoof(line);
                     returnBuilding.setRoof(newRoof);
-                }else{
+                }
+                else{
                     System.err.println("File invalid format.");
                 }
             }
@@ -125,6 +126,7 @@ public class FileInputImpl implements FileInput {
         }
         return wallToReturn;
     }
+
 
     public Roof buildRoof(String roofString){
         roofString = roofString.substring(3);
