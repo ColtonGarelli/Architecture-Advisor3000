@@ -9,6 +9,7 @@ public class BuildingImpl implements Building{
     double height;
     public ArrayList<ExternalWall> walls;
     Roof roof;
+    public ArrayList<FloorImpl> floors;
 
     public BuildingImpl(){
         this.length = 0.0;
@@ -274,5 +275,22 @@ public class BuildingImpl implements Building{
     @Override
     public int getWallAmount() {
         return this.walls.size();
+    }
+
+    public boolean addFloor(FloorImpl floorToAdd){
+        this.floors.add(floorToAdd);
+        return true;
+    }
+
+    public Floor getFloor(int index) {
+        return null;
+    }
+
+    public boolean removeFloor(int index){
+        return true;
+    }
+
+    public int getNumberOfFloors(){
+        return this.floors.size();
     }
 }

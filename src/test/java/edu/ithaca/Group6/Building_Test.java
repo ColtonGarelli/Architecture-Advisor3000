@@ -246,5 +246,22 @@ public class Building_Test {
         assertEquals(testMaterial2,testBuilding.getWall(1).getMaterial());
     }
 
+    @Test
+    void addRemoveFloorTest(){
+        Building testBuilding = new BuildingImpl();
+        testBuilding.addFloor(new FloorImpl(10, new Brick()));
+        testBuilding.addFloor(new FloorImpl(20, new ConcreteBrick()));
+        testBuilding.addFloor(new FloorImpl(45, new Wood()));
+        assertEquals(testBuilding.getFloor(2).getMaterial().getMaterialName(), new Wood().getMaterialName());
+        assertEquals(testBuilding.getFloor(1).getMaterial().getMaterialName(), new ConcreteBrick().getMaterialName());
+        assertEquals(testBuilding.getFloor(0).getMaterial().getMaterialName(), new Brick().getMaterialName());
+        testBuilding.removeFloor(2);
+        assertThrows(testBuilding.getFloor(2).getMaterial().getMaterialName(), new IndexOutOfBoundsException());
+        assertEquals(testBuilding.getFloor(1).getMaterial().getMaterialName(), new ConcreteBrick().getMaterialName());
+        testBuilding.removeFloor(0);
+        assertEquals(testBuilding.getFloor(0).getMaterial().getMaterialName(), new Brick().getMaterialName());
+    }
+
+
 
 }

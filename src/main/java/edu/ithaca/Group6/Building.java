@@ -107,4 +107,14 @@ public interface Building {
      * @return the amount of walls in a building
      */
     public int getWallAmount();
-}
+
+    public boolean removeFloor(int index);
+
+    public Floor getFloor(int index);
+
+    public boolean addFloor(FloorImpl floorToAdd);
+
+    public int getNumberOfFloors();
+
+
+    }
