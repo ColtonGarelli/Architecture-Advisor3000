@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+
 public class FloorTest {
 
     @Test
@@ -24,7 +25,10 @@ public class FloorTest {
         testFloor.setMaterial(new TwoByThree());
         assertEquals(testFloor.getHeight(), 30, "Floor constructor test failed");
         assertEquals(testFloor.getMaterial(), new TwoByThree(), "Floor constructor test failed");
-
+        testFloor.setHeight(100);
+        testFloor.setMaterial(new Wood());
+        assertEquals(testFloor.getHeight(), 100, "Floor constructor test failed");
+        assertEquals(testFloor.getMaterial(), new Wood(), "Floor constructor test failed");
 
     }
 
