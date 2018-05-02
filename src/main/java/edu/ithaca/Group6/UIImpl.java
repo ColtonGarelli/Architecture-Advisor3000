@@ -8,7 +8,7 @@ import static java.lang.Character.isLetter;
 
 public class UIImpl implements UI {
     public Scanner userIn;
-    public ArrayList<BuildingImpl> buildingList = new ArrayList<BuildingImpl>();
+    public ArrayList<Building> buildingList = new ArrayList<Building>();
     public FileInput saveFileIn;
     public FileOutput saveFileOut;
 
@@ -66,7 +66,7 @@ public class UIImpl implements UI {
         System.out.println("Welcome to the Architecture Advisor3000");
         System.out.println("\nWhen you would like to begin modifying your project enter Yes.");
         String entry = userIn.next();
-        BuildingImpl demoBuilding;
+        Building demoBuilding;
         boolean userYes = yesOrNo(entry);
         while (!userYes) {
             System.out.println("Please enter Yes when ready");
@@ -77,7 +77,7 @@ public class UIImpl implements UI {
         entry = userIn.next();
         userYes = yesOrNo(entry);
         if (userYes) {
-            demoBuilding = keepLoading();
+            demoBuilding = keepLoading(); //working here
         }else{
             demoBuilding = createNewBuilding();
         }
@@ -151,11 +151,11 @@ public class UIImpl implements UI {
         this.userIn.close();
     }
 
-    public BuildingImpl createNewBuilding() {
+    public Building createNewBuilding() {
         double height = initializeHeight();
         double width = initializeWidth();
         double length = initializeLength();
-        BuildingImpl demoBuilding = new BuildingImpl(length, width, height);
+        Building demoBuilding = new BuildingImpl(length, width, height);
         Roof roof = new RoofImpl(width, length, 2, height);
         ExternalWall newWall1 = new ExternalWall();
         ExternalWall newWall2 = new ExternalWall();
@@ -533,7 +533,7 @@ public class UIImpl implements UI {
     //creates a dummy building for testing purposes
     @Override
     public void dummyBuilding() {
-        BuildingImpl newBuilding = new BuildingImpl(60, 60, 12);
+        Building newBuilding = new BuildingImpl(60, 60, 12);
         double[] startPoint1 = new double[]{0.0, 0.0, 0.0};
         double[] startPoint2 = new double[]{0.0, 0.0, 0.0};
         double[] startPoint3 = new double[]{0.0, 55.0, 0.0};
@@ -555,7 +555,7 @@ public class UIImpl implements UI {
     }
 
     @Override
-    public void addBuilding(BuildingImpl building){
+    public void addBuilding(Building building){
         buildingList.add(building);
     }
 
@@ -738,7 +738,7 @@ public class UIImpl implements UI {
     }
 
     @Override
-    public void addWallFeature(BuildingImpl building){
+    public void addWallFeature(Building building){
         System.out.println("Choose a wall to modify");
         System.out.println("Number of Existing walls: " + building.walls.size());
         int wallToChange = enterValidInt(1, building.walls.size());
@@ -785,7 +785,7 @@ public class UIImpl implements UI {
     }
 
     @Override
-    public void addStairs(BuildingImpl building){
+    public void addStairs(Building building){
         System.out.println("Choose a wall to modify");
         System.out.println("Number of Existing walls: " + building.walls.size());
         int wallToChange = enterValidInt(1, building.walls.size());
@@ -896,7 +896,7 @@ public class UIImpl implements UI {
     }
 
     @Override
-    public void removeWallFeature(BuildingImpl building){
+    public void removeWallFeature(Building building){
         System.out.println("Choose a wall to modify");
         System.out.println("Number of Existing walls: " + building.walls.size());
         int wallToChange = enterValidInt(1, building.walls.size());
@@ -912,7 +912,6 @@ public class UIImpl implements UI {
     }
 
     public void login(){
-        this.dummyBuilding();
         //System.out.println(displayWalls(this.buildingList.get(0).getWall(0)));
         System.out.println("Welcome to the Architecture Advisor3000");
         System.out.println("Please Log In.");
@@ -932,6 +931,7 @@ public class UIImpl implements UI {
 
     public void architectMain(){
         boolean repeat = true;
+        Building demoBuilding;
         while(repeat) {
             System.out.println("What would you like to do?");
             System.out.println("1.) Display Existing Buildings");
@@ -944,12 +944,16 @@ public class UIImpl implements UI {
                 case 1:
                     break;
                 case 2:
-                    this.createNewBuilding();
+                    demoBuilding = this.createNewBuilding();
+                    buildingList.add(demoBuilding);
                     break;
                 case 3: //select a building from the arrayList
                     architectModify(0);
                     break;
                 case 4:
+                    demoBuilding = keepLoading();
+                    buildingList.add(demoBuilding);
+                    //working here
                     break;
                 case 5:
                     break;
@@ -1082,8 +1086,8 @@ public class UIImpl implements UI {
      * Makes it so the program only continues if the file isn't empty (not null building!)
      * @return building loaded from selected file
      */
-    public BuildingImpl keepLoading() {
-        BuildingImpl demoBuilding;
+    public Building keepLoading() {
+        Building demoBuilding;
         int saveSlotNum = displayAvailableFiles();
         saveFileIn = selectInFile(saveSlotNum);
         demoBuilding = saveFileIn.loadFromFile();
@@ -1101,5 +1105,9 @@ public class UIImpl implements UI {
             }
         }
         return demoBuilding;
+    }
+
+    public boolean saveFile(){
+        return false;
     }
 }

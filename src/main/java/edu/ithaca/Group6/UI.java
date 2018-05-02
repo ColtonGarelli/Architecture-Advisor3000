@@ -65,7 +65,7 @@ public interface UI {
      * @param building
      * @post add building to BuildingList
      */
-    public void addBuilding(BuildingImpl building);
+    public void addBuilding(Building building);
 
     /**
      * Prompts user for input, and creates a new wall based on user input values
@@ -78,16 +78,15 @@ public interface UI {
      * Prompts user for input, and adds a wall feature to a wall based on user input values
      * @param building
      */
-    public void addWallFeature(BuildingImpl building);
+    public void addWallFeature(Building building);
 
     /**
      * User chooses a wall from the building
      * Tells the user how many features are in the wall
      * User chooses which one to remove
      * @param building
-     * @param idx
      */
-    public void removeWallFeature(BuildingImpl building);
+    public void removeWallFeature(Building building);
 
     /**
      * User can login as an architect or a builder
@@ -117,5 +116,5 @@ public interface UI {
      * Similar functionality to wall feature implementation
      * @param building
      */
-    public void addStairs(BuildingImpl building);
+    public void addStairs(Building building);
 }
