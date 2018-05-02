@@ -931,8 +931,8 @@ public class UIImpl implements UI {
     }
 
     public void architectMain(){
-        String repeat = "yes";
-        while(repeat.equals("yes")) {
+        boolean repeat = true;
+        while(repeat) {
             System.out.println("What would you like to do?");
             System.out.println("1.) Display Existing Buildings");
             System.out.println("2.) Create Building");
@@ -944,7 +944,7 @@ public class UIImpl implements UI {
                 case 1:
                     break;
                 case 2:
-                    this.createBuilding();
+                    this.createNewBuilding();
                     break;
                 case 3: //select a building from the arrayList
                     architectModify(0);
@@ -957,13 +957,7 @@ public class UIImpl implements UI {
                     break;
             }
             System.out.println("Would you like do anything else?");
-            String repeatEntry = userIn.next().toLowerCase();
-            boolean goodEntry2 = checkYesOrNo(repeatEntry);
-            while(goodEntry2==false){
-                System.out.println("Please enter Yes or No");
-                repeatEntry = userIn.next().toLowerCase();
-                goodEntry2 = checkYesOrNo(repeatEntry);
-            }
+            repeat = yesOrNo(userIn.next());
         }
     }
 
@@ -1003,22 +997,15 @@ public class UIImpl implements UI {
     }
 
     public void builderMain() {
-        String repeat = "yes";
-        while (repeat.equals("yes")) {
+        boolean repeat = true;
+        while (repeat) {
             System.out.println("Existing Buildings:");
             //Display list of existing buildings
             System.out.println("Select a building for a cost estimate.");
             int entry = enterValidInt(1, this.buildingList.size());
             System.out.println("Estimated Cost: $" + this.buildingList.get(entry - 1).calcTotalCost());
             System.out.println("Would you like to get another cost estimate?");
-            String repeatEntry = userIn.next().toLowerCase();
-            boolean goodEntry = checkYesOrNo(repeatEntry);
-            while (goodEntry == false) {
-                System.out.println("Please enter Yes or No");
-                repeatEntry = userIn.next().toLowerCase();
-                goodEntry = checkYesOrNo(repeatEntry);
-            }
-            repeat = repeatEntry;
+            repeat = yesOrNo(userIn.next());
         }
         System.out.println("Thank you for using our system!");
     }
