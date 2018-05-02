@@ -132,6 +132,7 @@ class ExternalWall extends WallImpl {
 
     public double calcCost(){
         double cost = this.getArea() * this.getMaterial().getCostPerSquareFoot();
+        cost += this.stairs.getCostPerUnit();
         return cost;
     }
 
