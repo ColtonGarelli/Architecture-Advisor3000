@@ -918,17 +918,7 @@ public class UIImpl implements UI {
         System.out.println("Please Log In.");
         System.out.println("1.) Architect login");
         System.out.println("2.) Builder Login");
-        String entry = userIn.next();
-        boolean goodEntry = checkValidInt(entry);
-        while(goodEntry==false){
-            System.out.println("Invalid Entry.");
-            System.out.println("Please Log In.");
-            System.out.println("1.) Architect login");
-            System.out.println("2.) Builder Login");
-            entry = userIn.next();
-            goodEntry = checkValidInt(entry);
-        }
-        int entryInt = Integer.parseInt(entry);
+        int entryInt = enterValidInt(1,2);
         switch (entryInt) {
             case 1: System.out.println("Hello Architect.");
                     architectMain();
@@ -949,20 +939,7 @@ public class UIImpl implements UI {
             System.out.println("3.) Modify an existing building");
             System.out.println("4.) Import Buildings");
             System.out.println("5.) Export Buildings");
-            String entry = userIn.next();
-            boolean goodEntry = checkValidInt(entry);
-            while (goodEntry == false) {
-                System.out.println("Invalid Entry.");
-                System.out.println("What would you like to do?");
-                System.out.println("1.) Display Existing Buildings");
-                System.out.println("2.) Create Building");
-                System.out.println("3.) Modify an existing building");
-                System.out.println("4.) Import Buildings");
-                System.out.println("5.) Export Buildings");
-                entry = userIn.next();
-                goodEntry = checkValidInt(entry);
-            }
-            int entryInt = Integer.parseInt(entry);
+            int entryInt = enterValidInt(1,5);
             switch (entryInt) {
                 case 1:
                     break;
