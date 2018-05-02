@@ -277,10 +277,15 @@ public class ExternalWallTest {
         this.testWall.setHeight(2);
         MaterialByArea testMaterial = new Wood();
         this.testWall.setMaterial(testMaterial);
-        assertEquals(8.0, this.testWall.calcCost(), "Did not correctly calculate cost");
+        assertEquals(6.0, this.testWall.calcCost(), "Did not correctly calculate cost");
         testMaterial = new TwoByFour();
         this.testWall.setMaterial(testMaterial);
-        assertEquals(13.28, this.testWall.calcCost(), "Did not correctly calculate cost - Two-By-Four");
+        double thickness = testWall.getThickness();
+        thickness=thickness*thickness;
+        thickness= thickness/2;
+        double totalVolume = testWall.getLength()*testWall.getHeight()*testWall.getThickness();
+        totalVolume = totalVolume-thickness;
+        assertEquals(totalVolume*1.66, this.testWall.calcCost(), "Did not correctly calculate cost - Two-By-Four");
     }
 
     @Test
