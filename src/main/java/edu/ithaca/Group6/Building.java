@@ -112,7 +112,7 @@ public interface Building {
 
     public Floor getFloor(int index);
 
-    public boolean addFloor(FloorImpl floorToAdd);
+    public boolean addFloor(Floor floorToAdd);
 
     public int getNumberOfFloors();
 
