@@ -2,7 +2,7 @@ package edu.ithaca.Group6;
 
 public abstract class BuildingFeaturesImpl implements BuildingFeatures {
 
-   public abstract double getCost();
+   public abstract double getCostPerUnit();
 
    public abstract String getFeatureName();
 
@@ -21,7 +21,7 @@ class Ceiling extends BuildingFeaturesImpl{
 
     }
 
-    public double getCost(){
+    public double getCostPerUnit(){
         return this.cost;
     }
 
@@ -32,23 +32,50 @@ class Ceiling extends BuildingFeaturesImpl{
 }
 
 class Stairs extends BuildingFeaturesImpl{
-    double perStairlength;
+    double height;
+    int numStairs;
     double width;
     double thickness;
     MaterialByArea material;
-    String name = "Ceiling";
-    double cost;
+    String name = "Stairs";
 
-    public double getPerStairlengthLength(){
-        return this.perStairlength;
+    public Stairs(){
+        Wood wood = new Wood();
+        this.height = 0.0;
+        this.numStairs = 0;
+        this.width = 0.0;
+        this.thickness = 0.0;
+        this.material = wood;
     }
+
+    public Stairs(double height, int numStairs, double width, double thickness, MaterialByArea material){
+        this.height = height;
+        this.numStairs = numStairs;
+        this.width = width;
+        this.thickness = thickness;
+        this.material = material;
+    }
+
+    public double getHeight(){
+        return this.height;
+    }
+
+    public int getNumStairs() { return numStairs; }
 
     public String getFeatureName(){
         return name;
     }
 
-    public double getCost(){
-        return this.cost;
+    public double getCostPerUnit(){
+        double cost = 0.0;
+        double area = 0.0;
+        //one side of the stairs is a right triangle which is as wide as the width and as tall as the height.
+        //The area would be height*width/2, but there are two sides so that total is doubled.
+        area += height*width;
+        area += height*thickness;
+        area += width*thickness;
+        cost = area * material.getCostPerSquareFoot();
+        return cost;
     }
 
     public double getWidth(){
