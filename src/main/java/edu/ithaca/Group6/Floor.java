@@ -24,4 +24,5 @@ public interface Floor {
      */
     public MaterialByArea getMaterial();
 
+    public String floorOutString();
 }

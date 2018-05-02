@@ -11,10 +11,10 @@ public class FloorTest {
     void constructorTest(){
         Floor testFloor = new FloorImpl(20, new Brick());
         assertEquals(testFloor.getHeight(), 20, "Floor constructor test failed");
-        assertEquals(testFloor.getMaterial(), new Brick(), "Floor constructor test failed");
+        assertEquals(testFloor.getMaterial().getClass(), new Brick().getClass(), "Floor constructor test failed");
         Floor testFloor2 = new FloorImpl(20, new ConcreteBrick());
         assertEquals(testFloor2.getHeight(), 20, "Floor constructor test failed");
-        assertEquals(testFloor2.getMaterial(), new ConcreteBrick(), "Floor constructor test failed");
+        assertEquals(testFloor2.getMaterial().getClass(), new ConcreteBrick().getClass(), "Floor constructor test failed");
 
 
     }
@@ -24,12 +24,18 @@ public class FloorTest {
         testFloor.setHeight(30);
         testFloor.setMaterial(new TwoByThree());
         assertEquals(testFloor.getHeight(), 30, "Floor constructor test failed");
-        assertEquals(testFloor.getMaterial(), new TwoByThree(), "Floor constructor test failed");
+        assertEquals(testFloor.getMaterial().getClass(), new TwoByThree().getClass(), "Floor constructor test failed");
         testFloor.setHeight(100);
         testFloor.setMaterial(new Wood());
         assertEquals(testFloor.getHeight(), 100, "Floor constructor test failed");
-        assertEquals(testFloor.getMaterial(), new Wood(), "Floor constructor test failed");
+        assertEquals(testFloor.getMaterial().getClass(), new Wood().getClass(), "Floor constructor test failed");
 
+    }
+    @Test
+    void floorToStringTest(){
+        Floor testFloor = new FloorImpl(10, new Brick());
+        String testString = testFloor.floorOutString();
+        assertEquals(testString, "F: Brick_10.0\n");
     }
 
 }
