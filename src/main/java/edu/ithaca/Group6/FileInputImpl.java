@@ -45,7 +45,11 @@ public class FileInputImpl implements FileInput {
                 }else if(line.charAt(0)=='R'){
                     Roof newRoof = buildRoof(line);
                     returnBuilding.setRoof(newRoof);
-                }else{
+                }else if(line.charAt(0)=='F'){
+                    Floor newFloor = buildFloor(line);
+                    returnBuilding.addFloor(newFloor);
+                }
+                else{
                     System.err.println("File invalid format.");
                 }
             }
@@ -151,6 +155,19 @@ public class FileInputImpl implements FileInput {
             return null;
         }
         return roofToReturn;
+    }
+
+    public Floor buildFloor(String floorString){
+        floorString = floorString.substring(3);
+        String[] stringBreakdown = floorString.split("\\_");
+        try{
+            double height = Double.parseDouble(stringBreakdown[0]);
+            MaterialByArea floorMaterial = buildMaterialByArea(stringBreakdown[1]);
+            Floor floorToReturn = new FloorImpl(height,floorMaterial);
+            return floorToReturn;
+        }catch(Exception e){
+            return null;
+        }
     }
 
     public MaterialByArea buildMaterialByArea(String materialByAreaString){
