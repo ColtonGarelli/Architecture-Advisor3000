@@ -31,7 +31,7 @@ public class FloorImpl implements Floor {
 
     public String floorOutString(){
         String floorString;
-        floorString = "";
+        floorString = "F: " + this.material.getMaterialName() + "_" + this.height + "\n";
         return floorString;
     }
 }
