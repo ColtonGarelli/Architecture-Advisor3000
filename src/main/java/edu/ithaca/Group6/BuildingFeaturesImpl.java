@@ -39,6 +39,14 @@ class Stairs extends BuildingFeaturesImpl{
     MaterialByArea material;
     String name = "Stairs";
 
+    public Stairs(double height, int numStairs, double width, double thickness, MaterialByArea material){
+        this.height = height;
+        this.numStairs = numStairs;
+        this.width = width;
+        this.thickness = thickness;
+        this.material = material;
+    }
+
     public double getHeight(){
         return this.height;
     }
@@ -51,7 +59,13 @@ class Stairs extends BuildingFeaturesImpl{
 
     public double getCost(){
         double cost = 0.0;
-
+        double area = 0.0;
+        //one side of the stairs is a right triangle which is as wide as the width and as tall as the height.
+        //The area would be height*width/2, but there are two sides so that total is doubled.
+        area += height*width;
+        area += height*thickness;
+        area += width*thickness;
+        cost = area * material.getCostPerSquareFoot();
         return cost;
     }
 
