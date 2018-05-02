@@ -930,7 +930,7 @@ public class UIImpl implements UI {
 
     public void architectMain(){
         boolean repeat = true;
-        Building demoBuilding;
+        Building demoBuilding = null;
         while(repeat) {
             System.out.println("What would you like to do?");
             System.out.println("1.) Display Existing Buildings");
@@ -952,7 +952,7 @@ public class UIImpl implements UI {
                     }
                     break;
                 case 3: //select a building from the arrayList
-                    architectModify(0);
+
                     break;
                 case 4:
                     modificationsDone = false;
@@ -964,7 +964,20 @@ public class UIImpl implements UI {
                     }
                     break;
                 case 5:
+                    int saveFileChoice = displayAvailableFiles();
+                    saveFileOut = selectOutFile(saveFileChoice);
+                    if(demoBuilding == null){
+                        System.out.println("There is no building to be saved.");
+                        break;
+                    }else{
+                    boolean didSave = saveToFile(saveFileOut,demoBuilding);
+                    if(!didSave){
+                        System.out.println("Did not save properly.");
+                    }else{
+                        System.out.println("Successful save!");
+                    }
                     break;
+                    }
                 default:
                     break;
             }
@@ -1011,11 +1024,16 @@ public class UIImpl implements UI {
     public void builderMain() {
         boolean repeat = true;
         while (repeat) {
+            System.out.println("Select the file which contains the building you wish to view.");
             int saveFileChoice = displayAvailableFiles();
             //Display list of existing buildings
             FileInput fileIn = selectInFile(saveFileChoice);
-            Building useBuilding = fileIn.loadFromFile();
-            System.out.println("Estimated Cost: $" + useBuilding.calcTotalCost());
+            Building demoBuilding = fileIn.loadFromFile();
+            System.out.println("Estimated Cost: $" + demoBuilding.calcTotalCost());
+            System.out.println(buildingOutput(demoBuilding));
+            for (int i = 0; i < demoBuilding.getWallAmount(); i++) {
+                System.out.println(displayWalls(demoBuilding.getWall(i)));
+            }
             System.out.println("Would you like to get another cost estimate?");
             repeat = yesOrNo(userIn.next());
         }
