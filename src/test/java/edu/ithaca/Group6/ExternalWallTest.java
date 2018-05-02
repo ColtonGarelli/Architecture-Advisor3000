@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.lang.Math;
 
 public class ExternalWallTest {
     Wall testWall;
@@ -276,10 +277,15 @@ public class ExternalWallTest {
         this.testWall.setHeight(2);
         MaterialByArea testMaterial = new Wood();
         this.testWall.setMaterial(testMaterial);
-        assertEquals(8.0, this.testWall.calcCost(), "Did not correctly calculate cost");
+        assertEquals(6.0, this.testWall.calcCost(), "Did not correctly calculate cost");
         testMaterial = new TwoByFour();
         this.testWall.setMaterial(testMaterial);
-        assertEquals(13.28, this.testWall.calcCost(), "Did not correctly calculate cost - Two-By-Four");
+        double thickness = testWall.getThickness();
+        thickness=thickness*thickness;
+        thickness= thickness/2;
+        double totalVolume = testWall.getLength()*testWall.getHeight()*testWall.getThickness();
+        totalVolume = totalVolume-thickness;
+        assertEquals(totalVolume*1.66, this.testWall.calcCost(), "Did not correctly calculate cost - Two-By-Four");
     }
 
     @Test
@@ -310,6 +316,30 @@ public class ExternalWallTest {
 
         assertFalse(this.testWall.removeFeature(this.testWall.getFeatureListSize()),"Removed nonexistent feature");
         assertFalse(this.testWall.removeFeature(-1),"Removed improper index");
+    }
+
+    @Test
+    void testCalcCorrection(){
+        ExternalWall testWall = new ExternalWall();
+        ExternalWall testWall2 = new ExternalWall();
+        //1.00
+        testWall.setMaterial(new Wood());
+        //142.34231564
+        testWall2.setMaterial(new Brick());
+        testWall.setLength(50);
+        testWall.setHeight(60);
+        testWall.setThickness(.5);
+        double wall1Cost = 50*60*.5;
+        wall1Cost = wall1Cost-(.5*.5)/2;
+        testWall2.setLength(30);
+        testWall2.setHeight(60);
+        testWall2.setThickness(.5);
+        double wall2Cost = 30*60*.5;
+        wall2Cost =wall2Cost-(.5*.5)/2;
+        wall2Cost = wall2Cost*142.34231564;
+        assertEquals(Math.round(wall1Cost), Math.round(testWall.calcCost()), "Wall cost was not corrected for overlap");
+        assertEquals(Math.round(wall2Cost), Math.round(testWall2.calcCost()), "Wall cost was not corrected for overlap");
+
     }
 
 }

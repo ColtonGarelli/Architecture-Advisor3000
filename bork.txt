@@ -3,3 +3,4 @@ W: [0.0,3.0,0.0]_[2.0,2.8,4.0]_Wood : $1.00 per square foot_
 W: [2.0,3.0,0.0]_[1.8,0.0,4.0]_Wood : $1.00 per square foot_
 W: [2.0,0.0,0.0]_[0.0,0.2,4.0]_Wood : $1.00 per square foot_
 R: [0.0,0.0,4.0]_[2.0,3.0,4.2]_
+F: 0.0_Brick : $142.34 per square foot_

@@ -9,6 +9,7 @@ public class BuildingImpl implements Building{
     double height;
     public ArrayList<ExternalWall> walls;
     Roof roof;
+    public ArrayList<Floor> floors;
 
     public BuildingImpl(){
         this.length = 0.0;
@@ -16,6 +17,7 @@ public class BuildingImpl implements Building{
         this.height = 0.0;
         this.walls = new ArrayList<ExternalWall>();
         this.roof = null;
+        this.floors = new ArrayList<Floor>();
     }
 
     public BuildingImpl(double xEdge, double yEdge, double height) {
@@ -25,6 +27,7 @@ public class BuildingImpl implements Building{
         this.walls = new ArrayList<ExternalWall>();
         this.roof = new RoofImpl(yEdge,xEdge,0.2,height);
         double thickness = 0.2;
+        this.floors = new ArrayList<Floor>();
 
 
 //        this.walls[0] = new ExternalWall();
@@ -274,5 +277,30 @@ public class BuildingImpl implements Building{
     @Override
     public int getWallAmount() {
         return this.walls.size();
+    }
+
+    public boolean addFloor(Floor floorToAdd){
+        this.floors.add(floorToAdd);
+        return true;
+    }
+
+    public Floor getFloor(int index) {
+        return this.floors.get(index);
+
+    }
+
+    public boolean removeFloor(int index){
+        try{
+            this.floors.remove(index);
+            return true;
+        }
+        catch(IndexOutOfBoundsException e) {
+            System.out.println("An out of bounds error occured while trying to remove a floor");
+            return false;
+        }
+    }
+
+    public int getNumberOfFloors(){
+        return this.floors.size();
     }
 }

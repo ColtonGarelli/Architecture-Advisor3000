@@ -16,6 +16,7 @@ public class FileOutput_Test {
         double heightIn = 4;
         double thickness = 0.2;
         MaterialByArea testMaterial1 = new Wood();
+        MaterialByArea testMaterial2 = new Brick();
         testBuilding = new BuildingImpl(xEdge,yEdge,heightIn);
         double[] startPoint1 = {0,0,0};
         double[] startPoint2 = {0,yEdge,0};
@@ -29,14 +30,19 @@ public class FileOutput_Test {
         testBuilding.addWall(wall2);
         testBuilding.addWall(wall3);
         testBuilding.addWall(wall4);
+        Floor testFloor = new FloorImpl(0,testMaterial2);
+        testBuilding.addFloor(testFloor);
         BayWindow testWindow = new BayWindow();
         testBuilding.addWallFeature(0,testWindow);
         String buildingString = "W: [0.0,0.0,0.0]_["+thickness+","+yEdge+","+heightIn+"]_"+testMaterial1.toString()+"_"+testWindow.toString()+"_"+"\n"
                 +"W: [0.0,"+yEdge+",0.0]_"+"["+xEdge+","+(yEdge-thickness)+","+heightIn+"]_"+testMaterial1.toString()+"_"+"\n"
                 +"W: ["+xEdge+","+yEdge+",0.0]_"+"["+(xEdge-thickness)+",0.0,"+heightIn+"]_"+testMaterial1.toString()+"_"+"\n"
                 +"W: ["+xEdge+",0.0,0.0]_"+"[0.0,"+thickness+","+heightIn+"]_"+testMaterial1.toString()+"_"+"\n"
-                +"R: [0.0,0.0,"+heightIn+"]_"+"["+xEdge+","+yEdge+","+(heightIn+thickness)+"]_"+"\n";
+                +"R: [0.0,0.0,"+heightIn+"]_"+"["+xEdge+","+yEdge+","+(heightIn+thickness)+"]_"+"\n"
+                +"F: " + testFloor.getHeight() + "_" + testFloor.getMaterial().toString() + "_" + "\n";
         assertEquals(buildingString,testOut.generateOutString(testBuilding),"Did not properly output a building string");
+        assertEquals(buildingString, testOut.generateOutString(testBuilding));
+
     }
 
     @Test

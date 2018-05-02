@@ -15,6 +15,7 @@ public class FileInput_Test {
         testIn = new FileInputImpl("bork.txt");
         testBuilding = new BuildingImpl();
         MaterialByArea testMaterial = new Wood();
+        MaterialByArea testMaterial2 = new Brick();
         //wall 1
         double[] bottomCoords = {0,0,0};
         double[] topCoords = {0.2,3,4};
@@ -36,7 +37,10 @@ public class FileInput_Test {
         assertArrayEquals(bottomCoords2,testBuilding.getWall(3).getBottomCoordinates(), "Did not properly build first wall");
         assertArrayEquals(topCoords2,testBuilding.getWall(3).getTopCoordinates(),"Did not get top coordinates");
         assertEquals(testMaterial.toString(),testBuilding.getWall(3).getMaterial().toString(),"Didn't get wall material");
-
+        //floor
+        double height = 0;
+        assertEquals(height,testBuilding.getFloor(0).getHeight(),"didn't get floor height");
+        assertEquals(testMaterial2.toString(),testBuilding.getFloor(0).getMaterial().toString(),"didn't get floor material");
     }
     @Test
     public void testBuildRoof(){
@@ -82,6 +86,19 @@ public class FileInput_Test {
         String[] fileList = {"File1","File2","File3","File4","File5"};
 
         assertArrayEquals(fileList,testIn.loadFileNames(),"Didn't get the proper text files from master file.");
+
+    }
+
+    @Test
+    public void testBuildFloor(){
+        testIn = new FileInputImpl("bork.txt");
+        String floorString = "F: 0.0_Brick : $142.34 per square foot_";
+        MaterialByArea testMaterial = new Brick();
+        Floor testFloor = ((FileInputImpl) testIn).buildFloor(floorString);
+        double zero = 0;
+
+        assertEquals(zero,testFloor.getHeight(),"didnt get floor height");
+        assertEquals(testMaterial.toString(),testFloor.getMaterial().toString(),"didn't get floor material");
 
     }
 }
