@@ -86,7 +86,6 @@ public class UIImpl implements UI {
         while (!modificationsDone) {
             modificationsDone = modifyWalls(demoBuilding);
         }
-        demoBuilding = new BuildingImpl();
         System.out.println("To create or select another building, enter 1. To quit enter 0.");
         int switchBuildings = enterValidInt(0, 1);
         while (switchBuildings == 1) {
@@ -940,20 +939,29 @@ public class UIImpl implements UI {
             System.out.println("4.) Import Buildings");
             System.out.println("5.) Export Buildings");
             int entryInt = enterValidInt(1,5);
+            boolean modificationsDone = false;
             switch (entryInt) {
                 case 1:
                     break;
                 case 2:
+                    modificationsDone = false;
                     demoBuilding = this.createNewBuilding();
                     buildingList.add(demoBuilding);
+                    while (!modificationsDone) {
+                        modificationsDone = modifyWalls(demoBuilding);
+                    }
                     break;
                 case 3: //select a building from the arrayList
                     architectModify(0);
                     break;
                 case 4:
+                    modificationsDone = false;
                     demoBuilding = keepLoading();
                     buildingList.add(demoBuilding);
                     //working here
+                    while (!modificationsDone) {
+                        modificationsDone = modifyWalls(demoBuilding);
+                    }
                     break;
                 case 5:
                     break;
@@ -1003,11 +1011,11 @@ public class UIImpl implements UI {
     public void builderMain() {
         boolean repeat = true;
         while (repeat) {
-            System.out.println("Existing Buildings:");
+            int saveFileChoice = displayAvailableFiles();
             //Display list of existing buildings
-            System.out.println("Select a building for a cost estimate.");
-            int entry = enterValidInt(1, this.buildingList.size());
-            System.out.println("Estimated Cost: $" + this.buildingList.get(entry - 1).calcTotalCost());
+            FileInput fileIn = selectInFile(saveFileChoice);
+            Building useBuilding = fileIn.loadFromFile();
+            System.out.println("Estimated Cost: $" + useBuilding.calcTotalCost());
             System.out.println("Would you like to get another cost estimate?");
             repeat = yesOrNo(userIn.next());
         }
@@ -1016,7 +1024,7 @@ public class UIImpl implements UI {
     /**
      * Displays the available files
      *
-     * @return the number of available files
+     * @return the choice of file to use
      */
     public int displayAvailableFiles() {
         FileInput masterIn = new FileInputImpl("masterFile.txt");
