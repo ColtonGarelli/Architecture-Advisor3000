@@ -15,7 +15,6 @@ public class UIImpl implements UI {
     public UIImpl() {
         this.userIn = new Scanner(System.in);
     }
-
     public static void main(String[] args) {
         UI demo = new UIImpl();
         demo.login();
@@ -955,6 +954,9 @@ public class UIImpl implements UI {
             boolean modificationsDone = false;
             switch (entryInt) {
                 case 1:
+                    for(int i = 0; i < buildingList.size(); i++){
+                        System.out.println(buildingList.get(i).buildingToString());
+                    }
                     break;
                 case 2:
                     modificationsDone = false;
@@ -965,11 +967,15 @@ public class UIImpl implements UI {
                     }
                     break;
                 case 3: //select a building from the arrayList
+
                     if(buildingList.size()<=0){
                         System.out.println("There are no buildings available yet to modify! Create or load a building.");
                         break;
                     }else {
                         System.out.println("Enter the number of the building you wish to modify:");
+                        for(int i=0; i<buildingList.size(); i++){
+
+                        }
                         int selection = enterValidInt(1, buildingList.size());
                         architectModify(selection-1);
                     }
@@ -1006,6 +1012,7 @@ public class UIImpl implements UI {
             repeat = yesOrNo(userIn.next());
         }
     }
+
 
     public void architectModify(int idx){
         //System.out.println("Existing buildings:");

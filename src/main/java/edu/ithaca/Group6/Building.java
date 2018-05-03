@@ -116,5 +116,7 @@ public interface Building {
 
     public int getNumberOfFloors();
 
+    public String buildingToString();
+
 
     }
