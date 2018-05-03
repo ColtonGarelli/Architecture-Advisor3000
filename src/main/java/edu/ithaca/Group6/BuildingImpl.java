@@ -340,4 +340,9 @@ public class BuildingImpl implements Building{
         }
         return buildingString;
     }
+
+    @Override
+    public int getNumberOfWalls() {
+        return this.walls.size();
+    }
 }

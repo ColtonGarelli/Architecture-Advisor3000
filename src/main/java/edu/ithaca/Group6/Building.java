@@ -118,5 +118,7 @@ public interface Building {
 
     public String buildingToString();
 
+    public int getNumberOfWalls();
+
 
     }

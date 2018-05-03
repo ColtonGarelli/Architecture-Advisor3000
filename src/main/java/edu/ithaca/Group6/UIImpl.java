@@ -85,7 +85,7 @@ public class UIImpl implements UI {
         while (!modificationsDone) {
             modificationsDone = modifyWalls(demoBuilding);
         }
-        System.out.println("To create or select another building, enter 1. To quit enter 0.");
+        System.out.println("To create or select another building, enter 1. To exit wall editor enter 0.");
         int switchBuildings = enterValidInt(0, 1);
         while (switchBuildings == 1) {
             System.out.println("Enter 1 to modify an existing building.\nEnter 2 to create a new building.\nEnter 3 to save your existing building.\nEnter 0 to go back.");
@@ -207,8 +207,8 @@ public class UIImpl implements UI {
         int option;
         int wallToChange;
         while (!done) {
-            System.out.println("Choose a wall, 1-4, to modify, or enter 0 to quit");
-            wallToChange = enterValidInt(0, 4);
+            System.out.println("Choose a wall, 1-"+demoBuilding.getWallAmount()+", to modify, or enter 0 to exit wall editor.");
+            wallToChange = enterValidInt(0, demoBuilding.getWallAmount());
             if (wallToChange != 0) {
                 int wallIndex = wallToChange - 1;
                 System.out.println("\nWall being modified: " + wallToChange + "\n" + displayWalls(demoBuilding.getWall(wallIndex)));
@@ -594,6 +594,7 @@ public class UIImpl implements UI {
             double x = -1;
             if (xEntry) {
                 x = Double.parseDouble(xStr);
+                start[0] = x;
             }
             while (x < 0 || !xEntry || x > this.buildingList.get(idx).getLength()) {
                 System.out.println("Invalid entry.");
@@ -602,6 +603,7 @@ public class UIImpl implements UI {
                 xEntry = checkValidDouble(xStr);
                 if (xEntry) {
                     x = Double.parseDouble(xStr);
+                    start[0] = x;
                 }
             }
             //y position
@@ -611,6 +613,7 @@ public class UIImpl implements UI {
             double y = -1;
             if (yEntry) {
                 y = Double.parseDouble(yStr);
+                start[1] = y;
             }
             while (y < 0 || !yEntry || x > this.buildingList.get(idx).getWidth()) {
                 System.out.println("Invalid entry.");
@@ -619,6 +622,7 @@ public class UIImpl implements UI {
                 yEntry = checkValidDouble(yStr);
                 if (yEntry) {
                     y = Double.parseDouble(yStr);
+                    start[1] = y;
                 }
             }
             //z position
@@ -628,6 +632,7 @@ public class UIImpl implements UI {
             double z = -1;
             if (zEntry) {
                 z = Double.parseDouble(zStr);
+                start[2] = z;
             }
             while (z < 0 || !zEntry || x > this.buildingList.get(idx).getHeight()) {
                 System.out.println("Invalid entry.");
@@ -636,6 +641,7 @@ public class UIImpl implements UI {
                 zEntry = checkValidDouble(zStr);
                 if (zEntry) {
                     z = Double.parseDouble(zStr);
+                    start[2] = z;
                 }
             }
             //Input wall length
@@ -733,15 +739,16 @@ public class UIImpl implements UI {
             ExternalWall wall = new ExternalWall(height, length, width, start, newMaterial);
 
             if (wall.getTopCoordinates()[0] > this.buildingList.get(idx).getLength()) {
-                System.out.print("Error: Wall is longer than the building");
+                System.out.println("Error: Wall is longer than the building");
                 return false;
             } else if (wall.getTopCoordinates()[1] > this.buildingList.get(idx).getWidth()) {
-                System.out.print("Error: Wall is wider than the building");
-                return false;
-            } else if (wall.getTopCoordinates()[2] > this.buildingList.get(idx).getHeight()) {
-                System.out.print("Error: Wall is taller than the building");
+                System.out.println("Error: Wall is wider than the building");
                 return false;
             }
+//            else if (wall.getTopCoordinates()[2] > this.buildingList.get(idx).getHeight()) {
+//                System.out.println("Error: Wall is taller than the building");
+//                return false;
+//            }
             this.buildingList.get(idx).addWall(wall);
             System.out.println("Wall Added");
             return true;
@@ -751,8 +758,8 @@ public class UIImpl implements UI {
     @Override
     public void addWallFeature(Building building){
         System.out.println("Choose a wall to modify");
-        System.out.println("Number of Existing walls: " + building.walls.size());
-        int wallToChange = enterValidInt(1, building.walls.size());
+        System.out.println("Number of Existing walls: " + building.getWallAmount());
+        int wallToChange = enterValidInt(1, building.getWallAmount());
         int wallIndex = wallToChange-1;
         System.out.println("Wall being modified: Wall " + wallToChange);
 
@@ -798,8 +805,8 @@ public class UIImpl implements UI {
     @Override
     public void addStairs(Building building){
         System.out.println("Choose a wall to modify");
-        System.out.println("Number of Existing walls: " + building.walls.size());
-        int wallToChange = enterValidInt(1, building.walls.size());
+        System.out.println("Number of Existing walls: " + building.getWallAmount());
+        int wallToChange = enterValidInt(1, building.getWallAmount());
         int wallIndex = wallToChange-1;
         System.out.println("Wall being modified: Wall " + wallToChange);
 
@@ -902,22 +909,22 @@ public class UIImpl implements UI {
                 break;
         }
         Stairs newStairs = new Stairs(height, num, width, thickness, newMaterial);
-        building.walls.get(wallIndex).addStairs(newStairs);
+        building.getWall(wallIndex).addStairs(newStairs);
         System.out.println("Stairs Added!");
     }
 
     @Override
     public void removeWallFeature(Building building){
         System.out.println("Choose a wall to modify");
-        System.out.println("Number of Existing walls: " + building.walls.size());
-        int wallToChange = enterValidInt(1, building.walls.size());
+        System.out.println("Number of Existing walls: " + building.getWallAmount());
+        int wallToChange = enterValidInt(1, building.getWallAmount());
         int wallIndex = wallToChange-1;
         System.out.println("Wall being modified: Wall " + wallToChange);
 
         int chooseFromDisplay;
-        System.out.println("Total features of this wall: " + building.walls.get(wallIndex).getFeatureListSize());
-        chooseFromDisplay = enterValidInt(1, building.walls.get(wallIndex).getFeatureListSize());
-        building.walls.get(wallIndex).removeFeature(chooseFromDisplay-1);
+        System.out.println("Total features of this wall: " + building.getWall(wallIndex).getFeatureListSize());
+        chooseFromDisplay = enterValidInt(1, building.getWall(wallIndex).getFeatureListSize());
+        building.getWall(wallIndex).removeFeature(chooseFromDisplay-1);
 
         System.out.println("Feature Removed!");
     }
@@ -954,8 +961,12 @@ public class UIImpl implements UI {
             boolean modificationsDone = false;
             switch (entryInt) {
                 case 1:
+                    if(buildingList.size()>0){
                     for(int i = 0; i < buildingList.size(); i++){
+                        System.out.println("Building : "+(i+1));
                         System.out.println(buildingList.get(i).buildingToString());
+                    }}else{
+                        System.out.println("There are no buildings currently loaded.");
                     }
                     break;
                 case 2:
@@ -972,6 +983,9 @@ public class UIImpl implements UI {
                         System.out.println("There are no buildings available yet to modify! Create or load a building.");
                         break;
                     }else {
+                        for(int i = 0; i < buildingList.size(); i++){
+                            System.out.println(buildingList.get(i).buildingToString());
+                        }
                         System.out.println("Enter the number of the building you wish to modify:");
                         for(int i=0; i<buildingList.size(); i++){
 
