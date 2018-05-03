@@ -8,14 +8,13 @@ import static java.lang.Character.isLetter;
 
 public class UIImpl implements UI {
     public Scanner userIn;
-    public ArrayList<BuildingImpl> buildingList = new ArrayList<BuildingImpl>();
+    public ArrayList<Building> buildingList = new ArrayList<Building>();
     public FileInput saveFileIn;
     public FileOutput saveFileOut;
 
     public UIImpl() {
         this.userIn = new Scanner(System.in);
     }
-
     public static void main(String[] args) {
         UI demo = new UIImpl();
         demo.login();
@@ -66,7 +65,7 @@ public class UIImpl implements UI {
         System.out.println("Welcome to the Architecture Advisor3000");
         System.out.println("\nWhen you would like to begin modifying your project enter Yes.");
         String entry = userIn.next();
-        BuildingImpl demoBuilding;
+        Building demoBuilding;
         boolean userYes = yesOrNo(entry);
         while (!userYes) {
             System.out.println("Please enter Yes when ready");
@@ -77,7 +76,7 @@ public class UIImpl implements UI {
         entry = userIn.next();
         userYes = yesOrNo(entry);
         if (userYes) {
-            demoBuilding = keepLoading();
+            demoBuilding = keepLoading(); //working here
         }else{
             demoBuilding = createNewBuilding();
         }
@@ -86,8 +85,7 @@ public class UIImpl implements UI {
         while (!modificationsDone) {
             modificationsDone = modifyWalls(demoBuilding);
         }
-        demoBuilding = new BuildingImpl();
-        System.out.println("To create or select another building, enter 1. To quit enter 0.");
+        System.out.println("To create or select another building, enter 1. To exit wall editor enter 0.");
         int switchBuildings = enterValidInt(0, 1);
         while (switchBuildings == 1) {
             System.out.println("Enter 1 to modify an existing building.\nEnter 2 to create a new building.\nEnter 3 to save your existing building.\nEnter 0 to go back.");
@@ -151,14 +149,16 @@ public class UIImpl implements UI {
         this.userIn.close();
     }
 
-    public BuildingImpl createNewBuilding() {
+    public Building createNewBuilding() {
         double height = initializeHeight();
         double width = initializeWidth();
         double length = initializeLength();
-        BuildingImpl demoBuilding = new BuildingImpl(length, width, height);
+        Building demoBuilding = new BuildingImpl(length, width, height);
         Roof roof = new RoofImpl(width, length, 2, height);
         ExternalWall newWall1 = new ExternalWall();
         ExternalWall newWall2 = new ExternalWall();
+        ExternalWall newWall3 = new ExternalWall();
+        ExternalWall newWall4 = new ExternalWall();
         double thickness = requestWallThickness();
         System.out.println("Select a material from the list below\n" + displayMaterialsByArea());
         int option = enterValidInt(1, 6);
@@ -167,24 +167,35 @@ public class UIImpl implements UI {
         newWall1.setLength(demoBuilding.getLength());
         newWall1.setThickness(thickness);
         newWall1.setMaterial(selectMaterial);
+        newWall1.setBottomCoordinates(0,0,0);
+        newWall1.setTopCoordinates(thickness,width,height);
         demoBuilding.addWall(newWall1);
+
         newWall2.setHeight(demoBuilding.getHeight());
         newWall2.setLength(demoBuilding.getWidth());
         newWall2.setThickness(thickness);
         newWall2.setMaterial(selectMaterial);
+        newWall2.setBottomCoordinates(0,width,0);
+        newWall2.setTopCoordinates(length,width-thickness,height);
         demoBuilding.addWall(newWall2);
-        newWall1 = new ExternalWall();
-        newWall1.setHeight(demoBuilding.getHeight());
-        newWall1.setLength(demoBuilding.getLength());
-        newWall1.setThickness(thickness);
-        newWall1.setMaterial(selectMaterial);
-        demoBuilding.addWall(newWall1);
-        newWall2 = new ExternalWall();
-        newWall2.setHeight(demoBuilding.getHeight());
-        newWall2.setLength(demoBuilding.getWidth());
-        newWall2.setThickness(thickness);
-        newWall2.setMaterial(selectMaterial);
-        demoBuilding.addWall(newWall2);
+
+        newWall3 = new ExternalWall();
+        newWall3.setHeight(demoBuilding.getHeight());
+        newWall3.setLength(demoBuilding.getLength());
+        newWall3.setThickness(thickness);
+        newWall3.setMaterial(selectMaterial);
+        newWall3.setBottomCoordinates(length,width,0);
+        newWall3.setTopCoordinates(length-thickness,0,height);
+        demoBuilding.addWall(newWall3);
+
+        newWall4 = new ExternalWall();
+        newWall4.setHeight(demoBuilding.getHeight());
+        newWall4.setLength(demoBuilding.getWidth());
+        newWall4.setThickness(thickness);
+        newWall4.setMaterial(selectMaterial);
+        newWall4.setBottomCoordinates(length,0,0);
+        newWall4.setTopCoordinates(0,thickness,height);
+        demoBuilding.addWall(newWall4);
         return demoBuilding;
 
     }
@@ -196,8 +207,8 @@ public class UIImpl implements UI {
         int option;
         int wallToChange;
         while (!done) {
-            System.out.println("Choose a wall, 1-4, to modify, or enter 0 to quit");
-            wallToChange = enterValidInt(0, 4);
+            System.out.println("Choose a wall, 1-"+demoBuilding.getWallAmount()+", to modify, or enter 0 to exit wall editor.");
+            wallToChange = enterValidInt(0, demoBuilding.getWallAmount());
             if (wallToChange != 0) {
                 int wallIndex = wallToChange - 1;
                 System.out.println("\nWall being modified: " + wallToChange + "\n" + displayWalls(demoBuilding.getWall(wallIndex)));
@@ -533,7 +544,7 @@ public class UIImpl implements UI {
     //creates a dummy building for testing purposes
     @Override
     public void dummyBuilding() {
-        BuildingImpl newBuilding = new BuildingImpl(60, 60, 12);
+        Building newBuilding = new BuildingImpl(60, 60, 12);
         double[] startPoint1 = new double[]{0.0, 0.0, 0.0};
         double[] startPoint2 = new double[]{0.0, 0.0, 0.0};
         double[] startPoint3 = new double[]{0.0, 55.0, 0.0};
@@ -555,7 +566,7 @@ public class UIImpl implements UI {
     }
 
     @Override
-    public void addBuilding(BuildingImpl building){
+    public void addBuilding(Building building){
         buildingList.add(building);
     }
 
@@ -583,6 +594,7 @@ public class UIImpl implements UI {
             double x = -1;
             if (xEntry) {
                 x = Double.parseDouble(xStr);
+                start[0] = x;
             }
             while (x < 0 || !xEntry || x > this.buildingList.get(idx).getLength()) {
                 System.out.println("Invalid entry.");
@@ -591,6 +603,7 @@ public class UIImpl implements UI {
                 xEntry = checkValidDouble(xStr);
                 if (xEntry) {
                     x = Double.parseDouble(xStr);
+                    start[0] = x;
                 }
             }
             //y position
@@ -600,6 +613,7 @@ public class UIImpl implements UI {
             double y = -1;
             if (yEntry) {
                 y = Double.parseDouble(yStr);
+                start[1] = y;
             }
             while (y < 0 || !yEntry || x > this.buildingList.get(idx).getWidth()) {
                 System.out.println("Invalid entry.");
@@ -608,6 +622,7 @@ public class UIImpl implements UI {
                 yEntry = checkValidDouble(yStr);
                 if (yEntry) {
                     y = Double.parseDouble(yStr);
+                    start[1] = y;
                 }
             }
             //z position
@@ -617,6 +632,7 @@ public class UIImpl implements UI {
             double z = -1;
             if (zEntry) {
                 z = Double.parseDouble(zStr);
+                start[2] = z;
             }
             while (z < 0 || !zEntry || x > this.buildingList.get(idx).getHeight()) {
                 System.out.println("Invalid entry.");
@@ -625,6 +641,7 @@ public class UIImpl implements UI {
                 zEntry = checkValidDouble(zStr);
                 if (zEntry) {
                     z = Double.parseDouble(zStr);
+                    start[2] = z;
                 }
             }
             //Input wall length
@@ -722,15 +739,16 @@ public class UIImpl implements UI {
             ExternalWall wall = new ExternalWall(height, length, width, start, newMaterial);
 
             if (wall.getTopCoordinates()[0] > this.buildingList.get(idx).getLength()) {
-                System.out.print("Error: Wall is longer than the building");
+                System.out.println("Error: Wall is longer than the building");
                 return false;
             } else if (wall.getTopCoordinates()[1] > this.buildingList.get(idx).getWidth()) {
-                System.out.print("Error: Wall is wider than the building");
-                return false;
-            } else if (wall.getTopCoordinates()[2] > this.buildingList.get(idx).getHeight()) {
-                System.out.print("Error: Wall is taller than the building");
+                System.out.println("Error: Wall is wider than the building");
                 return false;
             }
+//            else if (wall.getTopCoordinates()[2] > this.buildingList.get(idx).getHeight()) {
+//                System.out.println("Error: Wall is taller than the building");
+//                return false;
+//            }
             this.buildingList.get(idx).addWall(wall);
             System.out.println("Wall Added");
             return true;
@@ -738,10 +756,10 @@ public class UIImpl implements UI {
     }
 
     @Override
-    public void addWallFeature(BuildingImpl building){
+    public void addWallFeature(Building building){
         System.out.println("Choose a wall to modify");
-        System.out.println("Number of Existing walls: " + building.walls.size());
-        int wallToChange = enterValidInt(1, building.walls.size());
+        System.out.println("Number of Existing walls: " + building.getWallAmount());
+        int wallToChange = enterValidInt(1, building.getWallAmount());
         int wallIndex = wallToChange-1;
         System.out.println("Wall being modified: Wall " + wallToChange);
 
@@ -785,10 +803,10 @@ public class UIImpl implements UI {
     }
 
     @Override
-    public void addStairs(BuildingImpl building){
+    public void addStairs(Building building){
         System.out.println("Choose a wall to modify");
-        System.out.println("Number of Existing walls: " + building.walls.size());
-        int wallToChange = enterValidInt(1, building.walls.size());
+        System.out.println("Number of Existing walls: " + building.getWallAmount());
+        int wallToChange = enterValidInt(1, building.getWallAmount());
         int wallIndex = wallToChange-1;
         System.out.println("Wall being modified: Wall " + wallToChange);
 
@@ -891,44 +909,33 @@ public class UIImpl implements UI {
                 break;
         }
         Stairs newStairs = new Stairs(height, num, width, thickness, newMaterial);
-        building.walls.get(wallIndex).addStairs(newStairs);
+        building.getWall(wallIndex).addStairs(newStairs);
         System.out.println("Stairs Added!");
     }
 
     @Override
-    public void removeWallFeature(BuildingImpl building){
+    public void removeWallFeature(Building building){
         System.out.println("Choose a wall to modify");
-        System.out.println("Number of Existing walls: " + building.walls.size());
-        int wallToChange = enterValidInt(1, building.walls.size());
+        System.out.println("Number of Existing walls: " + building.getWallAmount());
+        int wallToChange = enterValidInt(1, building.getWallAmount());
         int wallIndex = wallToChange-1;
         System.out.println("Wall being modified: Wall " + wallToChange);
 
         int chooseFromDisplay;
-        System.out.println("Total features of this wall: " + building.walls.get(wallIndex).getFeatureListSize());
-        chooseFromDisplay = enterValidInt(1, building.walls.get(wallIndex).getFeatureListSize());
-        building.walls.get(wallIndex).removeFeature(chooseFromDisplay-1);
+        System.out.println("Total features of this wall: " + building.getWall(wallIndex).getFeatureListSize());
+        chooseFromDisplay = enterValidInt(1, building.getWall(wallIndex).getFeatureListSize());
+        building.getWall(wallIndex).removeFeature(chooseFromDisplay-1);
 
         System.out.println("Feature Removed!");
     }
 
     public void login(){
-        this.dummyBuilding();
         //System.out.println(displayWalls(this.buildingList.get(0).getWall(0)));
         System.out.println("Welcome to the Architecture Advisor3000");
         System.out.println("Please Log In.");
         System.out.println("1.) Architect login");
         System.out.println("2.) Builder Login");
-        String entry = userIn.next();
-        boolean goodEntry = checkValidInt(entry);
-        while(goodEntry==false){
-            System.out.println("Invalid Entry.");
-            System.out.println("Please Log In.");
-            System.out.println("1.) Architect login");
-            System.out.println("2.) Builder Login");
-            entry = userIn.next();
-            goodEntry = checkValidInt(entry);
-        }
-        int entryInt = Integer.parseInt(entry);
+        int entryInt = enterValidInt(1,2);
         switch (entryInt) {
             case 1: System.out.println("Hello Architect.");
                     architectMain();
@@ -941,54 +948,85 @@ public class UIImpl implements UI {
     }
 
     public void architectMain(){
-        String repeat = "yes";
-        while(repeat.equals("yes")) {
+        boolean repeat = true;
+        Building demoBuilding = null;
+        while(repeat) {
             System.out.println("What would you like to do?");
             System.out.println("1.) Display Existing Buildings");
             System.out.println("2.) Create Building");
             System.out.println("3.) Modify an existing building");
             System.out.println("4.) Import Buildings");
             System.out.println("5.) Export Buildings");
-            String entry = userIn.next();
-            boolean goodEntry = checkValidInt(entry);
-            while (goodEntry == false) {
-                System.out.println("Invalid Entry.");
-                System.out.println("What would you like to do?");
-                System.out.println("1.) Display Existing Buildings");
-                System.out.println("2.) Create Building");
-                System.out.println("3.) Modify an existing building");
-                System.out.println("4.) Import Buildings");
-                System.out.println("5.) Export Buildings");
-                entry = userIn.next();
-                goodEntry = checkValidInt(entry);
-            }
-            int entryInt = Integer.parseInt(entry);
+            int entryInt = enterValidInt(1,5);
+            boolean modificationsDone = false;
             switch (entryInt) {
                 case 1:
+                    if(buildingList.size()>0){
+                    for(int i = 0; i < buildingList.size(); i++){
+                        System.out.println("Building : "+(i+1));
+                        System.out.println(buildingList.get(i).buildingToString());
+                    }}else{
+                        System.out.println("There are no buildings currently loaded.");
+                    }
                     break;
                 case 2:
-                    this.createBuilding();
+                    modificationsDone = false;
+                    demoBuilding = this.createNewBuilding();
+                    buildingList.add(demoBuilding);
+                    while (!modificationsDone) {
+                        modificationsDone = modifyWalls(demoBuilding);
+                    }
                     break;
                 case 3: //select a building from the arrayList
-                    architectModify(0);
+
+                    if(buildingList.size()<=0){
+                        System.out.println("There are no buildings available yet to modify! Create or load a building.");
+                        break;
+                    }else {
+                        for(int i = 0; i < buildingList.size(); i++){
+                            System.out.println(buildingList.get(i).buildingToString());
+                        }
+                        System.out.println("Enter the number of the building you wish to modify:");
+                        for(int i=0; i<buildingList.size(); i++){
+
+                        }
+                        int selection = enterValidInt(1, buildingList.size());
+                        architectModify(selection-1);
+                    }
+
                     break;
                 case 4:
+                    modificationsDone = false;
+                    demoBuilding = keepLoading();
+                    buildingList.add(demoBuilding);
+                    //working here
+                    while (!modificationsDone) {
+                        modificationsDone = modifyWalls(demoBuilding);
+                    }
                     break;
                 case 5:
+                    int saveFileChoice = displayAvailableFiles();
+                    saveFileOut = selectOutFile(saveFileChoice);
+                    if(demoBuilding == null){
+                        System.out.println("There is no building to be saved.");
+                        break;
+                    }else{
+                    boolean didSave = saveToFile(saveFileOut,demoBuilding);
+                    if(!didSave){
+                        System.out.println("Did not save properly.");
+                    }else{
+                        System.out.println("Successful save!");
+                    }
                     break;
+                    }
                 default:
                     break;
             }
             System.out.println("Would you like do anything else?");
-            String repeatEntry = userIn.next().toLowerCase();
-            boolean goodEntry2 = checkYesOrNo(repeatEntry);
-            while(goodEntry2==false){
-                System.out.println("Please enter Yes or No");
-                repeatEntry = userIn.next().toLowerCase();
-                goodEntry2 = checkYesOrNo(repeatEntry);
-            }
+            repeat = yesOrNo(userIn.next());
         }
     }
+
 
     public void architectModify(int idx){
         //System.out.println("Existing buildings:");
@@ -1026,29 +1064,27 @@ public class UIImpl implements UI {
     }
 
     public void builderMain() {
-        String repeat = "yes";
-        while (repeat.equals("yes")) {
-            System.out.println("Existing Buildings:");
+        boolean repeat = true;
+        while (repeat) {
+            System.out.println("Select the file which contains the building you wish to view.");
+            int saveFileChoice = displayAvailableFiles();
             //Display list of existing buildings
-            System.out.println("Select a building for a cost estimate.");
-            int entry = enterValidInt(1, this.buildingList.size());
-            System.out.println("Estimated Cost: $" + this.buildingList.get(entry - 1).calcTotalCost());
-            System.out.println("Would you like to get another cost estimate?");
-            String repeatEntry = userIn.next().toLowerCase();
-            boolean goodEntry = checkYesOrNo(repeatEntry);
-            while (goodEntry == false) {
-                System.out.println("Please enter Yes or No");
-                repeatEntry = userIn.next().toLowerCase();
-                goodEntry = checkYesOrNo(repeatEntry);
+            FileInput fileIn = selectInFile(saveFileChoice);
+            Building demoBuilding = fileIn.loadFromFile();
+            System.out.println("Estimated Cost: $" + demoBuilding.calcTotalCost());
+            System.out.println(buildingOutput(demoBuilding));
+            for (int i = 0; i < demoBuilding.getWallAmount(); i++) {
+                System.out.println(displayWalls(demoBuilding.getWall(i)));
             }
-            repeat = repeatEntry;
+            System.out.println("Would you like to get another cost estimate?");
+            repeat = yesOrNo(userIn.next());
         }
         System.out.println("Thank you for using our system!");
     }
     /**
      * Displays the available files
      *
-     * @return the number of available files
+     * @return the choice of file to use
      */
     public int displayAvailableFiles() {
         FileInput masterIn = new FileInputImpl("masterFile.txt");
@@ -1118,8 +1154,8 @@ public class UIImpl implements UI {
      * Makes it so the program only continues if the file isn't empty (not null building!)
      * @return building loaded from selected file
      */
-    public BuildingImpl keepLoading() {
-        BuildingImpl demoBuilding;
+    public Building keepLoading() {
+        Building demoBuilding;
         int saveSlotNum = displayAvailableFiles();
         saveFileIn = selectInFile(saveSlotNum);
         demoBuilding = saveFileIn.loadFromFile();
@@ -1137,5 +1173,9 @@ public class UIImpl implements UI {
             }
         }
         return demoBuilding;
+    }
+
+    public boolean saveFile(){
+        return false;
     }
 }

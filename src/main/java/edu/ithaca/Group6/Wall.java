@@ -100,4 +100,6 @@ public interface Wall {
      * @return a string of the wall to be used in the output file
      */
     public String outString();
+
+    public void addStairs(Stairs stairsToAdd);
 }

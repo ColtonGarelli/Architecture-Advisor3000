@@ -303,4 +303,46 @@ public class BuildingImpl implements Building{
     public int getNumberOfFloors(){
         return this.floors.size();
     }
+
+    public String buildingToString(){
+
+        String buildingString;
+        buildingString = "\nBuilding Dimensions\n\n";
+        buildingString += "Height: ";
+        buildingString += String.valueOf(this.getHeight()) + "\n";
+        buildingString += "Length: ";
+        buildingString += String.valueOf(this.getLength())+"\n";
+        buildingString += "Width: ";
+        buildingString += String.valueOf(this.getWidth())+"\n\n\n";
+        buildingString += "Walls:\n";
+        for(int i=0; i<this.getWallAmount(); i++){
+            buildingString += String.valueOf(i+1) +".\n" + "Height: ";
+            buildingString += String.valueOf(this.getWall(i).getHeight()) + "\n";
+            buildingString += "Length: ";
+            buildingString+= String.valueOf(this.getWall(i).getLength()+"\n");
+            buildingString += "Thickness: ";
+            buildingString += String.valueOf(this.getWall(i).getThickness())+"\n\n";
+
+            if(this.getNumberOfFloors()>0) {
+                buildingString += "Floors: ";
+                for (int i2 = 0; i2 < this.getNumberOfFloors(); i2++) {
+                    buildingString += this.getFloor(i2).floorOutString().replace('_', ' ') + "\n";
+                }
+            }
+
+            if(this.getWall(i).getFeatureListSize() > 0) {
+                buildingString += "Features: \n";
+                for (int i3 = 0; i3 < this.getWall(i).getFeatureListSize(); i3++) {
+                    buildingString += this.getWall(i).getFeature(i3).toString() + "\n";
+                }
+            }
+            buildingString += "\n\n";
+        }
+        return buildingString;
+    }
+
+    @Override
+    public int getNumberOfWalls() {
+        return this.walls.size();
+    }
 }
