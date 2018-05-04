@@ -24,10 +24,10 @@ public class UIImpl implements UI {
     public int enterValidInt(int startInt, int endInt) {
         int userInt = startInt - 1;
         while (userInt < startInt || userInt > endInt) {
-            String userInput = userIn.next();
+            String userInput = userIn.nextLine();
             while (!checkValidInt(userInput)) {
                 System.out.println("Please enter a valid option, " + startInt + " - " + endInt + "");
-                userInput = userIn.next();
+                userInput = userIn.nextLine();
             }
             userInt = Integer.parseInt(userInput);
             if (userInt < startInt || userInt > endInt) {
@@ -46,7 +46,7 @@ public class UIImpl implements UI {
     public boolean yesOrNo(String userInput) {
         while (!checkYesOrNo(userInput)) {
             System.out.println("Please enter a valid yes or no option.");
-            userInput = userIn.next();
+            userInput = userIn.nextLine();
         }
         String shortUserInput = userInput.substring(0, 1);
         //Lowercase the string
@@ -64,16 +64,16 @@ public class UIImpl implements UI {
     public void sprintThreeDemo() {
         System.out.println("Welcome to the Architecture Advisor3000");
         System.out.println("\nWhen you would like to begin modifying your project enter Yes.");
-        String entry = userIn.next();
+        String entry = userIn.nextLine();
         Building demoBuilding;
         boolean userYes = yesOrNo(entry);
         while (!userYes) {
             System.out.println("Please enter Yes when ready");
-            entry = userIn.next();
+            entry = userIn.nextLine();
             userYes = yesOrNo(entry);
         }
         System.out.println("You have the option to load from a save slot. Would you like to load?");
-        entry = userIn.next();
+        entry = userIn.nextLine();
         userYes = yesOrNo(entry);
         if (userYes) {
             demoBuilding = keepLoading(); //working here
@@ -351,11 +351,11 @@ public class UIImpl implements UI {
     public double initializeLength() {
         boolean goodEntry;
         System.out.println("Enter the length of the structure");
-        String length = userIn.next();
+        String length = userIn.nextLine();
         goodEntry = checkValidDouble(length);
         while (!goodEntry) {
             System.out.println("Invalid entry. Please enter the length of the structure");
-            length = userIn.next();
+            length = userIn.nextLine();
             goodEntry = checkValidDouble(length);
         }
         return Double.parseDouble(length);
@@ -365,11 +365,11 @@ public class UIImpl implements UI {
     public double initializeHeight() {
         boolean goodEntry;
         System.out.println("Enter the height of the structure");
-        String height = userIn.next();
+        String height = userIn.nextLine();
         goodEntry = checkValidDouble(height);
         while (!goodEntry) {
             System.out.println("Invalid entry. Please enter the height of the structure");
-            height = userIn.next();
+            height = userIn.nextLine();
             goodEntry = checkValidDouble(height);
         }
         return Double.parseDouble(height);
@@ -379,11 +379,11 @@ public class UIImpl implements UI {
     public double initializeWidth() {
         boolean goodEntry;
         System.out.println("Enter the width of the structure");
-        String width = userIn.next();
+        String width = userIn.nextLine();
         goodEntry = checkValidDouble(width);
         while (!goodEntry) {
             System.out.println("Invalid entry. Please enter the width of the structure");
-            width = userIn.next();
+            width = userIn.nextLine();
             goodEntry = checkValidDouble(width);
         }
         return Double.parseDouble(width);
@@ -391,7 +391,7 @@ public class UIImpl implements UI {
 
     public double requestWallThickness() {
         System.out.println("Please enter desired wall thickness");
-        String thicknessStr = userIn.next();
+        String thicknessStr = userIn.nextLine();
         boolean goodEntry = checkValidDouble(thicknessStr);
         double thickness = -1;
         if (goodEntry) {
@@ -399,7 +399,7 @@ public class UIImpl implements UI {
         }
         while (thickness < 0.1 || !goodEntry) {
             System.out.println("Invalid entry. Please enter desired wall thickness");
-            thicknessStr = userIn.next();
+            thicknessStr = userIn.nextLine();
             goodEntry = checkValidDouble(thicknessStr);
             if (goodEntry) {
                 thickness = Double.parseDouble(thicknessStr);
@@ -573,7 +573,7 @@ public class UIImpl implements UI {
     @Override
     public boolean addWall(int idx) {
         /**System.out.println("Enter a length for the new wall");
-         String lengthStr = userIn.next();
+         String lengthStr = userIn.nextLine();
          boolean lengthEntry = checkValidDouble(lengthStr);
          double length = -1;
          if(lengthEntry){
@@ -589,7 +589,7 @@ public class UIImpl implements UI {
             System.out.println("Enter a starting point for the new wall.");
             //x position
             System.out.print("X position: ");
-            String xStr = userIn.next();
+            String xStr = userIn.nextLine();
             boolean xEntry = checkValidDouble(xStr);
             double x = -1;
             if (xEntry) {
@@ -599,7 +599,7 @@ public class UIImpl implements UI {
             while (x < 0 || !xEntry || x > this.buildingList.get(idx).getLength()) {
                 System.out.println("Invalid entry.");
                 System.out.print("X position: ");
-                xStr = userIn.next();
+                xStr = userIn.nextLine();
                 xEntry = checkValidDouble(xStr);
                 if (xEntry) {
                     x = Double.parseDouble(xStr);
@@ -608,7 +608,7 @@ public class UIImpl implements UI {
             }
             //y position
             System.out.print("Y position: ");
-            String yStr = userIn.next();
+            String yStr = userIn.nextLine();
             boolean yEntry = checkValidDouble(yStr);
             double y = -1;
             if (yEntry) {
@@ -618,7 +618,7 @@ public class UIImpl implements UI {
             while (y < 0 || !yEntry || x > this.buildingList.get(idx).getWidth()) {
                 System.out.println("Invalid entry.");
                 System.out.print("Z position: ");
-                yStr = userIn.next();
+                yStr = userIn.nextLine();
                 yEntry = checkValidDouble(yStr);
                 if (yEntry) {
                     y = Double.parseDouble(yStr);
@@ -627,7 +627,7 @@ public class UIImpl implements UI {
             }
             //z position
             System.out.print("Z position: ");
-            String zStr = userIn.next();
+            String zStr = userIn.nextLine();
             boolean zEntry = checkValidDouble(zStr);
             double z = -1;
             if (zEntry) {
@@ -637,7 +637,7 @@ public class UIImpl implements UI {
             while (z < 0 || !zEntry || x > this.buildingList.get(idx).getHeight()) {
                 System.out.println("Invalid entry.");
                 System.out.print("Z position: ");
-                zStr = userIn.next();
+                zStr = userIn.nextLine();
                 zEntry = checkValidDouble(zStr);
                 if (zEntry) {
                     z = Double.parseDouble(zStr);
@@ -646,7 +646,7 @@ public class UIImpl implements UI {
             }
             //Input wall length
             System.out.println("Enter a length for the new wall");
-            String lengthStr = userIn.next();
+            String lengthStr = userIn.nextLine();
             boolean lengthEntry = checkValidDouble(lengthStr);
             double length = -1;
             if (lengthEntry) {
@@ -654,7 +654,7 @@ public class UIImpl implements UI {
             }
             while (length < 0.1 || !lengthEntry) {
                 System.out.println("Invalid entry. Please enter desired wall length");
-                lengthStr = userIn.next();
+                lengthStr = userIn.nextLine();
                 lengthEntry = checkValidDouble(lengthStr);
                 if (lengthEntry) {
                     length = Double.parseDouble(lengthStr);
@@ -662,7 +662,7 @@ public class UIImpl implements UI {
             }
             //Input wall width
             System.out.println("Enter a width for the new wall");
-            String widthStr = userIn.next();
+            String widthStr = userIn.nextLine();
             boolean widthEntry = checkValidDouble(widthStr);
             double width = -1;
             if (widthEntry) {
@@ -670,7 +670,7 @@ public class UIImpl implements UI {
             }
             while (width < 0.1 || !widthEntry) {
                 System.out.println("Invalid entry. Please enter desired wall width");
-                widthStr = userIn.next();
+                widthStr = userIn.nextLine();
                 widthEntry = checkValidDouble(widthStr);
                 if (widthEntry) {
                     width = Double.parseDouble(widthStr);
@@ -678,7 +678,7 @@ public class UIImpl implements UI {
             }
             //Input wall height
             System.out.println("Enter a height for the new wall");
-            String heightStr = userIn.next();
+            String heightStr = userIn.nextLine();
             boolean heightEntry = checkValidDouble(heightStr);
             double height = -1;
             if (heightEntry) {
@@ -686,7 +686,7 @@ public class UIImpl implements UI {
             }
             while (height < 0.1 || !heightEntry) {
                 System.out.println("Invalid entry. Please enter desired wall height");
-                heightStr = userIn.next();
+                heightStr = userIn.nextLine();
                 heightEntry = checkValidDouble(heightStr);
                 if (heightEntry) {
                     height = Double.parseDouble(heightStr);
@@ -695,7 +695,7 @@ public class UIImpl implements UI {
             //Input wall material
             System.out.println("Select a material to make the new wall out of");
             System.out.println(this.displayMaterialsByArea());
-            String selectionStr = userIn.next();
+            String selectionStr = userIn.nextLine();
             boolean selectionEntry = checkValidInt(selectionStr);
             int selection = 0;
             if (selectionEntry) {
@@ -704,7 +704,7 @@ public class UIImpl implements UI {
             while (selection < 1 || !selectionEntry || selection > 6) {
                 System.out.println("Invalid entry. Please select one of the available materials.");
                 System.out.println(this.displayMaterialsByArea());
-                selectionStr = userIn.next();
+                selectionStr = userIn.nextLine();
                 selectionEntry = checkValidInt(selectionStr);
                 if (selectionEntry) {
                     selection = Integer.parseInt(selectionStr);
@@ -812,7 +812,7 @@ public class UIImpl implements UI {
 
         //Input stairs height
         System.out.println("Enter a height for the stairs");
-        String heightStr = userIn.next();
+        String heightStr = userIn.nextLine();
         boolean heightEntry = checkValidDouble(heightStr);
         double height = -1;
         if (heightEntry) {
@@ -820,7 +820,7 @@ public class UIImpl implements UI {
         }
         while (height < 0.1 || !heightEntry) {
             System.out.println("Invalid entry. Please enter desired stairs height");
-            heightStr = userIn.next();
+            heightStr = userIn.nextLine();
             heightEntry = checkValidDouble(heightStr);
             if (heightEntry) {
                 height = Double.parseDouble(heightStr);
@@ -828,7 +828,7 @@ public class UIImpl implements UI {
         }
         //Input number of stairs
         System.out.println("Enter the desired number of stairs");
-        String numStr = userIn.next();
+        String numStr = userIn.nextLine();
         boolean numEntry = checkValidInt(numStr);
         int num = -1;
         if (numEntry) {
@@ -836,7 +836,7 @@ public class UIImpl implements UI {
         }
         while (num < 1 || !numEntry) {
             System.out.println("Invalid entry. Please enter the desired number of stairs");
-            numStr = userIn.next();
+            numStr = userIn.nextLine();
             numEntry = checkValidInt(numStr);
             if (numEntry) {
                 num = Integer.parseInt(numStr);
@@ -844,7 +844,7 @@ public class UIImpl implements UI {
         }
         //Input stairs width
         System.out.println("Enter a width for the stairs");
-        String widthStr = userIn.next();
+        String widthStr = userIn.nextLine();
         boolean widthEntry = checkValidDouble(widthStr);
         double width = -1;
         if (widthEntry) {
@@ -852,7 +852,7 @@ public class UIImpl implements UI {
         }
         while (width < 0.1 || !widthEntry) {
             System.out.println("Invalid entry. Please enter desired stairs width");
-            widthStr = userIn.next();
+            widthStr = userIn.nextLine();
             widthEntry = checkValidDouble(widthStr);
             if (widthEntry) {
                 width = Double.parseDouble(widthStr);
@@ -860,7 +860,7 @@ public class UIImpl implements UI {
         }
         //Input stairs height
         System.out.println("Enter a thickness for the stairs");
-        String thicknessStr = userIn.next();
+        String thicknessStr = userIn.nextLine();
         boolean thicknessEntry = checkValidDouble(thicknessStr);
         double thickness = -1;
         if (thicknessEntry) {
@@ -868,7 +868,7 @@ public class UIImpl implements UI {
         }
         while (thickness < 0.1 || !thicknessEntry) {
             System.out.println("Invalid entry. Please enter desired stairs thickness");
-            thicknessStr = userIn.next();
+            thicknessStr = userIn.nextLine();
             thicknessEntry = checkValidDouble(thicknessStr);
             if (thicknessEntry) {
                 thickness = Double.parseDouble(thicknessStr);
@@ -877,7 +877,7 @@ public class UIImpl implements UI {
         //Input stairs material
         System.out.println("Select a material to make the stairs out of");
         System.out.println(this.displayMaterialsByArea());
-        String selectionStr = userIn.next();
+        String selectionStr = userIn.nextLine();
         boolean selectionEntry = checkValidInt(selectionStr);
         int selection = 0;
         if (selectionEntry) {
@@ -1023,7 +1023,7 @@ public class UIImpl implements UI {
                     break;
             }
             System.out.println("Would you like do anything else?");
-            repeat = yesOrNo(userIn.next());
+            repeat = yesOrNo(userIn.nextLine());
         }
     }
 
@@ -1036,7 +1036,7 @@ public class UIImpl implements UI {
         System.out.println("3.) Add Stairs to an Existing Building");
         System.out.println("4.) Add a Feature to a Wall");
         System.out.println("5.) Remove a Feature from a Wall");
-        String entry = userIn.next();
+        String entry = userIn.nextLine();
         boolean goodEntry = checkValidInt(entry);
         while(goodEntry==false){
             System.out.println("1.) Add a New Wall to an Existing Building");
@@ -1044,7 +1044,7 @@ public class UIImpl implements UI {
             System.out.println("3.) Add Stairs to an Existing Building");
             System.out.println("4.) Add a Feature to a Wall");
             System.out.println("5.) Remove a Feature from a Wall");
-            entry = userIn.next();
+            entry = userIn.nextLine();
             goodEntry = checkValidInt(entry);
         }
         int entryInt = Integer.parseInt(entry);
@@ -1077,7 +1077,7 @@ public class UIImpl implements UI {
                 System.out.println(displayWalls(demoBuilding.getWall(i)));
             }
             System.out.println("Would you like to get another cost estimate?");
-            repeat = yesOrNo(userIn.next());
+            repeat = yesOrNo(userIn.nextLine());
         }
         System.out.println("Thank you for using our system!");
     }
