@@ -1,5 +1,5 @@
-W: [0.0,0.0,0.0]_[1.0,4.0,3.0]_Clay Brick : $0.04 per square foot_
-W: [0.0,4.0,0.0]_[5.0,3.0,3.0]_Clay Brick : $0.04 per square foot_
-W: [5.0,4.0,0.0]_[4.0,0.0,3.0]_Clay Brick : $0.04 per square foot_
-W: [5.0,0.0,0.0]_[0.0,1.0,3.0]_Clay Brick : $0.04 per square foot_
-R: [0.0,0.0,3.0]_[5.0,4.0,3.2]_
+W: [0.0,0.0,0.0]_[40.0,10000.0,10000.0]_Brick : $142.34 per square foot_Bay Window : $1198.66, Length: 6.13ft, Width: 1.00ft, Height: 5.08ft_
+W: [0.0,10000.0,0.0]_[10000.0,9960.0,10000.0]_Brick : $142.34 per square foot_
+W: [10000.0,10000.0,0.0]_[9960.0,0.0,10000.0]_Brick : $142.34 per square foot_
+W: [10000.0,0.0,0.0]_[0.0,40.0,10000.0]_Brick : $142.34 per square foot_Door : $900.00, Length: 3.00ft, Width: 0.15ft, Height: 6.67ft_
+R: [0.0,0.0,10000.0]_[10000.0,10000.0,10000.2]_
