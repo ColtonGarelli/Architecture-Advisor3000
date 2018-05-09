@@ -3,7 +3,6 @@ package edu.ithaca.Group6;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import edu.ithaca.Group6.FileOutputImpl;
 
 import static java.lang.Character.isLetter;
 
@@ -978,15 +977,15 @@ public class UIImpl implements UI {
                     }else{
                         System.out.println("There are no buildings currently loaded.");
                     }
-                    System.out.println("Would you like to do anything else?");
-                    repeat = yesOrNo(userIn.nextLine());
+                    //System.out.println("Would you like to do anything else?");
+                    repeat = true;
                     break;
                 case 2:
                     modificationsDone = false;
                     demoBuilding = this.createNewBuilding();
                     buildingList.add(demoBuilding);
-                    System.out.println("Would you like to do anything else?");
-                    repeat = yesOrNo(userIn.nextLine());
+                    //System.out.println("Would you like to do anything else?");
+                    repeat = true;
                     saved = false;
                     break;
                 case 3: //select a building from the arrayList
@@ -1006,16 +1005,16 @@ public class UIImpl implements UI {
                         int selection = enterValidInt(1, buildingList.size());
                         architectModify(selection-1);
                     }
-                    System.out.println("Would you like to do anything else?");
-                    repeat = yesOrNo(userIn.nextLine());
+    //                    System.out.println("Would you like to do anything else?");
+                    repeat = true;
                     saved = false;
                     break;
                 case 4:
                     modificationsDone = false;
                     demoBuilding = keepLoading();
                     buildingList.add(demoBuilding);
-                    System.out.println("Would you like to do anything else?");
-                    repeat = yesOrNo(userIn.nextLine());
+//                    System.out.println("Would you like to do anything else?");
+                    repeat = true;
                     break;
                 case 5:
 
@@ -1033,8 +1032,8 @@ public class UIImpl implements UI {
                     }else{
                         System.out.println("Successful save!");
                     }
-                    System.out.println("Would you like to do anything else?");
-                    repeat = yesOrNo(userIn.nextLine());
+//                    System.out.println("Would you like to do anything else?");
+                    repeat = true;
                     saved = true;
                     break;
                     }
