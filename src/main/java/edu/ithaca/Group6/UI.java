@@ -117,4 +117,12 @@ public interface UI {
      * @param building
      */
     public void addStairs(Building building);
+
+    /**
+     * determines if user input yes or user input no
+     * @param input user input
+     * @return true is yes, false if no
+     */
+    public boolean yesOrNo(String input);
+
 }
