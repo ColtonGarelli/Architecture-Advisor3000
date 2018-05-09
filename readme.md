@@ -1,9 +1,15 @@
 [Task Responsibility Document](https://docs.google.com/document/d/1jQQJPG8D2RovpcrkoIQbu1lbX18Ktlws6mZQ17fxmLg/view?usp=sharing)
+
 [Acceptance Testing Plan](https://docs.google.com/document/d/15yi6Ol9tSyosTtz0tHQYhUKYDU6klqaFRcEg82-k_TQ/view?usp=sharing)
+
 [Quick Start Guide -TBD](http://putintheritzon.ytmnd.com/)
+
 [Javadocs -TBD](http://putintheritzon.ytmnd.com/)
+
 [Final Retrospective](https://docs.google.com/document/d/1HN_UqSBHIEAc5S7G6L_wR1zg1-mQZ5RNs-O39rJpIZM/view?usp=sharing)
+
 [Final Class Diagram -TBD](http://putintheritzon.ytmnd.com/)
+
 [State Diagram](https://drive.google.com/file/d/1fkV9hLJhzICGWCu5Wl7Qdb4n00ZdyMgk/view?usp=sharing)
 
 Developers
