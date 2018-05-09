@@ -4,7 +4,7 @@
 
 [Quick Start Guide -TBD](http://putintheritzon.ytmnd.com/)
 
-[Javadocs -TBD](http://putintheritzon.ytmnd.com/)
+[Javadocs -TBD](https://coltongarelli.github.io/Architecture-Advisor3000/)
 
 [Final Retrospective](https://docs.google.com/document/d/1HN_UqSBHIEAc5S7G6L_wR1zg1-mQZ5RNs-O39rJpIZM/view?usp=sharing)
 
