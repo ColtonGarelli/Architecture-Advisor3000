@@ -9,19 +9,14 @@ public interface Floor {
      */
     public void setHeight(double height);
 
-    /**
-     *
-     */
     public double getHeight();
 
     /**
-     *
+     * sets material of floor
+     * @param material material to set floor
      */
     public void setMaterial(MaterialByArea material);
 
-    /**
-     *
-     */
     public MaterialByArea getMaterial();
 
     public String floorOutString();

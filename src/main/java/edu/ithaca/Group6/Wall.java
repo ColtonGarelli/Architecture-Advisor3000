@@ -101,5 +101,9 @@ public interface Wall {
      */
     public String outString();
 
+    /**
+     * adds stairs to a wall
+     * @param stairsToAdd
+     */
     public void addStairs(Stairs stairsToAdd);
 }
