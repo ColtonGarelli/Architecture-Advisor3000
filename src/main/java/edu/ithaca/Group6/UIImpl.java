@@ -1194,7 +1194,7 @@ public class UIImpl implements UI {
         String[] listOfFiles = masterIn.loadFileNames();
         FileOutput fileOut;
         if (choice < listOfFiles.length) {
-            fileOut = new FileOutputImpl(listOfFiles[choice] + ".txt");
+            fileOut = new FileOutputImpl(listOfFiles[choice-1] + ".txt");
             return fileOut;
         } else {
             System.out.println("Invalid file output name.");
