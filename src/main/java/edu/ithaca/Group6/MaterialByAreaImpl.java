@@ -99,7 +99,7 @@ class Brick extends MaterialByAreaImpl {
 
     @Override
     public double costPerSquareFeetBuilder() {
-        return 142.34231564;
+        return 142.34;
     }
 }
 

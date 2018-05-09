@@ -3,8 +3,10 @@ package edu.ithaca.Group6;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import edu.ithaca.Group6.FileOutputImpl;
 
 import static java.lang.Character.isLetter;
+
 
 public class UIImpl implements UI {
     public Scanner userIn;
@@ -14,6 +16,7 @@ public class UIImpl implements UI {
 
     public UIImpl() {
         this.userIn = new Scanner(System.in);
+
     }
     public static void main(String[] args) {
         UI demo = new UIImpl();
@@ -48,11 +51,11 @@ public class UIImpl implements UI {
             System.out.println("Please enter a valid yes or no option.");
             userInput = userIn.nextLine();
         }
-        String shortUserInput = userInput.substring(0, 1);
+
         //Lowercase the string
-        shortUserInput = shortUserInput.toLowerCase();
+        userInput = userInput.toLowerCase();
         //Compare if yes or no
-        if (shortUserInput.equals("y")) {
+        if (userInput.equals("yes")) {
             return true;
         } else {
             return false;
@@ -61,7 +64,8 @@ public class UIImpl implements UI {
     }
 
     //    in a list of options, quit will always be 0
-    public void sprintThreeDemo() {
+    public void sprintThreeDemo()
+    {
         System.out.println("Welcome to the Architecture Advisor3000");
         System.out.println("\nWhen you would like to begin modifying your project enter Yes.");
         String entry = userIn.nextLine();
@@ -110,7 +114,8 @@ public class UIImpl implements UI {
                         break;
                     case 3:
                         System.out.println("Select which file to save to.");
-                        int saveChoice = displayAvailableFiles();
+                        int fileTot = displayAvailableFiles();
+                        int saveChoice = enterValidInt(1, fileTot);
                         this.saveFileOut = selectOutFile(saveChoice);
                         boolean didSave = saveToFile(saveFileOut,demoBuilding);
                         while(!didSave){
@@ -207,7 +212,7 @@ public class UIImpl implements UI {
         int option;
         int wallToChange;
         while (!done) {
-            System.out.println("Choose a wall, 1-"+demoBuilding.getWallAmount()+", to modify, or enter 0 to exit wall editor.");
+            System.out.println("Choose a wall, 1-"+demoBuilding.getWallAmount()+" to modify, or enter 0 to exit wall editor.");
             wallToChange = enterValidInt(0, demoBuilding.getWallAmount());
             if (wallToChange != 0) {
                 int wallIndex = wallToChange - 1;
@@ -579,6 +584,8 @@ public class UIImpl implements UI {
          if(lengthEntry){
          length = Double.parseDouble(lengthStr);
          }**/
+
+
         if (idx < 0) {
             return false;
         } else if (idx > this.buildingList.size() - 1) {
@@ -950,6 +957,7 @@ public class UIImpl implements UI {
     public void architectMain(){
         boolean repeat = true;
         Building demoBuilding = null;
+        boolean saved = false;
         while(repeat) {
             System.out.println("What would you like to do?");
             System.out.println("1.) Display Existing Buildings");
@@ -957,25 +965,29 @@ public class UIImpl implements UI {
             System.out.println("3.) Modify an existing building");
             System.out.println("4.) Import Buildings");
             System.out.println("5.) Export Buildings");
-            int entryInt = enterValidInt(1,5);
+            System.out.println("0.) Quit");
+            int entryInt = enterValidInt(0,5);
             boolean modificationsDone = false;
             switch (entryInt) {
                 case 1:
                     if(buildingList.size()>0){
-                    for(int i = 0; i < buildingList.size(); i++){
-                        System.out.println("Building : "+(i+1));
-                        System.out.println(buildingList.get(i).buildingToString());
-                    }}else{
+                        for(int i = 0; i < buildingList.size(); i++){
+                            System.out.println("\n\nBuilding: "+(i+1));
+                            System.out.println(buildingList.get(i).buildingToString());
+                        }
+                    }else{
                         System.out.println("There are no buildings currently loaded.");
                     }
+                    System.out.println("Would you like to do anything else?");
+                    repeat = yesOrNo(userIn.nextLine());
                     break;
                 case 2:
                     modificationsDone = false;
                     demoBuilding = this.createNewBuilding();
                     buildingList.add(demoBuilding);
-                    while (!modificationsDone) {
-                        modificationsDone = modifyWalls(demoBuilding);
-                    }
+                    System.out.println("Would you like to do anything else?");
+                    repeat = yesOrNo(userIn.nextLine());
+                    saved = false;
                     break;
                 case 3: //select a building from the arrayList
 
@@ -984,28 +996,32 @@ public class UIImpl implements UI {
                         break;
                     }else {
                         for(int i = 0; i < buildingList.size(); i++){
+                            System.out.println("\n\nBuilding : "+(i+1));
                             System.out.println(buildingList.get(i).buildingToString());
                         }
                         System.out.println("Enter the number of the building you wish to modify:");
-                        for(int i=0; i<buildingList.size(); i++){
-
-                        }
+//                        for(int i=0; i<buildingList.size(); i++){
+//
+//                        }
                         int selection = enterValidInt(1, buildingList.size());
                         architectModify(selection-1);
                     }
-
+                    System.out.println("Would you like to do anything else?");
+                    repeat = yesOrNo(userIn.nextLine());
+                    saved = false;
                     break;
                 case 4:
                     modificationsDone = false;
                     demoBuilding = keepLoading();
                     buildingList.add(demoBuilding);
-                    //working here
-                    while (!modificationsDone) {
-                        modificationsDone = modifyWalls(demoBuilding);
-                    }
+                    System.out.println("Would you like to do anything else?");
+                    repeat = yesOrNo(userIn.nextLine());
                     break;
                 case 5:
-                    int saveFileChoice = displayAvailableFiles();
+
+                    int fileTot = displayAvailableFiles();
+                    int saveFileChoice = enterValidInt(1, fileTot);
+                    this.saveFileOut = selectOutFile(saveFileChoice);
                     saveFileOut = selectOutFile(saveFileChoice);
                     if(demoBuilding == null){
                         System.out.println("There is no building to be saved.");
@@ -1017,14 +1033,35 @@ public class UIImpl implements UI {
                     }else{
                         System.out.println("Successful save!");
                     }
+                    System.out.println("Would you like to do anything else?");
+                    repeat = yesOrNo(userIn.nextLine());
+                    saved = true;
                     break;
                     }
+                case 0:
+                    repeat = false;
+                    break;
                 default:
                     break;
             }
-            System.out.println("Would you like do anything else?");
-            repeat = yesOrNo(userIn.nextLine());
+
         }
+        if(saved==false) {
+            try {
+                String outString = "";
+                boolean successfulSave = false;
+                if (this.buildingList.size() != 0) {
+                    saveFileOut = new FileOutputImpl("Autosave.txt");
+                    for (int i = 0; i < this.buildingList.size(); i++) {
+                        saveFileOut.generateOutStream();
+                        successfulSave = saveFileOut.saveToFile(saveFileOut.generateOutString(buildingList.get(i)));
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Some problem autosaving open buildings.\n");
+            }
+        }
+
     }
 
 
@@ -1032,52 +1069,81 @@ public class UIImpl implements UI {
         //System.out.println("Existing buildings:");
         //Display list of buildings
         System.out.println("1.) Add a New Wall to an Existing Building");
-        System.out.println("2.) Add a New Ceiling to an Existing Building");
-        System.out.println("3.) Add Stairs to an Existing Building");
-        System.out.println("4.) Add a Feature to a Wall");
-        System.out.println("5.) Remove a Feature from a Wall");
-        String entry = userIn.nextLine();
-        boolean goodEntry = checkValidInt(entry);
-        while(goodEntry==false){
-            System.out.println("1.) Add a New Wall to an Existing Building");
-            System.out.println("2.) Add a New Ceiling to an Existing Building");
-            System.out.println("3.) Add Stairs to an Existing Building");
-            System.out.println("4.) Add a Feature to a Wall");
-            System.out.println("5.) Remove a Feature from a Wall");
-            entry = userIn.nextLine();
-            goodEntry = checkValidInt(entry);
-        }
-        int entryInt = Integer.parseInt(entry);
+        System.out.println("2.) Add Stairs to an Existing Building");
+        System.out.println("3.) Add a Feature to a Wall");
+        System.out.println("4.) Remove a Feature from a Wall");
+        System.out.println("0.) To go back");
+        int entryInt = enterValidInt(0, 4);
+//        String entry = userIn.nextLine();
+//        boolean goodEntry = checkValidInt(entry);
+//        while(goodEntry==false){
+//            System.out.println("1.) Add a New Wall to an Existing Building");
+//            System.out.println("2.) Add Stairs to an Existing Building");
+//            System.out.println("3.) Add a Feature to a Wall");
+//            System.out.println("4.) Remove a Feature from a Wall");
+//            entry = userIn.nextLine();
+//            goodEntry = checkValidInt(entry);
+//        }
+//        int entryInt = Integer.parseInt(entry);
         switch (entryInt) {
-            case 1: this.addWall(idx);
-                    break;
-            case 2:
+            case 1:
+                try {
+                    System.out.println("Wall coordinates:\n\n");
+                    String outString = "Wall 1: " + wallCoordsString(buildingList.get(idx).getWall(0));
+                    outString += "\nWall 2: " + wallCoordsString(buildingList.get(idx).getWall(0));
+                    outString += "\nWall 3: " + wallCoordsString(buildingList.get(idx).getWall(0));
+                    outString += "\nWall 4: " + wallCoordsString(buildingList.get(idx).getWall(0));
+                    System.out.println(outString);
+                }
+                catch(Exception e){
+                    System.out.println("Could not print external wall coordinates.");
+                }
+                this.addWall(idx);
                 break;
-            case 3: addStairs(buildingList.get(idx));
+            case 2: addStairs(buildingList.get(idx));
                 break;
-            case 4: this.addWallFeature(buildingList.get(idx));
-                    break;
-            case 5: this.removeWallFeature(buildingList.get(idx));
-                    break;
-            default: break;
+            case 3:
+                this.addWallFeature(buildingList.get(idx));
+                break;
+            case 4:
+                this.removeWallFeature(buildingList.get(idx));
+                break;
+            case 0:
+                break;
+            default:
+                break;
         }
+    }
+
+    public String wallCoordsString(Wall wallIn){
+        String coordString = "";
+        coordString = "\nBottom: [" +wallIn.bottomCoordinates[0] + "," + wallIn.bottomCoordinates[1] + "," + wallIn.bottomCoordinates[2] + "]\nTop: [" + wallIn.topCoordinates[0] + "," + wallIn.topCoordinates[1] + "," + wallIn.topCoordinates[2] + "]\n";
+        return coordString;
     }
 
     public void builderMain() {
         boolean repeat = true;
         while (repeat) {
             System.out.println("Select the file which contains the building you wish to view.");
-            int saveFileChoice = displayAvailableFiles();
+            int saveFileChoice = enterValidInt(0,displayAvailableFiles());
+            System.out.println("or enter 0 to quit.");
             //Display list of existing buildings
-            FileInput fileIn = selectInFile(saveFileChoice);
-            Building demoBuilding = fileIn.loadFromFile();
-            System.out.println("Estimated Cost: $" + demoBuilding.calcTotalCost());
-            System.out.println(buildingOutput(demoBuilding));
-            for (int i = 0; i < demoBuilding.getWallAmount(); i++) {
-                System.out.println(displayWalls(demoBuilding.getWall(i)));
+            if(saveFileChoice!=0) {
+                FileInput fileIn = selectInFile(saveFileChoice);
+                Building demoBuilding = fileIn.loadFromFile();
+                if (demoBuilding != null) {
+                    System.out.println("Estimated Cost: $" + demoBuilding.calcTotalCost());
+                    System.out.println(buildingOutput(demoBuilding));
+                    for (int i = 0; i < demoBuilding.getWallAmount(); i++) {
+                        System.out.println(displayWalls(demoBuilding.getWall(i)));
+                    }
+                    System.out.println("Would you like to get another cost estimate?");
+                    repeat = yesOrNo(userIn.nextLine());
+                } else {
+                    System.out.println("The file you've chosen is empty.");
+                }
             }
-            System.out.println("Would you like to get another cost estimate?");
-            repeat = yesOrNo(userIn.nextLine());
+            else{repeat=false;}
         }
         System.out.println("Thank you for using our system!");
     }
@@ -1090,13 +1156,13 @@ public class UIImpl implements UI {
         FileInput masterIn = new FileInputImpl("masterFile.txt");
         String[] listOfFiles = masterIn.loadFileNames();
         String displayString = "Available Files:\n";
+        int fileTot = 0;
         for (int i = 0; i < listOfFiles.length; i++) {
             displayString += (i+1) + ": " + listOfFiles[i] + "\n";
+            fileTot++;
         }
-        System.out.println(displayString);
-        System.out.println("Select which save file you wish to use:");
-        int selection = enterValidInt(1, listOfFiles.length);
-        return selection-1;
+        System.out.println(displayString +"\nSelect a file");
+        return fileTot;
     }
 
     /**
@@ -1145,9 +1211,16 @@ public class UIImpl implements UI {
      * @return true is successful save, false otherwise
      */
     public boolean saveToFile(FileOutput file, Building buildingToSave) {
-        String outString = file.generateOutString(buildingToSave);
-        boolean didSave = file.saveToFile(outString);
-        return didSave;
+        try {
+            String outString = file.generateOutString(buildingToSave);
+            boolean didSave = file.saveToFile(outString);
+            return didSave;
+        }
+        catch (Exception e){
+            System.out.println("An error occurred in saving.");
+            return false;
+        }
+
     }
 
     /**
@@ -1156,23 +1229,34 @@ public class UIImpl implements UI {
      */
     public Building keepLoading() {
         Building demoBuilding;
-        int saveSlotNum = displayAvailableFiles();
-        saveFileIn = selectInFile(saveSlotNum);
-        demoBuilding = saveFileIn.loadFromFile();
-        while (demoBuilding == null) {
-            System.out.println("That file is empty. You may try another or build a new building.");
-            System.out.println("1. Try another save slot. \n2. Build a new building.");
-            int userNum = enterValidInt(1, 2);
-            if(userNum == 1) {
-                saveSlotNum = displayAvailableFiles();
-                saveFileIn = selectInFile(saveSlotNum);
-                demoBuilding = saveFileIn.loadFromFile();
-                saveFileOut = selectOutFile(saveSlotNum);
-            }else {
-                demoBuilding = createNewBuilding();
+        int fileTot = displayAvailableFiles();
+        int saveSlotNum = enterValidInt(0, fileTot);
+        try {
+            saveFileIn = selectInFile(saveSlotNum-1);
+            demoBuilding = saveFileIn.loadFromFile();
+            while (demoBuilding == null) {
+                System.out.println("That file is empty. You may try another or build a new building.");
+                System.out.println("1. Try another save slot. \n2. Build a new building.");
+                int userNum = enterValidInt(1, 2);
+                if(userNum == 1) {
+                    displayAvailableFiles();
+                    saveSlotNum = enterValidInt(1, fileTot);
+                    saveFileIn = selectInFile(saveSlotNum);
+                    demoBuilding = saveFileIn.loadFromFile();
+                    saveFileOut = selectOutFile(saveSlotNum);
+                }
+                else { demoBuilding = createNewBuilding();
+
+                    }
+
             }
+            return demoBuilding;
+
         }
-        return demoBuilding;
+        catch (NullPointerException e){
+            System.out.println("An error occurred in loading the file.");
+            return null;
+        }
     }
 
     public boolean saveFile(){

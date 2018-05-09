@@ -25,4 +25,6 @@ public interface FileOutput {
      */
     public boolean saveToFile(String outStr);
 
+    public boolean setFileName(String fileName);
+
 }

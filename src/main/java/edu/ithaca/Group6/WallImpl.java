@@ -135,7 +135,7 @@ class ExternalWall extends WallImpl {
         double correction = ((this.getThickness()*this.getThickness())*this.getMaterial().getCostPerSquareFoot())/2;
         cost = cost-correction;
         cost += this.stairs.getCostPerUnit();
-        return cost;
+        return Math.round(cost*100)/100;
     }
 
     public boolean addFeature(MaterialByUnit feature) {

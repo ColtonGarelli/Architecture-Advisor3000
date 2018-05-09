@@ -22,7 +22,6 @@ public class FileInputImpl implements FileInput {
         try{
             this.inFile = new File(this.fileInName);
             this.inReader = new BufferedReader(new FileReader(this.inFile));
-
             if(!inFile.exists()){
                 inFile.createNewFile();
             }
@@ -59,6 +58,8 @@ public class FileInputImpl implements FileInput {
             return returnBuilding;
         }catch(IOException e){
             System.out.println("File not found.");
+        }
+        catch (NullPointerException e1){
         }
         return null;
     }

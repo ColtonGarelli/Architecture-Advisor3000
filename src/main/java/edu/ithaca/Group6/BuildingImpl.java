@@ -1,6 +1,7 @@
 package edu.ithaca.Group6;
 
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class BuildingImpl implements Building{
     //Creating a building in the shape of a rectangular prism
@@ -99,8 +100,7 @@ public class BuildingImpl implements Building{
                 totalCost += this.walls.get(x).getFeature(y).getCostPerUnit();
             }
         }
-
-        return totalCost;
+        return Math.round(totalCost*100)/100;
     }
 
     @Override
@@ -307,13 +307,13 @@ public class BuildingImpl implements Building{
     public String buildingToString(){
 
         String buildingString;
-        buildingString = "\nBuilding Dimensions\n\n";
+        buildingString = "Building Dimensions\n";
         buildingString += "Height: ";
         buildingString += String.valueOf(this.getHeight()) + "\n";
         buildingString += "Length: ";
         buildingString += String.valueOf(this.getLength())+"\n";
         buildingString += "Width: ";
-        buildingString += String.valueOf(this.getWidth())+"\n\n\n";
+        buildingString += String.valueOf(this.getWidth())+"\n\n";
         buildingString += "Walls:\n";
         for(int i=0; i<this.getWallAmount(); i++){
             buildingString += String.valueOf(i+1) +".\n" + "Height: ";
@@ -321,7 +321,8 @@ public class BuildingImpl implements Building{
             buildingString += "Length: ";
             buildingString+= String.valueOf(this.getWall(i).getLength()+"\n");
             buildingString += "Thickness: ";
-            buildingString += String.valueOf(this.getWall(i).getThickness())+"\n\n";
+            buildingString += String.valueOf(this.getWall(i).getThickness())+"\n";
+            buildingString += this.getWall(i).getMaterial().getMaterialName()+": $" +String.valueOf(this.getWall(i).getMaterial().getCostPerSquareFoot())+" per square foot\n";
 
             if(this.getNumberOfFloors()>0) {
                 buildingString += "Floors: ";
@@ -336,7 +337,7 @@ public class BuildingImpl implements Building{
                     buildingString += this.getWall(i).getFeature(i3).toString() + "\n";
                 }
             }
-            buildingString += "\n\n";
+            buildingString += "\n";
         }
         return buildingString;
     }

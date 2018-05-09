@@ -65,4 +65,9 @@ public class FileOutputImpl implements FileOutput {
         }
         return false;
     }
+
+    public boolean setFileName(String fileName){
+        this.fileOutName= fileName;
+        return true;
+    }
 }
