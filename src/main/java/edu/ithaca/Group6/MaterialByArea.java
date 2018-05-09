@@ -37,16 +37,8 @@ public interface MaterialByArea {
      */
     public void setCost(double cost);
 
-    /**
-     *
-     * @return materialName
-     */
     public String getMaterialName();
 
-    /**
-     *
-     * @return costPerSquareFoot
-     */
     public double getCostPerSquareFoot();
 
     /**

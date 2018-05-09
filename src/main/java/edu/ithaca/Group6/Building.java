@@ -90,28 +90,31 @@ public interface Building {
 
 
     /**
-     * Adds a roof to the building
+     * Sets a roof to the building (only one roof)
      * @param roofToAdd
      * @return true if successful add, false otherwise
      */
     public boolean setRoof(Roof roofToAdd);
 
-    /**
-     *
-     * @return the roof of the building
-     */
+
     public Roof getRoof();
 
-    /**
-     *
-     * @return the amount of walls in a building
-     */
     public int getWallAmount();
 
+    /**
+     *
+     * @param index index of the floor to be removed
+     * @return true if success, false otherwise
+     */
     public boolean removeFloor(int index);
 
     public Floor getFloor(int index);
 
+    /**
+     * adds a floor to a building
+     * @param floorToAdd
+     * @return true if success, false otherwise
+     */
     public boolean addFloor(Floor floorToAdd);
 
     public int getNumberOfFloors();

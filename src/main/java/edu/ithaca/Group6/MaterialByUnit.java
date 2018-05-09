@@ -14,34 +14,14 @@ public interface MaterialByUnit {
     public double lengthBuilder();
     public double heightBuilder();
 
-    /**
-     * Get the name of the material
-     * @return materialName
-     */
     public String getMaterialName();
 
-    /**
-     * Get the cost of an individual unit of the material
-     * @return costPerUnit
-     */
     public double getCostPerUnit();
 
-    /**
-     * Get the length
-     * @return length
-     */
     public double getLength();
 
-    /**
-     * Get the width
-     * @return Width
-     */
     public double getWidth();
 
-    /**
-     * Get the height
-     * @return height
-     */
     public double getHeight();
 
     /**
