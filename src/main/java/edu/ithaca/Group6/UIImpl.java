@@ -54,7 +54,7 @@ public class UIImpl implements UI {
         //Lowercase the string
         userInput = userInput.toLowerCase();
         //Compare if yes or no
-        if (userInput.equals("yes")) {
+        if (userInput.equals("yes") || userInput.equals("y")) {
             return true;
         } else {
             return false;
